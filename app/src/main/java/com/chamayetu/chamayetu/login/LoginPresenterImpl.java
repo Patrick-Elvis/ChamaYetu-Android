@@ -19,12 +19,17 @@ public class LoginPresenterImpl implements LoginPresenter {
     }
 
     @Override
-    public void dismissPogressDialog(Context context) {
+    public void dismissPogressDialog(Context context, boolean isSuccess) {
 
     }
 
     @Override
     public void displayErrorMessage(Context context, String ErrorMessage) {
+
+    }
+
+    @Override
+    public void displaySuccessMessage(String message) {
 
     }
 }
