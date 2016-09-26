@@ -97,6 +97,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 // user is signed in, therefore redirect to MainActivity
                 Log.d(LOGINACT_TAG, "onAuthStateChanged:signed in" + user.getUid());
                 startActivity(new Intent(LoginActivity.this, MainActivity.class));
+            }else{
+                Log.d(LOGINACT_TAG, "onAuthStateChanged:signedout");
             }
         };
     }
@@ -347,6 +349,20 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         protected void onCancelled() {
             mAuthTask = null;
             showProgress(false);
+        }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mAuth.addAuthStateListener(mAuthListener);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if(mAuthListener != null){
+            mAuth.removeAuthStateListener(mAuthListener);
         }
     }
 }
