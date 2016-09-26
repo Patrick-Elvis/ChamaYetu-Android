@@ -1,5 +1,8 @@
 package com.chamayetu.chamayetu.utils;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * ChamaYetu
  * com.chamayetu.chamayetu.utils
@@ -8,4 +11,5 @@ package com.chamayetu.chamayetu.utils;
  */
 
 public class Contract {
+
 }

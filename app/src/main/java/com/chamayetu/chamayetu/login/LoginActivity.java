@@ -33,7 +33,10 @@ import android.widget.Toast;
 import com.chamayetu.chamayetu.R;
 import com.chamayetu.chamayetu.main.MainActivity;
 import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
+import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -42,6 +45,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.Executor;
 
@@ -118,7 +122,30 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
     /**Initialize social logins: Google, Twitter, Facebook, Github...*/
     private void initSocialLogins() {
+        /*Initialize with Facebook Login*/
+        facebookLoginBtn.setReadPermissions(Arrays.asList("email", "public_profile"));
+        facebookLoginBtn.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+            @Override
+            public void onSuccess(LoginResult loginResult) {
+                Log.d(LOGINACT_TAG, "FacebookLoginSuccess"+loginResult);
+                //pass this token to handle with firebase login
+                if(LoginAuthHandler.handleFacebookLogin(loginResult.getAccessToken(), mAuth, LoginActivity.this)){
 
+                }else{
+
+                }
+            }
+
+            @Override
+            public void onCancel() {
+
+            }
+
+            @Override
+            public void onError(FacebookException error) {
+
+            }
+        });
     }
 
     private void populateAutoComplete() {

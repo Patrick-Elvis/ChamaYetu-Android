@@ -1,5 +1,7 @@
 package com.chamayetu.chamayetu.login;
 
+import android.content.Context;
+
 /**
  * ChamaYetu
  * com.chamayetu.chamayetu.login
@@ -8,4 +10,8 @@ package com.chamayetu.chamayetu.login;
  */
 
 public interface LoginPresenter {
+
+    /**Display login progress to user in the context they are currently in*/
+    void showPogressDialog(Context context);
+
 }
