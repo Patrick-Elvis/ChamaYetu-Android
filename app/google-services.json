@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "128820725100",
+    "firebase_url": "https://chamayetu-ddca4.firebaseio.com",
+    "project_id": "chamayetu-ddca4",
+    "storage_bucket": "chamayetu-ddca4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:128820725100:android:9582b24f87ac8927",
+        "android_client_info": {
+          "package_name": "com.chamayetu.chamayetu"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "128820725100-jj584e2q01b2ib6g6ps4p1kumhvvmnva.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.chamayetu.chamayetu",
+            "certificate_hash": "25E187BE40B16C3C09ECD1B3E3D26A6651938BCD"
+          }
+        },
+        {
+          "client_id": "128820725100-qf47ee6ouoouav7u4gnlpgug3dfdek90.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDT8xP9OJEFzhVht6nlTXHqTjCn6iDG1qw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "128820725100-qf47ee6ouoouav7u4gnlpgug3dfdek90.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
