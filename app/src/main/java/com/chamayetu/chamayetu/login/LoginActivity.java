@@ -1,4 +1,4 @@
-package com.chamayetu.chamayetu;
+package com.chamayetu.chamayetu.views.login;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -21,16 +21,15 @@ import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.inputmethod.EditorInfo;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
+import com.chamayetu.chamayetu.R;
+import com.chamayetu.chamayetu.views.main.MainActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
