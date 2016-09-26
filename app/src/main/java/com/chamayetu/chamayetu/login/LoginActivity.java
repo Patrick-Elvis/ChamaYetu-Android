@@ -32,6 +32,9 @@ import android.widget.Toast;
 
 import com.chamayetu.chamayetu.R;
 import com.chamayetu.chamayetu.main.MainActivity;
+import com.facebook.CallbackManager;
+import com.facebook.FacebookSdk;
+import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -54,7 +57,14 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     public static final String LOGINACT_TAG = LoginActivity.class.getSimpleName();
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
-
+    // UI references.
+    private @BindView(R.id.email) AutoCompleteTextView mEmailView;
+    private @BindView(R.id.password) EditText mPasswordView;
+    private @BindView(R.id.email_sign_in_button)Button mEmailSignInButton;
+    private @BindView(R.id.login_form) View mProgressView;
+    private @BindView(R.id.login_progress) View mLoginFormView;
+    private @BindView(R.id.facebook_login_button) LoginButton facebookLoginBtn;
+    private CallbackManager callbackManager;
     /** Id to identity READ_CONTACTS permission request.*/
     private static final int REQUEST_READ_CONTACTS = 0;
 
@@ -70,16 +80,11 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
      * Keep track of the login task to ensure we can cancel it if requested.*/
     private UserLoginTask mAuthTask = null;
 
-    // UI references.
-    private @BindView(R.id.email) AutoCompleteTextView mEmailView;
-    private @BindView(R.id.password) EditText mPasswordView;
-    private @BindView(R.id.email_sign_in_button)Button mEmailSignInButton;
-    private @BindView(R.id.login_form) View mProgressView;
-    private @BindView(R.id.login_progress) View mLoginFormView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        FacebookSdk.sdkInitialize(this);
         setContentView(R.layout.login_activity);
         ButterKnife.bind(this);
         populateAutoComplete();
@@ -93,6 +98,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         });
 
         mEmailSignInButton.setOnClickListener(view -> attemptLogin());
+        callbackManager = CallbackManager.Factory.create();
+
         mAuth = FirebaseAuth.getInstance();
 
         mAuthListener = firebaseAuth -> {
@@ -105,6 +112,13 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 Log.d(LOGINACT_TAG, "onAuthStateChanged:signedout");
             }
         };
+
+        initSocialLogins();
+    }
+
+    /**Initialize social logins: Google, Twitter, Facebook, Github...*/
+    private void initSocialLogins() {
+
     }
 
     private void populateAutoComplete() {
