@@ -13,5 +13,6 @@ public interface LoginPresenter {
 
     /**Display login progress to user in the context they are currently in*/
     void showPogressDialog(Context context);
-
+    void dismissPogressDialog(Context context);
+    void displayErrorMessage(Context context, String ErrorMessage);
 }
