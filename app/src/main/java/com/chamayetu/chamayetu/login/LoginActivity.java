@@ -1,4 +1,4 @@
-package com.chamayetu.chamayetu.views.login;
+package com.chamayetu.chamayetu.login;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -27,14 +27,19 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.chamayetu.chamayetu.R;
-import com.chamayetu.chamayetu.views.main.MainActivity;
+import com.chamayetu.chamayetu.main.MainActivity;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Executor;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -43,15 +48,13 @@ import static android.Manifest.permission.READ_CONTACTS;
 
 /**
  * A login screen that offers login via email/password.
- */
+ * or social media logins.*/
 public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<Cursor> {
     public static final String LOGINACT_TAG = LoginActivity.class.getSimpleName();
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
 
-    /**
-     * Id to identity READ_CONTACTS permission request.
-     */
+    /** Id to identity READ_CONTACTS permission request.*/
     private static final int REQUEST_READ_CONTACTS = 0;
 
     /**
@@ -61,9 +64,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private static final String[] DUMMY_CREDENTIALS = new String[]{
             "foo@example.com:hello", "bar@example.com:world"
     };
+
     /**
-     * Keep track of the login task to ensure we can cancel it if requested.
-     */
+     * Keep track of the login task to ensure we can cancel it if requested.*/
     private UserLoginTask mAuthTask = null;
 
     // UI references.
@@ -311,24 +314,17 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         @Override
         protected Boolean doInBackground(Void... params) {
-            // TODO: attempt authentication against a network service.
-
-            try {
-                // Simulate network access.
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                return false;
-            }
-
-            for (String credential : DUMMY_CREDENTIALS) {
-                String[] pieces = credential.split(":");
-                if (pieces[0].equals(mEmail)) {
-                    // Account exists, return true if the password matches.
-                    return pieces[1].equals(mPassword);
-                }
-            }
-
-            // TODO: register the new account here.
+            //TODO: display snack bar for the authentication failure
+            mAuth.signInWithEmailAndPassword(mEmail, mPassword).addOnCompleteListener(
+                    LoginActivity.this,
+                    task -> {
+                        Log.d(LOGINACT_TAG, "signInWithEmail:onComplete "+ task.isSuccessful());
+                        if(!task.isSuccessful()){
+                            Log.w(LOGINACT_TAG, "SignInWithEmail: ", task.getException());
+                            Toast.makeText(LoginActivity.this, "Authentication failed.",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                });
             return true;
         }
 
@@ -337,7 +333,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             mAuthTask = null;
             showProgress(false);
 
+            // if successful, start main activity
             if (success) {
+                startActivity(new Intent(LoginActivity.this, MainActivity.class));
                 finish();
             } else {
                 mPasswordView.setError(getString(R.string.error_incorrect_password));

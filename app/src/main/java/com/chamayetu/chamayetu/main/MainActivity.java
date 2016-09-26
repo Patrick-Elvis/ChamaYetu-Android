@@ -1,4 +1,4 @@
-package com.chamayetu.chamayetu.views.main;
+package com.chamayetu.chamayetu.main;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
