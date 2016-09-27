@@ -36,6 +36,7 @@ public class LoginAuthHandler{
                         Log.w(TAG, "FacebookSignInFail:",task.getException());
                         success = false;
                         loginPresenter.dismissProgressDialog(context, success);
+                        loginPresenter.displayErrorMessage(context, "Failed to login to Facebook");
                     }else{
                         success = task.isSuccessful();
                     }

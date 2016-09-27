@@ -2,6 +2,15 @@ package com.chamayetu.chamayetu.login;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.os.Parcelable;
+import android.view.View;
+
+import com.chamayetu.chamayetu.R;
+import com.github.johnpersano.supertoasts.library.Style;
+import com.github.johnpersano.supertoasts.library.SuperActivityToast;
+import com.github.johnpersano.supertoasts.library.SuperToast;
+import com.github.johnpersano.supertoasts.library.utils.PaletteUtils;
+import com.google.firebase.auth.FirebaseAuth;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
@@ -13,8 +22,8 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
  */
 
 public class LoginPresenterImpl implements LoginPresenter {
-    SweetAlertDialog pDialog;
-
+    private SweetAlertDialog pDialog;
+    private SuperToast superToast;
     public LoginPresenterImpl(){}
 
     @Override
@@ -40,11 +49,27 @@ public class LoginPresenterImpl implements LoginPresenter {
 
     @Override
     public void displayErrorMessage(Context context, String ErrorMessage) {
-
+        superToast = new SuperToast(context);
+        superToast.setDuration(Style.DURATION_LONG);
+        superToast.setText(ErrorMessage);
+        superToast.show();
     }
 
     @Override
     public void displaySuccessMessage(Context context, String message) {
+        superToast = new SuperToast(context);
+        superToast.setDuration(Style.DURATION_LONG);
+        superToast.setText(message);
+        superToast.show();
+    }
+
+    @Override
+    public void retry(Context context) {
+        //LoginAuthHandler.handleFacebookLogin(token, FirebaseAuth.getInstance(),context);
+    }
+
+    @Override
+    public void isNetworkBeforeLoginAttempt(Context context) {
 
     }
 

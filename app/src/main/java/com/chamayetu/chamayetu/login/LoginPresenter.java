@@ -25,7 +25,7 @@ public interface LoginPresenter {
     /**
      * The Error message to display. This messge will be custom to the Login method used.
      * @param context Context in which to display the error message
-     * @param ErrorMessage The error message to display to the uer*/
+     * @param ErrorMessage The error message to display to the user*/
     void displayErrorMessage(Context context, String ErrorMessage);
 
     /**
@@ -34,4 +34,14 @@ public interface LoginPresenter {
      * @param message The success message to display, which will be the user name**/
     void displaySuccessMessage(Context context, String message);
 
+    /**
+     * Retry Login Method
+     * @param context Context in which to retry login*/
+    void retry(Context context);
+
+
+    /**
+     * Check network availability before attempting Login
+     * @param context Context to run this method*/
+    void isNetworkBeforeLoginAttempt(Context context);
 }
