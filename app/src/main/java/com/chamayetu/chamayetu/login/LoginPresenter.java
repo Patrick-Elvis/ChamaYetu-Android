@@ -13,13 +13,13 @@ public interface LoginPresenter {
 
     /**Display login progress to user in the context they are currently in
      * @param context context in which to dissplay the progress dialog*/
-    void showPogressDialog(Context context);
+    void showProgressDialog(Context context);
 
     /**Dismiss the Progress Dialog depending on the sucess of the response, display message
      * @param context context to run
      * @param isSuccess if the process is not successful display {@code displayErrorMessage}
      *                 else display {@code displaySuccessMessage}**/
-    void dismissPogressDialog(Context context, boolean isSuccess);
+    void dismissProgressDialog(Context context, boolean isSuccess);
 
 
     /**

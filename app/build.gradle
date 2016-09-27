@@ -48,6 +48,10 @@ android {
     }
 }
 
+repositories {
+    mavenCentral()
+}
+
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
@@ -72,5 +76,7 @@ dependencies {
     compile 'com.google.firebase:firebase-invites:9.6.1'
 
     facebookCompile 'com.facebook.android:facebook-android-sdk:[4,5)'
+
+    compile 'cn.pedant.sweetalert:library:1.3'
 }
 apply plugin: 'com.google.gms.google-services'

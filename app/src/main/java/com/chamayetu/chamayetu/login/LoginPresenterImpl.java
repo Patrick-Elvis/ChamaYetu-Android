@@ -14,12 +14,12 @@ public class LoginPresenterImpl implements LoginPresenter {
     public LoginPresenterImpl(){}
 
     @Override
-    public void showPogressDialog(Context context) {
+    public void showProgressDialog(Context context) {
 
     }
 
     @Override
-    public void dismissPogressDialog(Context context, boolean isSuccess) {
+    public void dismissProgressDialog(Context context, boolean isSuccess) {
 
     }
 
