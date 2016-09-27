@@ -378,7 +378,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         switch (v.getId()){
             case R.id.google_signin_button:
                 /*handle google login*/
-                
+                Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
+                startActivityForResult(signInIntent, RC_SIGN_IN);
                 break;
         }
     }
