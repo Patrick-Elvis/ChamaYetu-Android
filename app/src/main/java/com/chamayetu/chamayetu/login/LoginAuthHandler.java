@@ -26,7 +26,7 @@ public class LoginAuthHandler{
 
     public static boolean handleFacebookLogin(AccessToken token, FirebaseAuth firebaseAuth, Context context){
         Log.d(TAG, "FirebaseWithFacebookLogin:"+token);
-        loginPresenter.showPogressDialog(context);
+        loginPresenter.showProgressDialog(context);
 
         AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
         firebaseAuth.signInWithCredential(credential).addOnCompleteListener(

@@ -108,6 +108,14 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         initSocialLogins();
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        //pass the request code, result and data to the callback manager to handle Facebook login
+        callbackManager.onActivityResult(requestCode, resultCode, data);
+    }
+
     /**Initialize social logins: Google, Twitter, Facebook, Github...*/
     private void initSocialLogins() {
         /*Initialize with Facebook Login*/
@@ -121,18 +129,19 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 if(LoginAuthHandler.handleFacebookLogin(loginResult.getAccessToken(), mAuth, LoginActivity.this)){
                     startActivity(new Intent(LoginActivity.this, MainActivity.class));
                 }else{
-                    //display error to user
+                    //TODO:display error to user
+                    Toast.makeText(LoginActivity.this, "Login with Facebook has failed",Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onCancel() {
-
+                Log.d(LOGINACT_TAG, "FacebookLogin:Cancel");
             }
 
             @Override
             public void onError(FacebookException error) {
-
+                Log.d(LOGINACT_TAG, "FacebookLogin:Error", error);
             }
         });
     }
