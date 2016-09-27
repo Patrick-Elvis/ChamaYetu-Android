@@ -29,7 +29,8 @@ public class LoginPresenterImpl implements LoginPresenter {
     }
 
     @Override
-    public void displaySuccessMessage(String message) {
+    public void displaySuccessMessage(Context context, String message) {
 
     }
+
 }

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="default_web_client_id" translatable="false">128820725100-qf47ee6ouoouav7u4gnlpgug3dfdek90.apps.googleusercontent.com</string>
+<!--    <string name="default_web_client_id" translatable="false">128820725100-qf47ee6ouoouav7u4gnlpgug3dfdek90.apps.googleusercontent.com</string>
     <string name="firebase_database_url" translatable="false">https://chamayetu-ddca4.firebaseio.com</string>
     <string name="gcm_defaultSenderId" translatable="false">128820725100</string>
     <string name="google_api_key" translatable="false">AIzaSyDT8xP9OJEFzhVht6nlTXHqTjCn6iDG1qw</string>
     <string name="google_app_id" translatable="false">1:128820725100:android:9582b24f87ac8927</string>
     <string name="google_crash_reporting_api_key" translatable="false">AIzaSyDT8xP9OJEFzhVht6nlTXHqTjCn6iDG1qw</string>
-    <string name="google_storage_bucket" translatable="false">chamayetu-ddca4.appspot.com</string>
+    <string name="google_storage_bucket" translatable="false">chamayetu-ddca4.appspot.com</string>-->
 </resources>

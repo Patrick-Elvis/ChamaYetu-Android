@@ -58,12 +58,12 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
     // UI references.
-    private @BindView(R.id.email) AutoCompleteTextView mEmailView;
-    private @BindView(R.id.password) EditText mPasswordView;
-    private @BindView(R.id.email_sign_in_button)Button mEmailSignInButton;
-    private @BindView(R.id.login_form) View mProgressView;
-    private @BindView(R.id.login_progress) View mLoginFormView;
-    private @BindView(R.id.facebook_login_button) LoginButton facebookLoginBtn;
+    @BindView(R.id.email) AutoCompleteTextView mEmailView;
+    @BindView(R.id.password) EditText mPasswordView;
+    @BindView(R.id.email_sign_in_button)Button mEmailSignInButton;
+    @BindView(R.id.login_form) View mProgressView;
+    @BindView(R.id.login_progress) View mLoginFormView;
+    @BindView(R.id.facebook_login_button) LoginButton facebookLoginBtn;
     private CallbackManager callbackManager;
     /** Id to identity READ_CONTACTS permission request.*/
     private static final int REQUEST_READ_CONTACTS = 0;

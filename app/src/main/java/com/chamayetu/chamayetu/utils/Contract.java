@@ -1,5 +1,7 @@
 package com.chamayetu.chamayetu.utils;
 
+import com.chamayetu.chamayetu.BuildConfig;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,5 +13,6 @@ import java.util.List;
  */
 
 public class Contract {
-
+    public static final String TWITTER_KEY = BuildConfig.TWITTER_CONSUMER_KEY;
+    public static final String TWITTER_CONSUMER_SECRET = BuildConfig.TWITTER_CONSUMER_KEY;
 }
