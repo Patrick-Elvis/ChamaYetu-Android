@@ -62,7 +62,7 @@ import com.google.android.gms.auth.api.Auth;
 /**
  * A login screen that offers login via email/password.
  * or social media logins.*/
-public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<Cursor>, GoogleApiClient.OnConnectionFailedListener {
+public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<Cursor>, GoogleApiClient.OnConnectionFailedListener, View.OnClickListener {
     public static final String LOGINACT_TAG = LoginActivity.class.getSimpleName();
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
@@ -116,7 +116,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 Log.d(LOGINACT_TAG, "onAuthStateChanged:signedout");
             }
         };
-
+        googleSignInButton.setOnClickListener(this);
         initSocialLogins();
     }
 
@@ -129,11 +129,16 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             if(googleSignInResult.isSuccess()){
                 //Google sign in was successful, authenticate with Firebase
                 GoogleSignInAccount googleSignInAccount = googleSignInResult.getSignInAccount();
-
+                if(LoginAuthHandler.handleGoogleLogin(googleSignInAccount,mAuth,LoginActivity.this)){
+                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                }else{
+                    Log.d(LOGINACT_TAG, "onAuthStateChanged:signedout");
+                    Toast.makeText(this, "Google Sign in failed", Toast.LENGTH_SHORT).show();
+                }
             }
         }
 
-            //pass the request code, result and data to the callback manager to handle Facebook login
+        //pass the request code, result and data to the callback manager to handle Facebook login
         callbackManager.onActivityResult(requestCode, resultCode, data);
     }
 
@@ -366,6 +371,16 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         // be available.
         Log.d(LOGINACT_TAG, "onConnectionFailed: GoogleAPI" + connectionResult);
         Toast.makeText(this, "Google Play Services error.", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.google_signin_button:
+                /*handle google login*/
+                
+                break;
+        }
     }
 
 

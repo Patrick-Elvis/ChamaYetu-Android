@@ -50,6 +50,11 @@ public class LoginAuthHandler{
         return success;
     }
 
+    /**Handles Google Login, takes in GoogleSignInAccount from onActivityResult, gets token
+     * checks if the task is complete and handles the process as required
+     * @param context The context in which this method will run
+     * @param account GoogleSignInAccount that will be retrieved from calling context
+     * @param auth Firebase Auth that will be used to sign in this particular user to Firebase*/
     public static boolean handleGoogleLogin(GoogleSignInAccount account, FirebaseAuth auth, Context context){
         Log.d(TAG, "FirebaseWithGoogleLogin: " + account.getId());
         loginPresenter.showProgressDialog(context);
