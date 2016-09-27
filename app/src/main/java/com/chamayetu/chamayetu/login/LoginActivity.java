@@ -286,9 +286,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         return password.isEmpty();
     }
 
-    /**
-     * Shows the progress UI and hides the login form.
-     */
+    /*** Shows the progress UI and hides the login form.*/
     @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
     private void showProgress(final boolean show) {
         // On Honeycomb MR2 we have the ViewPropertyAnimator APIs, which allow
