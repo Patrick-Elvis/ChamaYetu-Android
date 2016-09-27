@@ -38,7 +38,9 @@ import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -53,6 +55,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 import static android.Manifest.permission.READ_CONTACTS;
+import static com.chamayetu.chamayetu.utils.Contract.RC_SIGN_IN;
+
 import com.google.android.gms.auth.api.Auth;
 
 /**
@@ -119,8 +123,17 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        // result returned from launching the intent
+        if(requestCode == RC_SIGN_IN) {
+            GoogleSignInResult googleSignInResult = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
+            if(googleSignInResult.isSuccess()){
+                //Google sign in was successful, authenticate with Firebase
+                GoogleSignInAccount googleSignInAccount = googleSignInResult.getSignInAccount();
+                
+            }
+        }
 
-        //pass the request code, result and data to the callback manager to handle Facebook login
+            //pass the request code, result and data to the callback manager to handle Facebook login
         callbackManager.onActivityResult(requestCode, resultCode, data);
     }
 
@@ -164,7 +177,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 .enableAutoManage(this, this)
                 .addApi(Auth.GOOGLE_SIGN_IN_API,gso)
                 .build();
-        
+
 
     }
 
