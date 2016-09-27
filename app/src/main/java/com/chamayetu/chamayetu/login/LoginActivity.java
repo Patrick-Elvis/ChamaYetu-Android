@@ -38,6 +38,10 @@ import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.SignInButton;
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -49,14 +53,17 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 import static android.Manifest.permission.READ_CONTACTS;
+import com.google.android.gms.auth.api.Auth;
 
 /**
  * A login screen that offers login via email/password.
  * or social media logins.*/
-public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<Cursor> {
+public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<Cursor>, GoogleApiClient.OnConnectionFailedListener {
     public static final String LOGINACT_TAG = LoginActivity.class.getSimpleName();
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
+    private GoogleApiClient mGoogleApiClient;
+
     // UI references.
     @BindView(R.id.email) AutoCompleteTextView mEmailView;
     @BindView(R.id.password) EditText mPasswordView;
@@ -64,6 +71,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     @BindView(R.id.login_form) View mProgressView;
     @BindView(R.id.login_progress) View mLoginFormView;
     @BindView(R.id.facebook_login_button) LoginButton facebookLoginBtn;
+    @BindView(R.id.google_signin_button) SignInButton googleSignInButton;
     private CallbackManager callbackManager;
     /** Id to identity READ_CONTACTS permission request.*/
     private static final int REQUEST_READ_CONTACTS = 0;
@@ -144,6 +152,20 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 Log.d(LOGINACT_TAG, "FacebookLogin:Error", error);
             }
         });
+
+        /*Google Sign in logic*/
+        /*request permissions ffrom Google*/
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestEmail()
+                .build();
+
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .enableAutoManage(this, this)
+                .addApi(Auth.GOOGLE_SIGN_IN_API,gso)
+                .build();
+        
+
     }
 
     private void populateAutoComplete() {
@@ -323,6 +345,14 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                         android.R.layout.simple_dropdown_item_1line, emailAddressCollection);
 
         mEmailView.setAdapter(adapter);
+    }
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+        // An unresolvable error has occurred and Google APIs (including Sign-In) will not
+        // be available.
+        Log.d(LOGINACT_TAG, "onConnectionFailed: GoogleAPI" + connectionResult);
+        Toast.makeText(this, "Google Play Services error.", Toast.LENGTH_SHORT).show();
     }
 
 
