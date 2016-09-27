@@ -35,6 +35,7 @@ public class LoginAuthHandler{
                     if(!task.isSuccessful()){
                         Log.w(TAG, "FacebookSignInFail:",task.getException());
                         success = false;
+                        loginPresenter.dismissProgressDialog(context, success);
                     }else{
                         success = task.isSuccessful();
                     }

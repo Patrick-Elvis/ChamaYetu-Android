@@ -40,7 +40,7 @@ public class LoginPresenterImpl implements LoginPresenter {
 
     @Override
     public void displayErrorMessage(Context context, String ErrorMessage) {
-        
+
     }
 
     @Override
