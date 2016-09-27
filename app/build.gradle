@@ -44,15 +44,6 @@ android {
         nofacebook {
             minSdkVersion 9
         }
-
-        supertoast{
-            minSdkVersion 16
-        }
-
-        nosupertoast{
-            minSdkVersion 9
-        }
-
     }
 }
 
@@ -87,7 +78,5 @@ dependencies {
 
     compile 'cn.pedant.sweetalert:library:1.3'
 
-    /*Super Toasts*/
-    supertoastCompile 'com.github.johnpersano:supertoasts:2.0'
 }
 apply plugin: 'com.google.gms.google-services'

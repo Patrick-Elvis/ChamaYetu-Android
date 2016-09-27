@@ -4,12 +4,9 @@ import android.content.Context;
 import android.graphics.Color;
 import android.os.Parcelable;
 import android.view.View;
+import android.widget.Toast;
 
 import com.chamayetu.chamayetu.R;
-import com.github.johnpersano.supertoasts.library.Style;
-import com.github.johnpersano.supertoasts.library.SuperActivityToast;
-import com.github.johnpersano.supertoasts.library.SuperToast;
-import com.github.johnpersano.supertoasts.library.utils.PaletteUtils;
 import com.google.firebase.auth.FirebaseAuth;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
@@ -23,7 +20,6 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class LoginPresenterImpl implements LoginPresenter {
     private SweetAlertDialog pDialog;
-    private SuperToast superToast;
     public LoginPresenterImpl(){}
 
     @Override
@@ -49,18 +45,12 @@ public class LoginPresenterImpl implements LoginPresenter {
 
     @Override
     public void displayErrorMessage(Context context, String ErrorMessage) {
-        superToast = new SuperToast(context);
-        superToast.setDuration(Style.DURATION_LONG);
-        superToast.setText(ErrorMessage);
-        superToast.show();
+        Toast.makeText(context, ErrorMessage, Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void displaySuccessMessage(Context context, String message) {
-        superToast = new SuperToast(context);
-        superToast.setDuration(Style.DURATION_LONG);
-        superToast.setText(message);
-        superToast.show();
+        Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
     }
 
     @Override
