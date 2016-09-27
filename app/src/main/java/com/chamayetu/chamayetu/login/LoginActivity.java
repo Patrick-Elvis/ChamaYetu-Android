@@ -129,7 +129,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             if(googleSignInResult.isSuccess()){
                 //Google sign in was successful, authenticate with Firebase
                 GoogleSignInAccount googleSignInAccount = googleSignInResult.getSignInAccount();
-                
+
             }
         }
 
