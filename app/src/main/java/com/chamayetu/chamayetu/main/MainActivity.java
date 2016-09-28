@@ -18,6 +18,7 @@ import com.chamayetu.chamayetu.R;
 import com.chamayetu.chamayetu.login.LoginActivity;
 import com.chamayetu.chamayetu.mychama.MyChamaView;
 import com.chamayetu.chamayetu.useraccount.MyAccountView;
+import com.chamayetu.chamayetu.useraccount.UserAccountActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
@@ -134,13 +135,11 @@ public class MainActivity extends AppCompatActivity {
                                 //default screen, MyChama
                                 fragment = MyChamaView.newInstance();
                                 title = ((Nameable) drawerItem).getName().getText();
-                                Log.d(MAINACT_TAG,title);
+                                Log.d(MAINACT_TAG,"FragmentView:"+title);
                                 break;
                             case 2:
                                 //my account
-                                fragment = MyAccountView.newInstance();
-                                title = ((Nameable) drawerItem).getName().getText();
-                                Log.d(MAINACT_TAG,title);
+                                startActivity(new Intent(MainActivity.this, UserAccountActivity.class));
                                 break;
                             case 3:
                                 // notifications

@@ -11,8 +11,7 @@ import android.os.Parcelable;
  */
 public class ChamaPojo implements Parcelable {
 
-    protected ChamaPojo(Parcel in) {
-    }
+    protected ChamaPojo(Parcel in) {}
 
     public static final Creator<ChamaPojo> CREATOR = new Creator<ChamaPojo>() {
         @Override
@@ -32,6 +31,5 @@ public class ChamaPojo implements Parcelable {
     }
 
     @Override
-    public void writeToParcel(Parcel dest, int flags) {
-    }
+    public void writeToParcel(Parcel dest, int flags) {}
 }
