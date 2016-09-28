@@ -14,6 +14,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import com.chamayetu.chamayetu.R;
@@ -21,6 +22,9 @@ import com.chamayetu.chamayetu.login.LoginActivity;
 import com.chamayetu.chamayetu.mychama.MyChamaView;
 import com.chamayetu.chamayetu.useraccount.MyAccountView;
 import com.chamayetu.chamayetu.useraccount.UserAccountActivity;
+import com.chamayetu.chamayetu.utils.Contract;
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
@@ -50,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseUser mFirebaseUser;
     private String mUsername;
     private Uri mPhotoUrl;
+    private GoogleApiClient mGoogleApiClient;
     private String mEmail;
     private FirebaseRemoteConfig mFirebaseRemoteConfig;
 
@@ -238,5 +243,25 @@ public class MainActivity extends AppCompatActivity {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.main_menu, menu);
         return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.settings_menu:
+                //open settings
+                return true;
+            //sign out the user
+            case R.id.sign_out_menu:
+                mFirebaseAuth.signOut();
+                Auth.GoogleSignInApi.signOut(mGoogleApiClient);
+                mFirebaseUser = null;
+                mUsername = Contract.ANONYMOUS;
+                mPhotoUrl = null;
+                startActivity(new Intent(this, LoginActivity.class));
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }
