@@ -14,10 +14,12 @@ import com.chamayetu.chamayetu.R;
 import com.chamayetu.chamayetu.login.LoginActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
 import com.mikepenz.crossfadedrawerlayout.view.CrossfadeDrawerLayout;
 import com.mikepenz.materialdrawer.AccountHeader;
 import com.mikepenz.materialdrawer.AccountHeaderBuilder;
 import com.mikepenz.materialdrawer.Drawer;
+import com.mikepenz.materialdrawer.DrawerBuilder;
 import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 
@@ -31,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     private String mUsername;
     private Uri mPhotoUrl;
     private String mEmail;
+    private FirebaseRemoteConfig mFirebaseRemoteConfig;
 
     private Drawer drawer = null;
     private AccountHeader headerResult = null;
@@ -52,6 +55,9 @@ public class MainActivity extends AppCompatActivity {
         // Initialize Firebase Auth
         mFirebaseAuth = FirebaseAuth.getInstance();
         mFirebaseUser = mFirebaseAuth.getCurrentUser();
+
+        // Initialize Firebase Remote Config.
+        mFirebaseRemoteConfig = FirebaseRemoteConfig.getInstance();
 
         if (mFirebaseUser == null) {
             // Not signed in, launch the Sign In activity
@@ -77,7 +83,13 @@ public class MainActivity extends AppCompatActivity {
                 )
                 .withSavedInstance(savedInstanceState)
                 .build();
-        
+
+        //create the drawer
+        drawer = new DrawerBuilder()
+                .withActivity(this)
+                .withToolbar(toolbar)
+                .withHasStableIds(true)
+                .
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(view -> Snackbar.make(view, "Replace with your own action",
