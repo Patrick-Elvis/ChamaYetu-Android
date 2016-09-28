@@ -127,18 +127,20 @@ public class MainActivity extends AppCompatActivity {
                 ).withOnDrawerItemClickListener((view, position, drawerItem) -> {
                     if(drawerItem instanceof Nameable){
                         Fragment fragment = null;
-                        String title = "";
+                        String title = ((Nameable) drawerItem).getName().getText();
                         // perform click events for drawer items
                         switch ((int) drawerItem.getIdentifier()){
                             case 1:
                                 //default screen, MyChama
                                 fragment = MyChamaView.newInstance();
                                 title = ((Nameable) drawerItem).getName().getText();
+                                Log.d(MAINACT_TAG,title);
                                 break;
                             case 2:
                                 //my account
                                 fragment = MyAccountView.newInstance();
                                 title = ((Nameable) drawerItem).getName().getText();
+                                Log.d(MAINACT_TAG,title);
                                 break;
                             case 3:
                                 // notifications
