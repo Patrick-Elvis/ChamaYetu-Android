@@ -122,6 +122,23 @@ public class MainActivity extends AppCompatActivity {
                     public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
                         if(drawerItem instanceof Nameable){
                             // perform click events for drawer items
+                            switch ((int) drawerItem.getIdentifier()){
+                                case 1:
+                                    //default screen
+                                    break;
+                                case 2:
+                                    //my account
+                                    break;
+                                case 3:
+                                    // notifications
+                                    break;
+                                case 4:
+                                    //settings
+                                    break;
+                                case 5:
+                                    //default screen
+                                    break;
+                            }
 
                         }
                         //we do not consume the event and want the Drawer to continue with the event chain
