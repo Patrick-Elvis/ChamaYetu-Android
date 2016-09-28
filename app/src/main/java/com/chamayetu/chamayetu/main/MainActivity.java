@@ -1,6 +1,7 @@
 package com.chamayetu.chamayetu.main;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -20,8 +21,14 @@ import com.mikepenz.materialdrawer.AccountHeader;
 import com.mikepenz.materialdrawer.AccountHeaderBuilder;
 import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.DrawerBuilder;
+import com.mikepenz.materialdrawer.holder.BadgeStyle;
+import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
 import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
+import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
+import com.mikepenz.materialdrawer.model.SectionDrawerItem;
+import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IProfile;
+import com.mikepenz.materialdrawer.model.interfaces.Nameable;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -89,7 +96,41 @@ public class MainActivity extends AppCompatActivity {
                 .withActivity(this)
                 .withToolbar(toolbar)
                 .withHasStableIds(true)
-                .
+                .withDrawerLayout(R.layout.crossfade_drawer)
+                .withGenerateMiniDrawer(true)
+                .withAccountHeader(headerResult)
+                .addDrawerItems(
+                        //default screen My Chama
+                        new PrimaryDrawerItem().withName(R.string.drawer_item_mychama).withIcon(GoogleMaterial.Icon.gmd_sun).withIdentifier(1),
+
+                        // My Account
+                        new PrimaryDrawerItem().withName(R.string.drawer_item_myaccount).withIcon(FontAwesome.Icon.faw_home).withIdentifier(2).withSelectable(false),
+
+                        //Notifications
+                        new PrimaryDrawerItem().withName(R.string.drawer_item_notification).withIcon(FontAwesome.Icon.faw_home).withBadge("22").withBadgeStyle(new BadgeStyle(Color.RED, Color.RED)).withIdentifier(3).withSelectable(false),
+
+                        //settings
+                        new PrimaryDrawerItem().withName(R.string.drawer_item_settings).withIcon(FontAwesome.Icon.faw_gamepad).withIdentifier(4),
+
+                        // Help
+                        new PrimaryDrawerItem().withName(R.string.drawer_item_help).withIcon(FontAwesome.Icon.faw_eye).withIdentifier(5),
+
+                        //About
+                        new PrimaryDrawerItem().withDescription("A more complex sample").withName(R.string.drawer_item_about).withIcon(GoogleMaterial.Icon.gmd_adb).withIdentifier(6)
+                ).withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
+                    @Override
+                    public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
+                        if(drawerItem instanceof Nameable){
+                            // perform click events for drawer items
+
+                        }
+                        //we do not consume the event and want the Drawer to continue with the event chain
+                        return false;
+                    }
+                }).withSavedInstance(savedInstanceState)
+                .withShowDrawerOnFirstLaunch(true)
+                .build();
+
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(view -> Snackbar.make(view, "Replace with your own action",
