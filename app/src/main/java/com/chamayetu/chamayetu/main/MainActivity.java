@@ -19,6 +19,7 @@ import android.view.ViewGroup;
 import com.chamayetu.chamayetu.R;
 import com.chamayetu.chamayetu.login.LoginActivity;
 import com.chamayetu.chamayetu.mychama.MyChamaView;
+import com.chamayetu.chamayetu.settings.SettingsActivity;
 import com.chamayetu.chamayetu.useraccount.UserAccountActivity;
 import com.chamayetu.chamayetu.utils.Contract;
 import com.google.firebase.auth.FirebaseAuth;
@@ -136,7 +137,7 @@ public class MainActivity extends AppCompatActivity {
                             case 1:
                                 //default screen, MyChama
                                 fragment = MyChamaView.newInstance();
-                                title = ((Nameable) drawerItem).getName().getText();
+                                title = "My Chama";
                                 Log.d(MAINACT_TAG,"FragmentView:"+title);
                                 break;
                             case 2:
@@ -245,6 +246,7 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()){
             case R.id.settings_menu:
                 //open settings
+                startActivity(new Intent(this, SettingsActivity.class));
                 return true;
             //sign out the user
             case R.id.sign_out_menu:
@@ -253,6 +255,7 @@ public class MainActivity extends AppCompatActivity {
                 mUsername = Contract.ANONYMOUS;
                 mPhotoUrl = null;
                 startActivity(new Intent(this, LoginActivity.class));
+                finish();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
