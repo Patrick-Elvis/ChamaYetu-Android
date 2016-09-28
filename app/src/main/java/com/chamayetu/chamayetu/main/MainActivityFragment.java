@@ -1,4 +1,4 @@
-package com.chamayetu.chamayetu.views.main;
+package com.chamayetu.chamayetu.main;
 
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
