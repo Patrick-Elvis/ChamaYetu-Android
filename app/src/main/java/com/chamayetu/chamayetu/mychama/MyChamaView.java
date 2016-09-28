@@ -20,7 +20,9 @@ public class MyChamaView extends Fragment {
     public MyChamaView() {}
 
     public static Fragment newInstance(){
-        return new MyChamaView();
+        MyChamaView myChamaView = new MyChamaView();
+        myChamaView.setRetainInstance(true);
+        return myChamaView;
     }
 
     @Override

@@ -126,7 +126,7 @@ public class MainActivity extends AppCompatActivity {
                 ).withOnDrawerItemClickListener((view, position, drawerItem) -> {
                     if(drawerItem instanceof Nameable){
                         Fragment fragment = null;
-                        String title;
+                        String title = "";
                         // perform click events for drawer items
                         switch ((int) drawerItem.getIdentifier()){
                             case 1:
@@ -156,7 +156,14 @@ public class MainActivity extends AppCompatActivity {
                                 title = ((Nameable) drawerItem).getName().getText();
                                 break;
                         }
-
+                        /**swap the fragments appropriately*/
+                        if(fragment != null){
+                            FragmentManager fragmentManager = getSupportFragmentManager();
+                            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                            fragmentTransaction.replace(R.id.container_body, fragment);
+                            fragmentTransaction.commit();
+                            getSupportActionBar().setTitle(title);
+                        }
                     }
                     //we do not consume the event and want the Drawer to continue with the event chain
                     return false;

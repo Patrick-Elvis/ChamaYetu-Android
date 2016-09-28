@@ -20,7 +20,9 @@ public class MyAccountView extends Fragment{
     public MyAccountView(){}
 
     public static Fragment newInstance() {
-        return new MyAccountView();
+        MyAccountView myAccountView = new MyAccountView();
+        myAccountView.setRetainInstance(true);
+        return myAccountView;
     }
 
     @Nullable
