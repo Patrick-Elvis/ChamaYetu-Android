@@ -4,8 +4,6 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -15,7 +13,6 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.chamayetu.chamayetu.R;
 import com.chamayetu.chamayetu.login.LoginActivity;
 import com.chamayetu.chamayetu.mychama.MyChamaView;
@@ -34,9 +31,6 @@ import com.mikepenz.materialdrawer.holder.BadgeStyle;
 import com.mikepenz.materialdrawer.interfaces.ICrossfader;
 import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
 import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
-import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
-import com.mikepenz.materialdrawer.model.SectionDrawerItem;
-import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 import com.mikepenz.materialdrawer.model.interfaces.Nameable;
 import com.mikepenz.materialdrawer.util.DrawerUIUtils;
@@ -112,22 +106,22 @@ public class MainActivity extends AppCompatActivity {
                 .withAccountHeader(headerResult)
                 .addDrawerItems(
                         //default screen My Chama
-                        new PrimaryDrawerItem().withName(R.string.drawer_item_mychama).withIcon(GoogleMaterial.Icon.gmd_sun).withIdentifier(1),
+                        new PrimaryDrawerItem().withName(R.string.drawer_item_mychama).withIcon(GoogleMaterial.Icon.gmd_group_work).withIdentifier(1),
 
                         // My Account
-                        new PrimaryDrawerItem().withName(R.string.drawer_item_myaccount).withIcon(FontAwesome.Icon.faw_home).withIdentifier(2).withSelectable(false),
+                        new PrimaryDrawerItem().withName(R.string.drawer_item_myaccount).withIcon(FontAwesome.Icon.faw_user).withIdentifier(2).withSelectable(false),
 
                         //Notifications
-                        new PrimaryDrawerItem().withName(R.string.drawer_item_notification).withIcon(FontAwesome.Icon.faw_home).withBadge("22").withBadgeStyle(new BadgeStyle(Color.RED, Color.RED)).withIdentifier(3).withSelectable(false),
+                        new PrimaryDrawerItem().withName(R.string.drawer_item_notification).withIcon(FontAwesome.Icon.faw_bell).withBadge("22").withBadgeStyle(new BadgeStyle(Color.RED, Color.RED)).withIdentifier(3).withSelectable(false),
 
                         //settings
-                        new PrimaryDrawerItem().withName(R.string.drawer_item_settings).withIcon(FontAwesome.Icon.faw_gamepad).withIdentifier(4),
+                        new PrimaryDrawerItem().withName(R.string.drawer_item_settings).withIcon(FontAwesome.Icon.faw_cogs).withIdentifier(4),
 
                         // Help
-                        new PrimaryDrawerItem().withName(R.string.drawer_item_help).withIcon(FontAwesome.Icon.faw_eye).withIdentifier(5),
+                        new PrimaryDrawerItem().withName(R.string.drawer_item_help).withIcon(FontAwesome.Icon.faw_question).withIdentifier(5),
 
                         //About
-                        new PrimaryDrawerItem().withName(R.string.drawer_item_about).withIcon(GoogleMaterial.Icon.gmd_adb).withIdentifier(6)
+                        new PrimaryDrawerItem().withName(R.string.drawer_item_about).withIcon(GoogleMaterial.Icon.gmd_info).withIdentifier(6)
                 ).withOnDrawerItemClickListener((view, position, drawerItem) -> {
                     if(drawerItem instanceof Nameable){
                         Fragment fragment = null;
@@ -141,6 +135,7 @@ public class MainActivity extends AppCompatActivity {
                                 break;
                             case 2:
                                 //my account
+
                                 break;
                             case 3:
                                 // notifications
@@ -149,7 +144,10 @@ public class MainActivity extends AppCompatActivity {
                                 //settings
                                 break;
                             case 5:
-                                //default screen
+                                //help screen
+                                break;
+                            case 6:
+                                //about screen
                                 break;
                             default:
                                 fragment = MyChamaView.newInstance();
@@ -200,8 +198,6 @@ public class MainActivity extends AppCompatActivity {
                 return crossfadeDrawerLayout.isCrossfaded();
             }
         });
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
     }
 
 
