@@ -17,6 +17,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
 import com.mikepenz.crossfadedrawerlayout.view.CrossfadeDrawerLayout;
+import com.mikepenz.fontawesome_typeface_library.FontAwesome;
+import com.mikepenz.google_material_typeface_library.GoogleMaterial;
 import com.mikepenz.materialdrawer.AccountHeader;
 import com.mikepenz.materialdrawer.AccountHeaderBuilder;
 import com.mikepenz.materialdrawer.Drawer;
@@ -116,34 +118,31 @@ public class MainActivity extends AppCompatActivity {
                         new PrimaryDrawerItem().withName(R.string.drawer_item_help).withIcon(FontAwesome.Icon.faw_eye).withIdentifier(5),
 
                         //About
-                        new PrimaryDrawerItem().withDescription("A more complex sample").withName(R.string.drawer_item_about).withIcon(GoogleMaterial.Icon.gmd_adb).withIdentifier(6)
-                ).withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
-                    @Override
-                    public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
-                        if(drawerItem instanceof Nameable){
-                            // perform click events for drawer items
-                            switch ((int) drawerItem.getIdentifier()){
-                                case 1:
-                                    //default screen
-                                    break;
-                                case 2:
-                                    //my account
-                                    break;
-                                case 3:
-                                    // notifications
-                                    break;
-                                case 4:
-                                    //settings
-                                    break;
-                                case 5:
-                                    //default screen
-                                    break;
-                            }
-
+                        new PrimaryDrawerItem().withName(R.string.drawer_item_about).withIcon(GoogleMaterial.Icon.gmd_adb).withIdentifier(6)
+                ).withOnDrawerItemClickListener((view, position, drawerItem) -> {
+                    if(drawerItem instanceof Nameable){
+                        // perform click events for drawer items
+                        switch ((int) drawerItem.getIdentifier()){
+                            case 1:
+                                //default screen
+                                break;
+                            case 2:
+                                //my account
+                                break;
+                            case 3:
+                                // notifications
+                                break;
+                            case 4:
+                                //settings
+                                break;
+                            case 5:
+                                //default screen
+                                break;
                         }
-                        //we do not consume the event and want the Drawer to continue with the event chain
-                        return false;
+
                     }
+                    //we do not consume the event and want the Drawer to continue with the event chain
+                    return false;
                 }).withSavedInstance(savedInstanceState)
                 .withShowDrawerOnFirstLaunch(true)
                 .build();
