@@ -83,5 +83,6 @@ dependencies {
     compile('com.mikepenz:materialdrawer:5.6.0@aar') {
         transitive = true
     }
+    compile('com.mikepenz:crossfadedrawerlayout:1.0.0@aar')
 }
 apply plugin: 'com.google.gms.google-services'

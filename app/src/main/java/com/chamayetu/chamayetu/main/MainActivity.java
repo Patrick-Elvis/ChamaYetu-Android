@@ -8,8 +8,11 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.chamayetu.chamayetu.R;
+import com.mikepenz.materialdrawer.Drawer;
 
 public class MainActivity extends AppCompatActivity {
+    public static final String MAINACT_TAG = MainActivity.class.getSimpleName();
+    private Drawer drawer = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
