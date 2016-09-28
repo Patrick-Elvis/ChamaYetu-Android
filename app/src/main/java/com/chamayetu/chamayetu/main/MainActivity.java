@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import com.chamayetu.chamayetu.R;
 import com.chamayetu.chamayetu.login.LoginActivity;
 import com.chamayetu.chamayetu.mychama.MyChamaView;
+import com.chamayetu.chamayetu.useraccount.MyAccountView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
@@ -135,7 +136,8 @@ public class MainActivity extends AppCompatActivity {
                                 break;
                             case 2:
                                 //my account
-
+                                fragment = MyAccountView.newInstance();
+                                title = ((Nameable) drawerItem).getName().getText();
                                 break;
                             case 3:
                                 // notifications
