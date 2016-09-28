@@ -6,6 +6,9 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -15,6 +18,7 @@ import android.view.ViewGroup;
 
 import com.chamayetu.chamayetu.R;
 import com.chamayetu.chamayetu.login.LoginActivity;
+import com.chamayetu.chamayetu.mychama.MyChamaView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
@@ -85,11 +89,10 @@ public class MainActivity extends AppCompatActivity {
             mPhotoUrl = mFirebaseUser.getPhotoUrl();
         }
         /*user profile*/
-        final IProfile user_profile = new ProfileDrawerItem().withName(mUsername).withEmail(mEmail).withIcon(mPhotoUrl);
+        final IProfile user_profile = new ProfileDrawerItem().withName(mUsername).withEmail(mEmail).withIcon(Uri.parse(mPhotoUrl.toString()));
         Log.d(MAINACT_TAG,"Username: "+ mUsername + " Email: " + mEmail + " Photo Url: " + mPhotoUrl);
 
         //create the account header
-        // Create the AccountHeader
         headerResult = new AccountHeaderBuilder()
                 .withActivity(this)
                 .withHeaderBackground(R.drawable.header)
@@ -127,10 +130,14 @@ public class MainActivity extends AppCompatActivity {
                         new PrimaryDrawerItem().withName(R.string.drawer_item_about).withIcon(GoogleMaterial.Icon.gmd_adb).withIdentifier(6)
                 ).withOnDrawerItemClickListener((view, position, drawerItem) -> {
                     if(drawerItem instanceof Nameable){
+                        Fragment fragment = null;
+                        String title;
                         // perform click events for drawer items
                         switch ((int) drawerItem.getIdentifier()){
                             case 1:
-                                //default screen
+                                //default screen, MyChama
+                                fragment = MyChamaView.newInstance();
+                                title = ((Nameable) drawerItem).getName().getText();
                                 break;
                             case 2:
                                 //my account
@@ -144,6 +151,10 @@ public class MainActivity extends AppCompatActivity {
                             case 5:
                                 //default screen
                                 break;
+                            default:
+                                fragment = MyChamaView.newInstance();
+                                title = ((Nameable) drawerItem).getName().getText();
+                                break;
                         }
 
                     }
@@ -152,6 +163,13 @@ public class MainActivity extends AppCompatActivity {
                 }).withSavedInstance(savedInstanceState)
                 .withShowDrawerOnFirstLaunch(true)
                 .build();
+
+        //set the default screen to MyChamaView
+        Fragment fragment = MyChamaView.newInstance();
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.container_body, fragment);
+        fragmentTransaction.commit();
 
         crossfadeDrawerLayout = (CrossfadeDrawerLayout) drawer.getDrawerLayout();
         //define maxDrawerWidth
