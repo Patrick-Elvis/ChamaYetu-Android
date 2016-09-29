@@ -93,10 +93,26 @@ public class UserPojo implements Parcelable {
     }
 
     protected UserPojo(Parcel in) {
+        this.firstName = in.readString();
+        this.lastName = in.readString();
+        this.email = in.readString();
+        this.role = in.readString();
+        this.phoneNumber = in.readInt();
+        this.totalContributed = in.readInt();
+        this.avgContribution = in.readInt();
+        this.chamaGroups = in.createStringArrayList();
     }
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(firstName);
+        dest.writeString(lastName);
+        dest.writeString(email);
+        dest.writeString(role);
+        dest.writeInt(phoneNumber);
+        dest.writeInt(totalContributed);
+        dest.writeInt(avgContribution);
+        dest.writeStringList(chamaGroups);
     }
 
     @Override
@@ -104,7 +120,7 @@ public class UserPojo implements Parcelable {
         return 0;
     }
 
-    public static final Creator<UserPojo> CREATOR = new Creator<UserPojo>() {
+    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
         @Override
         public UserPojo createFromParcel(Parcel in) {
             return new UserPojo(in);

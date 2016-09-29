@@ -193,4 +193,6 @@
     <string name="useracct_displayname">Display Name</string>
     <string name="useracct_email">Email</string>
     <string name="useracct_chamalabel">My Chama(s)</string>
+    <string name="useracct_mychamalabel">My Chama</string>
+    <string name="useracct_mychamafield">my role</string>
 </resources>
