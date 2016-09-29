@@ -100,7 +100,6 @@
                     android:text="@string/statement_amount_field"/>
             </LinearLayout>
         </LinearLayout>
-
     </android.support.v7.widget.CardView>
 
 </android.support.constraint.ConstraintLayout>

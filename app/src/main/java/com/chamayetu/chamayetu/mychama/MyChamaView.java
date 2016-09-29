@@ -2,6 +2,7 @@ package com.chamayetu.chamayetu.mychama;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,7 @@ import butterknife.ButterKnife;
  */
 
 public class MyChamaView extends Fragment {
+    @BindView(R.id.mychamastatement_card) CardView statementCard;
     @BindView(R.id.statement_from_field) TextView dateFrom;
     @BindView(R.id.statement_to_field) TextView dateTo;
     public MyChamaView() {}
