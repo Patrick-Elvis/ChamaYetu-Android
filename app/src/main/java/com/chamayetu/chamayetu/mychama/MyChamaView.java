@@ -78,10 +78,10 @@ public class MyChamaView extends Fragment {
                         chamaPojo.getName(),chamaPojo.getVenue(),chamaPojo.getMilestone());
                 Log.d(MYCHAMA_TAG,chamaPojo.toString());
 
-                nxtMeetingTime.setText(chamaPojo.getNextMeetingTime());
+                nxtMeetingTime.setText((int) chamaPojo.getNextMeetingTime());
                 nxtMeetingVenue.setText(chamaPojo.getVenue());
                 milestioneView.setText(chamaPojo.getMilestone());
-                memberNumbers.setText(chamaPojo.getMembers());
+                memberNumbers.setText((int) chamaPojo.getMembers());
             }
 
             @Override
