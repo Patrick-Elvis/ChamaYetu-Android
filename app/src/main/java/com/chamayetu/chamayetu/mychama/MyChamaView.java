@@ -24,6 +24,13 @@ public class MyChamaView extends Fragment {
     @BindView(R.id.mychamastatement_card) CardView statementCard;
     @BindView(R.id.statement_from_field) TextView dateFrom;
     @BindView(R.id.statement_to_field) TextView dateTo;
+    @BindView(R.id.mychamanxtmeeting_card) CardView nxtMeetingCard;
+    @BindView(R.id.nxtmeeting_time_field) TextView nxtMeetingTime;
+    @BindView(R.id.nxtmeeting_venue_field) TextView nxtMeetingVenue;
+    @BindView(R.id.mychamaagenda_card) CardView agendaCard;
+    @BindView(R.id.milestone_field) TextView milestioneView;
+    @BindView(R.id.mychamamembers_card) CardView membersCard;
+    @BindView(R.id.members_number) TextView memberNumbers;
     public MyChamaView() {}
 
     public static Fragment newInstance(){

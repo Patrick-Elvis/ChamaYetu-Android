@@ -201,4 +201,15 @@
     <string name="statement_to_field">to_date</string>
     <string name="statement_amount_label">Amount:</string>
     <string name="statement_amount_field">amountTxt</string>
+    <string name="nxtmeeting_label">Next Meeting</string>
+    <string name="nxtmeeting_time_label">Time:</string>
+    <string name="nxtmeeting_time_field">time_data</string>
+    <string name="nxtmeeting_venue_label">Venue:</string>
+    <string name="nxtmeeting_venue_field">venue</string>
+    <string name="agenda_label">Agenda</string>
+    <string name="milestone_label">milestone: </string>
+    <string name="milestone_field">mile</string>
+    <string name="milestone_date">Date: </string>
+    <string name="milestone_title">Members</string>
+    <string name="members_number">5</string>
 </resources>
