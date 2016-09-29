@@ -11,36 +11,18 @@ import android.os.Parcelable;
  */
 public class ChamaPojo implements Parcelable {
     //brief statement amounts
-    private int dateFrom, dateTo,nextMeetingTime,agendaTime, members;
-    private float amountTotal;
-    private String venue, milestone;
+    private int dateCreated,milestoneDate,nextMeetingTime, milesteoneDate, members;
+    private long totalAmount,amountExpected;
+    private String name, venue, milestone;
 
     /**Constructor for creating the ChamaPojo object*/
-    public ChamaPojo(int dateFrom, int dateTo, int nextMeetingTime, int agendaTime, int members, float amountTotal, String venue, String milestone) {
-        this.dateFrom = dateFrom;
-        this.dateTo = dateTo;
+    public ChamaPojo(int nextMeetingTime, int milesteoneDate, int members, long totalAmount, String venue, String milestone) {
         this.nextMeetingTime = nextMeetingTime;
-        this.agendaTime = agendaTime;
+        this.milesteoneDate = milesteoneDate;
         this.members = members;
-        this.amountTotal = amountTotal;
+        this.totalAmount = totalAmount;
         this.venue = venue;
         this.milestone = milestone;
-    }
-
-    public int getDateFrom() {
-        return dateFrom;
-    }
-
-    public void setDateFrom(int dateFrom) {
-        this.dateFrom = dateFrom;
-    }
-
-    public int getDateTo() {
-        return dateTo;
-    }
-
-    public void setDateTo(int dateTo) {
-        this.dateTo = dateTo;
     }
 
     public int getNextMeetingTime() {
@@ -51,12 +33,12 @@ public class ChamaPojo implements Parcelable {
         this.nextMeetingTime = nextMeetingTime;
     }
 
-    public int getAgendaTime() {
-        return agendaTime;
+    public int getMilesteoneDate() {
+        return milesteoneDate;
     }
 
-    public void setAgendaTime(int agendaTime) {
-        this.agendaTime = agendaTime;
+    public void setMilesteoneDate(int milesteoneDate) {
+        this.milesteoneDate = milesteoneDate;
     }
 
     public int getMembers() {
@@ -67,12 +49,12 @@ public class ChamaPojo implements Parcelable {
         this.members = members;
     }
 
-    public float getAmountTotal() {
-        return amountTotal;
+    public long getTotalAmount() {
+        return totalAmount;
     }
 
-    public void setAmountTotal(float amountTotal) {
-        this.amountTotal = amountTotal;
+    public void setTotalAmount(long totalAmount) {
+        this.totalAmount = totalAmount;
     }
 
     public String getVenue() {
@@ -92,23 +74,21 @@ public class ChamaPojo implements Parcelable {
     }
 
     public ChamaPojo(Parcel source) {
-        int[] data = new int[5];
+        int[] data = new int[3];
         String[] stringData = new String[2];
         source.readIntArray(data);
         source.readStringArray(stringData);
 
-        this.dateFrom = data[0];
-        this.dateTo = data[1];
-        this.nextMeetingTime = data[2];
-        this.agendaTime = data[3];
-        this.members = data[4];
+        this.nextMeetingTime = data[0];
+        this.milesteoneDate = data[1];
+        this.members = data[2];
 
-        amountTotal = source.readFloat();
+        totalAmount = source.readLong();
         this.venue = stringData[0];
         this.milestone = stringData[1];
     }
 
-    public static final Creator<ChamaPojo> CREATOR = new Creator<ChamaPojo>() {
+    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
         @Override
         public ChamaPojo createFromParcel(Parcel in) {
             return new ChamaPojo(in);
@@ -127,7 +107,7 @@ public class ChamaPojo implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeIntArray(new int[]{this.dateFrom, this.dateTo,this.nextMeetingTime,
-                this.agendaTime, this.members});
+        dest.writeIntArray(new int[]{this.nextMeetingTime,
+                this.milesteoneDate, this.members});
     }
 }

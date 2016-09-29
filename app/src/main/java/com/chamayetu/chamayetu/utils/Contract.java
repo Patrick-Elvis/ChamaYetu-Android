@@ -17,4 +17,8 @@ public class Contract {
     public static final String TWITTER_CONSUMER_SECRET = BuildConfig.TWITTER_CONSUMER_KEY;
     public static final int RC_SIGN_IN = 9001;
     public static final String ANONYMOUS = "anonymous";
+
+    public static final String CHAMA_NODE = "chamas";
+    public static final String STATEMENT_NODE ="statements";
+
 }
