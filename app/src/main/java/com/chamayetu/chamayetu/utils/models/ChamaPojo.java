@@ -11,18 +11,17 @@ import android.os.Parcelable;
  */
 public class ChamaPojo implements Parcelable {
     //brief statement amounts
-    private long dateCreated,milestoneDate,nextMeetingTime, milesteoneDate, members;
+    private long dateCreated,milestoneDate,nextMeetingTime, members;
     private long totalAmount,amountExpected;
     private String name, venue, milestone;
 
     public ChamaPojo(){}
 
     /**Constructor for creating the ChamaPojo object*/
-    public ChamaPojo(long dateCreated, long milestoneDate, long nextMeetingTime, long milesteoneDate, long members, long totalAmount, long amountExpected, String name, String venue, String milestone) {
+    public ChamaPojo(long dateCreated,long nextMeetingTime, long milestoneDate, long members, long totalAmount, long amountExpected, String name, String venue, String milestone) {
         this.dateCreated = dateCreated;
-        this.milestoneDate = milestoneDate;
         this.nextMeetingTime = nextMeetingTime;
-        this.milesteoneDate = milesteoneDate;
+        this.milestoneDate = milestoneDate;
         this.members = members;
         this.totalAmount = totalAmount;
         this.amountExpected = amountExpected;
@@ -71,14 +70,6 @@ public class ChamaPojo implements Parcelable {
         this.nextMeetingTime = nextMeetingTime;
     }
 
-    public long getMilesteoneDate() {
-        return milesteoneDate;
-    }
-
-    public void setMilesteoneDate(long milesteoneDate) {
-        this.milesteoneDate = milesteoneDate;
-    }
-
     public long getMembers() {
         return members;
     }
@@ -118,8 +109,7 @@ public class ChamaPojo implements Parcelable {
         source.readStringArray(stringData);
 
         this.nextMeetingTime = data[0];
-        this.milesteoneDate = data[1];
-        this.members = data[2];
+        this.members = data[1];
 
         totalAmount = source.readLong();
         this.venue = stringData[0];
@@ -146,6 +136,6 @@ public class ChamaPojo implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeLongArray(new long[]{this.nextMeetingTime,
-                this.milesteoneDate, this.members});
+                this.milestoneDate, this.members});
     }
 }

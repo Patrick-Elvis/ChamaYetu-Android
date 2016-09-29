@@ -58,7 +58,8 @@ public class MyChamaView extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.mychama_view, container, false);
-        ButterKnife.bind(rootView);
+        ButterKnife.bind(this, rootView);
+
         initFirebaseDatabase();
         return rootView;
     }
@@ -72,11 +73,11 @@ public class MyChamaView extends Fragment {
                 ChamaPojo chamaPojo = dataSnapshot.getValue(ChamaPojo.class);
 
                 chamaPojo = new ChamaPojo(chamaPojo.getDateCreated(),
-                        chamaPojo.getMilesteoneDate(), chamaPojo.getNextMeetingTime(),
-                        chamaPojo.getMilesteoneDate(), chamaPojo.getMembers(),
-                        chamaPojo.getTotalAmount(),chamaPojo.getAmountExpected(),
+                        chamaPojo.getNextMeetingTime(), chamaPojo.getMilestoneDate(),
+                        chamaPojo.getMembers(),chamaPojo.getTotalAmount(),chamaPojo.getAmountExpected(),
                         chamaPojo.getName(),chamaPojo.getVenue(),chamaPojo.getMilestone());
-                Log.d(MYCHAMA_TAG,chamaPojo.toString());
+
+                Log.d(MYCHAMA_TAG, String.valueOf(chamaPojo.getNextMeetingTime()) + " " + chamaPojo.getVenue() + " " + chamaPojo.getMilestone() + " " +chamaPojo.getMembers() );
 
                 nxtMeetingTime.setText((int) chamaPojo.getNextMeetingTime());
                 nxtMeetingVenue.setText(chamaPojo.getVenue());
