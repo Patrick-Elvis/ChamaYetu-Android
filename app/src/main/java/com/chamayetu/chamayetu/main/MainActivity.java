@@ -149,12 +149,14 @@ public class MainActivity extends AppCompatActivity {
                                 break;
                             case 4:
                                 //settings
+                                startActivity(new Intent(this, SettingsActivity.class));
                                 break;
                             case 5:
                                 //help screen
                                 break;
                             case 6:
                                 //about screen
+
                                 break;
                             default:
                                 fragment = MyChamaView.newInstance();
