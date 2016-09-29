@@ -9,7 +9,7 @@ import java.util.ArrayList;
  * ChamaYetu
  * com.chamayetu.chamayetu.utils.models
  * Created by lusinabrian on 29/09/16.
- * Description:
+ * Description: User Pojo for the User node in the database
  */
 
 public class UserPojo implements Parcelable {

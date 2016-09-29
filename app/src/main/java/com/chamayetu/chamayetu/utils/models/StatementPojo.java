@@ -7,7 +7,7 @@ import android.os.Parcelable;
  * ChamaYetu
  * com.chamayetu.chamayetu.utils.models
  * Created by lusinabrian on 29/09/16.
- * Description:
+ * Description: Statement Pojo for the statements node
  */
 
 public class StatementPojo implements Parcelable {
