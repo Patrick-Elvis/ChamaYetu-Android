@@ -16,13 +16,49 @@ public class ChamaPojo implements Parcelable {
     private String name, venue, milestone;
 
     /**Constructor for creating the ChamaPojo object*/
-    public ChamaPojo(int nextMeetingTime, int milesteoneDate, int members, long totalAmount, String venue, String milestone) {
+    public ChamaPojo(int dateCreated, int milestoneDate, int nextMeetingTime, int milesteoneDate, int members, long totalAmount, long amountExpected, String name, String venue, String milestone) {
+        this.dateCreated = dateCreated;
+        this.milestoneDate = milestoneDate;
         this.nextMeetingTime = nextMeetingTime;
         this.milesteoneDate = milesteoneDate;
         this.members = members;
         this.totalAmount = totalAmount;
+        this.amountExpected = amountExpected;
+        this.name = name;
         this.venue = venue;
         this.milestone = milestone;
+    }
+
+    public int getDateCreated() {
+        return dateCreated;
+    }
+
+    public void setDateCreated(int dateCreated) {
+        this.dateCreated = dateCreated;
+    }
+
+    public int getMilestoneDate() {
+        return milestoneDate;
+    }
+
+    public void setMilestoneDate(int milestoneDate) {
+        this.milestoneDate = milestoneDate;
+    }
+
+    public long getAmountExpected() {
+        return amountExpected;
+    }
+
+    public void setAmountExpected(long amountExpected) {
+        this.amountExpected = amountExpected;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public int getNextMeetingTime() {

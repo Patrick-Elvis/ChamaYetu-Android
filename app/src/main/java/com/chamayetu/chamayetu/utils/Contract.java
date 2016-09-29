@@ -20,5 +20,6 @@ public class Contract {
 
     public static final String CHAMA_NODE = "chamas";
     public static final String STATEMENT_NODE ="statements";
+    public static final String MEMBERS_NODE = "members";
 
 }
