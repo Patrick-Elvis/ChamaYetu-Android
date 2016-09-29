@@ -91,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
             mPhotoUrl = mFirebaseUser.getPhotoUrl();
         }
         /*user profile*/
-        final IProfile user_profile = new ProfileDrawerItem().withName(mUsername).withEmail(mEmail).withIcon(Uri.parse(mPhotoUrl.toString()));
+        final IProfile user_profile = new ProfileDrawerItem().withName(mUsername).withEmail(mEmail).withIcon(mPhotoUrl);
         Log.d(MAINACT_TAG,"Username: "+ mUsername + " Email: " + mEmail + " Photo Url: " + mPhotoUrl);
 
         //create the account header

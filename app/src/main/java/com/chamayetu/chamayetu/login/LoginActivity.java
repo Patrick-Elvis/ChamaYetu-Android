@@ -146,7 +146,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         facebookLoginBtn.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
-                Log.d(LOGINACT_TAG, "FacebookLoginSuccess"+loginResult);
+                Log.d(LOGINACT_TAG, "FacebookLoginSuccess: "+loginResult);
                 //pass this token to handle with firebase login
                 //if successful, start main activity
                 if(LoginAuthHandler.handleFacebookLogin(loginResult.getAccessToken(), mAuth, LoginActivity.this)){
