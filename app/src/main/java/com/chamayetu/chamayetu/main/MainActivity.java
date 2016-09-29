@@ -25,6 +25,8 @@ import com.chamayetu.chamayetu.utils.Contract;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
+import com.mikepenz.aboutlibraries.Libs;
+import com.mikepenz.aboutlibraries.LibsBuilder;
 import com.mikepenz.crossfadedrawerlayout.view.CrossfadeDrawerLayout;
 import com.mikepenz.fontawesome_typeface_library.FontAwesome;
 import com.mikepenz.google_material_typeface_library.GoogleMaterial;
@@ -156,7 +158,14 @@ public class MainActivity extends AppCompatActivity {
                                 break;
                             case 6:
                                 //about screen
-
+                                new LibsBuilder()
+                                        //provide a style (optional) (LIGHT, DARK, LIGHT_DARK_TOOLBAR)
+                                        .withActivityStyle(Libs.ActivityStyle.LIGHT_DARK_TOOLBAR)
+                                        //start the activity
+                                        .withAboutIconShown(true)
+                                        .withAboutVersionShown(true)
+                                        .withAboutDescription(getString(R.string.about_app))
+                                        .start(this);
                                 break;
                             default:
                                 fragment = MyChamaView.newInstance();
