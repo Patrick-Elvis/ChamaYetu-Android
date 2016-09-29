@@ -110,7 +110,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             FirebaseUser user = firebaseAuth.getCurrentUser();
             if(user !=null){
                 // user is signed in, therefore redirect to MainActivity
-                Log.d(LOGINACT_TAG, "onAuthStateChanged:signed in" + user.getUid());
+                Log.d(LOGINACT_TAG, "onAuthStateChanged:signedIn: " + user.getUid());
                 startActivity(new Intent(LoginActivity.this, MainActivity.class));
             }else{
                 Log.d(LOGINACT_TAG, "onAuthStateChanged:signedout");
@@ -131,9 +131,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 GoogleSignInAccount googleSignInAccount = googleSignInResult.getSignInAccount();
                 if(LoginAuthHandler.handleGoogleLogin(googleSignInAccount,mAuth,LoginActivity.this)){
                     startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                }else{
-                    Log.d(LOGINACT_TAG, "onAuthStateChanged:signedout");
-                    Toast.makeText(this, "Google Sign in failed", Toast.LENGTH_SHORT).show();
                 }
             }
         }
@@ -154,9 +151,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 //if successful, start main activity
                 if(LoginAuthHandler.handleFacebookLogin(loginResult.getAccessToken(), mAuth, LoginActivity.this)){
                     startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                }else{
-                    //TODO:display error to user
-                    Toast.makeText(LoginActivity.this, "Login with Facebook has failed",Toast.LENGTH_SHORT).show();
                 }
             }
 

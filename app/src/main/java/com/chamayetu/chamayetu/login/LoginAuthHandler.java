@@ -61,9 +61,9 @@ public class LoginAuthHandler{
         AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
 
         auth.signInWithCredential(credential).addOnCompleteListener((Activity)context, task -> {
-            Log.d(TAG, "SignInWithCredentialComplete"+ task.isSuccessful());
+            Log.d(TAG, "SignInWithCredentialComplete: "+ task.isSuccessful());
            if(!task.isSuccessful()){
-               Log.d(TAG, "GoogleSignInFail:", task.getException());
+               Log.d(TAG, "GoogleSignInFail: ", task.getException());
                success = !task.isSuccessful();
                loginPresenter.dismissProgressDialog(context, success);
                loginPresenter.displayErrorMessage(context, "Failed to login with Google");
