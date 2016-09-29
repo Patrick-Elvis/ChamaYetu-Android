@@ -5,8 +5,12 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.chamayetu.chamayetu.R;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
  * ChamaYetu
@@ -16,7 +20,8 @@ import com.chamayetu.chamayetu.R;
  */
 
 public class MyChamaView extends Fragment {
-
+    @BindView(R.id.statement_from_field) TextView dateFrom;
+    @BindView(R.id.statement_to_field) TextView dateTo;
     public MyChamaView() {}
 
     public static Fragment newInstance(){
@@ -29,7 +34,7 @@ public class MyChamaView extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.mychama_view, container, false);
-
+        ButterKnife.bind(rootView);
         return rootView;
     }
 

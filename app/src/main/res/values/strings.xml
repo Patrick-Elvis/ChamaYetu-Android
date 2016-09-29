@@ -195,4 +195,10 @@
     <string name="useracct_chamalabel">My Chama(s)</string>
     <string name="useracct_mychamalabel">My Chama</string>
     <string name="useracct_mychamafield">my role</string>
+    <string name="statement_from_label">From:</string>
+    <string name="statement_from_field">from date</string>
+    <string name="statement_to_label">To:</string>
+    <string name="statement_to_field">to_date</string>
+    <string name="statement_amount_label">Amount:</string>
+    <string name="statement_amount_field">amountTxt</string>
 </resources>
