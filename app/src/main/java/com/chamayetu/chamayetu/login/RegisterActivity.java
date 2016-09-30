@@ -48,6 +48,10 @@ public class RegisterActivity extends AppCompatActivity{
     @BindView(R.id.signup_chamaname_id) EditText signUpChamaNameView;
     @BindView(R.id.signup_phoneNo_id) EditText signUpPhoneNo;
     @BindView(R.id.signup_phoneNoTxtInp_id) TextInputLayout signUpPhoneNoTxtIn;
+    @BindView(R.id.signup_name_id) EditText signUpName;
+    @BindView(R.id.signup_nametxtInput_id) TextInputLayout signUpNameTxtIn;
+    @BindView(R.id.signup_retypepassword_id) EditText retypePassword;
+    @BindView(R.id.signup_retypepass_txtInput_id) TextInputLayout retypePasswordTxtIn;
     
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
