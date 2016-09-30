@@ -11,13 +11,58 @@ import android.os.Parcelable;
  */
 
 public class StatementPojo implements Parcelable {
-    private int dateFrom, dateTo,nextMeetingTime,agendaTime;
-    private float totalAmount;
+    private String dateFrom, dateTo, title;
+    private long totalAmount;
 
-    protected StatementPojo(Parcel in) {
+    public StatementPojo(){}
+
+    public StatementPojo(String dateFrom, String dateTo, String title, long totalAmount) {
+        this.dateFrom = dateFrom;
+        this.dateTo = dateTo;
+        this.title = title;
+        this.totalAmount = totalAmount;
     }
 
-    public static final Creator<StatementPojo> CREATOR = new Creator<StatementPojo>() {
+    public String getDateFrom() {
+        return dateFrom;
+    }
+
+    public void setDateFrom(String dateFrom) {
+        this.dateFrom = dateFrom;
+    }
+
+    public String getDateTo() {
+        return dateTo;
+    }
+
+    public void setDateTo(String dateTo) {
+        this.dateTo = dateTo;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public long getTotalAmount() {
+        return totalAmount;
+    }
+
+    public void setTotalAmount(long totalAmount) {
+        this.totalAmount = totalAmount;
+    }
+
+    protected StatementPojo(Parcel source) {
+        this.dateFrom = source.readString();
+        this.dateTo = source.readString();
+        this.title =source.readString();
+        this.totalAmount = source.readLong();
+    }
+
+    public static Parcelable.Creator<StatementPojo> CREATOR = new Parcelable.Creator<StatementPojo>() {
         @Override
         public StatementPojo createFromParcel(Parcel in) {
             return new StatementPojo(in);
@@ -36,5 +81,9 @@ public class StatementPojo implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.dateFrom);
+        dest.writeString(this.dateTo);
+        dest.writeString(this.title);
+        dest.writeLong(this.totalAmount);
     }
 }

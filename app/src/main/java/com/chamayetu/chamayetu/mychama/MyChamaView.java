@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.chamayetu.chamayetu.R;
 import com.chamayetu.chamayetu.utils.Contract;
 import com.chamayetu.chamayetu.utils.models.ChamaPojo;
+import com.chamayetu.chamayetu.utils.models.StatementPojo;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -36,6 +37,7 @@ public class MyChamaView extends Fragment {
     @BindView(R.id.mychamanxtmeeting_card) CardView nxtMeetingCard;
     @BindView(R.id.statement_from_field) TextView dateFrom;
     @BindView(R.id.statement_to_field) TextView dateTo;
+    @BindView(R.id.statement_amount_field) TextView statementAmt;
     @BindView(R.id.nxtmeeting_time_field) TextView nxtMeetingTime;
     @BindView(R.id.nxtmeeting_venue_field) TextView nxtMeetingVenue;
     @BindView(R.id.milestone_field) TextView milestioneView;
@@ -64,19 +66,20 @@ public class MyChamaView extends Fragment {
     /**Initialize Firebase Database*/
     private void initFirebaseDatabase() {
         mDatabase = FirebaseDatabase.getInstance().getReference();
+
         /*Get boda node*/
         /*TODO: get node of client's chama*/
-        mDatabase.child(Contract.CHAMA_NODE).child("boda").addValueEventListener(new ValueEventListener() {
+        mDatabase.child(Contract.CHAMA_NODE).child("boda")
+                .addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 ChamaPojo chamaPojo = dataSnapshot.getValue(ChamaPojo.class);
-
                 chamaPojo = new ChamaPojo(chamaPojo.getDateCreated(),
                         chamaPojo.getNextMeetingTime(), chamaPojo.getMilestoneDate(),
                         chamaPojo.getMembers(),chamaPojo.getTotalAmount(),chamaPojo.getAmountExpected(),
                         chamaPojo.getName(),chamaPojo.getVenue(),chamaPojo.getMilestone());
 
-                Log.d(MYCHAMA_TAG, String.valueOf(chamaPojo.getNextMeetingTime()) + " " + chamaPojo.getVenue() + " " + chamaPojo.getMilestone() + " " +chamaPojo.getMembers() );
+                Log.d(MYCHAMA_TAG+"ChamaNode: ", String.valueOf(chamaPojo.getNextMeetingTime()) + " " + chamaPojo.getVenue() + " " + chamaPojo.getMilestone() + " " +chamaPojo.getMembers() );
 
                 nxtMeetingTime.setText(chamaPojo.getNextMeetingTime());
                 nxtMeetingVenue.setText(chamaPojo.getVenue());
@@ -91,6 +94,30 @@ public class MyChamaView extends Fragment {
         });
 
         /*Get statement node of boda node*/
+        /*TODO: get node of client's statement*/
+        mDatabase.child(Contract.STATEMENT_NODE).child("boda")
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        StatementPojo statementPojo = dataSnapshot.getValue(StatementPojo.class);
+                        statementPojo = new StatementPojo(statementPojo.getDateFrom(),
+                                statementPojo.getDateTo(), statementPojo.getTitle(),
+                                statementPojo.getTotalAmount());
+
+                        Log.d(MYCHAMA_TAG+"Statement: ", statementPojo.getDateFrom()+ " "+
+                                statementPojo.getDateTo()+ " "+ statementPojo.getTitle()+ " "+
+                                statementPojo.getTotalAmount());
+
+                        dateFrom.setText(statementPojo.getDateFrom());
+                        dateTo.setText(statementPojo.getDateTo());
+                        statementAmt.setText(String.valueOf(statementPojo.getTotalAmount()));
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
 
     }
 
