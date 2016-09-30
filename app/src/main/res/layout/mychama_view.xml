@@ -6,12 +6,13 @@
     android:layout_height="wrap_content"
     android:layout_width="match_parent">
 
-<LinearLayout
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <android.support.v7.widget.CardView
+        <!--Statement card-->
+        <android.support.v7.widget.CardView
         android:id="@+id/mychamastatement_card"
         android:layout_width="match_parent"
         app:cardUseCompatPadding="true"
@@ -106,7 +107,8 @@
         </LinearLayout>
     </android.support.v7.widget.CardView>
 
-    <android.support.v7.widget.CardView
+        <!--Next meeting card-->
+        <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardUseCompatPadding="true"
@@ -171,7 +173,8 @@
         </LinearLayout>
     </android.support.v7.widget.CardView>
 
-    <android.support.v7.widget.CardView
+        <!--Agenda card-->
+        <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:id="@+id/mychamaagenda_card"
         android:layout_height="wrap_content"
@@ -234,8 +237,8 @@
         </LinearLayout>
     </android.support.v7.widget.CardView>
 
-    <!--MEMBERS CARD-->
-    <android.support.v7.widget.CardView
+        <!--MEMBERS CARD-->
+        <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/mychamamembers_card"
@@ -262,5 +265,5 @@
         </LinearLayout>
     </android.support.v7.widget.CardView>
 
-</LinearLayout>
+    </LinearLayout>
 </ScrollView>
