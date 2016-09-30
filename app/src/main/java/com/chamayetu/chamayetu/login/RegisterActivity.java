@@ -6,9 +6,12 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -124,13 +127,26 @@ public class RegisterActivity extends AppCompatActivity{
         String email = signUpEmail.getText().toString().trim();
 
         if(email.isEmpty() || isValidEmail(email)){
-            signUp_emailtxtInptLayout.setError(getString(R.string.err_msg_email));
-            requestFocus(signUp_email);
+            signUpPassTxtInptLayout.setError(getString(R.string.err_msg_email));
+            requestFocus(signUpEmail);
             return false;
         }else{
-            signUp_passwordTxtInptLayout.setErrorEnabled(false);
+            signUpPassTxtInptLayout.setErrorEnabled(false);
         }
         return true;
     }
+
+    /**checks for a valid email address from a pattern*/
+    private boolean isValidEmail(String email) {
+        return !TextUtils.isEmpty(email) && Patterns.EMAIL_ADDRESS.matcher(email).matches();
+    }
+
+    /**sets the focus to the edit text with the error message*/
+    private void requestFocus(View view) {
+        if(view.requestFocus()) {
+            this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
+        }
+    }
+
 
 }
