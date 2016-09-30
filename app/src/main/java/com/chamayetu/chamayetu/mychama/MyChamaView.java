@@ -36,6 +36,7 @@ public class MyChamaView extends Fragment {
     @BindView(R.id.mychamamembers_card) CardView membersCard;
     @BindView(R.id.mychamanxtmeeting_card) CardView nxtMeetingCard;
     @BindView(R.id.mychamaexpected_amt_card) CardView expectedAmtCard;
+
     @BindView(R.id.statement_from_field) TextView dateFrom;
     @BindView(R.id.statement_to_field) TextView dateTo;
     @BindView(R.id.statement_amount_field) TextView statementAmt;
