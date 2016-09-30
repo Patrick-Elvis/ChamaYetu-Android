@@ -35,13 +35,16 @@ public class MyChamaView extends Fragment {
     @BindView(R.id.mychamaagenda_card) CardView agendaCard;
     @BindView(R.id.mychamamembers_card) CardView membersCard;
     @BindView(R.id.mychamanxtmeeting_card) CardView nxtMeetingCard;
+    @BindView(R.id.mychamaexpected_amt_card) CardView expectedAmtCard;
     @BindView(R.id.statement_from_field) TextView dateFrom;
     @BindView(R.id.statement_to_field) TextView dateTo;
     @BindView(R.id.statement_amount_field) TextView statementAmt;
     @BindView(R.id.nxtmeeting_time_field) TextView nxtMeetingTime;
     @BindView(R.id.nxtmeeting_venue_field) TextView nxtMeetingVenue;
     @BindView(R.id.milestone_field) TextView milestioneView;
+    @BindView(R.id.milestone_date_field)TextView milestoneDate;
     @BindView(R.id.members_number) TextView memberNumbers;
+    @BindView(R.id.expextedamt_number) TextView expectedAmt;
 
     private DatabaseReference mDatabase;
 
@@ -85,6 +88,7 @@ public class MyChamaView extends Fragment {
                 nxtMeetingVenue.setText(chamaPojo.getVenue());
                 milestioneView.setText(chamaPojo.getMilestone());
                 memberNumbers.setText(String.valueOf(chamaPojo.getMembers()));
+                milestoneDate.setText(chamaPojo.getMilestoneDate());
             }
 
             @Override
@@ -118,8 +122,6 @@ public class MyChamaView extends Fragment {
 
                     }
                 });
-
     }
-
 
 }

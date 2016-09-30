@@ -206,10 +206,11 @@
     <string name="nxtmeeting_time_field">time_data</string>
     <string name="nxtmeeting_venue_label">Venue:</string>
     <string name="nxtmeeting_venue_field">venue</string>
-    <string name="agenda_label">Agenda</string>
-    <string name="milestone_label">milestone: </string>
+    <string name="agenda_label">Target</string>
+    <string name="milestone_label">Milestone:</string>
     <string name="milestone_field">mile</string>
-    <string name="milestone_date">Date: </string>
+    <string name="milestone_date">Target Date:</string>
     <string name="milestone_title">Members</string>
     <string name="members_number">5</string>
+    <string name="expectedamt_title">Expected Amount</string>
 </resources>
