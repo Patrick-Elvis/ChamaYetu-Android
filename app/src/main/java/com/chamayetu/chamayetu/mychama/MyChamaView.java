@@ -67,6 +67,8 @@ public class MyChamaView extends Fragment {
     /**Initialize Firebase Database*/
     private void initFirebaseDatabase() {
         mDatabase = FirebaseDatabase.getInstance().getReference();
+        /*Get boda node*/
+        /*TODO: get node of client's chama*/
         mDatabase.child(Contract.CHAMA_NODE).child("boda").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -79,7 +81,7 @@ public class MyChamaView extends Fragment {
 
                 Log.d(MYCHAMA_TAG, String.valueOf(chamaPojo.getNextMeetingTime()) + " " + chamaPojo.getVenue() + " " + chamaPojo.getMilestone() + " " +chamaPojo.getMembers() );
 
-                nxtMeetingTime.setText((int) chamaPojo.getNextMeetingTime());
+                nxtMeetingTime.setText(chamaPojo.getNextMeetingTime());
                 nxtMeetingVenue.setText(chamaPojo.getVenue());
                 milestioneView.setText(chamaPojo.getMilestone());
                 memberNumbers.setText((int) chamaPojo.getMembers());
@@ -90,6 +92,8 @@ public class MyChamaView extends Fragment {
 
             }
         });
+
+        /*Get statement node*/
 
     }
 
