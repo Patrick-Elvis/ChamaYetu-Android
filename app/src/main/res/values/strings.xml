@@ -227,4 +227,6 @@
     <string name="signup_button_str">Register</string>
     <string name="signup_password_str">Password</string>
     <string name="signup_email_str">Email</string>
+    <string name="signup_chamaname_str">Chama Name</string>
+    <string name="signup_phoneNo_str">Phone Number</string>
 </resources>

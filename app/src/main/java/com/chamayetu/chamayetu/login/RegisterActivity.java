@@ -44,7 +44,11 @@ public class RegisterActivity extends AppCompatActivity{
     @BindView(R.id.signup_password_id) EditText signUpPassword;
     @BindView(R.id.signup_emailtxtInput_id) TextInputLayout signUpEmailTxtInptLayout;
     @BindView(R.id.signup_pass_txtInput_id) TextInputLayout signUpPassTxtInptLayout;
-
+    @BindView(R.id.signup_chamanameTxtInp_id) TextInputLayout signUpChamaTxtInView;
+    @BindView(R.id.signup_chamaname_id) EditText signUpChamaNameView;
+    @BindView(R.id.signup_phoneNo_id) EditText signUpPhoneNo;
+    @BindView(R.id.signup_phoneNoTxtInp_id) TextInputLayout signUpPhoneNoTxtIn;
+    
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
 
@@ -159,7 +163,7 @@ public class RegisterActivity extends AppCompatActivity{
         String email = signUpEmail.getText().toString().trim();
 
         if(email.isEmpty() || isValidEmail(email)){
-            signUpPassTxtInptLayout.setError(getString(R.string.err_msg_email));
+            signUpEmailTxtInptLayout.setError(getString(R.string.err_msg_email));
             requestFocus(signUpEmail);
             return false;
         }else{
