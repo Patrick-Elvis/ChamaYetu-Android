@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.app.LoaderManager.LoaderCallbacks;
 
@@ -70,8 +71,14 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
     // UI references.
     @BindView(R.id.email) AutoCompleteTextView mEmailView;
+    @BindView(R.id.email_txtInputLayout) TextInputLayout mEmailTxtInpView;
+
     @BindView(R.id.password) EditText mPasswordView;
+    @BindView(R.id.password_txtInputLayout) TextInputLayout mPasswordTxtInpView;
+
     @BindView(R.id.email_sign_in_button)Button mEmailSignInButton;
+    @BindView(R.id.registerBtn)Button mRegisterButton;
+
     @BindView(R.id.login_form) View mProgressView;
     @BindView(R.id.login_progress) View mLoginFormView;
     @BindView(R.id.facebook_login_button) LoginButton facebookLoginBtn;
@@ -102,6 +109,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         });
 
         mEmailSignInButton.setOnClickListener(view -> attemptLogin());
+        mRegisterButton.setOnClickListener(view -> startActivity(new Intent(this, RegisterActivity.class)));
         callbackManager = CallbackManager.Factory.create();
 
         mAuth = FirebaseAuth.getInstance();

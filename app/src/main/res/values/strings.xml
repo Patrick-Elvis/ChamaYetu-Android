@@ -215,4 +215,8 @@
     <string name="expectedamt_title">Expected Amount</string>
     <string name="expectedamt_number">50000</string>
     <string name="currency_prepend">Ksh.</string>
+    <string name="action_register">Don't have an account? Register here</string>
+    <string name="signup_button_str">Register</string>
+    <string name="signup_password_str">Password</string>
+    <string name="signup_email_str">Email</string>
 </resources>
