@@ -1,5 +1,6 @@
 package com.chamayetu.chamayetu.login;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -14,8 +15,14 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.chamayetu.chamayetu.R;
+import com.chamayetu.chamayetu.main.MainActivity;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -37,6 +44,7 @@ public class RegisterActivity extends AppCompatActivity{
     @BindView(R.id.signup_password_id) EditText signUpPassword;
     @BindView(R.id.signup_emailtxtInput_id) TextInputLayout signUpEmailTxtInptLayout;
     @BindView(R.id.signup_pass_txtInput_id) TextInputLayout signUpPassTxtInptLayout;
+
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
 
@@ -58,6 +66,30 @@ public class RegisterActivity extends AppCompatActivity{
         };
         signUpEmail.addTextChangedListener(new MyTextWatcher(signUpEmail));
         signUpPassword.addTextChangedListener(new MyTextWatcher((signUpPassword)));
+        signUpButton.setOnClickListener(view -> submitFormDetails());
+    }
+
+    /**Submit registration details*/
+    private void submitFormDetails() {
+        if(!validateEmail() && validatePassword()){
+            String password = signUpPassword.getText().toString().trim();
+            String email = signUpEmail.getText().toString().trim();
+            mAuth.createUserWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(this, task -> {
+                        /*TODO: display a better message to user on sign up*/
+                        Log.d(REGISTERACT_TAG, "Create User with Email: "+ task.isSuccessful());
+                        Toast.makeText(RegisterActivity.this,"Success! :)", Toast.LENGTH_SHORT).show();
+                        // If sign in fails, display a message to the user. If sign in succeeds
+                        // the auth state listener will be notified and logic to handle the
+                        // signed in user can be handled in the listener.
+                        if (!task.isSuccessful()) {
+                            Toast.makeText(RegisterActivity.this,"Authentication failed.", Toast.LENGTH_SHORT).show();
+                            Log.d(REGISTERACT_TAG, task.getException().toString());
+                        } else {
+                            startActivity(new Intent(RegisterActivity.this, MainActivity.class));
+                        }
+                    });
+        }
     }
 
     @Override
