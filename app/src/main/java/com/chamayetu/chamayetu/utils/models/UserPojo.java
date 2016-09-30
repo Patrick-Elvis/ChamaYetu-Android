@@ -4,6 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * ChamaYetu
@@ -15,7 +16,7 @@ import java.util.ArrayList;
 public class UserPojo implements Parcelable {
     private String firstName,lastName, email, role;
     private int phoneNumber, totalContributed,avgContribution;
-    private ArrayList<String> chamaGroups;
+    private HashMap<String, Boolean> chamaGroups;
 
     public String getFirstName() {
         return firstName;
@@ -73,15 +74,15 @@ public class UserPojo implements Parcelable {
         this.avgContribution = avgContribution;
     }
 
-    public ArrayList<String> getChamaGroups() {
+    public HashMap<String, Boolean> getChamaGroups() {
         return chamaGroups;
     }
 
-    public void setChamaGroups(ArrayList<String> chamaGroups) {
+    public void setChamaGroups(HashMap<String, Boolean> chamaGroups) {
         this.chamaGroups = chamaGroups;
     }
 
-    public UserPojo(String firstName, String lastName, String email, String role, int phoneNumber, int totalContributed, int avgContribution, ArrayList<String> chamaGroups) {
+    public UserPojo(String firstName, String lastName, String email, String role, int phoneNumber, int totalContributed, int avgContribution, HashMap<String, Boolean> chamaGroups) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -100,7 +101,7 @@ public class UserPojo implements Parcelable {
         this.phoneNumber = in.readInt();
         this.totalContributed = in.readInt();
         this.avgContribution = in.readInt();
-        this.chamaGroups = in.createStringArrayList();
+        //this.chamaGroups = in.createStringArrayList();
     }
 
     @Override
@@ -112,7 +113,7 @@ public class UserPojo implements Parcelable {
         dest.writeInt(phoneNumber);
         dest.writeInt(totalContributed);
         dest.writeInt(avgContribution);
-        dest.writeStringList(chamaGroups);
+        dest.writeMap(chamaGroups);
     }
 
     @Override
