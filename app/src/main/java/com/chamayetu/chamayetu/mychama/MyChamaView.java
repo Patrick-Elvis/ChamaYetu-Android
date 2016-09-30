@@ -17,9 +17,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
-import java.util.ArrayList;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -84,7 +81,7 @@ public class MyChamaView extends Fragment {
                 nxtMeetingTime.setText(chamaPojo.getNextMeetingTime());
                 nxtMeetingVenue.setText(chamaPojo.getVenue());
                 milestioneView.setText(chamaPojo.getMilestone());
-                memberNumbers.setText((int) chamaPojo.getMembers());
+                memberNumbers.setText(String.valueOf(chamaPojo.getMembers()));
             }
 
             @Override
@@ -93,7 +90,7 @@ public class MyChamaView extends Fragment {
             }
         });
 
-        /*Get statement node*/
+        /*Get statement node of boda node*/
 
     }
 
