@@ -231,4 +231,5 @@
     <string name="signup_phoneNo_str">Phone Number</string>
     <string name="signup_name_str">Full Name</string>
     <string name="signup_retypepassword_str">Retype Password</string>
+    <string name="signup_role_str">Role</string>
 </resources>
