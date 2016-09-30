@@ -5,7 +5,10 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -50,6 +53,8 @@ public class RegisterActivity extends AppCompatActivity{
                 Log.d(REGISTERACT_TAG, "onAuthStateChanged:signed_out");
             }
         };
+        signUpEmail.addTextChangedListener(new MyTextWatcher(signUpEmail));
+        signUpPassword.addTextChangedListener(new MyTextWatcher((signUpPassword)));
     }
 
     @Override
@@ -65,4 +70,67 @@ public class RegisterActivity extends AppCompatActivity{
             mAuth.removeAuthStateListener(mAuthListener);
         }
     }
+
+    /**Todo: Make TextWatcher an interface*/
+    private class MyTextWatcher implements TextWatcher {
+        private View view;
+
+        public MyTextWatcher(View view) {
+            this.view = view;
+        }
+
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+            switch (view.getId()){
+                case R.id.signup_email_id:
+                    validateEmail();
+                    break;
+
+                case R.id.signup_password_id:
+                    validatePassword();
+                    break;
+            }
+        }
+    }
+
+    /**VALIDATE user password*/
+    private boolean validatePassword() {
+        String password = signUpPassword.getText().toString().trim();
+        if(password.isEmpty()){
+            signUpPassTxtInptLayout.setError(getString(R.string.err_msg_password));
+            requestFocus(signUpPassword);
+            return false;
+        }else if(password.length() < 6){
+            signUpPassTxtInptLayout.setError(getString(R.string.err_msg_password_short));
+            requestFocus(signUpPassword);
+        }else{
+            signUpPassTxtInptLayout.setErrorEnabled(false);
+        }
+        return true;
+    }
+
+    /**validate user email*/
+    private boolean validateEmail() {
+        String email = signUpEmail.getText().toString().trim();
+
+        if(email.isEmpty() || isValidEmail(email)){
+            signUp_emailtxtInptLayout.setError(getString(R.string.err_msg_email));
+            requestFocus(signUp_email);
+            return false;
+        }else{
+            signUp_passwordTxtInptLayout.setErrorEnabled(false);
+        }
+        return true;
+    }
+
 }

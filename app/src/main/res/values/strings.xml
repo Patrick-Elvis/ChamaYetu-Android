@@ -10,6 +10,14 @@
     <string name="error_invalid_password">This field is required</string>
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
+
+    <!--ERROR MESSAGES-->
+    <string name="err_msg_name">Enter your full name</string>
+    <string name="err_msg_email">Enter valid email address</string>
+    <string name="err_msg_password">Enter a password</string>
+    <string name="err_msg_password_short">Enter minimum 6 characters</string>
+
+
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
