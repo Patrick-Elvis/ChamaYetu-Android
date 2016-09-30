@@ -5,6 +5,6 @@
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="app_bar_height">180dp</dimen>
     <dimen name="text_margin">16dp</dimen>
-    <dimen name="statement_title_size">25sp</dimen>
+    <dimen name="statement_title_size">15sp</dimen>
 
 </resources>

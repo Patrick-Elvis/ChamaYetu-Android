@@ -90,6 +90,7 @@ public class MyChamaView extends Fragment {
                 milestioneView.setText(chamaPojo.getMilestone());
                 memberNumbers.setText(String.valueOf(chamaPojo.getMembers()));
                 milestoneDate.setText(chamaPojo.getMilestoneDate());
+                expectedAmt.setText(getString(R.string.currency_prepend)+ String.valueOf(chamaPojo.getAmountExpected()));
             }
 
             @Override
@@ -115,7 +116,7 @@ public class MyChamaView extends Fragment {
 
                         dateFrom.setText(statementPojo.getDateFrom());
                         dateTo.setText(statementPojo.getDateTo());
-                        statementAmt.setText(String.valueOf(statementPojo.getTotalAmount()));
+                        statementAmt.setText(String.valueOf("Ksh. " + statementPojo.getTotalAmount()));
                     }
 
                     @Override
