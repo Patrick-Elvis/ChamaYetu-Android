@@ -5,6 +5,7 @@ import android.os.Parcelable;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * ChamaYetu
@@ -16,8 +17,61 @@ import java.util.HashMap;
 public class UserPojo implements Parcelable {
     private String firstName,lastName, email, role;
     private int phoneNumber, totalContributed,avgContribution;
-    private HashMap<String, Boolean> chamaGroups;
+    private Map<String, Object> chamaGroups;
 
+    /**Default constructor required for calls to DataSnapshot.getValue(UserPojo.class)*/
+    public UserPojo(){}
+
+    public UserPojo(String firstName, String lastName, String email, String role, int phoneNumber, int totalContributed, int avgContribution, Map<String, Object> chamaGroups) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.role = role;
+        this.phoneNumber = phoneNumber;
+        this.totalContributed = totalContributed;
+        this.avgContribution = avgContribution;
+        this.chamaGroups = chamaGroups;
+    }
+
+    protected UserPojo(Parcel in) {
+        this.firstName = in.readString();
+        this.lastName = in.readString();
+        this.email = in.readString();
+        this.role = in.readString();
+        this.phoneNumber = in.readInt();
+        this.totalContributed = in.readInt();
+        this.avgContribution = in.readInt();
+        //this.chamaGroups = in.createStringArrayList();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(firstName);
+        dest.writeString(lastName);
+        dest.writeString(email);
+        dest.writeString(role);
+        dest.writeInt(phoneNumber);
+        dest.writeInt(totalContributed);
+        dest.writeInt(avgContribution);
+        dest.writeMap(chamaGroups);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
+        @Override
+        public UserPojo createFromParcel(Parcel in) {
+            return new UserPojo(in);
+        }
+
+        @Override
+        public UserPojo[] newArray(int size) {
+            return new UserPojo[size];
+        }
+    };
     public String getFirstName() {
         return firstName;
     }
@@ -74,62 +128,12 @@ public class UserPojo implements Parcelable {
         this.avgContribution = avgContribution;
     }
 
-    public HashMap<String, Boolean> getChamaGroups() {
+    public Map<String, Object> getChamaGroups() {
         return chamaGroups;
     }
 
-    public void setChamaGroups(HashMap<String, Boolean> chamaGroups) {
+    public void setChamaGroups(Map<String, Object> chamaGroups) {
         this.chamaGroups = chamaGroups;
     }
 
-    public UserPojo(String firstName, String lastName, String email, String role, int phoneNumber, int totalContributed, int avgContribution, HashMap<String, Boolean> chamaGroups) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.role = role;
-        this.phoneNumber = phoneNumber;
-        this.totalContributed = totalContributed;
-        this.avgContribution = avgContribution;
-        this.chamaGroups = chamaGroups;
-    }
-
-    protected UserPojo(Parcel in) {
-        this.firstName = in.readString();
-        this.lastName = in.readString();
-        this.email = in.readString();
-        this.role = in.readString();
-        this.phoneNumber = in.readInt();
-        this.totalContributed = in.readInt();
-        this.avgContribution = in.readInt();
-        //this.chamaGroups = in.createStringArrayList();
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(firstName);
-        dest.writeString(lastName);
-        dest.writeString(email);
-        dest.writeString(role);
-        dest.writeInt(phoneNumber);
-        dest.writeInt(totalContributed);
-        dest.writeInt(avgContribution);
-        dest.writeMap(chamaGroups);
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
-        @Override
-        public UserPojo createFromParcel(Parcel in) {
-            return new UserPojo(in);
-        }
-
-        @Override
-        public UserPojo[] newArray(int size) {
-            return new UserPojo[size];
-        }
-    };
 }

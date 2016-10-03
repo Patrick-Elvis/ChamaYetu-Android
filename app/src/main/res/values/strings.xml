@@ -232,4 +232,5 @@
     <string name="signup_name_str">Full Name</string>
     <string name="signup_retypepassword_str">Retype Password</string>
     <string name="signup_role_str">Role</string>
+    <string name="err_msg_password_match">Passwords do not match</string>
 </resources>
