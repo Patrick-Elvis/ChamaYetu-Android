@@ -16,13 +16,13 @@ import java.util.Map;
 
 public class UserPojo implements Parcelable {
     private String firstName,lastName, email, role;
-    private int phoneNumber, totalContributed,avgContribution;
+    private long phoneNumber, totalContributed,avgContribution;
     private Map<String, Object> chamaGroups;
 
     /**Default constructor required for calls to DataSnapshot.getValue(UserPojo.class)*/
     public UserPojo(){}
 
-    public UserPojo(String firstName, String lastName, String email, String role, int phoneNumber, int totalContributed, int avgContribution, Map<String, Object> chamaGroups) {
+    public UserPojo(String firstName, String lastName, String email, String role, long phoneNumber, long totalContributed, long avgContribution, Map<String, Object> chamaGroups) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -41,6 +41,7 @@ public class UserPojo implements Parcelable {
         this.phoneNumber = in.readInt();
         this.totalContributed = in.readInt();
         this.avgContribution = in.readInt();
+        // todo create a map
         //this.chamaGroups = in.createStringArrayList();
     }
 
@@ -50,9 +51,9 @@ public class UserPojo implements Parcelable {
         dest.writeString(lastName);
         dest.writeString(email);
         dest.writeString(role);
-        dest.writeInt(phoneNumber);
-        dest.writeInt(totalContributed);
-        dest.writeInt(avgContribution);
+        dest.writeLong(phoneNumber);
+        dest.writeLong(totalContributed);
+        dest.writeLong(avgContribution);
         dest.writeMap(chamaGroups);
     }
 
@@ -72,6 +73,7 @@ public class UserPojo implements Parcelable {
             return new UserPojo[size];
         }
     };
+
     public String getFirstName() {
         return firstName;
     }
@@ -104,15 +106,15 @@ public class UserPojo implements Parcelable {
         this.role = role;
     }
 
-    public int getPhoneNumber() {
+    public long getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(int phoneNumber) {
+    public void setPhoneNumber(long phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
-    public int getTotalContributed() {
+    public long getTotalContributed() {
         return totalContributed;
     }
 
@@ -120,7 +122,7 @@ public class UserPojo implements Parcelable {
         this.totalContributed = totalContributed;
     }
 
-    public int getAvgContribution() {
+    public long getAvgContribution() {
         return avgContribution;
     }
 

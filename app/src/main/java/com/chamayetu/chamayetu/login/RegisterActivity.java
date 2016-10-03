@@ -120,7 +120,7 @@ public class RegisterActivity extends AppCompatActivity{
     }
 
     /**Writes a new user to the Firebase Database at the User node*/
-    private void writeNewUser(String name, String email, String chamaName,String role, int phoneNumber) {
+    private void writeNewUser(String name, String email, String chamaName,String role, long phoneNumber) {
         String firstName = name.split(" ")[0];
         String lastName = name.split(" ")[1];
         Map<String, Object> chamaGroups = new HashMap<>();
@@ -133,7 +133,13 @@ public class RegisterActivity extends AppCompatActivity{
 
         // new instance of the new user
         UserPojo newUser = new UserPojo(firstName, lastName, email, role, phoneNumber,0,0,chamaGroups);
-
+        Log.d(REGISTERACT_TAG, "FN " + firstName +
+                "LN:" + lastName +
+                "EM: "+ email +
+                "RL: " + role +
+                "PH:" + phoneNumber +
+                "TOTl " + 0 + " AVG " + 0 +
+                "CHAMAGRPS: "+chamaGroups);
         mDatabaseRef.child(Contract.USERS_NODE).child(userName.toLowerCase()).setValue(newUser);
     }
 
@@ -208,11 +214,13 @@ public class RegisterActivity extends AppCompatActivity{
         return true;
     }
 
-    /**validate user email*/
+    /**validate user email
+     * @return boolean*/
     private boolean validateEmail() {
         String email = signUpEmail.getText().toString().trim();
 
-        if(email.isEmpty() || isValidEmail(email)){
+        // if empty or is not valid display an error
+        if(email.isEmpty() || !isValidEmail(email)){
             signUpEmailTxtInptLayout.setError(getString(R.string.err_msg_email));
             requestFocus(signUpEmail);
             return false;
