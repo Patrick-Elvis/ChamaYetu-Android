@@ -15,6 +15,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="25sp"
+            android:textColor="@color/black"
             android:text="@string/register_new_account"/>
     </LinearLayout>
     <android.support.design.widget.CoordinatorLayout
@@ -34,18 +35,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/register_proceed"
-            android:drawableEnd="@android:drawable/ic_media_play"
-            android:drawableRight="@android:drawable/ic_media_play"
+            android:drawableEnd="@drawable/ic_forward"
+            android:drawableRight="@drawable/ic_forward"
+            app:drawableTint="@color/black"
+            android:drawableTint="@color/black"
             android:background="@null"
             app:borderWidth="0dp"
             android:layout_margin="20dp"
             app:elevation="6dp"
             app:pressedTranslationZ="12dp"
+            android:textSize="20sp"
             android:layout_gravity="bottom|end"
             app:layout_anchor="@id/register_contentFrame"
             app:useCompatPadding="true"
             app:rippleColor="@android:color/white"
             app:layout_anchorGravity="bottom|right|end" />
-
     </android.support.design.widget.CoordinatorLayout>
+
 </LinearLayout>

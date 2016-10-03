@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:orientation="vertical"
+xmlns:android="http://schemas.android.com/apk/res/android"
+android:padding="@dimen/activity_horizontal_margin">
+
+    <!--Chama name-->
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/signup_chamanameTxtInp_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/signup_chamaname_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/signup_chamaname_str"
+            android:inputType="text"
+            android:maxLines="1"
+            android:textColor="@android:color/black" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <!--Role-->
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <RadioButton android:id="@+id/radio_chamarole_chair_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/chamarole_chairperson"
+            android:onClick="onRadioButtonClicked"/>
+        <RadioButton android:id="@+id/radio_chamarole_vicechar_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/chamarole_vicechair"
+            android:onClick="onRadioButtonClicked"/>
+        <RadioButton android:id="@+id/radio_treasurer_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/chamarole_treasurer"
+            android:onClick="onRadioButtonClicked"/>
+        <RadioButton android:id="@+id/radio_member_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/chamarole_member"
+            android:onClick="onRadioButtonClicked"/>
+    </RadioGroup>
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/signup_roletxtInput_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/signup_role_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/signup_role_str"
+            android:inputType="text"
+            android:maxLines="1"
+            android:textColor="@android:color/black" />
+
+    </android.support.design.widget.TextInputLayout>
+
+
+</LinearLayout>
