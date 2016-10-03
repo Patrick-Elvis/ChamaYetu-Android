@@ -116,7 +116,7 @@ public class RegisterActivity extends AppCompatActivity{
                     });
         }
         //write new user to the node users in FirebaseDatabase
-        writeNewUser(name, email, chamaName, role, Integer.parseInt(phoneNumber));
+        writeNewUser(name, email, chamaName, role, Long.parseLong(phoneNumber));
     }
 
     /**Writes a new user to the Firebase Database at the User node*/
@@ -134,12 +134,13 @@ public class RegisterActivity extends AppCompatActivity{
         // new instance of the new user
         UserPojo newUser = new UserPojo(firstName, lastName, email, role, phoneNumber,0,0,chamaGroups);
         Log.d(REGISTERACT_TAG, "FN " + firstName +
-                "LN:" + lastName +
+                "LN: " + lastName +
+                "UName: " + userName+
                 "EM: "+ email +
                 "RL: " + role +
-                "PH:" + phoneNumber +
-                "TOTl " + 0 + " AVG " + 0 +
+                "PH: " + String.valueOf(phoneNumber) +
                 "CHAMAGRPS: "+chamaGroups);
+
         mDatabaseRef.child(Contract.USERS_NODE).child(userName.toLowerCase()).setValue(newUser);
     }
 
