@@ -237,4 +237,6 @@
     <string name="chamarole_vicechair">Vice</string>
     <string name="chamarole_treasurer">Treasurer</string>
     <string name="chamarole_member">Member</string>
+    <string name="register_new_account">NEW ACCOUNT</string>
+    <string name="register_proceed">PROCEED</string>
 </resources>

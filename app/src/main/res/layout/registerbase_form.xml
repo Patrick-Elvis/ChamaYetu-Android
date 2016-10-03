@@ -3,9 +3,20 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
+    android:padding="35dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/register_intro"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="25sp"
+            android:text="@string/register_new_account"/>
+    </LinearLayout>
     <android.support.design.widget.CoordinatorLayout
         android:id="@+id/coordinatorLayout"
         android:layout_width="match_parent"
@@ -22,7 +33,10 @@
             android:id="@+id/register_nxt_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Next"
+            android:text="@string/register_proceed"
+            android:drawableEnd="@android:drawable/ic_media_play"
+            android:drawableRight="@android:drawable/ic_media_play"
+            android:background="@null"
             app:borderWidth="0dp"
             android:layout_margin="20dp"
             app:elevation="6dp"
