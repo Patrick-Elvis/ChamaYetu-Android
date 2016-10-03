@@ -24,10 +24,15 @@
         android:layout_height="match_parent">
 
         <!--Where the fragments will be populated-->
-        <FrameLayout
+        <android.support.v4.view.ViewPager
+            android:id="@+id/registerbase_viewpager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+<!--        <FrameLayout
             android:id="@+id/register_contentFrame"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent" />-->
 
         <!--Steps button, which will allow user to proceed to next screen-->
         <Button
@@ -46,7 +51,7 @@
             app:pressedTranslationZ="12dp"
             android:textSize="20sp"
             android:layout_gravity="bottom|end"
-            app:layout_anchor="@id/register_contentFrame"
+            app:layout_anchor="@id/registerbase_viewpager"
             app:useCompatPadding="true"
             app:rippleColor="@android:color/white"
             app:layout_anchorGravity="bottom|right|end" />
