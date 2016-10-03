@@ -1,8 +1,7 @@
-package com.chamayetu.chamayetu.login;
+package com.chamayetu.chamayetu.register;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -15,24 +14,21 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.Toast;
-
 import com.chamayetu.chamayetu.R;
 import com.chamayetu.chamayetu.main.MainActivity;
 import com.chamayetu.chamayetu.utils.Contract;
 import com.chamayetu.chamayetu.utils.models.UserPojo;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
 import java.util.Map;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -65,7 +61,6 @@ public class RegisterActivity extends AppCompatActivity{
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private DatabaseReference mDatabaseRef;
-
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -111,12 +106,11 @@ public class RegisterActivity extends AppCompatActivity{
                             Toast.makeText(RegisterActivity.this,"Authentication failed.", Toast.LENGTH_SHORT).show();
                             Log.d(REGISTERACT_TAG, task.getException().toString());
                         } else {
-                            startActivity(new Intent(RegisterActivity.this, MainActivity.class));
+                            //write new user to the node users in FirebaseDatabase
+                            writeNewUser(name, email, chamaName, role, Long.parseLong(phoneNumber));
                         }
                     });
         }
-        //write new user to the node users in FirebaseDatabase
-        writeNewUser(name, email, chamaName, role, Long.parseLong(phoneNumber));
     }
 
     /**Writes a new user to the Firebase Database at the User node*/
@@ -141,7 +135,32 @@ public class RegisterActivity extends AppCompatActivity{
                 "PH: " + String.valueOf(phoneNumber) +
                 "CHAMAGRPS: "+chamaGroups);
 
-        mDatabaseRef.child(Contract.USERS_NODE).child(userName.toLowerCase()).setValue(newUser);
+        //check if the user already exists in the database at the User's node
+        mDatabaseRef.child(Contract.USERS_NODE).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                //if the user name already exists
+                if(dataSnapshot.hasChild(userName)){
+                    //alert the user about the conflict
+                }else{
+                    //perform write operation, adding new user, start next activity
+                    mDatabaseRef.child(userName).setValue(newUser);
+                    startActivity(new Intent(RegisterActivity.this, MainActivity.class));
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+
+        });
+
+    }
+
+    /**Gets the role of the new user and registers their role*/
+    public void onRadioButtonClicked(View view){
+
     }
 
     @Override

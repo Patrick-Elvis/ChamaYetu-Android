@@ -33,6 +33,7 @@ import android.widget.Toast;
 
 import com.chamayetu.chamayetu.R;
 import com.chamayetu.chamayetu.main.MainActivity;
+import com.chamayetu.chamayetu.register.RegisterActivity;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;

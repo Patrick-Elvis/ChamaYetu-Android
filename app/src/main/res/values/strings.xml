@@ -233,4 +233,8 @@
     <string name="signup_retypepassword_str">Retype Password</string>
     <string name="signup_role_str">Role</string>
     <string name="err_msg_password_match">Passwords do not match</string>
+    <string name="chamarole_chairperson">Chairperson</string>
+    <string name="chamarole_vicechair">Vice</string>
+    <string name="chamarole_treasurer">Treasurer</string>
+    <string name="chamarole_member">Member</string>
 </resources>
