@@ -40,7 +40,7 @@ public class RegisterStepOne extends Fragment implements ISlidePolicy, ISlideBac
     public static final String REGISTERSTEP1_TAG = RegisterStepOne.class.getSimpleName();
 
     /*UI views*/
-    @BindView(R.id.registerstep1_form_container) ScrollView registerStep1Container;
+    @BindView(R.id.registerstep1_form_container) LinearLayout registerStep1Container;
     @BindView(R.id.signup_name_id) EditText signUpName;
     @BindView(R.id.signup_email_id) EditText signUpEmail;
     @BindView(R.id.signup_phoneNo_id) EditText signUpPhoneNo;
@@ -50,7 +50,6 @@ public class RegisterStepOne extends Fragment implements ISlidePolicy, ISlideBac
     @BindView(R.id.signup_emailtxtInput_id) TextInputLayout signUpEmailTxtInptLayout;
     @BindView(R.id.signup_phoneNoTxtInp_id) TextInputLayout signUpPhoneNoTxtIn;
     @BindView(R.id.signup_pass_txtInput_id) TextInputLayout signUpPassTxtInptLayout;
-    @BindView(R.id.signup_retypepass_txtInput_id) TextInputLayout signUpRetypePasswordTxtIn;
 
     public RegisterStepOne(){}
 
