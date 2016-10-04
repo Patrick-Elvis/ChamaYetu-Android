@@ -92,6 +92,7 @@ public class RegisterStepOne extends Fragment implements ISlidePolicy, ISlideBac
             editor.putString("EMAIL",email);
             editor.putString("PHONENO", phoneNo);
             editor.putString("PASSWORD", password);
+            Log.d(REGISTERSTEP1_TAG+"Editor", editor.toString());
             //apply the edits
             editor.apply();
         }
