@@ -66,8 +66,21 @@ public class RegisterStepOne extends Fragment implements ISlidePolicy, ISlideBac
      * */
     @Override
     public boolean isPolicyRespected() {
-        return false;
+        return validateAllFields();
     }
+
+    /**Performs a check on all the fields, confirming whether all the fields have been met*/
+    private boolean validateAllFields() {
+        boolean success = false;
+        //check if password and email have been validated
+        if((validateEmail() && validatePassword()) && (validatePhoneAndName())){
+            success = true;
+        }
+        //store the user credentials in a shared preference, proceed to next slide
+
+        return success;
+    }
+
 
     /**Notify the user of the unchecked requirements to proceed to next slide*/
     @Override
@@ -130,15 +143,20 @@ public class RegisterStepOne extends Fragment implements ISlidePolicy, ISlideBac
             signUpPassTxtInptLayout.setError(getString(R.string.err_msg_password));
             requestFocus(signUpPassword);
             return false;
-        }else if(password.length() < 6) {
+        }
+        //if password is less than 6 characters, display error message
+        else if(password.length() < 6) {
             signUpPassTxtInptLayout.setError(getString(R.string.err_msg_password_short));
             requestFocus(signUpPassword);
-        }else if(password.equals(password2)){
+        }
+        //if the the 2 passwords do not match, display error
+        else if(password.equals(password2)){
             signUpPassTxtInptLayout.setError(getString(R.string.err_msg_password_match));
             signUpRetypePasswordTxtIn.setError(getString(R.string.err_msg_password_match));
             requestFocus(signUpRetypePassword);
         }else{
             signUpPassTxtInptLayout.setErrorEnabled(false);
+            signUpRetypePasswordTxtIn.setErrorEnabled(false);
         }
         return true;
     }
@@ -148,7 +166,6 @@ public class RegisterStepOne extends Fragment implements ISlidePolicy, ISlideBac
      * @return boolean*/
     private boolean validateEmail() {
         String email = signUpEmail.getText().toString().trim();
-
         // if empty or is not valid display an error
         if(email.isEmpty() || !isValidEmail(email)){
             signUpEmailTxtInptLayout.setError(getString(R.string.err_msg_email));
@@ -156,6 +173,27 @@ public class RegisterStepOne extends Fragment implements ISlidePolicy, ISlideBac
             return false;
         }else{
             signUpPassTxtInptLayout.setErrorEnabled(false);
+        }
+        return true;
+    }
+
+    /**Validates whether the phone number and the user name have been entered(not empty)*/
+    private boolean validatePhoneAndName() {
+        String fullName = signUpName.getText().toString().trim();
+        String phoneNumber = signUpPhoneNo.getText().toString().trim();
+
+        //check if fields have been filled out
+        if(fullName.isEmpty()){
+            signUpNameTxtIn.setError(getString(R.string.err_msg_name));
+            requestFocus(signUpName);
+            return false;
+        }else if(phoneNumber.isEmpty()){
+            signUpPhoneNo.setError(getString(R.string.err_msg_phone));
+            requestFocus(signUpPhoneNo);
+            return false;
+        }else{
+            signUpNameTxtIn.setErrorEnabled(false);
+            signUpPhoneNoTxtIn.setErrorEnabled(false);
         }
         return true;
     }
@@ -171,7 +209,5 @@ public class RegisterStepOne extends Fragment implements ISlidePolicy, ISlideBac
             getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
         }
     }
-
-
 
 }
