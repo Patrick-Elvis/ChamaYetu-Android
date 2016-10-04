@@ -6,6 +6,8 @@ import android.support.annotation.ColorInt;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,7 +55,6 @@ public class RegisterStepOne extends Fragment implements ISlidePolicy, ISlideBac
         ButterKnife.bind(this,rootView);
         signUpEmail.addTextChangedListener(new MyTextWatcher(signUpEmail));
         signUpPassword.addTextChangedListener(new MyTextWatcher((signUpPassword)));
-
         return rootView;
     }
 
@@ -83,4 +84,61 @@ public class RegisterStepOne extends Fragment implements ISlidePolicy, ISlideBac
             registerStep1Container.setBackgroundColor(backgroundColor);
         }
     }
+
+    private class MyTextWatcher implements TextWatcher {
+        private View view;
+
+        public MyTextWatcher(View view) {
+            this.view = view;
+        }
+
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+            switch (view.getId()){
+                case R.id.signup_email_id:
+                    validateEmail();
+                    break;
+
+                case R.id.signup_password_id:
+                    validatePassword();
+                    break;
+            }
+        }
+    }
+    /**VALIDATE user password
+     * Check if user password is valid, if the user password is empty, display an error
+     * If the user retype password and passwords do not match, display an error to user
+     * else, if all checks out, then return true
+     * @return boolean*/
+    private boolean validatePassword() {
+        String password = signUpPassword.getText().toString();
+        String password2 = retypePassword.getText().toString();
+        if(password.isEmpty()){
+            signUpPassTxtInptLayout.setError(getString(R.string.err_msg_password));
+            requestFocus(signUpPassword);
+            return false;
+        }else if(password.length() < 6) {
+            signUpPassTxtInptLayout.setError(getString(R.string.err_msg_password_short));
+            requestFocus(signUpPassword);
+        }else if(password.equals(password2)){
+            signUpPassTxtInptLayout.setError(getString(R.string.err_msg_password_match));
+            signUpRetypePasswordTxtIn.setError(getString(R.string.err_msg_password_match));
+            requestFocus(retypePassword);
+        }else{
+            signUpPassTxtInptLayout.setErrorEnabled(false);
+        }
+        return true;
+    }
+
+
 }
