@@ -51,6 +51,8 @@ public class RegisterStepOne extends Fragment implements ISlidePolicy, ISlideBac
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.registerstep1_form, container, false);
         ButterKnife.bind(this,rootView);
+        signUpEmail.addTextChangedListener(new MyTextWatcher(signUpEmail));
+        signUpPassword.addTextChangedListener(new MyTextWatcher((signUpPassword)));
 
         return rootView;
     }
