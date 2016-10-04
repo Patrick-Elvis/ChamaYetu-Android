@@ -239,4 +239,5 @@
     <string name="chamarole_member">Member</string>
     <string name="register_new_account">NEW ACCOUNT</string>
     <string name="register_proceed">PROCEED</string>
+    <string name="registerstep_slide_policy_error">Please fill out all the fields.</string>
 </resources>
