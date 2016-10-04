@@ -1,5 +1,6 @@
 package com.chamayetu.chamayetu.register;
 
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.ColorInt;
@@ -9,6 +10,7 @@ import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,6 +36,7 @@ import butterknife.ButterKnife;
  */
 
 public class RegisterStepOne extends Fragment implements ISlidePolicy, ISlideBackgroundColorHolder{
+    public static final String REGISTERSTEP1_TAG = RegisterStepOne.class.getSimpleName();
 
     /*UI views*/
     @BindView(R.id.registerstep1_form_container) LinearLayout registerStep1Container;
@@ -72,12 +75,26 @@ public class RegisterStepOne extends Fragment implements ISlidePolicy, ISlideBac
     /**Performs a check on all the fields, confirming whether all the fields have been met*/
     private boolean validateAllFields() {
         boolean success = false;
+        SharedPreferences userCredentials = getActivity().getSharedPreferences("UserCredentials",0);
+        SharedPreferences.Editor editor= userCredentials.edit();
+
         //check if password and email have been validated
         if((validateEmail() && validatePassword()) && (validatePhoneAndName())){
             success = true;
-        }
-        //store the user credentials in a shared preference, proceed to next slide
+            Log.d(REGISTERSTEP1_TAG,"Registration Status: " + success);
+            //store the user credentials in a shared preference
+            String fullName = signUpName.getText().toString().trim();
+            String email = signUpEmail.getText().toString().trim();
+            String phoneNo = signUpPhoneNo.getText().toString().trim();
+            String password = signUpPassword.getText().toString();
 
+            editor.putString("FULLNAME",fullName);
+            editor.putString("EMAIL",email);
+            editor.putString("PHONENO", phoneNo);
+            editor.putString("PASSWORD", password);
+            //apply the edits
+            editor.apply();
+        }
         return success;
     }
 
