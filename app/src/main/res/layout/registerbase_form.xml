@@ -42,8 +42,6 @@
             android:text="@string/register_proceed"
             android:drawableEnd="@drawable/ic_forward"
             android:drawableRight="@drawable/ic_forward"
-            app:drawableTint="@color/black"
-            android:drawableTint="@color/black"
             android:background="@null"
             app:borderWidth="0dp"
             android:layout_margin="20dp"

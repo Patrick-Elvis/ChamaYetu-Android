@@ -37,13 +37,7 @@ public class RegisterStepOne extends Fragment {
     @BindView(R.id.signup_retypepass_txtInput_id) TextInputLayout retypePasswordTxtIn;
 
     public RegisterStepOne(){}
-
-    public static Fragment newInstance(){
-        RegisterStepOne registerStepOne = new RegisterStepOne();
-        registerStepOne.setRetainInstance(true);
-        return registerStepOne;
-    }
-
+    
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
