@@ -8,6 +8,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.chamayetu.chamayetu.R;
+import com.github.paolorotolo.appintro.ISlidePolicy;
+
+import butterknife.ButterKnife;
+
 /**
  * ChamaYetu
  * com.chamayetu.chamayetu.register
@@ -15,7 +20,7 @@ import android.view.ViewGroup;
  * Description:
  */
 
-public class RegisterStepThree extends Fragment {
+public class RegisterStepThree extends Fragment implements ISlidePolicy{
 
     public RegisterStepThree(){}
 
@@ -32,7 +37,10 @@ public class RegisterStepThree extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return super.onCreateView(inflater, container, savedInstanceState);
+        View rootView = inflater.inflate(R.layout.registerstep3_confirm, container, false);
+        ButterKnife.bind(this, rootView);
+
+        return rootView;
     }
 
     @Override
@@ -48,5 +56,15 @@ public class RegisterStepThree extends Fragment {
     @Override
     public void onPause() {
         super.onPause();
+    }
+
+    @Override
+    public boolean isPolicyRespected() {
+        return false;
+    }
+
+    @Override
+    public void onUserIllegallyRequestedNextPage() {
+
     }
 }

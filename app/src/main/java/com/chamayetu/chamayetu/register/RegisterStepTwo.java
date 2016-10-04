@@ -7,13 +7,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.chamayetu.chamayetu.R;
 import com.github.paolorotolo.appintro.ISlidePolicy;
+
+import butterknife.ButterKnife;
 
 /**
  * ChamaYetu
  * com.chamayetu.chamayetu.register
  * Created by lusinabrian on 04/10/16.
- * Description: Step to register the chama*/
+ * Description: Step to register a newx chama*/
 
 public class RegisterStepTwo extends Fragment implements ISlidePolicy{
 
@@ -37,7 +40,9 @@ public class RegisterStepTwo extends Fragment implements ISlidePolicy{
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return super.onCreateView(inflater, container, savedInstanceState);
+        View rootView = inflater.inflate(R.layout.registerstep2_form, container, false);
+        ButterKnife.bind(this, rootView);
+        return rootView;
     }
 
     @Override
