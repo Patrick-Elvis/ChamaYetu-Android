@@ -24,11 +24,11 @@ public class RegisterSlideContainer extends AppIntro2 {
         /*register the user*/
         addSlide(new RegisterStepOne());
 
-        /*register the chama*/
+        /*register the new chama, if not by invite*/
         addSlide(new RegisterStepTwo());
 
-        /*register the new chama, if not by invite*/
-
+        /*slide to confirm the user registration*/
+        addSlide(new RegisterStepThree());
 
         // Hide Skip/Done button.
         showSkipButton(false);
@@ -36,8 +36,6 @@ public class RegisterSlideContainer extends AppIntro2 {
 
         /*Set the animation for the sliders*/
         setZoomAnimation();
-
-
     }
 
     @Override
