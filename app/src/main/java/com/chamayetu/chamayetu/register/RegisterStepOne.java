@@ -48,11 +48,15 @@ public class RegisterStepOne extends Fragment implements ISlidePolicy{
         return rootView;
     }
 
+    /**Check if all the fields have passed to enable the user to proceed to the next slide.
+     * If all pass, proceed to next slide, if one fails, display error to user and point to error
+     * */
     @Override
     public boolean isPolicyRespected() {
         return false;
     }
 
+    /**Notify the user of the unchecked requirements to proceed to next slide*/
     @Override
     public void onUserIllegallyRequestedNextPage() {
 
