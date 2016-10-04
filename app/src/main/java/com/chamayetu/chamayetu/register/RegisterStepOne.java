@@ -19,6 +19,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.Toast;
 
 import com.chamayetu.chamayetu.R;
@@ -39,7 +40,7 @@ public class RegisterStepOne extends Fragment implements ISlidePolicy, ISlideBac
     public static final String REGISTERSTEP1_TAG = RegisterStepOne.class.getSimpleName();
 
     /*UI views*/
-    @BindView(R.id.registerstep1_form_container) LinearLayout registerStep1Container;
+    @BindView(R.id.registerstep1_form_container) ScrollView registerStep1Container;
     @BindView(R.id.signup_name_id) EditText signUpName;
     @BindView(R.id.signup_email_id) EditText signUpEmail;
     @BindView(R.id.signup_phoneNo_id) EditText signUpPhoneNo;
