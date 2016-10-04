@@ -7,10 +7,13 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -122,7 +125,7 @@ public class RegisterStepOne extends Fragment implements ISlidePolicy, ISlideBac
      * @return boolean*/
     private boolean validatePassword() {
         String password = signUpPassword.getText().toString();
-        String password2 = retypePassword.getText().toString();
+        String password2 = signUpRetypePassword.getText().toString();
         if(password.isEmpty()){
             signUpPassTxtInptLayout.setError(getString(R.string.err_msg_password));
             requestFocus(signUpPassword);
@@ -133,12 +136,42 @@ public class RegisterStepOne extends Fragment implements ISlidePolicy, ISlideBac
         }else if(password.equals(password2)){
             signUpPassTxtInptLayout.setError(getString(R.string.err_msg_password_match));
             signUpRetypePasswordTxtIn.setError(getString(R.string.err_msg_password_match));
-            requestFocus(retypePassword);
+            requestFocus(signUpRetypePassword);
         }else{
             signUpPassTxtInptLayout.setErrorEnabled(false);
         }
         return true;
     }
+
+    /**
+     * validate user email
+     * @return boolean*/
+    private boolean validateEmail() {
+        String email = signUpEmail.getText().toString().trim();
+
+        // if empty or is not valid display an error
+        if(email.isEmpty() || !isValidEmail(email)){
+            signUpEmailTxtInptLayout.setError(getString(R.string.err_msg_email));
+            requestFocus(signUpEmail);
+            return false;
+        }else{
+            signUpPassTxtInptLayout.setErrorEnabled(false);
+        }
+        return true;
+    }
+
+    /**checks for a valid email address from a pattern*/
+    private boolean isValidEmail(String email) {
+        return !TextUtils.isEmpty(email) && Patterns.EMAIL_ADDRESS.matcher(email).matches();
+    }
+
+    /**sets the focus to the edit text with the error message*/
+    private void requestFocus(View view) {
+        if(view.requestFocus()) {
+            getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
+        }
+    }
+
 
 
 }
