@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.chamayetu.chamayetu.R;
+import com.github.paolorotolo.appintro.ISlidePolicy;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -22,7 +23,7 @@ import butterknife.ButterKnife;
  * Description: Register the new user
  */
 
-public class RegisterStepOne extends Fragment {
+public class RegisterStepOne extends Fragment implements ISlidePolicy{
 
     /*UI views*/
     @BindView(R.id.signup_email_id) EditText signUpEmail;
@@ -37,7 +38,7 @@ public class RegisterStepOne extends Fragment {
     @BindView(R.id.signup_retypepass_txtInput_id) TextInputLayout retypePasswordTxtIn;
 
     public RegisterStepOne(){}
-    
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -45,5 +46,15 @@ public class RegisterStepOne extends Fragment {
         ButterKnife.bind(this,rootView);
 
         return rootView;
+    }
+
+    @Override
+    public boolean isPolicyRespected() {
+        return false;
+    }
+
+    @Override
+    public void onUserIllegallyRequestedNextPage() {
+
     }
 }

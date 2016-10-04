@@ -34,6 +34,7 @@ import android.widget.Toast;
 import com.chamayetu.chamayetu.R;
 import com.chamayetu.chamayetu.main.MainActivity;
 import com.chamayetu.chamayetu.register.RegisterActivity;
+import com.chamayetu.chamayetu.register.RegisterSlideContainer;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
@@ -110,7 +111,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         });
 
         mEmailSignInButton.setOnClickListener(view -> attemptLogin());
-        mRegisterButton.setOnClickListener(view -> startActivity(new Intent(this, RegisterActivity.class)));
+        mRegisterButton.setOnClickListener(view -> startActivity(new Intent(this, RegisterSlideContainer.class)));
         callbackManager = CallbackManager.Factory.create();
 
         mAuth = FirebaseAuth.getInstance();

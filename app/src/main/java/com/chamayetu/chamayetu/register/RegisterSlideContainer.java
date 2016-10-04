@@ -20,8 +20,12 @@ public class RegisterSlideContainer extends AppIntro2 {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         /*Add the slides for the registration steps*/
+
         /*register the user*/
         addSlide(new RegisterStepOne());
+
+        /*register the chama*/
+        addSlide(new RegisterStepTwo());
 
         /*register the new chama, if not by invite*/
 
