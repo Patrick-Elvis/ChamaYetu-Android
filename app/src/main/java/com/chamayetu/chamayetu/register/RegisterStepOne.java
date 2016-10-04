@@ -45,7 +45,6 @@ public class RegisterStepOne extends Fragment implements ISlidePolicy, ISlideBac
     @BindView(R.id.signup_email_id) EditText signUpEmail;
     @BindView(R.id.signup_phoneNo_id) EditText signUpPhoneNo;
     @BindView(R.id.signup_password_id) EditText signUpPassword;
-    @BindView(R.id.signup_retypepassword_id) EditText signUpRetypePassword;
 
     @BindView(R.id.signup_nametxtInput_id) TextInputLayout signUpNameTxtIn;
     @BindView(R.id.signup_emailtxtInput_id) TextInputLayout signUpEmailTxtInptLayout;
@@ -157,25 +156,18 @@ public class RegisterStepOne extends Fragment implements ISlidePolicy, ISlideBac
      * @return boolean*/
     private boolean validatePassword() {
         String password = signUpPassword.getText().toString();
-        String password2 = signUpRetypePassword.getText().toString();
         if(password.isEmpty()){
             signUpPassTxtInptLayout.setError(getString(R.string.err_msg_password));
             requestFocus(signUpPassword);
             return false;
         }
         //if password is less than 6 characters, display error message
-        else if(password.length() < 6) {
+        if(password.length() < 6) {
             signUpPassTxtInptLayout.setError(getString(R.string.err_msg_password_short));
             requestFocus(signUpPassword);
         }
-        //if the the 2 passwords do not match, display error
-        else if(password.equals(password2)){
-            signUpPassTxtInptLayout.setError(getString(R.string.err_msg_password_match));
-            signUpRetypePasswordTxtIn.setError(getString(R.string.err_msg_password_match));
-            requestFocus(signUpRetypePassword);
-        }else{
+        else{
             signUpPassTxtInptLayout.setErrorEnabled(false);
-            signUpRetypePasswordTxtIn.setErrorEnabled(false);
         }
         return true;
     }
@@ -186,7 +178,7 @@ public class RegisterStepOne extends Fragment implements ISlidePolicy, ISlideBac
     private boolean validateEmail() {
         String email = signUpEmail.getText().toString().trim();
         // if empty or is not valid display an error
-        if(email.isEmpty() || !isValidEmail(email)){
+        if(email.isEmpty() || isValidEmail(email)){
             signUpEmailTxtInptLayout.setError(getString(R.string.err_msg_email));
             requestFocus(signUpEmail);
             return false;
