@@ -25,6 +25,7 @@ import android.widget.Toast;
 import com.chamayetu.chamayetu.R;
 import com.github.paolorotolo.appintro.ISlideBackgroundColorHolder;
 import com.github.paolorotolo.appintro.ISlidePolicy;
+import com.sdsmdg.tastytoast.TastyToast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -34,7 +35,11 @@ import butterknife.ButterKnife;
  * com.chamayetu.chamayetu.register
  * Created by lusinabrian on 03/10/16.
  * Description: Register the new user
- * The {@link ISlidePolicy validates the registration form fields checking whether all are field to proceed to next slide. This}
+ * The {@link ISlidePolicy} validates the registration form fields checking whether all are field to proceed to next slide.
+ * First obtain all the UI references, then add textChangeListeners to the EditTexts
+ * Validate email and password fields to check whether they are valid
+ * Validate phone number and check whether the name field is empty
+ * if all fields pass, allow user to proceed to next screen for registration
  */
 
 public class RegisterStepOne extends Fragment implements ISlidePolicy, ISlideBackgroundColorHolder{
@@ -61,6 +66,8 @@ public class RegisterStepOne extends Fragment implements ISlidePolicy, ISlideBac
         ButterKnife.bind(this,rootView);
         signUpEmail.addTextChangedListener(new MyTextWatcher(signUpEmail));
         signUpPassword.addTextChangedListener(new MyTextWatcher((signUpPassword)));
+        signUpPhoneNo.addTextChangedListener(new MyTextWatcher(signUpPhoneNo));
+        signUpPassword.addTextChangedListener(new MyTextWatcher(signUpPassword));
         return rootView;
     }
 
@@ -103,7 +110,7 @@ public class RegisterStepOne extends Fragment implements ISlidePolicy, ISlideBac
     /**Notify the user of the unchecked requirements to proceed to next slide*/
     @Override
     public void onUserIllegallyRequestedNextPage() {
-        Toast.makeText(getContext(), R.string.registerstep_slide_policy_error, Toast.LENGTH_SHORT).show();
+        TastyToast.makeText(getContext(), getResources().getString(R.string.registerstep_slide_policy_error),TastyToast.LENGTH_SHORT,TastyToast.ERROR);
     }
 
     /**overrides the color of the background color in the xml layout*/
@@ -149,6 +156,7 @@ public class RegisterStepOne extends Fragment implements ISlidePolicy, ISlideBac
             }
         }
     }
+
     /**VALIDATE user password
      * Check if user password is valid, if the user password is empty, display an error
      * If the user retype password and passwords do not match, display an error to user
@@ -174,18 +182,21 @@ public class RegisterStepOne extends Fragment implements ISlidePolicy, ISlideBac
 
     /**
      * validate user email
+     * Obtain the user email from the email convert to string and trim it to remove whitespace
+     * if the string is empty or is a not a valid email address display an error to the user
+     * else disable errors and return true
      * @return boolean*/
     private boolean validateEmail() {
         String email = signUpEmail.getText().toString().trim();
-        // if empty or is not valid display an error
-        if(email.isEmpty() || isValidEmail(email)){
+        // if empty or is valid display an error
+        if(email.isEmpty() || !isValidEmail(email)){
             signUpEmailTxtInptLayout.setError(getString(R.string.err_msg_email));
             requestFocus(signUpEmail);
             return false;
         }else{
             signUpPassTxtInptLayout.setErrorEnabled(false);
+            return true;
         }
-        return true;
     }
 
     /**Validates whether the phone number and the user name have been entered(not empty)*/
@@ -209,7 +220,9 @@ public class RegisterStepOne extends Fragment implements ISlidePolicy, ISlideBac
         return true;
     }
 
-    /**checks for a valid email address from a pattern*/
+    /**checks for a valid email address from a pattern
+     * If the email field is not empty and the email matches an email pattern then return true
+     * @return boolean*/
     private boolean isValidEmail(String email) {
         return !TextUtils.isEmpty(email) && Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
