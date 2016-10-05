@@ -157,7 +157,6 @@ public class RegisterStepThree extends Fragment implements ISlidePolicy, ISlideB
                         }else{
                             //perform write operation, adding new user, start next activity
                             mDatabaseRef.child(userName).setValue(newUser);
-                            startActivity(new Intent(getActivity(), LoginActivity.class));
                         }
                     }
 
@@ -178,7 +177,7 @@ public class RegisterStepThree extends Fragment implements ISlidePolicy, ISlideB
                 }else{
                     //perform write operation, adding new user, start next activity
                     mDatabaseRef.child(chamaNodeName).setValue(chamaPojo);
-                    startActivity(new Intent(getActivity(), LoginActivity.class));
+                    //startActivity(new Intent(getActivity(), LoginActivity.class));
                 }
             }
 
