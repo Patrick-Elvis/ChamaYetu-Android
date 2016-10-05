@@ -159,7 +159,6 @@ public class RegisterStepOne extends Fragment implements ISlidePolicy, ISlideBac
 
     /**VALIDATE user password
      * Check if user password is valid, if the user password is empty, display an error
-     * If the user retype password and passwords do not match, display an error to user
      * else, if all checks out, then return true
      * @return boolean*/
     private boolean validatePassword() {
@@ -173,11 +172,12 @@ public class RegisterStepOne extends Fragment implements ISlidePolicy, ISlideBac
         if(password.length() < 6) {
             signUpPassTxtInptLayout.setError(getString(R.string.err_msg_password_short));
             requestFocus(signUpPassword);
+            return false;
         }
         else{
             signUpPassTxtInptLayout.setErrorEnabled(false);
+            return true;
         }
-        return true;
     }
 
     /**
