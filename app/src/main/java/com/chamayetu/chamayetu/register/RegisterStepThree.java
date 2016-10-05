@@ -116,19 +116,12 @@ public class RegisterStepThree extends Fragment implements ISlidePolicy, ISlideB
 
         // obtain only the first part of the email address
         int index = email.indexOf('@');
-        String userName = email.substring(0, index);
+        String userName = email.substring(0, index).toLowerCase();
 
         chamaGroups.put(chamaName, true);
 
         // new instance of the new user
         UserPojo newUser = new UserPojo(firstName, lastName, email, chamaRole, Long.parseLong(phoneNo),0,0,chamaGroups);
-        Log.d(REGISTERSTEP_3, "FN " + firstName +
-                "LN: " + lastName +
-                "UName: " + userName+
-                "EM: "+ email +
-                "RL: " + chamaRole +
-                "PH: " + String.valueOf(phoneNo) +
-                "CHAMAGRPS: "+chamaGroups);
 
         /*create a new chama pojo*/
         ChamaPojo chamaPojo = new ChamaPojo(dateCreated,nxtMeetingTime,milestoneDate,members,totalAmt,amountExpected,chamaName,nxtMeetingVenue,milestone);
@@ -171,14 +164,7 @@ public class RegisterStepThree extends Fragment implements ISlidePolicy, ISlideB
         mDatabaseRef.child(Contract.CHAMA_NODE).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                //if the user name already exists
-                if(dataSnapshot.hasChild(chamaNodeName)){
-                    //alert the user about the conflict
-                }else{
-                    //perform write operation, adding new user, start next activity
-                    mDatabaseRef.child(chamaNodeName).setValue(chamaPojo);
-                    //startActivity(new Intent(getActivity(), LoginActivity.class));
-                }
+                mDatabaseRef.child(chamaNodeName).setValue(chamaPojo);
             }
 
             @Override
