@@ -241,4 +241,12 @@
     <string name="register_proceed">PROCEED</string>
     <string name="registerstep_slide_policy_error">Please fill out all the fields.</string>
     <string name="err_msg_phone">Please enter your phone number</string>
+
+    <string-array name="chama_roles_array">
+        <item>Chairperson</item>
+        <item>Vice-chair</item>
+        <item>Treasurer</item>
+        <item>Secretary</item>
+        <item>Member</item>
+    </string-array>
 </resources>
