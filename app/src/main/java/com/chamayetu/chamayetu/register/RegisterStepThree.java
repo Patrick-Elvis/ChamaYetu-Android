@@ -2,6 +2,7 @@ package com.chamayetu.chamayetu.register;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.ColorInt;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.chamayetu.chamayetu.R;
+import com.github.paolorotolo.appintro.ISlideBackgroundColorHolder;
 import com.github.paolorotolo.appintro.ISlidePolicy;
 
 import butterknife.ButterKnife;
@@ -20,7 +22,7 @@ import butterknife.ButterKnife;
  * Description:
  */
 
-public class RegisterStepThree extends Fragment implements ISlidePolicy{
+public class RegisterStepThree extends Fragment implements ISlidePolicy, ISlideBackgroundColorHolder{
 
     public RegisterStepThree(){}
 
@@ -65,6 +67,16 @@ public class RegisterStepThree extends Fragment implements ISlidePolicy{
 
     @Override
     public void onUserIllegallyRequestedNextPage() {
+
+    }
+
+    @Override
+    public int getDefaultBackgroundColor() {
+        return 0;
+    }
+
+    @Override
+    public void setBackgroundColor(@ColorInt int backgroundColor) {
 
     }
 }

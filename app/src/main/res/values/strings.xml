@@ -242,6 +242,7 @@
     <string name="registerstep_slide_policy_error">Please fill out all the fields.</string>
     <string name="err_msg_phone">Please enter your phone number</string>
     <string name="err_msg_chamaname">Field is required.</string>
+    <string name="register_new_chamaaccount">NEW CHAMA</string>
 
     <string-array name="chama_roles_array">
         <item>Chairperson</item>

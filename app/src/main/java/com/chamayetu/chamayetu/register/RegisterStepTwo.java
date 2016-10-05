@@ -178,7 +178,7 @@ public class RegisterStepTwo extends Fragment implements ISlidePolicy, ISlideBac
         }
 
         //if field is not empty, but the name already exists in the database
-        if(!chamaInputName.isEmpty()){
+        else if(!chamaInputName.isEmpty()){
             String userIn = chamaInputName.toLowerCase();
             //check if the user already exists in the database at the User's node
             databaseReference.child(Contract.CHAMA_NODE).addValueEventListener(new ValueEventListener() {
@@ -202,9 +202,8 @@ public class RegisterStepTwo extends Fragment implements ISlidePolicy, ISlideBac
 
                         //get current date of creation in format Month Date Year
                         Calendar c = Calendar.getInstance();
-                        SimpleDateFormat df = new SimpleDateFormat("dd MMM yyyy", Locale.ENGLISH);
+                        SimpleDateFormat df = new SimpleDateFormat("dd MMMM yyyy", Locale.ENGLISH);
                         String formattedDate = df.format(c.getTime());
-                        Log.d(REGISTERSTEP_2+ "date: ",  formattedDate);
 
                         //store the data in sharedpreference file for access in last screen
                         editor.putString("CHAMA_NODE_NAME",userIn);
@@ -219,6 +218,7 @@ public class RegisterStepTwo extends Fragment implements ISlidePolicy, ISlideBac
                         editor.putString("NXTMEETING_VENUE", nextMeetingVenue);
                         editor.putString("CHAMAROLE", userChamaRoleChoice);
 
+                        Log.d(REGISTERSTEP_2+"CHAMAROLE", userChamaRoleChoice);
                         Log.d(REGISTERSTEP_2+"Editor2", editor.toString());
                         //apply the edits
                         editor.apply();
@@ -233,10 +233,9 @@ public class RegisterStepTwo extends Fragment implements ISlidePolicy, ISlideBac
                     TastyToast.makeText(getActivity(), "Error encountered", TastyToast.LENGTH_SHORT, TastyToast.ERROR);
                     Log.e(REGISTERSTEP_2+"DB Error", databaseError.getMessage());
                 }
-
             });
-
         }
+        Log.d(REGISTERSTEP_2+"VALID", String.valueOf(isValid[0]));
         return isValid[0];
     }
     /**sets the focus to the edit text with the error message*/
@@ -253,6 +252,6 @@ public class RegisterStepTwo extends Fragment implements ISlidePolicy, ISlideBac
 
     @Override
     public void onUserIllegallyRequestedNextPage() {
-
+        TastyToast.makeText(getActivity(),"All Fields are required", TastyToast.LENGTH_SHORT, TastyToast.ERROR);
     }
 }
