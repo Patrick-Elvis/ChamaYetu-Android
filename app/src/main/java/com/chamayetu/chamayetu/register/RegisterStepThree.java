@@ -14,12 +14,20 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.chamayetu.chamayetu.R;
+import com.chamayetu.chamayetu.login.LoginActivity;
+import com.chamayetu.chamayetu.main.MainActivity;
+import com.chamayetu.chamayetu.utils.Contract;
 import com.chamayetu.chamayetu.utils.models.ChamaPojo;
 import com.chamayetu.chamayetu.utils.models.UserPojo;
 import com.github.paolorotolo.appintro.ISlideBackgroundColorHolder;
 import com.github.paolorotolo.appintro.ISlidePolicy;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.sdsmdg.tastytoast.TastyToast;
 
 import java.util.HashMap;
@@ -40,6 +48,7 @@ public class RegisterStepThree extends Fragment implements ISlidePolicy, ISlideB
     @BindView(R.id.registerstep3_form_container) LinearLayout registerStep3;
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
+    private DatabaseReference mDatabaseRef;
 
     public RegisterStepThree(){}
 
@@ -59,6 +68,8 @@ public class RegisterStepThree extends Fragment implements ISlidePolicy, ISlideB
         View rootView = inflater.inflate(R.layout.registerstep3_confirm, container, false);
         ButterKnife.bind(this, rootView);
         mAuth = FirebaseAuth.getInstance();
+        mDatabaseRef = FirebaseDatabase.getInstance().getReference();
+
         mAuthStateListener = firebaseAuth -> {
             FirebaseUser user = firebaseAuth.getCurrentUser();
             if (user != null) {
@@ -131,6 +142,53 @@ public class RegisterStepThree extends Fragment implements ISlidePolicy, ISlideB
 
                         /*create a new chama pojo*/
                         ChamaPojo chamaPojo = new ChamaPojo(dateCreated,nxtMeetingTime,milestoneDate,members,totalAmt,amountExpected,chamaName,nxtMeetingVenue,milestone);
+
+                        //check if the user already exists in the database at the User's node
+                        mDatabaseRef.child(Contract.USERS_NODE).addValueEventListener(
+                                new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(DataSnapshot dataSnapshot) {
+                                        //if the user name already exists
+                                        if(dataSnapshot.hasChild(userName)){
+                                            //alert the user about the conflict
+                                            TastyToast.makeText(getActivity(),"username exists",TastyToast.LENGTH_SHORT, TastyToast.ERROR);
+                                        }else{
+                                            //perform write operation, adding new user, start next activity
+                                            mDatabaseRef.child(userName).setValue(newUser);
+                                            startActivity(new Intent(getActivity(), LoginActivity.class));
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+                                TastyToast.makeText(getActivity(), "Error encountered",TastyToast.LENGTH_SHORT,TastyToast.ERROR);
+
+                                Log.e(REGISTERSTEP_3, databaseError.getMessage());
+                            }
+
+                        });
+
+                        //check if the user already exists in the database at the User's node
+                        mDatabaseRef.child(Contract.CHAMA_NODE).addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                //if the user name already exists
+                                if(dataSnapshot.hasChild(chamaNodeName)){
+                                    //alert the user about the conflict
+                                }else{
+                                    //perform write operation, adding new user, start next activity
+                                    mDatabaseRef.child(chamaNodeName).setValue(chamaPojo);
+                                    startActivity(new Intent(getActivity(), LoginActivity.class));
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+                                TastyToast.makeText(getActivity(), "Error encountered",TastyToast.LENGTH_SHORT,TastyToast.ERROR);
+
+                                Log.e(REGISTERSTEP_3, databaseError.getMessage());
+                            }
+                        });
 
                     }
                 }
