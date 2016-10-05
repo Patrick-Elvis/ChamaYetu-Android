@@ -63,16 +63,6 @@ public class RegisterStepTwo extends Fragment implements ISlidePolicy, ISlideBac
     public RegisterStepTwo(){}
 
     @Override
-    public boolean isPolicyRespected() {
-        return false;
-    }
-
-    @Override
-    public void onUserIllegallyRequestedNextPage() {
-
-    }
-
-    @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
      }
@@ -132,17 +122,6 @@ public class RegisterStepTwo extends Fragment implements ISlidePolicy, ISlideBac
         }
     }
 
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        //get the selected item from the dropdown list and initialize the String choice
-        userChamaRoleChoice = (String) parent.getItemAtPosition(position);
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-        //
-    }
-
     private class ChamaTextWatcher implements TextWatcher {
         private View view;
         public ChamaTextWatcher(View view) {
@@ -167,6 +146,17 @@ public class RegisterStepTwo extends Fragment implements ISlidePolicy, ISlideBac
                     break;
             }
         }
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        //get the selected item from the dropdown list and initialize the String choice
+        userChamaRoleChoice = (String) parent.getItemAtPosition(position);
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+        //
     }
 
     /**Validates the chama name field, checking if the name already exists in the database.
@@ -256,4 +246,13 @@ public class RegisterStepTwo extends Fragment implements ISlidePolicy, ISlideBac
         }
     }
 
+    @Override
+    public boolean isPolicyRespected() {
+        return validateChamaNameField();
+    }
+
+    @Override
+    public void onUserIllegallyRequestedNextPage() {
+
+    }
 }
