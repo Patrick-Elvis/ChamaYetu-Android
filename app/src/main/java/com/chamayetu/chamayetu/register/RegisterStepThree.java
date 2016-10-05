@@ -110,6 +110,28 @@ public class RegisterStepThree extends Fragment implements ISlidePolicy, ISlideB
         String nxtMeetingTime = mUserChamaCredentials.getString("NXTMEETING_TIME", "missingValue");
         String nxtMeetingVenue = mUserChamaCredentials.getString("NXTMEETING_VENUE", "missingValue");
         String chamaRole = mUserChamaCredentials.getString("CHAMAROLE", "missingValue");
+        String firstName = fullName.split(" ")[0];
+        String lastName = fullName.split(" ")[1];
+        Map<String, Object> chamaGroups = new HashMap<>();
+
+        // obtain only the first part of the email address
+        int index = email.indexOf('@');
+        String userName = email.substring(0, index);
+
+        chamaGroups.put(chamaName, true);
+
+        // new instance of the new user
+        UserPojo newUser = new UserPojo(firstName, lastName, email, chamaRole, Long.parseLong(phoneNo),0,0,chamaGroups);
+        Log.d(REGISTERSTEP_3, "FN " + firstName +
+                "LN: " + lastName +
+                "UName: " + userName+
+                "EM: "+ email +
+                "RL: " + chamaRole +
+                "PH: " + String.valueOf(phoneNo) +
+                "CHAMAGRPS: "+chamaGroups);
+
+        /*create a new chama pojo*/
+        ChamaPojo chamaPojo = new ChamaPojo(dateCreated,nxtMeetingTime,milestoneDate,members,totalAmt,amountExpected,chamaName,nxtMeetingVenue,milestone);
 
         mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(
                 getActivity(), task -> {
@@ -119,80 +141,54 @@ public class RegisterStepThree extends Fragment implements ISlidePolicy, ISlideB
                     if(!task.isSuccessful()){
                         TastyToast.makeText(getActivity(),"Authentication failed.", TastyToast.LENGTH_SHORT, TastyToast.ERROR);
                         Log.d(REGISTERSTEP_3, task.getException().toString());
-                    }else{
-                        String firstName = fullName.split(" ")[0];
-                        String lastName = fullName.split(" ")[1];
-                        Map<String, Object> chamaGroups = new HashMap<>();
-
-                        // obtain only the first part of the email address
-                        int index = email.indexOf('@');
-                        String userName = email.substring(0, index);
-
-                        chamaGroups.put(chamaName, true);
-
-                        // new instance of the new user
-                        UserPojo newUser = new UserPojo(firstName, lastName, email, chamaRole, Long.parseLong(phoneNo),0,0,chamaGroups);
-                        Log.d(REGISTERSTEP_3, "FN " + firstName +
-                                "LN: " + lastName +
-                                "UName: " + userName+
-                                "EM: "+ email +
-                                "RL: " + chamaRole +
-                                "PH: " + String.valueOf(phoneNo) +
-                                "CHAMAGRPS: "+chamaGroups);
-
-                        /*create a new chama pojo*/
-                        ChamaPojo chamaPojo = new ChamaPojo(dateCreated,nxtMeetingTime,milestoneDate,members,totalAmt,amountExpected,chamaName,nxtMeetingVenue,milestone);
-
-                        //check if the user already exists in the database at the User's node
-                        mDatabaseRef.child(Contract.USERS_NODE).addValueEventListener(
-                                new ValueEventListener() {
-                                    @Override
-                                    public void onDataChange(DataSnapshot dataSnapshot) {
-                                        //if the user name already exists
-                                        if(dataSnapshot.hasChild(userName)){
-                                            //alert the user about the conflict
-                                            TastyToast.makeText(getActivity(),"username exists",TastyToast.LENGTH_SHORT, TastyToast.ERROR);
-                                        }else{
-                                            //perform write operation, adding new user, start next activity
-                                            mDatabaseRef.child(userName).setValue(newUser);
-                                            startActivity(new Intent(getActivity(), LoginActivity.class));
-                                }
-                            }
-
-                            @Override
-                            public void onCancelled(DatabaseError databaseError) {
-                                TastyToast.makeText(getActivity(), "Error encountered",TastyToast.LENGTH_SHORT,TastyToast.ERROR);
-
-                                Log.e(REGISTERSTEP_3, databaseError.getMessage());
-                            }
-
-                        });
-
-                        //check if the user already exists in the database at the User's node
-                        mDatabaseRef.child(Contract.CHAMA_NODE).addValueEventListener(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(DataSnapshot dataSnapshot) {
-                                //if the user name already exists
-                                if(dataSnapshot.hasChild(chamaNodeName)){
-                                    //alert the user about the conflict
-                                }else{
-                                    //perform write operation, adding new user, start next activity
-                                    mDatabaseRef.child(chamaNodeName).setValue(chamaPojo);
-                                    startActivity(new Intent(getActivity(), LoginActivity.class));
-                                }
-                            }
-
-                            @Override
-                            public void onCancelled(DatabaseError databaseError) {
-                                TastyToast.makeText(getActivity(), "Error encountered",TastyToast.LENGTH_SHORT,TastyToast.ERROR);
-
-                                Log.e(REGISTERSTEP_3, databaseError.getMessage());
-                            }
-                        });
-
                     }
                 }
         );
+
+        //check if the user already exists in the database at the User's node
+        mDatabaseRef.child(Contract.USERS_NODE).addValueEventListener(
+                new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        //if the user name already exists
+                        if(dataSnapshot.hasChild(userName)){
+                            //alert the user about the conflict
+                            TastyToast.makeText(getActivity(),"username exists",TastyToast.LENGTH_SHORT, TastyToast.ERROR);
+                        }else{
+                            //perform write operation, adding new user, start next activity
+                            mDatabaseRef.child(userName).setValue(newUser);
+                            startActivity(new Intent(getActivity(), LoginActivity.class));
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        TastyToast.makeText(getActivity(), "Error encountered",TastyToast.LENGTH_SHORT,TastyToast.ERROR);
+                        Log.e(REGISTERSTEP_3, databaseError.getMessage());
+                    }
+                });
+
+        //check if the user already exists in the database at the User's node
+        mDatabaseRef.child(Contract.CHAMA_NODE).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                //if the user name already exists
+                if(dataSnapshot.hasChild(chamaNodeName)){
+                    //alert the user about the conflict
+                }else{
+                    //perform write operation, adding new user, start next activity
+                    mDatabaseRef.child(chamaNodeName).setValue(chamaPojo);
+                    startActivity(new Intent(getActivity(), LoginActivity.class));
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                TastyToast.makeText(getActivity(), "Error encountered",TastyToast.LENGTH_SHORT,TastyToast.ERROR);
+
+                Log.e(REGISTERSTEP_3, databaseError.getMessage());
+            }
+        });
     }
 
     @Override
