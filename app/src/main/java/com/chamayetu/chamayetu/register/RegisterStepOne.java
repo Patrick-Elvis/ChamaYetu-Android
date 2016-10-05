@@ -34,6 +34,7 @@ import butterknife.ButterKnife;
  * com.chamayetu.chamayetu.register
  * Created by lusinabrian on 03/10/16.
  * Description: Register the new user
+ * The {@link ISlidePolicy validates the registration form fields checking whether all are field to proceed to next slide. This}
  */
 
 public class RegisterStepOne extends Fragment implements ISlidePolicy, ISlideBackgroundColorHolder{
