@@ -79,7 +79,12 @@ public class RegisterStepOne extends Fragment implements ISlidePolicy, ISlideBac
         return validateAllFields();
     }
 
-    /**Performs a check on all the fields, confirming whether all the fields have been met*/
+    /**Performs a check on all the fields, confirming whether all the fields have been met
+     * create a SharePreference file and set the mode to private
+     * Create the shared preference editor to store the user credentials
+     * if the email, password, phone and name fields pass their tests then they are valid then store the
+     * user credentials in variables and sdd to the editor
+     * @return boolean*/
     private boolean validateAllFields() {
         boolean success = false;
         SharedPreferences userCredentials = getActivity().getSharedPreferences("UserCredentials",0);
@@ -107,7 +112,8 @@ public class RegisterStepOne extends Fragment implements ISlidePolicy, ISlideBac
     }
 
 
-    /**Notify the user of the unchecked requirements to proceed to next slide*/
+    /**Notify the user of the unchecked requirements to proceed to next slide
+     * If the user tries to proceed without following register step one policy display an error message*/
     @Override
     public void onUserIllegallyRequestedNextPage() {
         TastyToast.makeText(getContext(), getResources().getString(R.string.registerstep_slide_policy_error),TastyToast.LENGTH_SHORT,TastyToast.ERROR);
@@ -199,7 +205,11 @@ public class RegisterStepOne extends Fragment implements ISlidePolicy, ISlideBac
         }
     }
 
-    /**Validates whether the phone number and the user name have been entered(not empty)*/
+    /**Validates whether the phone number and the user name have been entered(not empty)
+     * Validate phone an nam fields
+     * If the name field is empty then display an error, return false
+     * if the phone number field is empty display an error, return false
+     * else disable errors, return true*/
     private boolean validatePhoneAndName() {
         String fullName = signUpName.getText().toString().trim();
         String phoneNumber = signUpPhoneNo.getText().toString().trim();
@@ -216,8 +226,8 @@ public class RegisterStepOne extends Fragment implements ISlidePolicy, ISlideBac
         }else{
             signUpNameTxtIn.setErrorEnabled(false);
             signUpPhoneNoTxtIn.setErrorEnabled(false);
+            return true;
         }
-        return true;
     }
 
     /**checks for a valid email address from a pattern
@@ -233,5 +243,4 @@ public class RegisterStepOne extends Fragment implements ISlidePolicy, ISlideBac
             getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
         }
     }
-
 }
