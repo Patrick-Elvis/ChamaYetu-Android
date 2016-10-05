@@ -234,6 +234,7 @@ public class RegisterStepTwo extends Fragment implements ISlidePolicy, ISlideBac
                     Log.e(REGISTERSTEP_2+"DB Error", databaseError.getMessage());
                 }
             });
+            isValid[0] = true;
         }
         Log.d(REGISTERSTEP_2+"VALID", String.valueOf(isValid[0]));
         return isValid[0];
