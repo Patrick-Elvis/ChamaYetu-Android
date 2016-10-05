@@ -26,6 +26,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.sdsmdg.tastytoast.TastyToast;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -96,9 +97,8 @@ public class RegisterActivity extends AppCompatActivity{
         if(!validateEmail() && validatePassword()){
             mAuth.createUserWithEmailAndPassword(email, password)
                     .addOnCompleteListener(this, task -> {
-                        /*TODO: display a better message to user on sign up*/
                         Log.d(REGISTERACT_TAG, "Create User with Email: "+ task.isSuccessful());
-                        Toast.makeText(RegisterActivity.this,"Success! :)", Toast.LENGTH_SHORT).show();
+                        TastyToast.makeText(RegisterActivity.this,"Success!", TastyToast.LENGTH_SHORT, TastyToast.SUCCESS);
                         // If sign in fails, display a message to the user. If sign in succeeds
                         // the auth state listener will be notified and logic to handle the
                         // signed in user can be handled in the listener.
