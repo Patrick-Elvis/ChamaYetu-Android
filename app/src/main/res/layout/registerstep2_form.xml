@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:padding="65dp"
+    android:padding="35dp"
     android:id="@+id/registerstep2_form_container"
     android:background="@color/navajo_white"
     android:layout_height="match_parent">

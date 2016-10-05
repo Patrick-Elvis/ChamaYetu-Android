@@ -8,11 +8,13 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import com.chamayetu.chamayetu.R;
 import com.github.paolorotolo.appintro.ISlideBackgroundColorHolder;
 import com.github.paolorotolo.appintro.ISlidePolicy;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
@@ -23,6 +25,7 @@ import butterknife.ButterKnife;
  */
 
 public class RegisterStepThree extends Fragment implements ISlidePolicy, ISlideBackgroundColorHolder{
+    @BindView(R.id.registerstep3_form_container) LinearLayout registerStep3;
 
     public RegisterStepThree(){}
 
