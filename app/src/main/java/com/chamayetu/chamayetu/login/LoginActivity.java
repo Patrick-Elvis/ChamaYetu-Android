@@ -31,6 +31,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.chamayetu.chamayetu.R;
@@ -79,7 +80,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     @BindView(R.id.email) AutoCompleteTextView mEmailView;
     @BindView(R.id.password) EditText mPasswordView;
     @BindView(R.id.email_sign_in_button)Button mEmailSignInButton;
-    @BindView(R.id.forgot_password_link) Textview forgotPassword;
+    @BindView(R.id.forgot_password_link) TextView forgotPassword;
     @BindView(R.id.fab) FloatingActionButton floatingActionButton;
 
     @BindView(R.id.facebook_login_button) LoginButton facebookLoginBtn;
