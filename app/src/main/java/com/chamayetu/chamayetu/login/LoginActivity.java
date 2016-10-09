@@ -20,6 +20,7 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.support.v7.widget.CardView;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.Patterns;
@@ -72,6 +73,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private GoogleApiClient mGoogleApiClient;
 
     // UI references.
+    @BindView(R.id.cv_container) CardView cardViewContainer;
+
     @BindView(R.id.email) AutoCompleteTextView mEmailView;
     @BindView(R.id.email_txtInputLayout) TextInputLayout mEmailTxtInpView;
 
