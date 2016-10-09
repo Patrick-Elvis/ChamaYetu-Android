@@ -1,9 +1,12 @@
 package com.chamayetu.chamayetu.register;
 
+import android.annotation.TargetApi;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.TextInputLayout;
+import android.support.annotation.RequiresApi;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.text.Editable;
@@ -28,6 +31,13 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.sdsmdg.tastytoast.TastyToast;
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.transition.Transition;
+import android.transition.TransitionInflater;
+import android.view.View;
+import android.view.ViewAnimationUtils;
+import android.view.animation.AccelerateInterpolator;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -50,6 +60,7 @@ public class RegisterActivity extends AppCompatActivity{
     @BindView(R.id.signup_password_id) EditText signUpPassword;
     @BindView(R.id.signup_retypepassword_id) EditText retypePassword;
     @BindView(R.id.cv_add) CardView cardViewAdd;
+    @BindView(R.id.fab) FloatingActionButton floatingActionButton;
 
     @BindView(R.id.signup_chamaname_id) EditText signUpChamaNameView;
     @BindView(R.id.signup_phoneNo_id) EditText signUpPhoneNo;
@@ -76,10 +87,100 @@ public class RegisterActivity extends AppCompatActivity{
                 Log.d(REGISTERACT_TAG, "onAuthStateChanged:signed_out");
             }
         };
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            ShowEnterAnimation();
+        }
+        floatingActionButton.setOnClickListener(v -> animateRevealClose());
+
         mDatabaseRef = FirebaseDatabase.getInstance().getReference();
         signUpEmail.addTextChangedListener(new MyTextWatcher(signUpEmail));
         signUpPassword.addTextChangedListener(new MyTextWatcher((signUpPassword)));
         signUpButton.setOnClickListener(view -> submitFormDetails());
+    }
+
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    private void ShowEnterAnimation() {
+        Transition transition = TransitionInflater.from(this).inflateTransition(R.transition.fabtransition);
+        getWindow().setSharedElementEnterTransition(transition);
+
+        transition.addListener(new Transition.TransitionListener() {
+            @Override
+            public void onTransitionStart(Transition transition) {
+                cardViewAdd.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onTransitionEnd(Transition transition) {
+                transition.removeListener(this);
+                animateRevealShow();
+            }
+
+            @Override
+            public void onTransitionCancel(Transition transition) {
+
+            }
+
+            @Override
+            public void onTransitionPause(Transition transition) {
+
+            }
+
+            @Override
+            public void onTransitionResume(Transition transition) {
+
+            }
+
+
+        });
+    }
+
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    public void animateRevealShow() {
+        Animator mAnimator = ViewAnimationUtils.createCircularReveal(cardViewAdd, cardViewAdd.getWidth()/2,0, floatingActionButton.getWidth() / 2, cardViewAdd.getHeight());
+        mAnimator.setDuration(500);
+        mAnimator.setInterpolator(new AccelerateInterpolator());
+        mAnimator.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                super.onAnimationEnd(animation);
+            }
+
+            @Override
+            public void onAnimationStart(Animator animation) {
+                cardViewAdd.setVisibility(View.VISIBLE);
+                super.onAnimationStart(animation);
+            }
+        });
+        mAnimator.start();
+    }
+
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    public void animateRevealClose() {
+        Animator mAnimator = ViewAnimationUtils.createCircularReveal(cardViewAdd,cardViewAdd.getWidth()/2,0, cardViewAdd.getHeight(), floatingActionButton.getWidth() / 2);
+        mAnimator.setDuration(500);
+        mAnimator.setInterpolator(new AccelerateInterpolator());
+        mAnimator.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                cardViewAdd.setVisibility(View.INVISIBLE);
+                super.onAnimationEnd(animation);
+                floatingActionButton.setImageResource(R.drawable.plus);
+                RegisterActivity.super.onBackPressed();
+            }
+
+            @Override
+            public void onAnimationStart(Animator animation) {
+                super.onAnimationStart(animation);
+            }
+        });
+        mAnimator.start();
+    }
+
+    @Override
+    public void onBackPressed() {
+        animateRevealClose();
     }
 
     /**Submit registration details*/
