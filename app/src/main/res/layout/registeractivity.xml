@@ -37,6 +37,8 @@
                     android:textColor="#fff"
                     android:textSize="16sp"
                     android:textStyle="bold" />
+
+                <!--email-->
                 <LinearLayout
                     android:layout_marginTop="10dp"
                     android:paddingStart="50dp"
@@ -54,10 +56,10 @@
                             android:textSize="13sp"
                             android:hint="@string/useracct_email"
                             android:textColor="#f0f7f4"
-                            android:id="@+id/et_username"
+                            android:id="@+id/signup_email_id"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:inputType="textPersonName"
+                            android:inputType="textEmailAddress"
                             android:background="@drawable/selector_bg_edit_2"
                             android:textCursorDrawable="@drawable/bg_input_cursor_2"
                             android:paddingBottom="2dp" />
@@ -84,7 +86,7 @@
                             android:textSize="13sp"
                             android:hint="@string/signup_password_str"
                             android:textColor="#f0f7f4"
-                            android:id="@+id/et_password"
+                            android:id="@+id/signup_password_id"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:inputType="textPassword"
@@ -113,7 +115,7 @@
                             android:textSize="13sp"
                             android:textColor="#f0f7f4"
                             android:hint="@string/repeat_password"
-                            android:id="@+id/et_repeatpassword"
+                            android:id="@+id/signup_retypepassword_id"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:inputType="textPassword"
@@ -126,7 +128,7 @@
                 <Button
                     android:layout_marginTop="20dp"
                     android:layout_gravity="center_horizontal"
-                    android:id="@+id/bt_go"
+                    android:id="@+id/signup_button_id"
                     android:background="@drawable/bt_shape_2"
                     android:stateListAnimator="@drawable/state_list_animator_z"
                     android:layout_width="150dp"

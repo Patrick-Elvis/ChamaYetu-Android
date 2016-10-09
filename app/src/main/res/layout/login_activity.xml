@@ -53,7 +53,7 @@
                 android:layout_height="wrap_content"
                 app:mtf_image="@android:drawable/ic_dialog_email">
 
-                <AutoCompleteTextView
+                <EditText
                     android:id="@+id/email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

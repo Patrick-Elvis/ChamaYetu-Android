@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -43,21 +44,17 @@ public class RegisterActivity extends AppCompatActivity{
     public static final String REGISTERACT_TAG = RegisterActivity.class.getSimpleName();
 
     /*UI views*/
+
     @BindView(R.id.signup_button_id) Button signUpButton;
     @BindView(R.id.signup_email_id) EditText signUpEmail;
     @BindView(R.id.signup_password_id) EditText signUpPassword;
-    @BindView(R.id.signup_emailtxtInput_id) TextInputLayout signUpEmailTxtInptLayout;
-    @BindView(R.id.signup_pass_txtInput_id) TextInputLayout signUpPassTxtInptLayout;
-    @BindView(R.id.signup_chamanameTxtInp_id) TextInputLayout signUpChamaTxtInView;
+    @BindView(R.id.signup_retypepassword_id) EditText retypePassword;
+    @BindView(R.id.cv_add) CardView cardViewAdd;
+
     @BindView(R.id.signup_chamaname_id) EditText signUpChamaNameView;
     @BindView(R.id.signup_phoneNo_id) EditText signUpPhoneNo;
-    @BindView(R.id.signup_phoneNoTxtInp_id) TextInputLayout signUpPhoneNoTxtIn;
     @BindView(R.id.signup_name_id) EditText signUpName;
-    @BindView(R.id.signup_nametxtInput_id) TextInputLayout signUpNameTxtIn;
-    @BindView(R.id.signup_retypepassword_id) EditText retypePassword;
-    @BindView(R.id.signup_retypepass_txtInput_id) TextInputLayout retypePasswordTxtIn;
     @BindView(R.id.signup_role_id) EditText roleView;
-    @BindView(R.id.signup_roletxtInput_id) TextInputLayout roleViewTxtIn;
 
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
@@ -218,18 +215,26 @@ public class RegisterActivity extends AppCompatActivity{
         String password = signUpPassword.getText().toString();
         String password2 = retypePassword.getText().toString();
         if(password.isEmpty()){
+/*
             signUpPassTxtInptLayout.setError(getString(R.string.err_msg_password));
+*/
             requestFocus(signUpPassword);
             return false;
         }else if(password.length() < 6) {
+/*
             signUpPassTxtInptLayout.setError(getString(R.string.err_msg_password_short));
+*/
             requestFocus(signUpPassword);
         }else if(password.equals(password2)){
+/*
             signUpPassTxtInptLayout.setError(getString(R.string.err_msg_password_match));
             retypePasswordTxtIn.setError(getString(R.string.err_msg_password_match));
+*/
             requestFocus(retypePassword);
         }else{
+/*
             signUpPassTxtInptLayout.setErrorEnabled(false);
+*/
         }
         return true;
     }
@@ -241,11 +246,8 @@ public class RegisterActivity extends AppCompatActivity{
 
         // if empty or is not valid display an error
         if(email.isEmpty() || !isValidEmail(email)){
-            signUpEmailTxtInptLayout.setError(getString(R.string.err_msg_email));
             requestFocus(signUpEmail);
             return false;
-        }else{
-            signUpPassTxtInptLayout.setErrorEnabled(false);
         }
         return true;
     }
