@@ -248,6 +248,7 @@
     <string name="confirm_name_str">Full Name</string>
     <string name="confirm_new_account">Confirm your details.</string>
     <string name="login">LOGIN</string>
+    <string name="forgot_your_password">Forgot your password?</string>
 
     <string-array name="chama_roles_array">
         <item>Chairperson</item>

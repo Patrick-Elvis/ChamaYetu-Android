@@ -111,73 +111,56 @@
                     tools:targetApi="lollipop">
                 </Button>
             </RelativeLayout>
-
+            <!--forgot password link-->
+            <TextView
+                android:id="@+id/forgot_password_link"
+                android:layout_marginTop="5dp"
+                android:layout_gravity="center_horizontal"
+                android:textColor="#9a9a9a"
+                android:textSize="12sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:text="@string/forgot_your_password" />
         </LinearLayout>
-    </android.support.v7.widget.CardView>
-    <ScrollView
-        android:id="@+id/login_form"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
         <LinearLayout
-            android:id="@+id/email_login_form"
+            android:id="@+id/social_media_login_form"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <Button
-                style="?android:textAppearanceSmall"
-                android:layout_width="match_parent"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:weightSum="1">
+            <com.facebook.login.widget.LoginButton
+                android:id="@+id/facebook_login_button"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:textStyle="bold" />
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="30dp"/>
 
-            <LinearLayout
-                android:id="@+id/social_media_login_form"
-                android:layout_width="match_parent"
+            <com.google.android.gms.common.SignInButton
+                android:id="@+id/google_signin_button"
+                android:layout_width="180dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:weightSum="1">
-                <TextView
-                    android:text="OR"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    android:textAlignment="center"
-                    android:textColor="@android:color/black"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
-
-                <com.facebook.login.widget.LoginButton
-                    android:id="@+id/facebook_login_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="30dp"/>
-
-                <com.google.android.gms.common.SignInButton
-                    android:id="@+id/google_signin_button"
-                    android:layout_width="180dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="30dp"
-                    android:layout_marginTop="16dp"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-                <Button
-                    android:id="@+id/registerBtn"
-                    style="?android:textAppearanceSmall"
-                    android:background="@color/float_transparent"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:text="@string/action_register"
-                    android:textStyle="bold" />
-            </LinearLayout>
+                android:layout_marginBottom="30dp"
+                android:layout_marginTop="16dp"/>
         </LinearLayout>
-    </ScrollView>
+
+    </android.support.v7.widget.CardView>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:fabSize="normal"
+        android:src="@drawable/plus"
+        android:transitionName="loginFab"
+        android:layout_alignTop="@id/cv_container"
+        android:layout_marginTop="25dp"
+        android:layout_alignEnd="@id/cv_container"
+        android:layout_marginEnd="-20dp"
+        android:layout_alignRight="@id/cv_container"
+        android:layout_marginRight="-20dp"
+        tools:targetApi="lollipop" />
+
 </RelativeLayout>
