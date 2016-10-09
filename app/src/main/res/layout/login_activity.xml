@@ -109,8 +109,7 @@
                     android:layout_width="150dp"
                     android:layout_height="50dp"
                     android:text="@string/action_sign_in"
-                    android:textColor="#d3d3d3"
-                    tools:targetApi="lollipop">
+                    android:textColor="#d3d3d3">
                 </Button>
             </RelativeLayout>
             <!--forgot password link-->
