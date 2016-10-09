@@ -95,6 +95,8 @@
                         android:paddingBottom="2dp" />
                 </com.github.florent37.materialtextfield.MaterialTextField>
             </LinearLayout>
+
+            <!--sign in button-->
             <RelativeLayout
                 android:layout_marginTop="25dp"
                 android:gravity="center"
