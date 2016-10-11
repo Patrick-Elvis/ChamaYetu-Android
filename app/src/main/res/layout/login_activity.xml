@@ -40,29 +40,31 @@
                     android:textSize="18sp"
                     android:textStyle="bold" />
             </RelativeLayout>
-        <LinearLayout
-            android:layout_marginTop="10dp"
+
+            <!--
             android:paddingStart="50dp"
             android:paddingEnd="30dp"
             android:paddingLeft="50dp"
             android:paddingRight="30dp"
+            -->
+        <LinearLayout
+            android:layout_marginTop="10dp"
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="50dp">
+            android:layout_height="wrap_content">
             <com.github.florent37.materialtextfield.MaterialTextField
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 app:mtf_image="@android:drawable/ic_dialog_email">
 
                 <EditText
                     android:id="@+id/email"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:hint="@string/prompt_email"
                     android:inputType="textEmailAddress"
-                    android:textSize="13sp"
+                    android:textSize="15sp"
                     android:textColor="#2fa881"
-                    android:paddingBottom="2dp"
                     android:background="@drawable/selector_bg_edit"
                     android:textCursorDrawable="@drawable/bg_input_cursor"
                     android:maxLines="1"/>
@@ -71,13 +73,9 @@
         </LinearLayout>
             <!--password-->
             <LinearLayout
-                android:paddingStart="50dp"
-                android:paddingEnd="30dp"
-                android:paddingLeft="50dp"
-                android:paddingRight="30dp"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="50dp">
+                android:layout_height="wrap_content">
                 <com.github.florent37.materialtextfield.MaterialTextField
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -88,7 +86,7 @@
                         android:hint="@string/signup_password_str"
                         android:textColor="#2fa881"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:background="@drawable/selector_bg_edit"
                         android:textCursorDrawable="@drawable/bg_input_cursor"
                         android:inputType="textPassword"
