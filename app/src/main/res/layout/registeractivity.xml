@@ -156,7 +156,7 @@
                         android:layout_height="match_parent"
                         app:mtf_openKeyboardOnFocus="true"
                         app:mtf_cardCollapsedHeight="4dp"
-                        app:mtf_image="@android:drawable/ic_dialog_email">
+                        app:mtf_image="@android:drawable/ic_lock_idle_lock">
                         <EditText
                             android:textSize="13sp"
                             android:hint="@string/signup_password_str"
