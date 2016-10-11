@@ -309,7 +309,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
             // if successful, start main activity
             if (success) {
                 ActivityOptionsCompat oc2 = ActivityOptionsCompat.makeSceneTransitionAnimation(LoginActivity.this);
-                Intent i2 = new Intent(LoginActivity.this, MainActivity.class);
+                Intent i2 = new Intent(LoginActivity.this, LoginSuccess.class);
                 startActivity(i2, oc2.toBundle());
                 finish();
             } else {
