@@ -1,9 +1,17 @@
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_gravity="center"
+    android:layout_height="wrap_content">
+
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     tools:context="com.chamayetu.chamayetu.login.LoginActivity">
 
     <android.support.v7.widget.CardView
@@ -41,12 +49,6 @@
                     android:textStyle="bold" />
             </RelativeLayout>
 
-            <!--
-            android:paddingStart="50dp"
-            android:paddingEnd="30dp"
-            android:paddingLeft="50dp"
-            android:paddingRight="30dp"
-            -->
         <LinearLayout
             android:layout_marginTop="10dp"
             android:orientation="vertical"
@@ -55,7 +57,7 @@
             <com.github.florent37.materialtextfield.MaterialTextField
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:mtf_image="@android:drawable/ic_dialog_email">
+                app:mtf_image="@drawable/ic_mail_grey600_24dp">
 
                 <EditText
                     android:id="@+id/email"
@@ -162,3 +164,4 @@
         tools:targetApi="lollipop" />
 
 </RelativeLayout>
+</ScrollView>
