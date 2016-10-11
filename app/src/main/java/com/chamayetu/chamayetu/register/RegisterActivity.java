@@ -312,27 +312,15 @@ public class RegisterActivity extends AppCompatActivity{
         String password = signUpPassword.getText().toString();
         String password2 = retypePassword.getText().toString();
         if(password.isEmpty()){
-/*
-            signUpPassTxtInptLayout.setError(getString(R.string.err_msg_password));
-*/
             requestFocus(signUpPassword);
             return false;
         }else if(password.length() < 6) {
-/*
-            signUpPassTxtInptLayout.setError(getString(R.string.err_msg_password_short));
-*/
             requestFocus(signUpPassword);
-        }else if(password.equals(password2)){
-/*
-            signUpPassTxtInptLayout.setError(getString(R.string.err_msg_password_match));
-            retypePasswordTxtIn.setError(getString(R.string.err_msg_password_match));
-*/
+        }else if(!password.equals(password2)){
+            requestFocus(signUpPassword);
             requestFocus(retypePassword);
-        }else{
-/*
-            signUpPassTxtInptLayout.setErrorEnabled(false);
-*/
         }
+
         return true;
     }
 

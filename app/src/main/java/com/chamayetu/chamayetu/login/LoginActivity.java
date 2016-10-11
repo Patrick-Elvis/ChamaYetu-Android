@@ -77,6 +77,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         FacebookSdk.sdkInitialize(this);
+
         setContentView(R.layout.login_activity);
         ButterKnife.bind(this);
 
