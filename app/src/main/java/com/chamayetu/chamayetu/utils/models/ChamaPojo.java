@@ -3,11 +3,13 @@ package com.chamayetu.chamayetu.utils.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.chamayetu.chamayetu.mychama.DashboardView;
+
 /**
  * ChamaYetu
  * com.chamayetu.chamayetu.utils.models
  * Created by lusinabrian on 28/09/16.
- * Description: The Pojo class for the Chama Object to be displayed in {@link com.chamayetu.chamayetu.mychama.MyChamaView}
+ * Description: The Pojo class for the Chama Object to be displayed in {@link DashboardView}
  */
 public class ChamaPojo implements Parcelable {
     //brief statement amounts

@@ -25,7 +25,7 @@
     <string name="action_settings">Settings</string>
 
     <string name="facebook_app_id">150010222121636</string>
-    <string name="drawer_item_mychama">MyChama</string>
+    <string name="drawer_item_mychama">Dashboard</string>
     <string name="drawer_item_myaccount">MyAccount</string>
     <string name="drawer_item_settings">Settings</string>
     <string name="drawer_item_notification">Notifications</string>
@@ -252,6 +252,7 @@
     <string name="repeat_password">Repeat Password</string>
     <string name="next">NEXT</string>
     <string name="login_success">Login Success</string>
+    <string name="statement_title_header">Available funds</string>
 
     <string-array name="chama_roles_array">
         <item>Chairperson</item>

@@ -18,7 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import com.chamayetu.chamayetu.R;
 import com.chamayetu.chamayetu.login.LoginActivity;
-import com.chamayetu.chamayetu.mychama.MyChamaView;
+import com.chamayetu.chamayetu.mychama.DashboardView;
 import com.chamayetu.chamayetu.settings.SettingsActivity;
 import com.chamayetu.chamayetu.useraccount.UserAccountActivity;
 import com.chamayetu.chamayetu.utils.Contract;
@@ -138,7 +138,7 @@ public class MainActivity extends AppCompatActivity {
                         switch ((int) drawerItem.getIdentifier()){
                             case 1:
                                 //default screen, MyChama
-                                fragment = MyChamaView.newInstance();
+                                fragment = DashboardView.newInstance();
                                 title = "My Chama";
                                 Log.d(MAINACT_TAG,"FragmentView:"+title);
                                 break;
@@ -168,7 +168,7 @@ public class MainActivity extends AppCompatActivity {
                                         .start(this);
                                 break;
                             default:
-                                fragment = MyChamaView.newInstance();
+                                fragment = DashboardView.newInstance();
                                 title = ((Nameable) drawerItem).getName().getText();
                                 break;
                         }
@@ -187,8 +187,8 @@ public class MainActivity extends AppCompatActivity {
                 .withShowDrawerOnFirstLaunch(true)
                 .build();
 
-        //set the default screen to MyChamaView
-        Fragment fragment = MyChamaView.newInstance();
+        //set the default screen to DashboardView
+        Fragment fragment = DashboardView.newInstance();
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.container_body, fragment);

@@ -28,8 +28,8 @@ import butterknife.ButterKnife;
  * Description: View that will handle Chama Details and data for the user's chama
  */
 
-public class MyChamaView extends Fragment {
-    public static final String MYCHAMA_TAG = MyChamaView.class.getSimpleName();
+public class DashboardView extends Fragment {
+    public static final String MYCHAMA_TAG = DashboardView.class.getSimpleName();
 
     @BindView(R.id.mychamastatement_card) CardView statementCard;
     @BindView(R.id.mychamaagenda_card) CardView agendaCard;
@@ -49,18 +49,18 @@ public class MyChamaView extends Fragment {
 
     private DatabaseReference mDatabase;
 
-    public MyChamaView() {}
+    public DashboardView() {}
 
     public static Fragment newInstance(){
-        MyChamaView myChamaView = new MyChamaView();
-        myChamaView.setRetainInstance(true);
-        return myChamaView;
+        DashboardView dashboardView = new DashboardView();
+        dashboardView.setRetainInstance(true);
+        return dashboardView;
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.mychama_view, container, false);
+        View rootView = inflater.inflate(R.layout.dashboardview_layout, container, false);
         ButterKnife.bind(this, rootView);
 
         initFirebaseDatabase();
