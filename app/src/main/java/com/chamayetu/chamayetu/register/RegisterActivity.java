@@ -53,16 +53,18 @@ public class RegisterActivity extends AppCompatActivity{
     public static final String REGISTERACT_TAG = RegisterActivity.class.getSimpleName();
 
     /*UI views*/
-    @BindView(R.id.signup_button_id) Button signUpButton;
+    @BindView(R.id.signup_name_id) EditText signUpName;
     @BindView(R.id.signup_email_id) EditText signUpEmail;
+    @BindView(R.id.signup_phoneNo_id) EditText signUpPhoneNo;
+
     @BindView(R.id.signup_password_id) EditText signUpPassword;
     @BindView(R.id.signup_retypepassword_id) EditText retypePassword;
+    @BindView(R.id.signup_button_id) Button signUpButton;
+
     @BindView(R.id.cv_add) CardView cardViewAdd;
     @BindView(R.id.fab) FloatingActionButton floatingActionButton;
 
     @BindView(R.id.signup_chamaname_id) EditText signUpChamaNameView;
-    @BindView(R.id.signup_phoneNo_id) EditText signUpPhoneNo;
-    @BindView(R.id.signup_name_id) EditText signUpName;
 
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;

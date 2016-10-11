@@ -55,7 +55,7 @@
 
                         <EditText
                             android:textSize="13sp"
-                            android:hint="@string/useracct_email"
+                            android:hint="@string/confirm_name_str"
                             android:textColor="#f0f7f4"
                             android:id="@+id/signup_name_id"
                             android:layout_width="match_parent"
@@ -66,7 +66,6 @@
                             android:paddingBottom="2dp" />
 
                     </com.github.florent37.materialtextfield.MaterialTextField>
-
                 </LinearLayout>
 
                 <!--email-->
@@ -94,6 +93,32 @@
 
                     </com.github.florent37.materialtextfield.MaterialTextField>
 
+                </LinearLayout>
+
+                <!--phone number-->
+                <LinearLayout
+                    android:layout_marginTop="10dp"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp">
+                    <com.github.florent37.materialtextfield.MaterialTextField
+                        android:layout_width="300dp"
+                        android:layout_height="wrap_content"
+                        app:mtf_image="@android:drawable/ic_menu_call">
+
+                        <EditText
+                            android:textSize="13sp"
+                            android:hint="@string/signup_phoneNo_str"
+                            android:textColor="#f0f7f4"
+                            android:id="@+id/signup_phoneNo_id"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="phone"
+                            android:background="@drawable/selector_bg_edit_2"
+                            android:textCursorDrawable="@drawable/bg_input_cursor_2"
+                            android:paddingBottom="2dp" />
+
+                    </com.github.florent37.materialtextfield.MaterialTextField>
                 </LinearLayout>
 
                 <!--password-->
