@@ -64,7 +64,6 @@ public class RegisterActivity extends AppCompatActivity{
     @BindView(R.id.cv_add) CardView cardViewAdd;
     @BindView(R.id.fab) FloatingActionButton floatingActionButton;
 
-/*    @BindView(R.id.signup_chamaname_id) EditText signUpChamaNameView;*/
 
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
