@@ -1,5 +1,6 @@
 package com.chamayetu.chamayetu.login;
 
+import android.annotation.TargetApi;
 import android.app.ActivityOptions;
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -44,6 +45,7 @@ import butterknife.OnClick;
 import static com.chamayetu.chamayetu.utils.Contract.RC_SIGN_IN;
 
 import com.google.android.gms.auth.api.Auth;
+import com.sdsmdg.tastytoast.TastyToast;
 
 /**
  * A login screen that offers login via email/password.
@@ -107,11 +109,11 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         initSocialLogins();
     }
 
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @OnClick({R.id.email_sign_in_button, R.id.fab, R.id.google_signin_button})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.fab:
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                     getWindow().setExitTransition(null);
                     getWindow().setEnterTransition(null);
 
@@ -122,18 +124,15 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                     } else {
                         startActivity(new Intent(this, RegisterActivity.class));
                     }
-                }
                 break;
 
             case R.id.email_sign_in_button:
-                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
                     Explode explode = new Explode();
                     explode.setDuration(500);
                     getWindow().setExitTransition(explode);
                     getWindow().setEnterTransition(explode);
                     //verify credentials
                     attemptLogin();
-                }
                 break;
 
             /*Google login*/
@@ -296,8 +295,8 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                         Log.d(LOGINACT_TAG, "signInWithEmail:onComplete "+ task.isSuccessful());
                         if(!task.isSuccessful()){
                             Log.w(LOGINACT_TAG, "SignInWithEmail: ", task.getException());
-                            Toast.makeText(LoginActivity.this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
+                            TastyToast.makeText(LoginActivity.this, "Authentication failed.",
+                                    Toast.LENGTH_SHORT, TastyToast.ERROR);
                         }
                 });
             return true;
