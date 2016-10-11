@@ -64,7 +64,7 @@ public class RegisterActivity extends AppCompatActivity{
     @BindView(R.id.cv_add) CardView cardViewAdd;
     @BindView(R.id.fab) FloatingActionButton floatingActionButton;
 
-    @BindView(R.id.signup_chamaname_id) EditText signUpChamaNameView;
+/*    @BindView(R.id.signup_chamaname_id) EditText signUpChamaNameView;*/
 
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
@@ -187,7 +187,6 @@ public class RegisterActivity extends AppCompatActivity{
         String password = signUpPassword.getText().toString().trim();
         String email = signUpEmail.getText().toString().trim();
         String name = signUpName.getText().toString();
-        String chamaName = signUpChamaNameView.getText().toString();
         String phoneNumber = signUpPhoneNo.getText().toString();
 
         if(!validateEmail() && validatePassword()){
@@ -203,7 +202,7 @@ public class RegisterActivity extends AppCompatActivity{
                             Log.d(REGISTERACT_TAG, task.getException().toString());
                         } else {
                             //write new user to the node users in FirebaseDatabase
-                            writeNewUser(name, email, chamaName, "", Long.parseLong(phoneNumber));
+                            writeNewUser(name, email, "", "", Long.parseLong(phoneNumber));
                         }
                     });
         }
