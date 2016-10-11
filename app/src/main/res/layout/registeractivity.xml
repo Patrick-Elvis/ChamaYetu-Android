@@ -58,6 +58,8 @@
                     <com.github.florent37.materialtextfield.MaterialTextField
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        app:mtf_openKeyboardOnFocus="true"
+                        app:mtf_cardCollapsedHeight="4dp"
                         app:mtf_image="@drawable/ic_account_circle_black_36dp">
 
                         <EditText
@@ -88,7 +90,9 @@
                     <com.github.florent37.materialtextfield.MaterialTextField
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        app:mtf_image="@android:drawable/ic_dialog_email">
+                        app:mtf_openKeyboardOnFocus="true"
+                        app:mtf_cardCollapsedHeight="4dp"
+                        app:mtf_image="@drawable/ic_mail_grey600_24dp">
 
                         <EditText
                             android:textSize="13sp"
@@ -118,6 +122,8 @@
                     <com.github.florent37.materialtextfield.MaterialTextField
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        app:mtf_openKeyboardOnFocus="true"
+                        app:mtf_cardCollapsedHeight="4dp"
                         app:mtf_image="@android:drawable/ic_menu_call">
 
                         <EditText
@@ -148,6 +154,8 @@
                     <com.github.florent37.materialtextfield.MaterialTextField
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        app:mtf_openKeyboardOnFocus="true"
+                        app:mtf_cardCollapsedHeight="4dp"
                         app:mtf_image="@android:drawable/ic_dialog_email">
                         <EditText
                             android:textSize="13sp"
@@ -176,6 +184,8 @@
                     <com.github.florent37.materialtextfield.MaterialTextField
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        app:mtf_openKeyboardOnFocus="true"
+                        app:mtf_cardCollapsedHeight="4dp"
                         app:mtf_image="@android:drawable/ic_lock_idle_lock">
 
                         <EditText
