@@ -18,7 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import com.chamayetu.chamayetu.R;
 import com.chamayetu.chamayetu.login.LoginActivity;
-import com.chamayetu.chamayetu.mychama.DashboardView;
+import com.chamayetu.chamayetu.dasboard.DashboardView;
 import com.chamayetu.chamayetu.settings.SettingsActivity;
 import com.chamayetu.chamayetu.useraccount.UserAccountActivity;
 import com.chamayetu.chamayetu.utils.Contract;

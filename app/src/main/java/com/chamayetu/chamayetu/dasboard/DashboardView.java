@@ -1,4 +1,4 @@
-package com.chamayetu.chamayetu.mychama;
+package com.chamayetu.chamayetu.dasboard;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -147,8 +147,6 @@ public class DashboardView extends Fragment implements View.OnClickListener{
         }
 
     }
-
-
 
 
 }
