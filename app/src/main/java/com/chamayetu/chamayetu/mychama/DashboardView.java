@@ -29,7 +29,7 @@ import butterknife.ButterKnife;
  */
 
 public class DashboardView extends Fragment {
-    public static final String MYCHAMA_TAG = DashboardView.class.getSimpleName();
+    public static final String DASHBOARDVIEW_TAG = DashboardView.class.getSimpleName();
 
     @BindView(R.id.mychamastatement_card) CardView statementCard;
     @BindView(R.id.mychamaagenda_card) CardView agendaCard;
@@ -38,8 +38,9 @@ public class DashboardView extends Fragment {
     @BindView(R.id.mychamaexpected_amt_card) CardView expectedAmtCard;
 
     @BindView(R.id.tv_statement_bal_view) TextView chamaBalance;
-    @BindView(R.id.statement_from_field) TextView dateFrom;
-    @BindView(R.id.statement_to_field) TextView dateTo;
+
+    @BindView(R.id.tv_outgoing_field) TextView outgoingsField;
+    @BindView(R.id.tv_fundsReceived_label) TextView fundsRecievedField;
     @BindView(R.id.statement_amount_field) TextView statementAmt;
     @BindView(R.id.nxtmeeting_time_field) TextView nxtMeetingTime;
     @BindView(R.id.nxtmeeting_venue_field) TextView nxtMeetingVenue;
@@ -84,7 +85,7 @@ public class DashboardView extends Fragment {
                         chamaPojo.getMembers(),chamaPojo.getTotalAmount(),chamaPojo.getAmountExpected(),
                         chamaPojo.getName(),chamaPojo.getVenue(),chamaPojo.getMilestone());
 
-                Log.d(MYCHAMA_TAG+"ChamaNode: ", String.valueOf(chamaPojo.getNextMeetingTime()) + " " + chamaPojo.getVenue() + " " + chamaPojo.getMilestone() + " " +chamaPojo.getMembers() );
+                Log.d(DASHBOARDVIEW_TAG +"ChamaNode: ", String.valueOf(chamaPojo.getNextMeetingTime()) + " " + chamaPojo.getVenue() + " " + chamaPojo.getMilestone() + " " +chamaPojo.getMembers() );
 
                 nxtMeetingTime.setText(chamaPojo.getNextMeetingTime());
                 nxtMeetingVenue.setText(chamaPojo.getVenue());
@@ -111,12 +112,12 @@ public class DashboardView extends Fragment {
                                 statementPojo.getDateTo(), statementPojo.getTitle(),
                                 statementPojo.getTotalAmount());
 
-                        Log.d(MYCHAMA_TAG+"Statement: ", statementPojo.getDateFrom()+ " "+
+                        Log.d(DASHBOARDVIEW_TAG +"Statement: ", statementPojo.getDateFrom()+ " "+
                                 statementPojo.getDateTo()+ " "+ statementPojo.getTitle()+ " "+
                                 statementPojo.getTotalAmount());
 
-                        dateFrom.setText(statementPojo.getDateFrom());
-                        dateTo.setText(statementPojo.getDateTo());
+                        outgoingsField.setText(statementPojo.getDateFrom());
+                        fundsRecievedField.setText(statementPojo.getDateTo());
                         statementAmt.setText(String.valueOf("Ksh. " + statementPojo.getTotalAmount()));
                     }
 

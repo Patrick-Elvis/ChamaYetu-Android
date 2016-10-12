@@ -253,6 +253,11 @@
     <string name="next">NEXT</string>
     <string name="login_success">Login Success</string>
     <string name="statement_title_header">Available funds</string>
+    <string name="statement_bal_view_txt">Ksh. Balance</string>
+    <string name="tv_outgoing_label">Outgoings:</string>
+    <string name="tv_outgoing_field">outgoings KSH</string>
+    <string name="tv_fundsReceived_label">Funds received:</string>
+    <string name="tv_fundsReceived_field">funds KSH</string>
 
     <string-array name="chama_roles_array">
         <item>Chairperson</item>
