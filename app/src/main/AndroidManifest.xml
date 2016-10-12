@@ -34,7 +34,6 @@
         <activity android:name=".register.RegisterActivity"/>
 
         <!--For the registration slides-->
-        <activity android:name=".register.RegisterSlideContainer"/>
 
         <activity
             android:name="com.facebook.FacebookActivity"
