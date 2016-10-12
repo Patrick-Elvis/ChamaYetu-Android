@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.chamayetu.chamayetu.R;
@@ -41,6 +42,8 @@ public class DashboardView extends Fragment {
 
     @BindView(R.id.tv_outgoing_field) TextView outgoingsField;
     @BindView(R.id.tv_fundsReceived_label) TextView fundsRecievedField;
+    @BindView(R.id.btn_full_statement) Button btnFullStatement;
+    @BindView(R.id.btn_mini_statment) Button btnMiniStatement;
     @BindView(R.id.statement_amount_field) TextView statementAmt;
     @BindView(R.id.nxtmeeting_time_field) TextView nxtMeetingTime;
     @BindView(R.id.nxtmeeting_venue_field) TextView nxtMeetingVenue;

@@ -116,31 +116,54 @@
                             android:text="@string/tv_fundsReceived_field"/>
                     </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingLeft="24dp"
-                android:paddingRight="24dp"
-                android:paddingBottom="24dp"
-                android:orientation="horizontal">
-                <TextView
-                    android:id="@+id/statement_amount_label"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="20sp"
-                    android:textColor="@color/black"
-                    android:text="@string/statement_amount_label"/>
-                <TextView
-                    android:id="@+id/statement_amount_field"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="20sp"
-                    android:layout_marginLeft="12dp"
-                    android:layout_marginStart="12dp"
-                    android:textColor="@color/black"
-                    android:text="@string/statement_amount_field"/>
+                    <!--divider-->
+                    <View
+                        android:layout_width="380dp"
+                        android:layout_height="1dp"
+                        android:layout_gravity="center"
+                        android:background="@color/dark_gray" />
+
+                    <!--Button containers to view full statement and mini statement-->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="24dp"
+                        android:paddingRight="24dp"
+                        android:paddingBottom="24dp"
+                        android:layout_marginTop="20dp"
+                        android:weightSum="2"
+                        style="?android:attr/buttonBarStyle"
+                        android:orientation="horizontal">
+
+                        <!--full statement button-->
+                        <Button
+                            android:id="@+id/btn_full_statement"
+                            android:background="@drawable/bt_shape"
+                            android:layout_width="150dp"
+                            android:layout_height="50dp"
+                            android:textSize="15sp"
+                            android:layout_weight="1"
+                            android:textColor="#d3d3d3"
+                            android:layout_marginEnd="20dp"
+                            android:layout_marginRight="20dp"
+                            style="?android:attr/buttonBarButtonStyle"
+                            android:text="@string/btn_full_statement"/>
+
+                        <Button
+                            android:id="@+id/btn_mini_statment"
+                            android:layout_width="150dp"
+                            android:background="@drawable/bt_shape"
+                            style="?android:attr/buttonBarButtonStyle"
+                            android:layout_weight="1"
+                            android:layout_height="50dp"
+                            android:textSize="15sp"
+                            android:textColor="#d3d3d3"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginLeft="20dp"
+                            android:text="@string/btn_mini_statement"/>
             </LinearLayout>
-        </LinearLayout>
+
+                </LinearLayout>
             </LinearLayout>
     </android.support.v7.widget.CardView>
 
