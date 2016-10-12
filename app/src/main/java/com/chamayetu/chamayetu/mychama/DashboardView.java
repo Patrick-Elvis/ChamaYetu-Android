@@ -21,6 +21,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * ChamaYetu
@@ -29,7 +30,7 @@ import butterknife.ButterKnife;
  * Description: View that will handle Chama Details and data for the user's chama
  */
 
-public class DashboardView extends Fragment {
+public class DashboardView extends Fragment implements View.OnClickListener{
     public static final String DASHBOARDVIEW_TAG = DashboardView.class.getSimpleName();
 
     @BindView(R.id.mychamastatement_card) CardView statementCard;
@@ -44,6 +45,7 @@ public class DashboardView extends Fragment {
     @BindView(R.id.tv_fundsReceived_label) TextView fundsRecievedField;
     @BindView(R.id.btn_full_statement) Button btnFullStatement;
     @BindView(R.id.btn_mini_statment) Button btnMiniStatement;
+
     @BindView(R.id.statement_amount_field) TextView statementAmt;
     @BindView(R.id.nxtmeeting_time_field) TextView nxtMeetingTime;
     @BindView(R.id.nxtmeeting_venue_field) TextView nxtMeetingVenue;
@@ -130,5 +132,23 @@ public class DashboardView extends Fragment {
                     }
                 });
     }
+
+    /**Register click events for the mini and full statements*/
+    @OnClick({R.id.btn_full_statement, R.id.btn_mini_statment})
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.btn_full_statement:
+                /*display the full statement*/
+                break;
+
+            case R.id.btn_mini_statment:
+                /*display a mini statement*/
+                break;
+        }
+
+    }
+
+
+
 
 }
