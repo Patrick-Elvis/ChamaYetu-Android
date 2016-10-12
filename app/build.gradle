@@ -101,7 +101,7 @@ dependencies {
 
     /*custom calender*/
     compile 'com.riontech:calendar:1.0'
-    
+
     facebookCompile 'com.facebook.android:facebook-android-sdk:[4,5)'
 
     compile 'com.jakewharton:butterknife:8.4.0'
