@@ -46,7 +46,6 @@ public class DashboardView extends Fragment implements View.OnClickListener{
     @BindView(R.id.btn_full_statement) Button btnFullStatement;
     @BindView(R.id.btn_mini_statment) Button btnMiniStatement;
 
-    @BindView(R.id.statement_amount_field) TextView statementAmt;
     @BindView(R.id.nxtmeeting_time_field) TextView nxtMeetingTime;
     @BindView(R.id.nxtmeeting_venue_field) TextView nxtMeetingVenue;
     @BindView(R.id.milestone_field) TextView milestioneView;
@@ -123,7 +122,7 @@ public class DashboardView extends Fragment implements View.OnClickListener{
 
                         outgoingsField.setText(statementPojo.getDateFrom());
                         fundsRecievedField.setText(statementPojo.getDateTo());
-                        statementAmt.setText(String.valueOf("Ksh. " + statementPojo.getTotalAmount()));
+                        chamaBalance.setText(String.valueOf("Ksh. " + statementPojo.getTotalAmount()));
                     }
 
                     @Override

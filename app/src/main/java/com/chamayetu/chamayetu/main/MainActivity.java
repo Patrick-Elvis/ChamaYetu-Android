@@ -119,6 +119,9 @@ public class MainActivity extends AppCompatActivity {
                         // My Account
                         new PrimaryDrawerItem().withName(R.string.drawer_item_myaccount).withIcon(FontAwesome.Icon.faw_user).withIdentifier(2),
 
+                        //Calender
+                        new PrimaryDrawerItem().withName(R.string.drawer_item_calender).withIcon(FontAwesome.Icon.faw_calendar).withIdentifier(21),
+
                         //Notifications
                         new PrimaryDrawerItem().withName(R.string.drawer_item_notification).withIcon(FontAwesome.Icon.faw_bell).withBadge("22").withBadgeStyle(new BadgeStyle(Color.RED, Color.RED)).withIdentifier(3),
 
@@ -137,6 +140,7 @@ public class MainActivity extends AppCompatActivity {
                         // perform click events for drawer items
                         switch ((int) drawerItem.getIdentifier()){
                             case 1:
+                                /**todo: replace with the user's chama*/
                                 //default screen, MyChama
                                 fragment = DashboardView.newInstance();
                                 title = "My Chama";
@@ -145,6 +149,10 @@ public class MainActivity extends AppCompatActivity {
                             case 2:
                                 //my account
                                 startActivity(new Intent(MainActivity.this, UserAccountActivity.class));
+                                break;
+                            /*calender*/
+                            case 21:
+                                //calender fragment
                                 break;
                             case 3:
                                 // notifications

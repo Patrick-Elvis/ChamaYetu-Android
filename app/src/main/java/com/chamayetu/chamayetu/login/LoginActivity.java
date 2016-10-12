@@ -82,7 +82,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         ButterKnife.bind(this);
 
         mPasswordView.setOnEditorActionListener((textView, id, keyEvent) -> {
-            if (id == R.id.login || id == EditorInfo.IME_NULL) {
+            if (id == R.id.email_sign_in_button || id == EditorInfo.IME_NULL) {
                 attemptLogin();
                 return true;
             }

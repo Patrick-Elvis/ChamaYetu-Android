@@ -260,6 +260,7 @@
     <string name="tv_fundsReceived_field">funds KSH</string>
     <string name="btn_full_statement">Full Statement</string>
     <string name="btn_mini_statement">Mini Statement</string>
+    <string name="drawer_item_calender">Calender</string>
 
     <string-array name="chama_roles_array">
         <item>Chairperson</item>
