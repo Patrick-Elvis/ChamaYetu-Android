@@ -11,16 +11,21 @@ import android.os.Parcelable;
  */
 
 public class StatementPojo implements Parcelable {
+    /*
+      "outgoings":5000,
+      "fundsRecieved":15000,*/
     private String dateFrom, dateTo, title;
-    private long totalAmount;
+    private long totalAmount, outgoings, fundsReceived;
 
     public StatementPojo(){}
 
-    public StatementPojo(String dateFrom, String dateTo, String title, long totalAmount) {
+    public StatementPojo(String dateFrom, String dateTo, String title, long totalAmount, long outgoings,long fundsReceived) {
         this.dateFrom = dateFrom;
         this.dateTo = dateTo;
         this.title = title;
         this.totalAmount = totalAmount;
+        this.outgoings = outgoings;
+        this.fundsReceived = fundsReceived;
     }
 
     public String getDateFrom() {
@@ -55,24 +60,21 @@ public class StatementPojo implements Parcelable {
         this.totalAmount = totalAmount;
     }
 
-    protected StatementPojo(Parcel source) {
-        this.dateFrom = source.readString();
-        this.dateTo = source.readString();
-        this.title =source.readString();
-        this.totalAmount = source.readLong();
+    public long getOutgoings() {
+        return outgoings;
     }
 
-    public static Parcelable.Creator<StatementPojo> CREATOR = new Parcelable.Creator<StatementPojo>() {
-        @Override
-        public StatementPojo createFromParcel(Parcel in) {
-            return new StatementPojo(in);
-        }
+    public void setOutgoings(long outgoings) {
+        this.outgoings = outgoings;
+    }
 
-        @Override
-        public StatementPojo[] newArray(int size) {
-            return new StatementPojo[size];
-        }
-    };
+    public long getFundsReceived() {
+        return fundsReceived;
+    }
+
+    public void setFundsReceived(long fundsReceived) {
+        this.fundsReceived = fundsReceived;
+    }
 
     @Override
     public int describeContents() {
@@ -85,5 +87,28 @@ public class StatementPojo implements Parcelable {
         dest.writeString(this.dateTo);
         dest.writeString(this.title);
         dest.writeLong(this.totalAmount);
+        dest.writeLong(this.outgoings);
+        dest.writeLong(this.fundsReceived);
     }
+
+    protected StatementPojo(Parcel in) {
+        this.dateFrom = in.readString();
+        this.dateTo = in.readString();
+        this.title = in.readString();
+        this.totalAmount = in.readLong();
+        this.outgoings = in.readLong();
+        this.fundsReceived = in.readLong();
+    }
+
+    public static final Creator<StatementPojo> CREATOR = new Creator<StatementPojo>() {
+        @Override
+        public StatementPojo createFromParcel(Parcel source) {
+            return new StatementPojo(source);
+        }
+
+        @Override
+        public StatementPojo[] newArray(int size) {
+            return new StatementPojo[size];
+        }
+    };
 }
