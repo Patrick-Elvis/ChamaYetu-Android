@@ -7,7 +7,7 @@ import android.os.Parcelable;
  * ChamaYetu
  * com.chamayetu.chamayetu.models
  * Created by lusinabrian on 13/10/16.
- * Description:
+ * Description: Model class for the Activity Node
  */
 
 public class ActivityModel implements Parcelable {

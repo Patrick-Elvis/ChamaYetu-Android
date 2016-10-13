@@ -1,6 +1,7 @@
 package com.chamayetu.chamayetu.dasboard;
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -12,7 +13,9 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.chamayetu.chamayetu.R;
+import com.chamayetu.chamayetu.adapters.ActivityRecyclerAdapter;
 import com.chamayetu.chamayetu.graph.StatementBarGraph;
+import com.chamayetu.chamayetu.models.ActivityModel;
 import com.chamayetu.chamayetu.utils.Contract;
 import com.chamayetu.chamayetu.models.ChamaPojo;
 import com.chamayetu.chamayetu.models.StatementPojo;
@@ -26,6 +29,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.sdsmdg.tastytoast.TastyToast;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -68,6 +74,8 @@ public class DashboardView extends Fragment implements View.OnClickListener, OnC
     @BindView(R.id.expextedamt_number) TextView expectedAmt;
 
     private DatabaseReference mDatabase;
+    private ActivityRecyclerAdapter activityRecyclerAdapter;
+    private List<ActivityModel> activityModelList;
 
     public DashboardView() {}
 
@@ -78,6 +86,13 @@ public class DashboardView extends Fragment implements View.OnClickListener, OnC
     }
 
     @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        activityModelList = new ArrayList<>();
+        activityRecyclerAdapter = new ActivityRecyclerAdapter(getActivity(),activityModelList,R.layout.chamaactivity_item_layout);
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.dashboardview_layout, container, false);
@@ -85,9 +100,43 @@ public class DashboardView extends Fragment implements View.OnClickListener, OnC
 
         StatementBarGraph statementBarGraph = new StatementBarGraph(mBarChart, getActivity());
         statementBarGraph.initGraph();
+
         // initialize recycler adapter
+        initActivityRecycler();
         initFirebaseDatabase();
         return rootView;
+    }
+
+    /**Initilizes the Activity Recycler to display activity for a particular chama*/
+    /*todo: change child node from boda to current user's chama*/
+    public void initActivityRecycler(){
+        // initialize the Database
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        mDatabase.child(Contract.ACTIVITY_NODE).child("boda").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                ActivityModel activityModel = dataSnapshot.getValue(ActivityModel.class);
+
+                String key = dataSnapshot.getChildren().iterator().next().getKey();
+                Log.d(DASHBOARDVIEW_TAG+" KEYs",key);
+
+                activityModel = new ActivityModel(
+                        activityModel.getActivityType(),
+                        activityModel.getPerson(),
+                        activityModel.getDate(),
+                        activityModel.getAmount());
+
+                activityModelList = new ArrayList<>();
+                activityModelList.add(activityModel);
+                activityRecyclerAdapter = new ActivityRecyclerAdapter(getActivity(),activityModelList,R.layout.chamaactivity_item_layout);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.e(DASHBOARDVIEW_TAG+"DBError", String.valueOf(databaseError));
+                TastyToast.makeText(getActivity(), "Operation cancelled",TastyToast.LENGTH_SHORT, TastyToast.ERROR);
+            }
+        });
     }
 
     /**Initialize Firebase Database*/
