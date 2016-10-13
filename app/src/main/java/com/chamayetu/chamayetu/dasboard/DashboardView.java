@@ -116,13 +116,16 @@ public class DashboardView extends Fragment implements View.OnClickListener, OnC
     public void initActivityRecycler(){
         activityModelList = new ArrayList<>();
         mDatabase = FirebaseDatabase.getInstance().getReference();
-        //SharedPreferences sharedPreferences =
+        SharedPreferences mNotification = getActivity().getSharedPreferences(Contract.NOTIFICATION_SP_FILE,0);
+        SharedPreferences.Editor editor = mNotification.edit();
         mDatabase.child(Contract.ACTIVITY_NODE).child("boda").addValueEventListener(
                 new ValueEventListener() {
                 int notificationCounter = 0;
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     notificationCounter += 1;
+                    editor.putInt(Contract.NOTIFICATION_SP_KEY, notificationCounter);
+                    editor.apply();
                     for(DataSnapshot children: dataSnapshot.getChildren()){
                         ActivityModel activityModel1 = children.getValue(ActivityModel.class);
                         activityModel1 = new ActivityModel(

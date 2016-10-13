@@ -10,11 +10,15 @@ import java.util.List;
  * com.chamayetu.chamayetu.utils
  * Created by lusinabrian on 26/09/16.
  * Description: Constants class for the application
+ * _SP_ files denote SharedPreferences
  */
 
 public class Contract {
     public static final String TWITTER_KEY = BuildConfig.TWITTER_CONSUMER_KEY;
     public static final String TWITTER_CONSUMER_SECRET = BuildConfig.TWITTER_CONSUMER_KEY;
+    public static final String NOTIFICATION_SP_FILE = "Notifications";
+    public static final String NOTIFICATION_SP_KEY="NotificationCount";
+
     public static final int RC_SIGN_IN = 9001;
     public static final String ANONYMOUS = "anonymous";
 

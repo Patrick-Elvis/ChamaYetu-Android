@@ -1,6 +1,7 @@
 package com.chamayetu.chamayetu.main;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
@@ -55,10 +56,10 @@ public class MainActivity extends AppCompatActivity {
     private Uri mPhotoUrl;
     private String mEmail;
     private FirebaseRemoteConfig mFirebaseRemoteConfig;
-
     private Drawer drawer = null;
     private AccountHeader headerResult = null;
     private CrossfadeDrawerLayout crossfadeDrawerLayout = null;
+    private SharedPreferences mNotifications;
 
     // Define UI elements
     @BindView(R.id.toolbar) Toolbar toolbar;
@@ -90,6 +91,9 @@ public class MainActivity extends AppCompatActivity {
             mEmail = mFirebaseUser.getEmail();
             mPhotoUrl = mFirebaseUser.getPhotoUrl();
         }
+        mNotifications = getSharedPreferences(Contract.NOTIFICATION_SP_FILE,0);
+        int badgeCount = mNotifications.getInt(Contract.NOTIFICATION_SP_KEY, 0);
+
         /*user profile*/
         final IProfile user_profile = new ProfileDrawerItem().withName(mUsername).withEmail(mEmail).withIcon(mPhotoUrl);
         Log.d(MAINACT_TAG,"Username: "+ mUsername + " Email: " + mEmail + " Photo Url: " + mPhotoUrl);
@@ -123,7 +127,7 @@ public class MainActivity extends AppCompatActivity {
                         new PrimaryDrawerItem().withName(R.string.drawer_item_calender).withIcon(FontAwesome.Icon.faw_calendar).withIdentifier(21),
 
                         //Notifications
-                        new PrimaryDrawerItem().withName(R.string.drawer_item_notification).withIcon(FontAwesome.Icon.faw_bell).withBadge("22").withBadgeStyle(new BadgeStyle(Color.RED, Color.RED)).withIdentifier(3),
+                        new PrimaryDrawerItem().withName(R.string.drawer_item_notification).withIcon(FontAwesome.Icon.faw_bell).withBadge(badgeCount).withBadgeStyle(new BadgeStyle(Color.RED, Color.RED)).withIdentifier(3),
 
                         //settings
                         new PrimaryDrawerItem().withName(R.string.drawer_item_settings).withIcon(FontAwesome.Icon.faw_cogs).withIdentifier(4),
