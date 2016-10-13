@@ -62,7 +62,7 @@ public class DashboardView extends Fragment implements View.OnClickListener, OnC
     @BindView(R.id.tv_chama_memmbers_id) TextView chamaMembersNo;
 
     @BindView(R.id.tv_outgoing_field) TextView outgoingsField;
-    @BindView(R.id.tv_fundsReceived_label) TextView fundsRecievedField;
+    @BindView(R.id.tv_fundsReceived_field) TextView fundsRecievedField;
     @BindView(R.id.btn_full_statement) Button btnFullStatement;
     @BindView(R.id.btn_mini_statment) Button btnMiniStatement;
 
@@ -128,6 +128,7 @@ public class DashboardView extends Fragment implements View.OnClickListener, OnC
 
                 activityModelList = new ArrayList<>();
                 activityModelList.add(activityModel);
+                Log.d(DASHBOARDVIEW_TAG+"Activity",activityModelList.toString());
                 activityRecyclerAdapter = new ActivityRecyclerAdapter(getActivity(),activityModelList,R.layout.chamaactivity_item_layout);
                 mRecyclerView.setAdapter(activityRecyclerAdapter);
             }
@@ -156,20 +157,20 @@ public class DashboardView extends Fragment implements View.OnClickListener, OnC
                         chamaPojo.getMembers(),chamaPojo.getTotalAmount(),chamaPojo.getAmountExpected(),
                         chamaPojo.getName(),chamaPojo.getVenue(),chamaPojo.getMilestone());
 
-                Log.d(DASHBOARDVIEW_TAG +"ChamaNode: ", String.valueOf(chamaPojo.getNextMeetingTime()) + " " + chamaPojo.getVenue() + " " + chamaPojo.getMilestone() + " " +chamaPojo.getMembers() );
+                Log.d(DASHBOARDVIEW_TAG +"ChamaNode: ", chamaPojo.toString());
 
                 nxtMeetingTime.setText(chamaPojo.getNextMeetingTime());
                 nxtMeetingVenue.setText(chamaPojo.getVenue());
                 milestioneView.setText(chamaPojo.getMilestone());
-                memberNumbers.setText(String.valueOf(chamaPojo.getMembers()));
                 milestoneDate.setText(chamaPojo.getMilestoneDate());
-                chamaMembersNo.setText(String.valueOf(chamaPojo.getMembers()));
+                chamaMembersNo.setText(String.valueOf(chamaPojo.getMembers()) + " members");
                 expectedAmt.setText(String.valueOf(chamaPojo.getAmountExpected()));
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-
+                Log.e(DASHBOARDVIEW_TAG+"DBError", String.valueOf(databaseError));
+                TastyToast.makeText(getActivity(), "Operation cancelled",TastyToast.LENGTH_SHORT, TastyToast.ERROR);
             }
         });
 

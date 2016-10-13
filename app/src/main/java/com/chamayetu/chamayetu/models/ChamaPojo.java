@@ -31,6 +31,21 @@ public class ChamaPojo implements Parcelable {
         this.milestone = milestone;
     }
 
+    @Override
+    public String toString() {
+        return "ChamaPojo{" +
+                "totalAmount=" + totalAmount +
+                ", amountExpected=" + amountExpected +
+                ", members=" + members +
+                ", name='" + name + '\'' +
+                ", venue='" + venue + '\'' +
+                ", milestone='" + milestone + '\'' +
+                ", dateCreated='" + dateCreated + '\'' +
+                ", milestoneDate='" + milestoneDate + '\'' +
+                ", nextMeetingTime='" + nextMeetingTime + '\'' +
+                '}';
+    }
+
     public String getDateCreated() {
         return dateCreated;
     }
