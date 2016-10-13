@@ -1,11 +1,11 @@
-package com.chamayetu.chamayetu.utils.models;
+package com.chamayetu.chamayetu.models;
 
 import android.os.Parcel;
 import android.os.Parcelable;
 
 /**
  * ChamaYetu
- * com.chamayetu.chamayetu.utils.models
+ * com.chamayetu.chamayetu.models
  * Created by lusinabrian on 29/09/16.
  * Description: Statement Pojo for the statements node
  */

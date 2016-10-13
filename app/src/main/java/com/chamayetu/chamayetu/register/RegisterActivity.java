@@ -22,7 +22,7 @@ import android.widget.Toast;
 import com.chamayetu.chamayetu.R;
 import com.chamayetu.chamayetu.main.MainActivity;
 import com.chamayetu.chamayetu.utils.Contract;
-import com.chamayetu.chamayetu.utils.models.UserPojo;
+import com.chamayetu.chamayetu.models.UserPojo;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;

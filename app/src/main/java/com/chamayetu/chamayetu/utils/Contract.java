@@ -22,4 +22,6 @@ public class Contract {
     public static final String STATEMENT_NODE ="statements";
     public static final String MEMBERS_NODE = "members";
     public static final String USERS_NODE = "users";
+    public static final String ACTIVITY_NODE = "activity";
+    public static final String PROJECTS_NODE ="projects";
 }

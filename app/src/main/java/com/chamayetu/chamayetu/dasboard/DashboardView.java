@@ -12,11 +12,10 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.chamayetu.chamayetu.R;
-import com.chamayetu.chamayetu.graph.GraphAdapter;
 import com.chamayetu.chamayetu.graph.StatementBarGraph;
 import com.chamayetu.chamayetu.utils.Contract;
-import com.chamayetu.chamayetu.utils.models.ChamaPojo;
-import com.chamayetu.chamayetu.utils.models.StatementPojo;
+import com.chamayetu.chamayetu.models.ChamaPojo;
+import com.chamayetu.chamayetu.models.StatementPojo;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.highlight.Highlight;
@@ -26,7 +25,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.robinhood.spark.SparkView;
 import com.sdsmdg.tastytoast.TastyToast;
 
 import butterknife.BindView;
@@ -87,7 +85,7 @@ public class DashboardView extends Fragment implements View.OnClickListener, OnC
 
         StatementBarGraph statementBarGraph = new StatementBarGraph(mBarChart, getActivity());
         statementBarGraph.initGraph();
-
+        // initialize recycler adapter
         initFirebaseDatabase();
         return rootView;
     }
