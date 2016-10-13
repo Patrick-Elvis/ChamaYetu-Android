@@ -21,7 +21,7 @@ public class MyAxisValueFormatter implements AxisValueFormatter {
 
     @Override
     public String getFormattedValue(float value, AxisBase axis) {
-        return mFormat.format(value) + " $";
+        return mFormat.format(value) + " KSH";
     }
 
     @Override

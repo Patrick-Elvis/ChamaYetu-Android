@@ -261,6 +261,8 @@
     <string name="btn_full_statement">Full Statement</string>
     <string name="btn_mini_statement">Mini Statement</string>
     <string name="drawer_item_calender">Calender</string>
+    <string name="statement_contribution_title">Contributions</string>
+    <string name="tv_chama_members_title">5 members</string>
 
     <string-array name="chama_roles_array">
         <item>Chairperson</item>

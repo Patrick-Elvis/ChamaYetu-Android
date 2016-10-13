@@ -48,7 +48,6 @@ public class StatementBarGraph implements OnChartValueSelectedListener{
         mBarChart.setDrawBarShadow(false);
         mBarChart.setDrawValueAboveBar(true);
 
-
         // if more than 60 entries are displayed in the chart, no values will be
         // drawn
         mBarChart.setMaxVisibleValueCount(60);
@@ -57,6 +56,9 @@ public class StatementBarGraph implements OnChartValueSelectedListener{
         mBarChart.setPinchZoom(false);
 
         mBarChart.setDrawGridBackground(false);
+
+        // add a nice and smooth animation
+        mBarChart.animateXY(3000, 3000);
         // mBarChart.setDrawYLabels(false);
         AxisValueFormatter xAxisFormatter = new DayAxisValueFormatter(mBarChart);
         AxisValueFormatter custom = new MyAxisValueFormatter();

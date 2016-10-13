@@ -52,6 +52,7 @@ public class DashboardView extends Fragment implements View.OnClickListener, OnC
     @BindView(R.id.statement_barchart) BarChart mBarChart;
     
     @BindView(R.id.tv_statement_bal_view) TextView chamaBalance;
+    @BindView(R.id.tv_chama_memmbers_id) TextView chamaMembersNo;
 
     @BindView(R.id.tv_outgoing_field) TextView outgoingsField;
     @BindView(R.id.tv_fundsReceived_label) TextView fundsRecievedField;
