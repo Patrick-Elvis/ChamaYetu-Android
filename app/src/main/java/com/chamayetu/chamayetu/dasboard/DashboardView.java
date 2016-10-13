@@ -111,6 +111,7 @@ public class DashboardView extends Fragment implements View.OnClickListener, OnC
     /*todo: change child node from boda to current user's chama*/
     public void initActivityRecycler(){
         // initialize the Database
+        activityModelList = new ArrayList<>();
         mDatabase = FirebaseDatabase.getInstance().getReference();
         mDatabase.child(Contract.ACTIVITY_NODE).child("boda").addValueEventListener(
                 new ValueEventListener() {
@@ -125,8 +126,6 @@ public class DashboardView extends Fragment implements View.OnClickListener, OnC
                                 activityModel1.getPerson(),
                                 activityModel1.getDate(),
                                 activityModel1.getAmount());
-
-                        activityModelList = new ArrayList<>();
                         activityModelList.add(activityModel1);
                     }
 
