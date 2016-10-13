@@ -48,10 +48,6 @@ public class DashboardView extends Fragment implements View.OnClickListener, OnC
     public static final String DASHBOARDVIEW_TAG = DashboardView.class.getSimpleName();
 
     @BindView(R.id.mychamastatement_card) CardView statementCard;
-    @BindView(R.id.mychamaagenda_card) CardView agendaCard;
-    @BindView(R.id.mychamamembers_card) CardView membersCard;
-    @BindView(R.id.mychamanxtmeeting_card) CardView nxtMeetingCard;
-    @BindView(R.id.mychamaexpected_amt_card) CardView expectedAmtCard;
     @BindView(R.id.mychama_graph_view_card) CardView graphCard;
     @BindView(R.id.chamaactivity_card) CardView activityCard;
 
@@ -66,12 +62,6 @@ public class DashboardView extends Fragment implements View.OnClickListener, OnC
     @BindView(R.id.btn_full_statement) Button btnFullStatement;
     @BindView(R.id.btn_mini_statment) Button btnMiniStatement;
 
-    @BindView(R.id.nxtmeeting_time_field) TextView nxtMeetingTime;
-    @BindView(R.id.nxtmeeting_venue_field) TextView nxtMeetingVenue;
-    @BindView(R.id.milestone_field) TextView milestioneView;
-    @BindView(R.id.milestone_date_field)TextView milestoneDate;
-    @BindView(R.id.members_number) TextView memberNumbers;
-    @BindView(R.id.expextedamt_number) TextView expectedAmt;
 
     private DatabaseReference mDatabase;
     private ActivityRecyclerAdapter activityRecyclerAdapter;
@@ -153,35 +143,6 @@ public class DashboardView extends Fragment implements View.OnClickListener, OnC
     /**Initialize Firebase Database*/
     private void initFirebaseDatabase() {
         mDatabase = FirebaseDatabase.getInstance().getReference();
-
-        /*Get boda node*/
-        /*TODO: get node of client's chama*/
-        mDatabase.child(Contract.CHAMA_NODE).child("boda")
-                .addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                ChamaPojo chamaPojo = dataSnapshot.getValue(ChamaPojo.class);
-                chamaPojo = new ChamaPojo(chamaPojo.getDateCreated(),
-                        chamaPojo.getNextMeetingTime(), chamaPojo.getMilestoneDate(),
-                        chamaPojo.getMembers(),chamaPojo.getTotalAmount(),chamaPojo.getAmountExpected(),
-                        chamaPojo.getName(),chamaPojo.getVenue(),chamaPojo.getMilestone());
-
-                Log.d(DASHBOARDVIEW_TAG +"ChamaNode: ", chamaPojo.toString());
-
-                nxtMeetingTime.setText(chamaPojo.getNextMeetingTime());
-                nxtMeetingVenue.setText(chamaPojo.getVenue());
-                milestioneView.setText(chamaPojo.getMilestone());
-                milestoneDate.setText(chamaPojo.getMilestoneDate());
-                chamaMembersNo.setText(String.valueOf(chamaPojo.getMembers()) + " members");
-                expectedAmt.setText(String.valueOf(chamaPojo.getAmountExpected()));
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                Log.e(DASHBOARDVIEW_TAG+"DBError", String.valueOf(databaseError));
-                TastyToast.makeText(getActivity(), "Operation cancelled",TastyToast.LENGTH_SHORT, TastyToast.ERROR);
-            }
-        });
 
         /*Get statement node of boda node*/
         /*TODO: get node of client's statement*/

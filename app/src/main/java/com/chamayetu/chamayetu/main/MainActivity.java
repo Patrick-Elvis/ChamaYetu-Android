@@ -127,7 +127,7 @@ public class MainActivity extends AppCompatActivity {
                         new PrimaryDrawerItem().withName(R.string.drawer_item_calender).withIcon(FontAwesome.Icon.faw_calendar).withIdentifier(21),
 
                         //Notifications
-                        new PrimaryDrawerItem().withName(R.string.drawer_item_notification).withIcon(FontAwesome.Icon.faw_bell).withBadge(badgeCount).withBadgeStyle(new BadgeStyle(Color.RED, Color.RED)).withIdentifier(3),
+                        new PrimaryDrawerItem().withName(R.string.drawer_item_notification).withIcon(FontAwesome.Icon.faw_bell).withBadge(String.valueOf(badgeCount)).withBadgeStyle(new BadgeStyle(Color.RED, Color.RED)).withIdentifier(3),
 
                         //settings
                         new PrimaryDrawerItem().withName(R.string.drawer_item_settings).withIcon(FontAwesome.Icon.faw_cogs).withIdentifier(4),
