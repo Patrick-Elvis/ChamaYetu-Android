@@ -129,6 +129,7 @@ public class DashboardView extends Fragment implements View.OnClickListener, OnC
                 activityModelList = new ArrayList<>();
                 activityModelList.add(activityModel);
                 activityRecyclerAdapter = new ActivityRecyclerAdapter(getActivity(),activityModelList,R.layout.chamaactivity_item_layout);
+                mRecyclerView.setAdapter(activityRecyclerAdapter);
             }
 
             @Override
@@ -162,6 +163,7 @@ public class DashboardView extends Fragment implements View.OnClickListener, OnC
                 milestioneView.setText(chamaPojo.getMilestone());
                 memberNumbers.setText(String.valueOf(chamaPojo.getMembers()));
                 milestoneDate.setText(chamaPojo.getMilestoneDate());
+                chamaMembersNo.setText(String.valueOf(chamaPojo.getMembers()));
                 expectedAmt.setText(String.valueOf(chamaPojo.getAmountExpected()));
             }
 
