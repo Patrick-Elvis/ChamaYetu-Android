@@ -1,15 +1,25 @@
 package com.chamayetu.chamayetu.graph;
 
 import android.content.Context;
+import android.graphics.RectF;
+import android.util.Log;
 
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.highlight.Highlight;
+import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.github.mikephil.charting.formatter.AxisValueFormatter;
+import com.github.mikephil.charting.utils.ColorTemplate;
+import com.github.mikephil.charting.utils.MPPointF;
+
+import java.util.ArrayList;
 
 
 /**
@@ -20,6 +30,7 @@ import com.github.mikephil.charting.formatter.AxisValueFormatter;
  */
 
 public class StatementBarGraph implements OnChartValueSelectedListener{
+    private static final String STATEMENTBARGRAPH = StatementBarGraph.class.getSimpleName();
     private BarChart mBarChart;
     private Context context;
 
@@ -54,19 +65,7 @@ public class StatementBarGraph implements OnChartValueSelectedListener{
         initYAxis(custom);
         createLegend();
 
-        XYMarkerView mv = new XYMarkerView(this, xAxisFormatter);
-        mv.setChartView(mChart); // For bounds control
-        mChart.setMarker(mv); // Set the marker to the chart
-
         setData(12, 50);
-
-        // setting data
-        mSeekBarY.setProgress(50);
-        mSeekBarX.setProgress(12);
-
-        mSeekBarY.setOnSeekBarChangeListener(this);
-        mSeekBarX.setOnSeekBarChangeListener(this);
-
     }
 
     /**Initialize the Legend and create it*/
@@ -112,9 +111,62 @@ public class StatementBarGraph implements OnChartValueSelectedListener{
     }
 
 
+    /**Used to set data*/
+    private void setData(int count, float range) {
+
+        float start = 0f;
+
+        ArrayList<BarEntry> yVals1 = new ArrayList<BarEntry>();
+
+        for (int i = (int) start; i < start + count + 1; i++) {
+            float mult = (range + 1);
+            float val = (float) (Math.random() * mult);
+            yVals1.add(new BarEntry(i, val));
+        }
+
+        BarDataSet set1;
+
+        if (mBarChart.getData() != null &&
+                mBarChart.getData().getDataSetCount() > 0) {
+            set1 = (BarDataSet) mBarChart.getData().getDataSetByIndex(0);
+            set1.setValues(yVals1);
+            mBarChart.getData().notifyDataChanged();
+            mBarChart.notifyDataSetChanged();
+        } else {
+            set1 = new BarDataSet(yVals1, "The year 2017");
+            set1.setColors(ColorTemplate.MATERIAL_COLORS);
+
+            ArrayList<IBarDataSet> dataSets = new ArrayList<IBarDataSet>();
+            dataSets.add(set1);
+
+            BarData data = new BarData(dataSets);
+            data.setValueTextSize(10f);
+            data.setBarWidth(0.9f);
+
+            mBarChart.setData(data);
+        }
+    }
+
+    protected RectF mOnValueSelectedRectF = new RectF();
 
     @Override
     public void onValueSelected(Entry e, Highlight h) {
+
+        if (e == null)
+            return;
+
+        RectF bounds = mOnValueSelectedRectF;
+        mBarChart.getBarBounds((BarEntry) e, bounds);
+        MPPointF position = mBarChart.getPosition(e, YAxis.AxisDependency.LEFT);
+
+        Log.i(STATEMENTBARGRAPH+"bounds", bounds.toString());
+        Log.i(STATEMENTBARGRAPH+"position", position.toString());
+
+        Log.i(STATEMENTBARGRAPH+"x-index",
+                "low: " + mBarChart.getLowestVisibleX() + ", high: "
+                        + mBarChart.getHighestVisibleX());
+
+        MPPointF.recycleInstance(position);
 
     }
 
