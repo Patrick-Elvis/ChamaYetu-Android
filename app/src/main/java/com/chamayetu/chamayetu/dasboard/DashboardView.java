@@ -91,7 +91,7 @@ public class DashboardView extends Fragment implements View.OnClickListener{
             if (value == null) {
                 TastyToast.makeText(getActivity(),"Tap and hold the graph to scrub", TastyToast.LENGTH_SHORT,TastyToast.INFO);
             } else {
-                TastyToast.makeText(getActivity(),"Scrubbing value: %1$s", TastyToast.LENGTH_SHORT,TastyToast.INFO);
+                TastyToast.makeText(getActivity(),String.format("Scrubbing value: %1$s",value), TastyToast.LENGTH_SHORT,TastyToast.INFO);
             }
         });
         ;
