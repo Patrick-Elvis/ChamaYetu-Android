@@ -29,14 +29,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.sdsmdg.tastytoast.TastyToast;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
 /**
  * ChamaYetu
  * com.chamayetu.chamayetu.mychama
@@ -76,6 +74,7 @@ public class DashboardView extends Fragment implements View.OnClickListener, OnC
     private DatabaseReference mDatabase;
     private ActivityRecyclerAdapter activityRecyclerAdapter;
     private List<ActivityModel> activityModelList;
+    private FirebaseRecyclerAdapter<ActivityModel, ActivityRecyclerAdapter.ViewHolder> firebaseRecyclerAdapter;
 
     public DashboardView() {}
 
@@ -113,11 +112,13 @@ public class DashboardView extends Fragment implements View.OnClickListener, OnC
         // initialize the Database
         mDatabase = FirebaseDatabase.getInstance().getReference();
         mDatabase.child(Contract.ACTIVITY_NODE).child("boda").addValueEventListener(new ValueEventListener() {
+
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 ActivityModel activityModel = dataSnapshot.getValue(ActivityModel.class);
 
                 String key = dataSnapshot.getChildren().iterator().next().getKey();
+                
                 Log.d(DASHBOARDVIEW_TAG+" KEYs",key);
 
                 activityModel = new ActivityModel(
@@ -128,7 +129,9 @@ public class DashboardView extends Fragment implements View.OnClickListener, OnC
 
                 activityModelList = new ArrayList<>();
                 activityModelList.add(activityModel);
+
                 Log.d(DASHBOARDVIEW_TAG+"Activity",activityModelList.toString());
+
                 activityRecyclerAdapter = new ActivityRecyclerAdapter(getActivity(),activityModelList,R.layout.chamaactivity_item_layout);
                 mRecyclerView.setAdapter(activityRecyclerAdapter);
             }
@@ -198,6 +201,22 @@ public class DashboardView extends Fragment implements View.OnClickListener, OnC
                         TastyToast.makeText(getActivity(), "Error encountered", TastyToast.LENGTH_SHORT, TastyToast.ERROR);
                     }
                 });
+
+        firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<ActivityModel, ActivityRecyclerAdapter.ViewHolder>(ActivityModel.class,
+                R.layout.chamaactivity_item_layout,
+                ActivityRecyclerAdapter.ViewHolder.class,
+                mDatabase.child(Contract.ACTIVITY_NODE).child("boda")) {
+
+            @Override
+            protected void populateViewHolder(ActivityRecyclerAdapter.ViewHolder viewHolder, ActivityModel model,
+                                              int position) {
+                viewHolder.personName.setText(model.getPerson());
+                viewHolder.activityName.setText(model.getActivityType());
+                viewHolder.activityDate.setText(model.getDate());
+                viewHolder.amount.setText("Ksh. " + String.valueOf(model.getAmount()));
+            }
+        };
+
     }
 
     /**Register click events for the mini and full statements*/

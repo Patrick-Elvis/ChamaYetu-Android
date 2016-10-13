@@ -59,7 +59,7 @@ public class ActivityRecyclerAdapter extends RecyclerView.Adapter<ActivityRecycl
             personName.setText(activityModel.getPerson());
             activityName.setText(activityModel.getActivityType());
             activityDate.setText(activityModel.getDate());
-            amount.setText(String.valueOf(activityModel.getAmount()));
+            amount.setText("Ksh. " + String.valueOf(activityModel.getAmount()));
         }
     }
 
