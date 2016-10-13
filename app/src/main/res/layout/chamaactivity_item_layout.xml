@@ -4,7 +4,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:padding="10dp"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -16,7 +16,7 @@
             android:id="@+id/chamaactivity_type"
             android:layout_width="wrap_content"
             android:layout_weight="1"
-            android:textSize="20sp"
+            android:textSize="18sp"
             android:textStyle="bold"
             android:textColor="@color/black"
             android:text="@string/chamaactivity_type"
@@ -29,7 +29,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="end"
-            android:textSize="20sp"
+            android:textSize="18sp"
             android:textStyle="bold"
             android:textColor="@color/black"
             android:text="@string/chamaactivity_amount"/>
@@ -39,7 +39,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:orientation="horizontal"
-        android:paddingTop="5dp"
         android:weightSum="2"
         android:layout_height="wrap_content">
         <TextView
@@ -57,7 +56,7 @@
             android:layout_width="wrap_content"
             android:layout_weight="1"
             android:gravity="end"
-            android:textSize="20sp"
+            android:textSize="15sp"
             android:textStyle="normal"
             android:textColor="@color/gray"
             android:text="@string/chamaactivity_date"
