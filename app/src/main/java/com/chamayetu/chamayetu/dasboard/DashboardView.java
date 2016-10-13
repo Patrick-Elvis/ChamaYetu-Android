@@ -19,6 +19,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.robinhood.spark.SparkView;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -39,6 +41,8 @@ public class DashboardView extends Fragment implements View.OnClickListener{
     @BindView(R.id.mychamanxtmeeting_card) CardView nxtMeetingCard;
     @BindView(R.id.mychamaexpected_amt_card) CardView expectedAmtCard;
     @BindView(R.id.mychama_graph_view_card) CardView graphCard;
+
+    @BindView(R.id.chama_graphView) SparkView graphView;
 
     @BindView(R.id.tv_statement_bal_view) TextView chamaBalance;
 
