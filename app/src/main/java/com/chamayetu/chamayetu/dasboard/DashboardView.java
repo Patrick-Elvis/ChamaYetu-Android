@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.chamayetu.chamayetu.R;
+import com.chamayetu.chamayetu.graph.GraphAdapter;
 import com.chamayetu.chamayetu.utils.Contract;
 import com.chamayetu.chamayetu.utils.models.ChamaPojo;
 import com.chamayetu.chamayetu.utils.models.StatementPojo;
@@ -20,6 +21,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.robinhood.spark.SparkView;
+import com.sdsmdg.tastytoast.TastyToast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -42,7 +44,7 @@ public class DashboardView extends Fragment implements View.OnClickListener{
     @BindView(R.id.mychamaexpected_amt_card) CardView expectedAmtCard;
     @BindView(R.id.mychama_graph_view_card) CardView graphCard;
 
-    @BindView(R.id.chama_graphView) SparkView graphView;
+    @BindView(R.id.chama_graphView) SparkView graphSparkView;
 
     @BindView(R.id.tv_statement_bal_view) TextView chamaBalance;
 
@@ -59,6 +61,8 @@ public class DashboardView extends Fragment implements View.OnClickListener{
     @BindView(R.id.expextedamt_number) TextView expectedAmt;
 
     private DatabaseReference mDatabase;
+    private GraphAdapter graphAdapter;
+
 
     public DashboardView() {}
 
@@ -73,11 +77,25 @@ public class DashboardView extends Fragment implements View.OnClickListener{
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.dashboardview_layout, container, false);
         ButterKnife.bind(this, rootView);
-
+        initGraphView();
         initFirebaseDatabase();
         return rootView;
     }
 
+    /**Initilize the Graph view*/
+    public void initGraphView(){
+        graphAdapter = new GraphAdapter();
+        graphAdapter.randomize();
+        graphSparkView.setAdapter(graphAdapter);
+        graphSparkView.setScrubListener(value -> {
+            if (value == null) {
+                TastyToast.makeText(getActivity(),"Tap and hold the graph to scrub", TastyToast.LENGTH_SHORT,TastyToast.INFO);
+            } else {
+                TastyToast.makeText(getActivity(),"Scrubbing value: %1$s", TastyToast.LENGTH_SHORT,TastyToast.INFO);
+            }
+        });
+        ;
+    }
     /**Initialize Firebase Database*/
     private void initFirebaseDatabase() {
         mDatabase = FirebaseDatabase.getInstance().getReference();
