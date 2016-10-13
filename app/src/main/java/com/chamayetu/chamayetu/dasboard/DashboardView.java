@@ -117,33 +117,18 @@ public class DashboardView extends Fragment implements View.OnClickListener, OnC
 
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
-                    //ActivityModel activityModel = dataSnapshot.getValue(ActivityModel.class);
                     for(DataSnapshot children: dataSnapshot.getChildren()){
                         Log.d(DASHBOARDVIEW_TAG+"Children", children.toString());
-                        for (DataSnapshot data: children.getChildren()){
-                            ActivityModel activityModel1 = data.getValue(ActivityModel.class);
+                        ActivityModel activityModel1 = children.getValue(ActivityModel.class);
+                        activityModel1 = new ActivityModel(
+                                activityModel1.getActivityType(),
+                                activityModel1.getPerson(),
+                                activityModel1.getDate(),
+                                activityModel1.getAmount());
 
-                            activityModel1 = new ActivityModel(
-                                    activityModel1.getActivityType(),
-                                    activityModel1.getPerson(),
-                                    activityModel1.getDate(),
-                                    activityModel1.getAmount());
-
-                            activityModelList = new ArrayList<>();
-                            activityModelList.add(activityModel1);
-                        }
+                        activityModelList = new ArrayList<>();
+                        activityModelList.add(activityModel1);
                     }
-
-                    /*
-                    activityModel = new ActivityModel(
-                            activityModel.getActivityType(),
-                            activityModel.getPerson(),
-                            activityModel.getDate(),
-                            activityModel.getAmount());
-
-                    activityModelList = new ArrayList<>();
-                    activityModelList.add(activityModel);
-                    */
 
                     Log.d(DASHBOARDVIEW_TAG+"Activity",activityModelList.toString());
 
