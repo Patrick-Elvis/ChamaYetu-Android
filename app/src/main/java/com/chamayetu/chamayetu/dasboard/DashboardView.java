@@ -1,5 +1,6 @@
 package com.chamayetu.chamayetu.dasboard;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -75,7 +76,6 @@ public class DashboardView extends Fragment implements View.OnClickListener, OnC
     private DatabaseReference mDatabase;
     private ActivityRecyclerAdapter activityRecyclerAdapter;
     private List<ActivityModel> activityModelList;
-    private FirebaseRecyclerAdapter<ActivityModel, ActivityRecyclerAdapter.ViewHolder> firebaseRecyclerAdapter;
 
     public DashboardView() {}
 
@@ -107,17 +107,22 @@ public class DashboardView extends Fragment implements View.OnClickListener, OnC
         return rootView;
     }
 
-    /**Initilizes the Activity Recycler to display activity for a particular chama*/
+    /**Initilizes the Activity Recycler to display activity for a particular chama
+     * The notificationCounter variable will be used to post badges in the drawer menu
+     * it will record any change on this node and update the user
+     * Initialize the arraylist that will store the information of activities
+     * initialize an instance of the Firebase database*/
     /*todo: change child node from boda to current user's chama*/
     public void initActivityRecycler(){
-        // initialize the Database
         activityModelList = new ArrayList<>();
         mDatabase = FirebaseDatabase.getInstance().getReference();
+        //SharedPreferences sharedPreferences =
         mDatabase.child(Contract.ACTIVITY_NODE).child("boda").addValueEventListener(
                 new ValueEventListener() {
-
+                int notificationCounter = 0;
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
+                    notificationCounter += 1;
                     for(DataSnapshot children: dataSnapshot.getChildren()){
                         ActivityModel activityModel1 = children.getValue(ActivityModel.class);
                         activityModel1 = new ActivityModel(
@@ -199,22 +204,6 @@ public class DashboardView extends Fragment implements View.OnClickListener, OnC
                         TastyToast.makeText(getActivity(), "Error encountered", TastyToast.LENGTH_SHORT, TastyToast.ERROR);
                     }
                 });
-
-        firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<ActivityModel, ActivityRecyclerAdapter.ViewHolder>(ActivityModel.class,
-                R.layout.chamaactivity_item_layout,
-                ActivityRecyclerAdapter.ViewHolder.class,
-                mDatabase.child(Contract.ACTIVITY_NODE).child("boda")) {
-
-            @Override
-            protected void populateViewHolder(ActivityRecyclerAdapter.ViewHolder viewHolder, ActivityModel model,
-                                              int position) {
-                viewHolder.personName.setText(model.getPerson());
-                viewHolder.activityName.setText(model.getActivityType());
-                viewHolder.activityDate.setText(model.getDate());
-                viewHolder.amount.setText("Ksh. " + String.valueOf(model.getAmount()));
-            }
-        };
-
     }
 
     /**Register click events for the mini and full statements*/
