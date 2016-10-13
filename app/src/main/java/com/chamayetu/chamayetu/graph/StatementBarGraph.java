@@ -6,12 +6,14 @@ import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
+import com.github.mikephil.charting.formatter.AxisValueFormatter;
+
 
 /**
  * ChamaYetu
  * com.chamayetu.chamayetu.graph
  * Created by lusinabrian on 13/10/16.
- * Description:
+ * Description: Deals with Bar graph display of the statement
  */
 
 public class StatementBarGraph implements OnChartValueSelectedListener{
@@ -41,6 +43,9 @@ public class StatementBarGraph implements OnChartValueSelectedListener{
 
         mBarChart.setDrawGridBackground(false);
         // mBarChart.setDrawYLabels(false);
+
+        AxisValueFormatter xAxisFormatter = new DayAxisValueFormatter(mChart);
+
     }
 
     @Override
