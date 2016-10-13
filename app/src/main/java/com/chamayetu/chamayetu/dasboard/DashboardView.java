@@ -119,7 +119,6 @@ public class DashboardView extends Fragment implements View.OnClickListener, OnC
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     for(DataSnapshot children: dataSnapshot.getChildren()){
-                        Log.d(DASHBOARDVIEW_TAG+"Children", children.toString());
                         ActivityModel activityModel1 = children.getValue(ActivityModel.class);
                         activityModel1 = new ActivityModel(
                                 activityModel1.getActivityType(),
@@ -128,8 +127,6 @@ public class DashboardView extends Fragment implements View.OnClickListener, OnC
                                 activityModel1.getAmount());
                         activityModelList.add(activityModel1);
                     }
-
-                    Log.d(DASHBOARDVIEW_TAG+"Activity",activityModelList.toString());
 
                     activityRecyclerAdapter = new ActivityRecyclerAdapter(getActivity(), activityModelList,
                             R.layout.chamaactivity_item_layout);
