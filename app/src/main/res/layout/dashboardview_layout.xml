@@ -167,6 +167,28 @@
             </LinearLayout>
     </android.support.v7.widget.CardView>
 
+        <!--Graph Card-->
+        <android.support.v7.widget.CardView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginRight="1dp"
+            android:layout_marginEnd="1dp"
+            android:layout_marginStart="1dp"
+            android:layout_marginLeft="1dp"
+            app:cardUseCompatPadding="true"
+            app:cardElevation="4dp"
+            android:padding="24dp"
+            app:cardCornerRadius="@dimen/cardview_default_radius"
+            android:id="@+id/mychama_graph_view_card">
+
+            <com.robinhood.spark.SparkView
+                android:id="@+id/sparkview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </android.support.v7.widget.CardView>
+
         <!--Next meeting card-->
         <android.support.v7.widget.CardView
             android:id="@+id/mychamanxtmeeting_card"

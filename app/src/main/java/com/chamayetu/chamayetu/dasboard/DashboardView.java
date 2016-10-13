@@ -38,6 +38,7 @@ public class DashboardView extends Fragment implements View.OnClickListener{
     @BindView(R.id.mychamamembers_card) CardView membersCard;
     @BindView(R.id.mychamanxtmeeting_card) CardView nxtMeetingCard;
     @BindView(R.id.mychamaexpected_amt_card) CardView expectedAmtCard;
+    @BindView(R.id.mychama_graph_view_card) CardView graphCard;
 
     @BindView(R.id.tv_statement_bal_view) TextView chamaBalance;
 
