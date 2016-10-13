@@ -130,20 +130,19 @@ public class DashboardView extends Fragment implements View.OnClickListener, OnC
                         StatementPojo statementPojo = dataSnapshot.getValue(StatementPojo.class);
                         statementPojo = new StatementPojo(statementPojo.getDateFrom(),
                                 statementPojo.getDateTo(), statementPojo.getTitle(),
-                                statementPojo.getTotalAmount());
+                                statementPojo.getTotalAmount(),statementPojo.getOutgoings(), statementPojo.getFundsReceived());
 
-                        Log.d(DASHBOARDVIEW_TAG +"Statement: ", statementPojo.getDateFrom()+ " "+
-                                statementPojo.getDateTo()+ " "+ statementPojo.getTitle()+ " "+
-                                statementPojo.getTotalAmount());
+                        Log.d(DASHBOARDVIEW_TAG, statementPojo.toString());
 
-                        outgoingsField.setText(statementPojo.getDateFrom());
-                        fundsRecievedField.setText(statementPojo.getDateTo());
+                        outgoingsField.setText(String.valueOf(statementPojo.getOutgoings()) + "KSH");
+                        fundsRecievedField.setText(String.valueOf(statementPojo.getFundsReceived()) + "KSH");
                         chamaBalance.setText(String.valueOf("Ksh. " + statementPojo.getTotalAmount()));
                     }
 
                     @Override
                     public void onCancelled(DatabaseError databaseError) {
-
+                        Log.e(DASHBOARDVIEW_TAG+"DBError", String.valueOf(databaseError));
+                        TastyToast.makeText(getActivity(), "Error encountered", TastyToast.LENGTH_SHORT, TastyToast.ERROR);
                     }
                 });
     }

@@ -111,4 +111,16 @@ public class StatementPojo implements Parcelable {
             return new StatementPojo[size];
         }
     };
+
+    @Override
+    public String toString() {
+        return "StatementPojo{" +
+                "dateFrom='" + dateFrom + '\'' +
+                ", dateTo='" + dateTo + '\'' +
+                ", title='" + title + '\'' +
+                ", totalAmount=" + totalAmount +
+                ", outgoings=" + outgoings +
+                ", fundsReceived=" + fundsReceived +
+                '}';
+    }
 }
