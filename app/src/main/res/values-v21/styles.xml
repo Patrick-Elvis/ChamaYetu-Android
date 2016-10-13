@@ -5,5 +5,23 @@
         <item name="windowNoTitle">true</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="spark_SparkViewStyle">@style/spark_SparkView</item>
+
+    </style>
+
+    <style name="MySparkViewStyle" parent="@style/spark_SparkView">
+        <item name="spark_lineColor">@color/graph_line_color</item>
+        <item name="spark_lineWidth">@dimen/graph_line_width</item>
+        <item name="spark_cornerRadius">@dimen/graph_corner_radius</item>
+        <item name="spark_fill">false</item>
+
+        <item name="spark_baseLineColor">@color/graph_base_line_color</item>
+        <item name="spark_baseLineWidth">@dimen/graph_base_line_width</item>
+
+        <item name="spark_scrubLineColor">@color/graph_scrub_line_color</item>
+        <item name="spark_scrubLineWidth">@dimen/graph_scrub_line_width</item>
+        <item name="spark_scrubEnabled">true</item>
+
+        <item name="spark_animateChanges">true</item>
     </style>
 </resources>
