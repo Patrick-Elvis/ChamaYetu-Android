@@ -265,6 +265,10 @@
     <string name="tv_chama_members_title">5 members</string>
     <string name="account_activity_title">Account Activity</string>
     <string name="account_period_title">Period</string>
+    <string name="chamaactivity_type">ActType</string>
+    <string name="chamaactivity_amount">Ksh. 1500</string>
+    <string name="chamaactivityperson_name">Person Name</string>
+    <string name="chamaactivity_date">Nov 12</string>
 
     <string-array name="chama_roles_array">
         <item>Chairperson</item>

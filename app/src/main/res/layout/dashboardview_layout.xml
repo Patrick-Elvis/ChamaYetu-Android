@@ -2,6 +2,7 @@
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/content_main"
     android:layout_height="wrap_content"
     android:layout_width="match_parent">
@@ -254,10 +255,27 @@
                 android:textSize="15sp"
                 android:textStyle="bold"
                 android:layout_weight="1"/>
-
         </LinearLayout>
-        <!--Display activity of the chama in recyclerview-->
 
+        <!--Display activity of the chama in recyclerview-->
+        <android.support.v7.widget.CardView
+            android:id="@+id/chamaactivity_card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardUseCompatPadding="true"
+            app:cardElevation="4dp"
+            android:padding="24dp"
+            app:cardCornerRadius="@dimen/cardview_default_radius"
+            android:layout_margin="8dp">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/chamaactivity_recycler"
+                android:layout_width="match_parent"
+                app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+                android:layout_height="wrap_content"
+                tools:listitem="@layout/chamaactivity_item_layout" />
+
+        </android.support.v7.widget.CardView>
         <!--Next meeting card-->
         <android.support.v7.widget.CardView
             android:id="@+id/mychamanxtmeeting_card"

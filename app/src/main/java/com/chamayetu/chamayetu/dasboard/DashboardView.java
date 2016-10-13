@@ -3,6 +3,7 @@ package com.chamayetu.chamayetu.dasboard;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -48,9 +49,11 @@ public class DashboardView extends Fragment implements View.OnClickListener, OnC
     @BindView(R.id.mychamanxtmeeting_card) CardView nxtMeetingCard;
     @BindView(R.id.mychamaexpected_amt_card) CardView expectedAmtCard;
     @BindView(R.id.mychama_graph_view_card) CardView graphCard;
+    @BindView(R.id.chamaactivity_card) CardView activityCard;
 
     @BindView(R.id.statement_barchart) BarChart mBarChart;
-    
+    @BindView(R.id.chamaactivity_recycler) RecyclerView mRecyclerView;
+
     @BindView(R.id.tv_statement_bal_view) TextView chamaBalance;
     @BindView(R.id.tv_chama_memmbers_id) TextView chamaMembersNo;
 
