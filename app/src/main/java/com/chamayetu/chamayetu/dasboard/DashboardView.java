@@ -30,6 +30,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.sdsmdg.tastytoast.TastyToast;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -111,37 +112,53 @@ public class DashboardView extends Fragment implements View.OnClickListener, OnC
     public void initActivityRecycler(){
         // initialize the Database
         mDatabase = FirebaseDatabase.getInstance().getReference();
-        mDatabase.child(Contract.ACTIVITY_NODE).child("boda").addValueEventListener(new ValueEventListener() {
+        mDatabase.child(Contract.ACTIVITY_NODE).child("boda").addValueEventListener(
+                new ValueEventListener() {
 
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                ActivityModel activityModel = dataSnapshot.getValue(ActivityModel.class);
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    //ActivityModel activityModel = dataSnapshot.getValue(ActivityModel.class);
+                    for(DataSnapshot children: dataSnapshot.getChildren()){
+                        Log.d(DASHBOARDVIEW_TAG+"Children", children.toString());
+                        for (DataSnapshot data: children.getChildren()){
+                            ActivityModel activityModel1 = data.getValue(ActivityModel.class);
 
-                String key = dataSnapshot.getChildren().iterator().next().getKey();
-                
-                Log.d(DASHBOARDVIEW_TAG+" KEYs",key);
+                            activityModel1 = new ActivityModel(
+                                    activityModel1.getActivityType(),
+                                    activityModel1.getPerson(),
+                                    activityModel1.getDate(),
+                                    activityModel1.getAmount());
 
-                activityModel = new ActivityModel(
-                        activityModel.getActivityType(),
-                        activityModel.getPerson(),
-                        activityModel.getDate(),
-                        activityModel.getAmount());
+                            activityModelList = new ArrayList<>();
+                            activityModelList.add(activityModel1);
+                        }
+                    }
 
-                activityModelList = new ArrayList<>();
-                activityModelList.add(activityModel);
+                    /*
+                    activityModel = new ActivityModel(
+                            activityModel.getActivityType(),
+                            activityModel.getPerson(),
+                            activityModel.getDate(),
+                            activityModel.getAmount());
 
-                Log.d(DASHBOARDVIEW_TAG+"Activity",activityModelList.toString());
+                    activityModelList = new ArrayList<>();
+                    activityModelList.add(activityModel);
+                    */
 
-                activityRecyclerAdapter = new ActivityRecyclerAdapter(getActivity(),activityModelList,R.layout.chamaactivity_item_layout);
-                mRecyclerView.setAdapter(activityRecyclerAdapter);
-            }
+                    Log.d(DASHBOARDVIEW_TAG+"Activity",activityModelList.toString());
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                Log.e(DASHBOARDVIEW_TAG+"DBError", String.valueOf(databaseError));
-                TastyToast.makeText(getActivity(), "Operation cancelled",TastyToast.LENGTH_SHORT, TastyToast.ERROR);
-            }
-        });
+                    activityRecyclerAdapter = new ActivityRecyclerAdapter(getActivity(), activityModelList,
+                            R.layout.chamaactivity_item_layout);
+
+                    mRecyclerView.setAdapter(activityRecyclerAdapter);
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    Log.e(DASHBOARDVIEW_TAG+"DBError", String.valueOf(databaseError));
+                    TastyToast.makeText(getActivity(), "Operation cancelled",TastyToast.LENGTH_SHORT, TastyToast.ERROR);
+                }
+            });
     }
 
     /**Initialize Firebase Database*/
