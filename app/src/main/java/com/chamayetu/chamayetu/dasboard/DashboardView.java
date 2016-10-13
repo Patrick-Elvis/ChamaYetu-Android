@@ -12,9 +12,14 @@ import android.widget.TextView;
 
 import com.chamayetu.chamayetu.R;
 import com.chamayetu.chamayetu.graph.GraphAdapter;
+import com.chamayetu.chamayetu.graph.StatementBarGraph;
 import com.chamayetu.chamayetu.utils.Contract;
 import com.chamayetu.chamayetu.utils.models.ChamaPojo;
 import com.chamayetu.chamayetu.utils.models.StatementPojo;
+import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.highlight.Highlight;
+import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -34,7 +39,7 @@ import butterknife.OnClick;
  * Description: View that will handle Chama Details and data for the user's chama
  */
 
-public class DashboardView extends Fragment implements View.OnClickListener{
+public class DashboardView extends Fragment implements View.OnClickListener, OnChartValueSelectedListener {
     public static final String DASHBOARDVIEW_TAG = DashboardView.class.getSimpleName();
 
     @BindView(R.id.mychamastatement_card) CardView statementCard;
@@ -44,8 +49,8 @@ public class DashboardView extends Fragment implements View.OnClickListener{
     @BindView(R.id.mychamaexpected_amt_card) CardView expectedAmtCard;
     @BindView(R.id.mychama_graph_view_card) CardView graphCard;
 
-    @BindView(R.id.chama_graphView) SparkView graphSparkView;
-
+    @BindView(R.id.statement_barchart) BarChart mBarChart;
+    
     @BindView(R.id.tv_statement_bal_view) TextView chamaBalance;
 
     @BindView(R.id.tv_outgoing_field) TextView outgoingsField;
@@ -61,8 +66,6 @@ public class DashboardView extends Fragment implements View.OnClickListener{
     @BindView(R.id.expextedamt_number) TextView expectedAmt;
 
     private DatabaseReference mDatabase;
-    private GraphAdapter graphAdapter;
-
 
     public DashboardView() {}
 
@@ -77,25 +80,14 @@ public class DashboardView extends Fragment implements View.OnClickListener{
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.dashboardview_layout, container, false);
         ButterKnife.bind(this, rootView);
-        initGraphView();
+
+        StatementBarGraph statementBarGraph = new StatementBarGraph(mBarChart, getActivity());
+        statementBarGraph.initGraph();
+
         initFirebaseDatabase();
         return rootView;
     }
 
-    /**Initilize the Graph view*/
-    public void initGraphView(){
-        graphAdapter = new GraphAdapter();
-        graphAdapter.randomize();
-        graphSparkView.setAdapter(graphAdapter);
-        graphSparkView.setScrubListener(value -> {
-            if (value == null) {
-                TastyToast.makeText(getActivity(),"Tap and hold the graph to scrub", TastyToast.LENGTH_SHORT,TastyToast.INFO);
-            } else {
-                TastyToast.makeText(getActivity(),String.format("Scrubbing value: %1$s",value), TastyToast.LENGTH_SHORT,TastyToast.INFO);
-            }
-        });
-        ;
-    }
     /**Initialize Firebase Database*/
     private void initFirebaseDatabase() {
         mDatabase = FirebaseDatabase.getInstance().getReference();
@@ -170,5 +162,13 @@ public class DashboardView extends Fragment implements View.OnClickListener{
 
     }
 
+    @Override
+    public void onValueSelected(Entry e, Highlight h) {
 
+    }
+
+    @Override
+    public void onNothingSelected() {
+
+    }
 }

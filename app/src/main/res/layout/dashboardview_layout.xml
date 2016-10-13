@@ -181,13 +181,11 @@
             app:cardCornerRadius="@dimen/cardview_default_radius"
             android:id="@+id/mychama_graph_view_card">
 
-            <com.robinhood.spark.SparkView
-                android:id="@+id/chama_graphView"
+            <!--include the graph here-->
+            <com.github.mikephil.charting.charts.BarChart
+                android:id="@+id/statement_barchart"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:spark_lineColor="@color/md_blue_grey_900"
-                app:spark_scrubEnabled="true"
-                app:spark_animateChanges="true"/>
+                android:layout_height="match_parent" />
 
         </android.support.v7.widget.CardView>
 
