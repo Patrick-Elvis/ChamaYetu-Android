@@ -277,6 +277,7 @@
     <string name="project_content">What is your project?</string>
     <string name="submit_btn_txt">SUBMIT</string>
     <string name="project_hint">Your Project</string>
+    <string name="date_picker">Pick a date</string>
 
     <string-array name="chama_roles_array">
         <item>Chairperson</item>

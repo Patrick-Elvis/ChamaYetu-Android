@@ -361,6 +361,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         switch (v.getId()){
+            /*todo: push projects to projects node of current user's chama*/
             case R.id.materialsheet_item_project:
                 //create dialog to suggest a project
                 new MaterialDialog.Builder(this)
@@ -373,10 +374,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         .positiveText(R.string.submit_btn_txt)
                         .input(R.string.project_hint, R.string.project_hint, false,
                                 (dialog, input) -> SingletonStash.showToast(this, input.toString() + "submitted")).show();
+            /*todo: push projects to projects node of current user's chama*/
                 break;
 
             case R.id.materialsheet_item_reminder:
                 /*setup a reminder for the group*/
+                new MaterialDialog.Builder(this)
+                        .title(R.string.date_picker)
+                        .customView(R.layout.dialog_datepicker, false)
+                        .positiveText(android.R.string.ok)
+                        .negativeText(android.R.string.cancel)
+//                .stackingBehavior(StackingBehavior.ALWAYS)
+                        .show();
                 break;
         }
         materialSheetFab.hideSheet();

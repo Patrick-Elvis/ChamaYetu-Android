@@ -46,6 +46,10 @@ android {
             minSdkVersion 9
         }
     }
+
+    dexOptions {
+        javaMaxHeapSize "4g"
+    }
 }
 
 repositories {
