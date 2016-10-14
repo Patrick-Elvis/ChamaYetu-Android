@@ -281,8 +281,8 @@
         </android.support.v7.widget.CardView>
 
         <!-- Your FAB implementation -->
-        <com.gordonwong.materialsheetfab.sample.Fab
-            android:id="@+id/fab"
+        <com.chamayetu.chamayetu.widgets.Fab
+            android:id="@+id/materialsheet_fab"
             style="@style/Widget.MaterialSheetFab.Fab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
