@@ -192,14 +192,14 @@ public class RegisterActivity extends AppCompatActivity{
         if(validateEmail() && validatePassword()){
             mAuth.createUserWithEmailAndPassword(email, password)
                     .addOnCompleteListener(this, task -> {
-                        Log.d(REGISTERACT_TAG, "Create User with Email: "+ task.isSuccessful());
-                        TastyToast.makeText(RegisterActivity.this,"Success!", TastyToast.LENGTH_SHORT, TastyToast.SUCCESS);
+                        Log.d(REGISTERACT_TAG+"register",email + password);
                         // If sign in fails, display a message to the user. If sign in succeeds
                         // the auth state listener will be notified and logic to handle the
                         // signed in user can be handled in the listener.
                         if (!task.isSuccessful()) {
+                            Log.d(REGISTERACT_TAG, "Create User with Email: "+ task.isSuccessful());
                             TastyToast.makeText(RegisterActivity.this,"Authentication failed.", TastyToast.LENGTH_SHORT,TastyToast.ERROR);
-                            Log.e(REGISTERACT_TAG, String.valueOf(task));
+                            Log.e(REGISTERACT_TAG, task.getException().getMessage());
                         } else {
                             //write new user to the node users in FirebaseDatabase
                             writeNewUser(name, email, "boda", "chairperson", Long.parseLong(phoneNumber));
