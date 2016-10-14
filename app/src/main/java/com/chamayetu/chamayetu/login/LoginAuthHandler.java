@@ -26,25 +26,6 @@ public class LoginAuthHandler{
         LoginAuthHandler.loginPresenter = loginPresenter;
     }
 
-    public static boolean handleFacebookLogin(AccessToken token, FirebaseAuth firebaseAuth, Context context){
-        Log.d(TAG, "FirebaseWithFacebookLogin:"+token);
-        loginPresenter.showProgressDialog(context);
-
-        AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
-        firebaseAuth.signInWithCredential(credential).addOnCompleteListener(
-                (Activity) context, task -> {
-                    Log.d(TAG, "FacebookSignInCredential:"+task.isSuccessful());
-                    if(!task.isSuccessful()){
-                        Log.w(TAG, "FacebookSignInFail:",task.getException());
-                        success = false;
-                        loginPresenter.dismissProgressDialog(context, success);
-                        loginPresenter.displayErrorMessage(context, "Failed to login to Facebook");
-                    }else{
-                        success = task.isSuccessful();
-                    }
-                });
-        return success;
-    }
 
     /**Handles Google Login, takes in GoogleSignInAccount from onActivityResult, gets token
      * checks if the task is complete and handles the process as required

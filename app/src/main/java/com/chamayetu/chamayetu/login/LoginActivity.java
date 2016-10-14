@@ -24,12 +24,7 @@ import android.widget.Toast;
 import com.chamayetu.chamayetu.R;
 import com.chamayetu.chamayetu.main.MainActivity;
 import com.chamayetu.chamayetu.register.RegisterActivity;
-import com.facebook.CallbackManager;
-import com.facebook.FacebookCallback;
-import com.facebook.FacebookException;
-import com.facebook.FacebookSdk;
-import com.facebook.login.LoginResult;
-import com.facebook.login.widget.LoginButton;
+
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
@@ -65,9 +60,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     @BindView(R.id.forgot_password_link) TextView forgotPassword;
     @BindView(R.id.fab) FloatingActionButton floatingActionButton;
 
-    @BindView(R.id.facebook_login_button) LoginButton facebookLoginBtn;
     @BindView(R.id.google_signin_button) SignInButton googleSignInButton;
-    private CallbackManager callbackManager;
 
     /**
      * Keep track of the login task to ensure we can cancel it if requested.*/
@@ -76,8 +69,6 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        FacebookSdk.sdkInitialize(this);
-
         setContentView(R.layout.login_activity);
         ButterKnife.bind(this);
 
@@ -88,8 +79,6 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
             }
             return false;
         });
-
-        callbackManager = CallbackManager.Factory.create();
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -161,36 +150,10 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
             }
         }
 
-        //pass the request code, result and data to the callback manager to handle Facebook login
-        callbackManager.onActivityResult(requestCode, resultCode, data);
     }
 
     /**Initialize social logins: Google, Twitter, Facebook, Github...*/
     private void initSocialLogins() {
-        /*Initialize with Facebook Login*/
-        facebookLoginBtn.setReadPermissions(Arrays.asList("email", "public_profile"));
-        facebookLoginBtn.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
-            @Override
-            public void onSuccess(LoginResult loginResult) {
-                Log.d(LOGINACT_TAG, "FacebookLoginSuccess: "+loginResult);
-                //pass this token to handle with firebase login
-                //if successful, start main activity
-                if(LoginAuthHandler.handleFacebookLogin(loginResult.getAccessToken(), mAuth, LoginActivity.this)){
-                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                }
-            }
-
-            @Override
-            public void onCancel() {
-                Log.d(LOGINACT_TAG, "FacebookLogin:Cancel");
-            }
-
-            @Override
-            public void onError(FacebookException error) {
-                Log.d(LOGINACT_TAG, "FacebookLogin:Error", error);
-            }
-        });
-
         /*Google Sign in logic*/
         /*request permissions ffrom Google*/
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
