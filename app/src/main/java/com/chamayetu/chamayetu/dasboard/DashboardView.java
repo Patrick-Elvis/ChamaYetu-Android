@@ -18,7 +18,7 @@ import com.chamayetu.chamayetu.adapters.ActivityRecyclerAdapter;
 import com.chamayetu.chamayetu.graph.StatementBarGraph;
 import com.chamayetu.chamayetu.models.ActivityModel;
 import com.chamayetu.chamayetu.utils.Contract;
-import com.chamayetu.chamayetu.models.ChamaPojo;
+
 import com.chamayetu.chamayetu.models.StatementPojo;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.data.Entry;
@@ -31,12 +31,10 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.sdsmdg.tastytoast.TastyToast;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
 /**
  * ChamaYetu
  * com.chamayetu.chamayetu.mychama

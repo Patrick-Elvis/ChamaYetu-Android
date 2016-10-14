@@ -23,6 +23,7 @@ import com.chamayetu.chamayetu.R;
 import com.chamayetu.chamayetu.main.MainActivity;
 import com.chamayetu.chamayetu.utils.Contract;
 import com.chamayetu.chamayetu.models.UserPojo;
+import com.chamayetu.chamayetu.utils.SingletonStash;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -197,8 +198,8 @@ public class RegisterActivity extends AppCompatActivity{
                         // the auth state listener will be notified and logic to handle the
                         // signed in user can be handled in the listener.
                         if (!task.isSuccessful()) {
-                            Toast.makeText(RegisterActivity.this,"Authentication failed.", Toast.LENGTH_SHORT).show();
-                            Log.d(REGISTERACT_TAG, task.getException().toString());
+                            TastyToast.makeText(RegisterActivity.this,"Authentication failed.", TastyToast.LENGTH_SHORT,TastyToast.ERROR);
+                            Log.e(REGISTERACT_TAG, String.valueOf(task));
                         } else {
                             //write new user to the node users in FirebaseDatabase
                             writeNewUser(name, email, "", "", Long.parseLong(phoneNumber));
@@ -221,13 +222,7 @@ public class RegisterActivity extends AppCompatActivity{
 
         // new instance of the new user
         UserPojo newUser = new UserPojo(firstName, lastName, email, role, phoneNumber,0,0,chamaGroups);
-        Log.d(REGISTERACT_TAG, "FN " + firstName +
-                "LN: " + lastName +
-                "UName: " + userName+
-                "EM: "+ email +
-                "RL: " + role +
-                "PH: " + String.valueOf(phoneNumber) +
-                "CHAMAGRPS: "+chamaGroups);
+        Log.d(REGISTERACT_TAG, newUser.toString());
 
         //check if the user already exists in the database at the User's node
         mDatabaseRef.child(Contract.USERS_NODE).addValueEventListener(new ValueEventListener() {
@@ -245,16 +240,11 @@ public class RegisterActivity extends AppCompatActivity{
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-
+                SingletonStash.showToast(RegisterActivity.this, "Encountered error, please retry",TastyToast.ERROR);
+                Log.d(REGISTERACT_TAG, String.valueOf(databaseError));
             }
 
         });
-
-    }
-
-    /**Gets the role of the new user and registers their role*/
-    public void onRadioButtonClicked(View view){
-
     }
 
     @Override

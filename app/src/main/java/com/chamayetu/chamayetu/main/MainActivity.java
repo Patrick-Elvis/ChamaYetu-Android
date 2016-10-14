@@ -373,7 +373,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         .inputRange(5, 24)
                         .positiveText(R.string.submit_btn_txt)
                         .input(R.string.project_hint, R.string.project_hint, false,
-                                (dialog, input) -> SingletonStash.showToast(this, input.toString() + "submitted")).show();
+                                (dialog, input) -> SingletonStash.showToast(this, input.toString() + "submitted",TastyToast.INFO)).show();
             /*todo: push projects to projects node of current user's chama*/
                 break;
 

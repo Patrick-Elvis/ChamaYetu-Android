@@ -14,8 +14,8 @@ import com.sdsmdg.tastytoast.TastyToast;
 
 public class SingletonStash {
 
-    public static void showToast(Context context, String message) {
-        TastyToast.makeText(context, message, TastyToast.LENGTH_SHORT, TastyToast.INFO);
-
+    public static void showToast(Context context, String message, int messageType) {
+        TastyToast.makeText(context, message, TastyToast.LENGTH_SHORT, messageType);
     }
+
 }

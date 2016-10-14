@@ -72,6 +72,20 @@ public class UserPojo implements Parcelable {
         }
     };
 
+    @Override
+    public String toString() {
+        return "UserPojo{" +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", role='" + role + '\'' +
+                ", phoneNumber=" + phoneNumber +
+                ", totalContributed=" + totalContributed +
+                ", avgContribution=" + avgContribution +
+                ", chamaGroups=" + chamaGroups +
+                '}';
+    }
+
     public String getFirstName() {
         return firstName;
     }
