@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -23,9 +24,12 @@ import com.chamayetu.chamayetu.dasboard.DashboardView;
 import com.chamayetu.chamayetu.settings.SettingsActivity;
 import com.chamayetu.chamayetu.useraccount.UserAccountActivity;
 import com.chamayetu.chamayetu.utils.Contract;
+import com.chamayetu.chamayetu.widgets.Fab;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
+import com.gordonwong.materialsheetfab.MaterialSheetFab;
+import com.gordonwong.materialsheetfab.MaterialSheetFabEventListener;
 import com.mikepenz.aboutlibraries.Libs;
 import com.mikepenz.aboutlibraries.LibsBuilder;
 import com.mikepenz.crossfadedrawerlayout.view.CrossfadeDrawerLayout;
@@ -44,11 +48,12 @@ import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 import com.mikepenz.materialdrawer.model.interfaces.Nameable;
 import com.mikepenz.materialdrawer.util.DrawerUIUtils;
 import com.mikepenz.materialize.util.UIUtils;
+import com.sdsmdg.tastytoast.TastyToast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener{
     public static final String MAINACT_TAG = MainActivity.class.getSimpleName();
     private FirebaseAuth mFirebaseAuth;
     private FirebaseUser mFirebaseUser;
@@ -60,6 +65,9 @@ public class MainActivity extends AppCompatActivity {
     private AccountHeader headerResult = null;
     private CrossfadeDrawerLayout crossfadeDrawerLayout = null;
     private SharedPreferences mNotifications;
+    private MaterialSheetFab materialSheetFab;
+    private int statusBarColor;
+
 
     // Define UI elements
     @BindView(R.id.toolbar) Toolbar toolbar;
@@ -73,6 +81,8 @@ public class MainActivity extends AppCompatActivity {
         //set the back arrow in the toolbar
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle(R.string.app_name);
+        setupFab();
+        updateSnackbar();
 
         // Initialize Firebase Auth
         mFirebaseAuth = FirebaseAuth.getInstance();
@@ -237,6 +247,57 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    /**handles setting up the FAB */
+    private void setupFab() {
+        Fab fab = (Fab) findViewById(R.id.materialsheet_fab);
+        View sheetView = findViewById(R.id.fab_sheet);
+        View overlay = findViewById(R.id.materialsheet_overlay);
+        int sheetColor = getResources().getColor(R.color.gray);
+        int fabColor = getResources().getColor(R.color.theme_accent);
+
+        // Create material sheet FAB
+        materialSheetFab = new MaterialSheetFab<>(fab, sheetView, overlay, sheetColor, fabColor);
+
+        // Set material sheet event listener
+        materialSheetFab.setEventListener(new MaterialSheetFabEventListener() {
+            @Override
+            public void onShowSheet() {
+                // Save current status bar color
+                statusBarColor = getStatusBarColor();
+                // Set darker status bar color to match the dim overlay
+                setStatusBarColor(getResources().getColor(R.color.black));
+            }
+
+            @Override
+            public void onHideSheet() {
+                // Restore status bar color
+                setStatusBarColor(statusBarColor);
+            }
+        });
+
+        // Set material sheet item click listeners
+        findViewById(R.id.materialsheet_item_reminder).setOnClickListener(this);
+        findViewById(R.id.materialsheet_item_project).setOnClickListener(this);
+    }
+
+    /**Updates the snackbar*/
+    private void updateSnackbar() {
+        View snackbar = findViewById(R.id.snackbar);
+        snackbar.setVisibility(View.GONE);
+    }
+
+    private int getStatusBarColor() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            return getWindow().getStatusBarColor();
+        }
+        return 0;
+    }
+
+    private void setStatusBarColor(int color) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setStatusBarColor(color);
+        }
+    }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
@@ -252,6 +313,13 @@ public class MainActivity extends AppCompatActivity {
         //handle the back press :D close the drawer first and if the drawer is closed close the activity
         if (drawer != null && drawer.isDrawerOpen()) {
             drawer.closeDrawer();
+        } else {
+            super.onBackPressed();
+        }
+
+        /*close the material sheet fab*/
+        if (materialSheetFab.isSheetVisible()) {
+            materialSheetFab.hideSheet();
         } else {
             super.onBackPressed();
         }
@@ -284,4 +352,11 @@ public class MainActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
+
+    @Override
+    public void onClick(View v) {
+        TastyToast.makeText(this, "Item clicked", TastyToast.LENGTH_SHORT,TastyToast.INFO);
+        materialSheetFab.hideSheet();
+    }
+
 }
