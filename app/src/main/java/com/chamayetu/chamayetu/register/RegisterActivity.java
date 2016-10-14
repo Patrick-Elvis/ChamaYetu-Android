@@ -20,6 +20,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 import com.chamayetu.chamayetu.R;
+import com.chamayetu.chamayetu.login.LoginSuccess;
 import com.chamayetu.chamayetu.main.MainActivity;
 import com.chamayetu.chamayetu.utils.Contract;
 import com.chamayetu.chamayetu.models.UserPojo;
@@ -131,7 +132,6 @@ public class RegisterActivity extends AppCompatActivity{
 
             }
 
-
         });
     }
 
@@ -202,7 +202,7 @@ public class RegisterActivity extends AppCompatActivity{
                             Log.e(REGISTERACT_TAG, String.valueOf(task));
                         } else {
                             //write new user to the node users in FirebaseDatabase
-                            writeNewUser(name, email, "", "", Long.parseLong(phoneNumber));
+                            writeNewUser(name, email, "boda", "chairperson", Long.parseLong(phoneNumber));
                         }
                     });
         }
@@ -234,7 +234,7 @@ public class RegisterActivity extends AppCompatActivity{
                 }else{
                     //perform write operation, adding new user, start next activity
                     mDatabaseRef.child(userName).setValue(newUser);
-                    startActivity(new Intent(RegisterActivity.this, MainActivity.class));
+                    startActivity(new Intent(RegisterActivity.this, LoginSuccess.class));
                 }
             }
 

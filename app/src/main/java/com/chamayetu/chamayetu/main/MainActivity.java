@@ -63,6 +63,8 @@ import butterknife.ButterKnife;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import android.text.InputType;
 
+import java.util.HashMap;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
     public static final String MAINACT_TAG = MainActivity.class.getSimpleName();
     private FirebaseAuth mFirebaseAuth;
@@ -374,7 +376,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         .title(R.string.project_input)
                         .content(R.string.project_content)
                         .inputType(InputType.TYPE_CLASS_TEXT |
-                                InputType.TYPE_TEXT_VARIATION_PERSON_NAME |
+                                InputType.TYPE_TEXT_VARIATION_SHORT_MESSAGE |
                                 InputType.TYPE_TEXT_FLAG_CAP_WORDS)
                         .inputRange(5, 24)
                         .positiveText(R.string.submit_btn_txt)
@@ -382,10 +384,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         .input(R.string.project_hint, R.string.project_hint_prefill, false,
                                 (dialog, input) -> {
                                     SingletonStash.showToast(MainActivity.this, input.toString() + " submitted.",TastyToast.INFO);
+                                    int projCount = 0;
                                     Projects projects = new Projects("Oct 14 2016",input.toString());
-                                    mDatabase.child(Contract.PROJECTS_NODE).child("boda").setValue(projects);
+                                    HashMap<String, Projects> proj = new HashMap<>();
+                                    proj.put("proj" + String.valueOf(projCount+=1), projects);
+                                    mDatabase.child(Contract.PROJECTS_NODE).child("boda").setValue(proj);
                                 }).show();
-            /*todo: push projects to projects node of current user's chama*/
                 break;
 
             case R.id.materialsheet_item_reminder:
@@ -397,7 +401,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         .positiveColor(ContextCompat.getColor(this, R.color.colorPrimaryDark))
                         .negativeText(android.R.string.cancel)
                         .negativeColor(ContextCompat.getColor(this, R.color.colorPrimaryDark))
-//                .stackingBehavior(StackingBehavior.ALWAYS)
                         .show();
                 break;
         }
