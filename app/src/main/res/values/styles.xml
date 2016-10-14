@@ -51,6 +51,7 @@
         <item name="android:elevation" tools:ignore="NewApi">@dimen/fab_elevation</item>
         <item name="android:src">@drawable/ic_add_grey600_24dp</item>
         <item name="fabSize">normal</item>
+        <item name="android:backgroundTint" tools:targetApi="lollipop">@color/colorPrimary</item>
         <item name="borderWidth">0dp</item>
     </style>
 
@@ -103,7 +104,7 @@
         <item name="android:gravity">center</item>
         <item name="android:clickable">true</item>
         <item name="android:background">?selectableItemBackgroundBorderless</item>
-        <item name="android:textColor">@color/theme_accent</item>
+        <item name="android:textColor">@color/yellow</item>
         <item name="android:textSize">@dimen/snackbar_textsize</item>
         <item name="android:textAllCaps">true</item>
     </style>

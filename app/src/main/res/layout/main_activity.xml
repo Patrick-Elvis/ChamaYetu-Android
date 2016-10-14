@@ -45,7 +45,6 @@
         <com.chamayetu.chamayetu.widgets.Fab
             android:id="@+id/materialsheet_fab"
             style="@style/Widget.MaterialSheetFab.Fab"
-            app:fabSize="normal"
             app:useCompatPadding="true"
             android:layout_alignParentBottom="true"
             android:layout_alignParentEnd="true"
