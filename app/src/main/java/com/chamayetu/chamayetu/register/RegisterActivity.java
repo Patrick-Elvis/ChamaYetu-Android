@@ -189,7 +189,7 @@ public class RegisterActivity extends AppCompatActivity{
         String name = signUpName.getText().toString();
         String phoneNumber = signUpPhoneNo.getText().toString();
 
-        if(!validateEmail() && validatePassword()){
+        if(validateEmail() && validatePassword()){
             mAuth.createUserWithEmailAndPassword(email, password)
                     .addOnCompleteListener(this, task -> {
                         Log.d(REGISTERACT_TAG, "Create User with Email: "+ task.isSuccessful());
@@ -203,6 +203,7 @@ public class RegisterActivity extends AppCompatActivity{
                         } else {
                             //write new user to the node users in FirebaseDatabase
                             writeNewUser(name, email, "boda", "chairperson", Long.parseLong(phoneNumber));
+                            startActivity(new Intent(RegisterActivity.this, LoginSuccess.class));
                         }
                     });
         }
