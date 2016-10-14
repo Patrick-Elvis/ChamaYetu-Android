@@ -86,7 +86,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@color/theme_accent">
+                        android:background="@color/theme_default_primary">
 
                         <TextView
                             android:id="@+id/materialsheet_item_project"

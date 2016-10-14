@@ -253,7 +253,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         View sheetView = findViewById(R.id.fab_sheet);
         View overlay = findViewById(R.id.materialsheet_overlay);
         int sheetColor = getResources().getColor(R.color.gray);
-        int fabColor = getResources().getColor(R.color.theme_accent);
+        int fabColor = getResources().getColor(R.color.theme_default_primary);
 
         // Create material sheet FAB
         materialSheetFab = new MaterialSheetFab<>(fab, sheetView, overlay, sheetColor, fabColor);
