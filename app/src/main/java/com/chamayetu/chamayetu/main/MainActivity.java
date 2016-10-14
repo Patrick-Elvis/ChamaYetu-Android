@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -24,6 +25,7 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import com.chamayetu.chamayetu.R;
 import com.chamayetu.chamayetu.login.LoginActivity;
 import com.chamayetu.chamayetu.dasboard.DashboardView;
+import com.chamayetu.chamayetu.models.Projects;
 import com.chamayetu.chamayetu.settings.SettingsActivity;
 import com.chamayetu.chamayetu.useraccount.UserAccountActivity;
 import com.chamayetu.chamayetu.utils.Contract;
@@ -378,9 +380,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         .positiveText(R.string.submit_btn_txt)
                         .positiveColor(ContextCompat.getColor(this, R.color.colorPrimaryDark))
                         .input(R.string.project_hint, R.string.project_hint_prefill, false,
-                                (dialog, input) -> SingletonStash.showToast(this, input.toString() + " submitted.",TastyToast.INFO)).show();
+                                (dialog, input) -> {
+                                    SingletonStash.showToast(MainActivity.this, input.toString() + " submitted.",TastyToast.INFO);
+                                    Projects projects = new Projects("Oct 14 2016",input.toString());
+                                    mDatabase.child(Contract.PROJECTS_NODE).child("boda").setValue(projects);
+                                }).show();
             /*todo: push projects to projects node of current user's chama*/
-
                 break;
 
             case R.id.materialsheet_item_reminder:
