@@ -8,29 +8,49 @@
     android:layout_height="match_parent"
     tools:context="com.chamayetu.chamayetu.main.MainActivity">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-    <android.support.design.widget.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
-
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
-    </android.support.design.widget.AppBarLayout>
-    </LinearLayout>
-    <android.support.design.widget.CoordinatorLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-            <FrameLayout
-                android:id="@+id/container_body"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content" />
-    </android.support.design.widget.CoordinatorLayout>
+
+        <android.support.design.widget.CoordinatorLayout
+            android:id="@+id/appbar_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <android.support.design.widget.AppBarLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:theme="@style/AppTheme.AppBarOverlay">
+
+                <android.support.v7.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:background="?attr/colorPrimary"
+                    app:popupTheme="@style/AppTheme.PopupOverlay" />
+            </android.support.design.widget.AppBarLayout>
+        </android.support.design.widget.CoordinatorLayout>
+
+        <android.support.design.widget.CoordinatorLayout
+            android:layout_width="match_parent"
+            android:layout_below="@+id/appbar_container"
+            android:layout_height="match_parent">
+                <FrameLayout
+                    android:id="@+id/container_body"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" />
+        </android.support.design.widget.CoordinatorLayout>
+
+        <!-- Your FAB implementation -->
+        <com.chamayetu.chamayetu.widgets.Fab
+            android:id="@+id/materialsheet_fab"
+            style="@style/Widget.MaterialSheetFab.Fab"
+            app:fabSize="normal"
+            app:useCompatPadding="true"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true" />
+
+    </RelativeLayout>
+
 </LinearLayout>
