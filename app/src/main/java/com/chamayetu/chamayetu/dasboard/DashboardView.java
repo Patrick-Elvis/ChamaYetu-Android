@@ -62,7 +62,6 @@ public class DashboardView extends Fragment implements View.OnClickListener, OnC
     @BindView(R.id.btn_full_statement) Button btnFullStatement;
     @BindView(R.id.btn_mini_statment) Button btnMiniStatement;
 
-
     private DatabaseReference mDatabase;
     private ActivityRecyclerAdapter activityRecyclerAdapter;
     private List<ActivityModel> activityModelList;

@@ -52,6 +52,7 @@ import com.sdsmdg.tastytoast.TastyToast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
     public static final String MAINACT_TAG = MainActivity.class.getSimpleName();
@@ -355,7 +356,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-        TastyToast.makeText(this, "Item clicked", TastyToast.LENGTH_SHORT,TastyToast.INFO);
+        switch (v.getId()){
+            case R.id.materialsheet_item_project:
+                //create dialog to suggest a project
+                new SweetAlertDialog(this, SweetAlertDialog.NORMAL_TYPE)
+                        .setTitleText("Suggest a project")
+                        .setContentText("Won't be able to recover this file!")
+                        .setConfirmText("Confirm")
+                        .setConfirmClickListener(sDialog -> sDialog
+                                .setTitleText("Deleted!")
+                                .setContentText("Your imaginary file has been deleted!")
+                                .setConfirmText("OK")
+                                .setConfirmClickListener(null)
+                                .changeAlertType(SweetAlertDialog.SUCCESS_TYPE))
+                        /*set the cancel click listener*/
+                        .setCancelClickListener(SweetAlertDialog::cancel)
+                        .show();
+                break;
+
+            case R.id.materialsheet_item_reminder:
+                /*setup a reminder for the group*/
+                break;
+        }
         materialSheetFab.hideSheet();
     }
 
