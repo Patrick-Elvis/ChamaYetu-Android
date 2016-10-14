@@ -31,6 +31,8 @@ import com.chamayetu.chamayetu.utils.SingletonStash;
 import com.chamayetu.chamayetu.widgets.Fab;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
 import com.gordonwong.materialsheetfab.MaterialSheetFab;
 import com.gordonwong.materialsheetfab.MaterialSheetFabEventListener;
@@ -73,7 +75,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private SharedPreferences mNotifications;
     private MaterialSheetFab materialSheetFab;
     private int statusBarColor;
-
+    private DatabaseReference mDatabase;
 
     // Define UI elements
     @BindView(R.id.toolbar) Toolbar toolbar;
@@ -89,6 +91,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         getSupportActionBar().setTitle(R.string.app_name);
         setupFab();
         updateSnackbar();
+        mDatabase = FirebaseDatabase.getInstance().getReference();
 
         // Initialize Firebase Auth
         mFirebaseAuth = FirebaseAuth.getInstance();
@@ -374,9 +377,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         .inputRange(5, 24)
                         .positiveText(R.string.submit_btn_txt)
                         .positiveColor(ContextCompat.getColor(this, R.color.colorPrimaryDark))
-                        .input(R.string.project_hint, R.string.project_hint, false,
-                                (dialog, input) -> SingletonStash.showToast(this, input.toString() + "submitted",TastyToast.INFO)).show();
+                        .input(R.string.project_hint, R.string.project_hint_prefill, false,
+                                (dialog, input) -> SingletonStash.showToast(this, input.toString() + " submitted.",TastyToast.INFO)).show();
             /*todo: push projects to projects node of current user's chama*/
+
                 break;
 
             case R.id.materialsheet_item_reminder:
@@ -385,7 +389,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         .title(R.string.date_picker)
                         .customView(R.layout.dialog_datepicker, false)
                         .positiveText(android.R.string.ok)
+                        .positiveColor(ContextCompat.getColor(this, R.color.colorPrimaryDark))
                         .negativeText(android.R.string.cancel)
+                        .negativeColor(ContextCompat.getColor(this, R.color.colorPrimaryDark))
 //                .stackingBehavior(StackingBehavior.ALWAYS)
                         .show();
                 break;
