@@ -269,6 +269,10 @@
     <string name="chamaactivity_amount">Ksh. 1500</string>
     <string name="chamaactivityperson_name">Person Name</string>
     <string name="chamaactivity_date">Nov 12</string>
+    <string name="add_reminder">Reminder</string>
+    <string name="createproject">Project</string>
+    <string name="view">View</string>
+    <string name="snackbar_shared_msg">Shared message</string>
 
     <string-array name="chama_roles_array">
         <item>Chairperson</item>
