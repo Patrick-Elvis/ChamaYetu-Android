@@ -18,12 +18,15 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.chamayetu.chamayetu.R;
 import com.chamayetu.chamayetu.login.LoginActivity;
 import com.chamayetu.chamayetu.dasboard.DashboardView;
 import com.chamayetu.chamayetu.settings.SettingsActivity;
 import com.chamayetu.chamayetu.useraccount.UserAccountActivity;
 import com.chamayetu.chamayetu.utils.Contract;
+import com.chamayetu.chamayetu.utils.SingletonStash;
 import com.chamayetu.chamayetu.widgets.Fab;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -53,6 +56,7 @@ import com.sdsmdg.tastytoast.TastyToast;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import cn.pedant.SweetAlert.SweetAlertDialog;
+import android.text.InputType;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
     public static final String MAINACT_TAG = MainActivity.class.getSimpleName();
@@ -359,19 +363,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (v.getId()){
             case R.id.materialsheet_item_project:
                 //create dialog to suggest a project
-                new SweetAlertDialog(this, SweetAlertDialog.NORMAL_TYPE)
-                        .setTitleText("Suggest a project")
-                        .setContentText("Won't be able to recover this file!")
-                        .setConfirmText("Confirm")
-                        .setConfirmClickListener(sDialog -> sDialog
-                                .setTitleText("Deleted!")
-                                .setContentText("Your imaginary file has been deleted!")
-                                .setConfirmText("OK")
-                                .setConfirmClickListener(null)
-                                .changeAlertType(SweetAlertDialog.SUCCESS_TYPE))
-                        /*set the cancel click listener*/
-                        .setCancelClickListener(SweetAlertDialog::cancel)
-                        .show();
+                new MaterialDialog.Builder(this)
+                        .title(R.string.project_input)
+                        .content(R.string.project_content)
+                        .inputType(InputType.TYPE_CLASS_TEXT |
+                                InputType.TYPE_TEXT_VARIATION_PERSON_NAME |
+                                InputType.TYPE_TEXT_FLAG_CAP_WORDS)
+                        .inputRange(5, 24)
+                        .positiveText(R.string.submit_btn_txt)
+                        .input(R.string.project_hint, R.string.project_hint, false,
+                                (dialog, input) -> SingletonStash.showToast(this, input.toString() + "submitted")).show();
                 break;
 
             case R.id.materialsheet_item_reminder:
@@ -380,5 +381,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         materialSheetFab.hideSheet();
     }
+
 
 }

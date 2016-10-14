@@ -273,6 +273,10 @@
     <string name="createproject">Project</string>
     <string name="view">View</string>
     <string name="snackbar_shared_msg">Shared message</string>
+    <string name="project_input">Project</string>
+    <string name="project_content">What is your project?</string>
+    <string name="submit_btn_txt">SUBMIT</string>
+    <string name="project_hint">Your Project</string>
 
     <string-array name="chama_roles_array">
         <item>Chairperson</item>
