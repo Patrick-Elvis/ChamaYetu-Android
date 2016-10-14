@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -372,6 +373,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 InputType.TYPE_TEXT_FLAG_CAP_WORDS)
                         .inputRange(5, 24)
                         .positiveText(R.string.submit_btn_txt)
+                        .positiveColor(ContextCompat.getColor(this, R.color.colorPrimaryDark))
                         .input(R.string.project_hint, R.string.project_hint, false,
                                 (dialog, input) -> SingletonStash.showToast(this, input.toString() + "submitted",TastyToast.INFO)).show();
             /*todo: push projects to projects node of current user's chama*/
