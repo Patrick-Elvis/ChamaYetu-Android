@@ -2,6 +2,7 @@ package com.chamayetu.chamayetu.registeruser;
 
 import android.app.Activity;
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.Patterns;
@@ -56,6 +57,9 @@ public class RegisterInteractorImpl implements RegisterInteractor {
                         } else {
                             //write new user to the node users in FirebaseDatabase
                             writeNewUser(name, email, "chairperson", phoneNumber, mDatabaseReference, listener);
+                            /*send email verification*/
+                            mAuth.addAuthStateListener(firebaseAuth -> firebaseAuth.getCurrentUser()
+                                    .sendEmailVerification());
                             //listener.onSuccess();
                         }
                     });
@@ -84,6 +88,7 @@ public class RegisterInteractorImpl implements RegisterInteractor {
                     //alert the user about the conflict
                     listener.onTaskError("User already exists",TastyToast.ERROR);
                     listener.onEmailError();
+                    Log.d(TAG+"UserExists: ",String.valueOf(dataSnapshot.hasChild(userName)));
                 }else{
                     //perform write operation, adding new user
                     mDatabaseReference.setValue(newUser);

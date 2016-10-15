@@ -124,7 +124,7 @@
                         android:layout_height="match_parent"
                         app:mtf_openKeyboardOnFocus="true"
                         app:mtf_cardCollapsedHeight="4dp"
-                        app:mtf_image="@android:drawable/ic_menu_call">
+                        app:mtf_image="@drawable/ic_action_phone_52">
 
                         <EditText
                             android:textSize="13sp"

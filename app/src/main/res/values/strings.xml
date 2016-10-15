@@ -281,6 +281,10 @@
     <string name="project_hint_prefill">Project</string>
     <string name="please_wait">Please wait</string>
     <string name="progress_dialog_title">Verifying credentials</string>
+    <string name="signup_chamaMembers">Number Of Members</string>
+    <string name="signup_bankAccount">Account Number</string>
+    <string name="signup_chama_bankName">Bank</string>
+    <string name="register_account">Register</string>
 
     <string-array name="chama_roles_array">
         <item>Chairperson</item>

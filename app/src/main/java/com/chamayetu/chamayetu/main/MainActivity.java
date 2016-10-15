@@ -79,6 +79,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private SharedPreferences mNotifications;
     private MaterialSheetFab materialSheetFab;
     private int statusBarColor;
+    private int projCount = 0;
     private DatabaseReference mDatabase;
 
     // Define UI elements
@@ -384,7 +385,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         .input(R.string.project_hint, R.string.project_hint_prefill, false,
                                 (dialog, input) -> {
                                     SingletonStash.showToast(MainActivity.this, input.toString() + " submitted.",TastyToast.INFO);
-                                    int projCount = 0;
                                     Projects projects = new Projects("Oct 14 2016",input.toString());
                                     HashMap<String, Projects> proj = new HashMap<>();
                                     proj.put("proj" + String.valueOf(projCount+=1), projects);
