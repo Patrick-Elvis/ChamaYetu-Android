@@ -50,9 +50,13 @@ public class RegisterPresenterImpl implements RegisterPresenter, RegisterInterac
 
     @Override
     public void validateChamaCredentials(String chamaName, int memberNo, String bankName, int accountNo) {
+        if(registerChamaView !=null){
+            registerChamaView.showProgress();
+        }
 
+        /*register the new Chama*/
+        registerInteractor.registerNewChama(context,chamaName,String.valueOf(memberNo),bankName,accountNo,mAuth, mDatabaseReference, this);
     }
-
 
     @Override
     public void onDestroy() {
@@ -137,6 +141,13 @@ public class RegisterPresenterImpl implements RegisterPresenter, RegisterInterac
         if (registerChamaView != null) {
             registerChamaView.setBankAccountError();
             registerChamaView.hideProgress();
+        }
+    }
+
+    @Override
+    public void onChamaSuccess() {
+        if (registerChamaView != null) {
+            registerChamaView.navigateToMainActivity();
         }
     }
 

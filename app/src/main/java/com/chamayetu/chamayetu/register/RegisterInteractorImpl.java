@@ -73,7 +73,7 @@ public class RegisterInteractorImpl implements RegisterInteractor {
     }
 
     @Override
-    public void registerNewChama(String chamaName, String chamaMembers, String bankName, long accountNumber, FirebaseAuth mAuth, DatabaseReference mDatabaseReference, OnRegisterNewChamaFinishedListener listener) {
+    public void registerNewChama(Context context, String chamaName, String chamaMembers, String bankName, long accountNumber, FirebaseAuth mAuth, DatabaseReference mDatabaseReference, OnRegisterNewChamaFinishedListener listener) {
         boolean error = false;
         //check if the chama name is filled out
         if(TextUtils.isEmpty(chamaName)){
@@ -114,12 +114,17 @@ public class RegisterInteractorImpl implements RegisterInteractor {
                     if(dataSnapshot.hasChild(chamaName)){
                         listener.onChamaNameError();
                         listener.chamaNameExistsError("Chama already exists", TastyToast.ERROR);
+                    } else {
+                        /*create the new chama*/
+                      mDatabaseReference.child(Contract.CHAMA_NODE).setValue(newChama);
+                        listener.onChamaSuccess();
                     }
                 }
 
                 @Override
                 public void onCancelled(DatabaseError databaseError) {
-
+                    listener.onTaskError("Error encountered, please retry", TastyToast.ERROR);
+                    Log.d(TAG+"DBError", databaseError.getMessage());
                 }
             });
         }
