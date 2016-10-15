@@ -219,6 +219,7 @@ public class RegisterActivity extends AppCompatActivity implements RegisterView,
     public void hideProgress() {
         if(materialDialog.isShowing()){
             materialDialog.dismiss();
+            finish();
         }
     }
 

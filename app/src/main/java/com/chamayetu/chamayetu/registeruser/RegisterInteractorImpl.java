@@ -7,15 +7,13 @@ import android.util.Log;
 import android.util.Patterns;
 import com.chamayetu.chamayetu.models.UserPojo;
 import com.chamayetu.chamayetu.utils.Contract;
-import com.chamayetu.chamayetu.utils.SingletonStash;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 import com.sdsmdg.tastytoast.TastyToast;
-
-import java.util.concurrent.Executor;
 
 /**
  * ChamaYetu
@@ -26,7 +24,6 @@ import java.util.concurrent.Executor;
 
 public class RegisterInteractorImpl implements RegisterInteractor {
     private static final String TAG = RegisterActivity.REGISTERACT_TAG;
-    private FirebaseAuth mAuth;
 
     @Override
     public void registerNewUser(Context context, String name, String email, String password, String retypePassword, long phoneNumber, FirebaseAuth mAuth, DatabaseReference mDatabaseReference, OnRegistrationFinishedListener listener) {
@@ -59,7 +56,7 @@ public class RegisterInteractorImpl implements RegisterInteractor {
                         } else {
                             //write new user to the node users in FirebaseDatabase
                             writeNewUser(name, email, "chairperson", phoneNumber, mDatabaseReference, listener);
-                            listener.onSuccess();
+                            //listener.onSuccess();
                         }
                     });
         }
@@ -74,7 +71,6 @@ public class RegisterInteractorImpl implements RegisterInteractor {
         int index = email.indexOf('@');
         String userName = email.substring(0, index);
 
-
         // new instance of the new user
         UserPojo newUser = new UserPojo(firstName, lastName, email, role, phoneNumber,0,0);
         Log.d(TAG, newUser.toString());
@@ -86,19 +82,20 @@ public class RegisterInteractorImpl implements RegisterInteractor {
                 //if the user name already exists
                 if(dataSnapshot.hasChild(userName)){
                     //alert the user about the conflict
+                    listener.onTaskError("User already exists",TastyToast.ERROR);
+                    listener.onEmailError();
                 }else{
-                    //perform write operation, adding new user, start next activity
-                    mDatabaseReference.child(userName).setValue(newUser);
+                    //perform write operation, adding new user
+                    mDatabaseReference.setValue(newUser);
+                    listener.onSuccess();
                 }
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 listener.onTaskError("Error encountered, please retry", TastyToast.ERROR);
-
                 Log.d(TAG+"DBError", databaseError.getMessage());
             }
-
         });
     }
 
