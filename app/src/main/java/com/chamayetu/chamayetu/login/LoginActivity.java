@@ -82,7 +82,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
         mAuth = FirebaseAuth.getInstance();
 
-        mAuthListener = firebaseAuth -> {
+      /*  mAuthListener = firebaseAuth -> {
             FirebaseUser user = firebaseAuth.getCurrentUser();
             if(user !=null){
                 // user is signed in, therefore redirect to MainActivity
@@ -92,7 +92,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                 Log.d(LOGINACT_TAG, "onAuthStateChanged:signedout");
             }
         };
-
+*/
         googleSignInButton.setOnClickListener(this);
         mEmailSignInButton.setOnClickListener(this);
 

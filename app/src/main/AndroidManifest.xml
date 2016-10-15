@@ -32,7 +32,7 @@
         </activity>
 
         <!--register a new user activity-->
-        <activity android:name=".registeruser.RegisterActivity"/>
+        <activity android:name=".register.RegisterActivity"/>
 
         <!--register a new chama activity-->
         <activity android:name=".register.RegisterChamaActivity"/>
