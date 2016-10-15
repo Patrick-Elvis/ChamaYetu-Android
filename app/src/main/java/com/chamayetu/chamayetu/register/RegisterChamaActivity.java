@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.EditText;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.chamayetu.chamayetu.R;
@@ -32,7 +33,7 @@ public class RegisterChamaActivity extends AppCompatActivity implements Register
     @BindView(R.id.signup_chamaMembers_id) EditText chamaMemberNumbersView;
     @BindView(R.id.signup_chama_bankAccount_id) EditText chamaAccountNoView;
     @BindView(R.id.signup_chama_bankName_id) EditText chamaBankNameView;
-    @BindView(R.id.signup_chama_button_id) EditText chamaSignUpBtnView;
+    @BindView(R.id.signup_chama_button_id) Button chamaSignUpBtnView;
 
     private RegisterPresenter registerPresenter;
     private MaterialDialog materialDialog;

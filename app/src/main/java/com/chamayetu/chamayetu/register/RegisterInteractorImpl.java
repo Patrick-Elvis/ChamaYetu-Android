@@ -20,6 +20,7 @@ import com.sdsmdg.tastytoast.TastyToast;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.Locale;
 
 /**
@@ -111,12 +112,14 @@ public class RegisterInteractorImpl implements RegisterInteractor {
             mDatabaseReference.child(Contract.CHAMA_NODE).addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
-                    if(dataSnapshot.hasChild(chamaName)){
+                    if(dataSnapshot.child(Contract.CHAMA_NODE).hasChild(chamaName)){
                         listener.onChamaNameError();
                         listener.chamaNameExistsError("Chama already exists", TastyToast.ERROR);
                     } else {
                         /*create the new chama*/
-                      mDatabaseReference.child(Contract.CHAMA_NODE).setValue(newChama);
+                        HashMap<String, ChamaPojo> newChamaNode = new HashMap<>();
+                        newChamaNode.put(chamaName, newChama);
+                        mDatabaseReference.child(Contract.CHAMA_NODE).setValue(newChamaNode);
                         listener.onChamaSuccess();
                     }
                 }
