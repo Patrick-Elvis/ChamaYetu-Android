@@ -1,5 +1,7 @@
 package com.chamayetu.chamayetu.registeruser;
 
+import android.content.Context;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 
@@ -16,12 +18,14 @@ public class RegisterPresenterImpl implements RegisterPresenter,RegisterInteract
     private RegisterInteractor registerInteractor;
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabaseReference;
+    private Context context;
 
-    public RegisterPresenterImpl(RegisterView registerView, FirebaseAuth mAuth, DatabaseReference mDatabaseRef) {
+    public RegisterPresenterImpl(RegisterView registerView, Context context, FirebaseAuth mAuth, DatabaseReference mDatabaseRef) {
         this.registerView = registerView;
         this.registerInteractor = new RegisterInteractorImpl();
         this.mAuth = mAuth;
         this.mDatabaseReference = mDatabaseRef;
+        this.context = context;
     }
 
 
@@ -32,7 +36,7 @@ public class RegisterPresenterImpl implements RegisterPresenter,RegisterInteract
         }
 
         /*register the new user*/
-        registerInteractor.registerNewUser(name,email,password,retypePassword,phoneNumber, mAuth, mDatabaseReference, this);
+        registerInteractor.registerNewUser(context,name,email,password,retypePassword,phoneNumber, mAuth, mDatabaseReference, this);
     }
 
     @Override

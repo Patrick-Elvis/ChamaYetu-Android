@@ -1,5 +1,7 @@
 package com.chamayetu.chamayetu.registeruser;
 
+import android.app.Activity;
+import android.content.Context;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.Patterns;
@@ -27,7 +29,7 @@ public class RegisterInteractorImpl implements RegisterInteractor {
     private FirebaseAuth mAuth;
 
     @Override
-    public void registerNewUser(String name, String email, String password, String retypePassword, long phoneNumber, FirebaseAuth mAuth, DatabaseReference mDatabaseReference, OnRegistrationFinishedListener listener) {
+    public void registerNewUser(Context context, String name, String email, String password, String retypePassword, long phoneNumber, FirebaseAuth mAuth, DatabaseReference mDatabaseReference, OnRegistrationFinishedListener listener) {
         /**Submit registration details*/
         boolean error = false;
 
@@ -45,7 +47,7 @@ public class RegisterInteractorImpl implements RegisterInteractor {
         /*if there is no error, begin registration*/
         if(!error) {
             mAuth.createUserWithEmailAndPassword(email, password)
-                    .addOnCompleteListener((Executor) this, task -> {
+                    .addOnCompleteListener((Activity) context, task -> {
                         Log.d(TAG+"register",email + password);
                         // If sign in fails, display a message to the user. If sign in succeeds
                         // the auth state listener will be notified and logic to handle the

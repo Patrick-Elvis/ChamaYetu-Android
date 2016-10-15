@@ -98,7 +98,7 @@ public class RegisterActivity extends AppCompatActivity implements RegisterView,
         floatingActionButton.setOnClickListener(this);
         signUpButton.setOnClickListener(this);
 
-        registerPresenter = new RegisterPresenterImpl(this, mAuth, mDatabaseRef);
+        registerPresenter = new RegisterPresenterImpl(this, RegisterActivity.this ,mAuth, mDatabaseRef);
 
     }
 

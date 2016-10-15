@@ -1,5 +1,7 @@
 package com.chamayetu.chamayetu.registeruser;
 
+import android.content.Context;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 
@@ -38,7 +40,7 @@ public interface RegisterInteractor {
      * @param retypePassword retyped password by user
      * @param phoneNumber Number of the new user
      * @param listener registration listner*/
-    void registerNewUser(String name, String email, String password, String retypePassword, long phoneNumber, FirebaseAuth mAuth, DatabaseReference mDatabaseReference, OnRegistrationFinishedListener listener);
+    void registerNewUser(Context context, String name, String email, String password, String retypePassword, long phoneNumber, FirebaseAuth mAuth, DatabaseReference mDatabaseReference, OnRegistrationFinishedListener listener);
 
     /**registers a new chama to the database adding the name and the members
      * @param chamaName  name of the chama
