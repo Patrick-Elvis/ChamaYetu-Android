@@ -51,7 +51,7 @@ import butterknife.ButterKnife;
  * Created by lusinabrian on 30/09/16.
  * Description: Register Activity class for a new user
  */
-public class RegisterActivity extends AppCompatActivity{
+public class RegisterActivity extends AppCompatActivity implements RegisterView{
     public static final String REGISTERACT_TAG = RegisterActivity.class.getSimpleName();
 
     /*UI views*/
@@ -260,6 +260,31 @@ public class RegisterActivity extends AppCompatActivity{
         if (mAuthListener != null) {
             mAuth.removeAuthStateListener(mAuthListener);
         }
+    }
+
+    @Override
+    public void showProgress() {
+
+    }
+
+    @Override
+    public void hideProgress() {
+
+    }
+
+    @Override
+    public void setEmailError() {
+
+    }
+
+    @Override
+    public void setPasswordError() {
+
+    }
+
+    @Override
+    public void navigateToMain() {
+
     }
 
     /**Todo: Make TextWatcher an interface*/

@@ -1,5 +1,7 @@
 package com.chamayetu.chamayetu.register;
 
+import android.content.Context;
+
 /**
  * ChamaYetu
  * com.chamayetu.chamayetu.login
@@ -8,5 +10,8 @@ package com.chamayetu.chamayetu.register;
  */
 
 public class RegisterAuthHandler {
+    private static boolean success = false;
+    private static String TAG = RegisterActivity.REGISTERACT_TAG;
 
+    public RegisterAuthHandler(){}
 }
