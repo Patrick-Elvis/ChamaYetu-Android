@@ -22,6 +22,7 @@ import android.widget.EditText;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.chamayetu.chamayetu.R;
 import com.chamayetu.chamayetu.login.LoginSuccess;
+import com.chamayetu.chamayetu.registerchama.RegisterChamaActivity;
 import com.chamayetu.chamayetu.utils.Contract;
 import com.chamayetu.chamayetu.models.UserPojo;
 import com.chamayetu.chamayetu.utils.SingletonStash;
@@ -51,7 +52,7 @@ import butterknife.ButterKnife;
  * Created by lusinabrian on 30/09/16.
  * Description: Register Activity class for a new user
  */
-public class RegisterActivity extends AppCompatActivity implements RegisterView{
+public class RegisterActivity extends AppCompatActivity implements RegisterView, View.OnClickListener{
     public static final String REGISTERACT_TAG = RegisterActivity.class.getSimpleName();
 
     /*UI views*/
@@ -93,12 +94,12 @@ public class RegisterActivity extends AppCompatActivity implements RegisterView{
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             ShowEnterAnimation();
         }
-        floatingActionButton.setOnClickListener(v -> animateRevealClose());
+        floatingActionButton.setOnClickListener(this);
+        signUpButton.setOnClickListener(this);
 
         mDatabaseRef = FirebaseDatabase.getInstance().getReference();
         signUpEmail.addTextChangedListener(new MyTextWatcher(signUpEmail));
         signUpPassword.addTextChangedListener(new MyTextWatcher((signUpPassword)));
-        signUpButton.setOnClickListener(view -> submitFormDetails());
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
@@ -309,8 +310,30 @@ public class RegisterActivity extends AppCompatActivity implements RegisterView{
 
     @Override
     public void navigateToChamaReg() {
-
+        startActivity(new Intent(this, RegisterChamaActivity.class));
         finish();
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.signup_button_id:
+                String password = signUpPassword.getText().toString().trim();
+                String email = signUpEmail.getText().toString().trim();
+                String name = signUpName.getText().toString();
+                String retypePass = retypePassword.getText().toString();
+                String phoneNumber = signUpPhoneNo.getText().toString();
+
+                registerPresenter.validateCredentials(name, email, Long.parseLong(phoneNumber), password, retypePass);
+
+                submitFormDetails();
+                break;
+
+            case R.id.fab:
+                animateRevealClose();
+                break;
+        }
+
     }
 
     private class MyTextWatcher implements TextWatcher {

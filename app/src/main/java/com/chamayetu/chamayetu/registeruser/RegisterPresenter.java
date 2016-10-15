@@ -9,7 +9,7 @@ package com.chamayetu.chamayetu.registeruser;
 
 public interface RegisterPresenter{
 
-    void validateCredentials(String email, long phoneNumber, String password, String retypePassword);
+    void validateCredentials(String name, String email, long phoneNumber, String password, String retypePassword);
 
     void onDestroy();
 }
