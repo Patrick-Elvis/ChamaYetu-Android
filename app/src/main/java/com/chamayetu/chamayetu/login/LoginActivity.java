@@ -23,7 +23,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.chamayetu.chamayetu.R;
 import com.chamayetu.chamayetu.main.MainActivity;
-import com.chamayetu.chamayetu.registeruser.RegisterActivity;
+import com.chamayetu.chamayetu.register.RegisterActivity;
 
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
