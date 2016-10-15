@@ -6,6 +6,8 @@ import android.content.Context;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.Patterns;
+
+import com.chamayetu.chamayetu.models.ChamaPojo;
 import com.chamayetu.chamayetu.models.UserPojo;
 import com.chamayetu.chamayetu.utils.Contract;
 
@@ -15,6 +17,10 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 import com.sdsmdg.tastytoast.TastyToast;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
 
 /**
  * ChamaYetu
@@ -67,7 +73,7 @@ public class RegisterInteractorImpl implements RegisterInteractor {
     }
 
     @Override
-    public void registerNewChama(String chamaName, String chamaMembers, String bankName, long accountNumber, OnRegisterNewChamaFinishedListener listener) {
+    public void registerNewChama(String chamaName, String chamaMembers, String bankName, long accountNumber, FirebaseAuth mAuth, DatabaseReference mDatabaseReference, OnRegisterNewChamaFinishedListener listener) {
         boolean error = false;
         //check if the chama name is filled out
         if(TextUtils.isEmpty(chamaName)){
@@ -93,7 +99,29 @@ public class RegisterInteractorImpl implements RegisterInteractor {
 
         /*if there is no error, proceed to registering the new chama*/
         if(!error){
+            Calendar c = Calendar.getInstance();
+            System.out.println("Current time => " + c.getTime());
 
+            SimpleDateFormat df = new SimpleDateFormat("MMMM-dd-yyyy", Locale.ENGLISH);
+            String formattedDate = df.format(c.getTime());
+
+            ChamaPojo newChama = new ChamaPojo(formattedDate,"","",Long.parseLong(chamaMembers),0,chamaName,"",bankName,accountNumber);
+
+            /*check if the chama is already in existence*/
+            mDatabaseReference.child(Contract.CHAMA_NODE).addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    if(dataSnapshot.hasChild(chamaName)){
+                        listener.onChamaNameError();
+                        listener.chamaNameExistsError("Chama already exists", TastyToast.ERROR);
+                    }
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
         }
 
     }

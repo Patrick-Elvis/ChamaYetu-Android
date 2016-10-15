@@ -12,7 +12,7 @@ import com.google.firebase.database.DatabaseReference;
  * Description:Presenter implementation calls view methods to update the UI by calling view interface.
  */
 
-public class RegisterPresenterImpl implements RegisterPresenter, RegisterInteractor.OnRegistrationFinishedListener {
+public class RegisterPresenterImpl implements RegisterPresenter, RegisterInteractor.OnRegistrationFinishedListener, RegisterInteractor.OnRegisterNewChamaFinishedListener {
 
     private RegisterView.RegisterChama registerChamaView;
     private RegisterView.RegisterUser registerUserView;
@@ -107,4 +107,44 @@ public class RegisterPresenterImpl implements RegisterPresenter, RegisterInterac
         }
     }
 
+
+    @Override
+    public void onChamaNameError() {
+        if (registerChamaView != null) {
+            registerChamaView.setChamaNameError();
+            registerChamaView.hideProgress();
+        }
+    }
+
+    @Override
+    public void onChamaMemberError() {
+        if (registerChamaView != null) {
+            registerChamaView.setChamaMemberNumbers();
+            registerChamaView.hideProgress();
+        }
+    }
+
+    @Override
+    public void onChamaBankNameError() {
+        if (registerChamaView != null) {
+            registerChamaView.setBankNameError();
+            registerChamaView.hideProgress();
+        }
+    }
+
+    @Override
+    public void onChamaAccountError() {
+        if (registerChamaView != null) {
+            registerChamaView.setBankAccountError();
+            registerChamaView.hideProgress();
+        }
+    }
+
+    @Override
+    public void chamaNameExistsError(String message, int messageType) {
+        if (registerChamaView != null) {
+            registerChamaView.displayToastError(message, messageType);
+            registerChamaView.hideProgress();
+        }
+    }
 }

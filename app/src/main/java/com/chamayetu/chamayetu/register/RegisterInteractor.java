@@ -38,6 +38,9 @@ public interface RegisterInteractor {
         void onChamaBankNameError();
 
         void onChamaAccountError();
+
+        /**displays error if the chama name already exists*/
+        void chamaNameExistsError(String message, int messageType);
     }
 
     /**Registers a new user taking in the name, password, phone number an a registration listener
@@ -54,6 +57,6 @@ public interface RegisterInteractor {
      * @param chamaMembers members of the new chama
      * @param accountNumber Account number of the chama;
      * @param bankName Name of the bank*/
-    void registerNewChama(String chamaName, String chamaMembers,String bankName, long accountNumber, OnRegisterNewChamaFinishedListener listener);
+    void registerNewChama(String chamaName, String chamaMembers,String bankName, long accountNumber, FirebaseAuth mAuth, DatabaseReference mDatabaseReference, OnRegisterNewChamaFinishedListener listener);
 
 }
