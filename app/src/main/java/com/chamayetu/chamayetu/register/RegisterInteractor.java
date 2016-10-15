@@ -53,8 +53,7 @@ public interface RegisterInteractor {
      * @param chamaName  name of the chama
      * @param chamaMembers members of the new chama
      * @param accountNumber Account number of the chama;
-     * @param bankName Name of the bank
-     * @param chairPerson the chairperson name, which is the new registering member*/
-    void registerNewChama(String chamaName, String chamaMembers, String chairPerson,String bankName, long accountNumber, OnRegisterNewChamaFinishedListener listener);
+     * @param bankName Name of the bank*/
+    void registerNewChama(String chamaName, String chamaMembers,String bankName, long accountNumber, OnRegisterNewChamaFinishedListener listener);
 
 }

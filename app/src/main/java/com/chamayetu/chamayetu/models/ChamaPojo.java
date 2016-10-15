@@ -13,8 +13,9 @@ import com.chamayetu.chamayetu.dasboard.DashboardView;
  */
 public class ChamaPojo implements Parcelable {
     //brief statement amounts
-    private long totalAmount,amountExpected, members;
+    private long totalAmount,amountExpected, members,accountNumber;
     private String name, venue, milestone,dateCreated,milestoneDate,nextMeetingTime;
+    private String bankName;
 
     public ChamaPojo(){}
 
@@ -31,18 +32,35 @@ public class ChamaPojo implements Parcelable {
         this.milestone = milestone;
     }
 
+    /**Constructor for creating the ChamaPojo object*/
+    public ChamaPojo(String dateCreated,String nextMeetingTime, String milestoneDate, long members, long totalAmount, long amountExpected, String name, String venue, String milestone, String bankName, long accountNumber) {
+        this.dateCreated = dateCreated;
+        this.nextMeetingTime = nextMeetingTime;
+        this.milestoneDate = milestoneDate;
+        this.members = members;
+        this.totalAmount = totalAmount;
+        this.amountExpected = amountExpected;
+        this.name = name;
+        this.venue = venue;
+        this.milestone = milestone;
+        this.bankName = bankName;
+        this.accountNumber = accountNumber;
+    }
+
     @Override
     public String toString() {
         return "ChamaPojo{" +
                 "totalAmount=" + totalAmount +
                 ", amountExpected=" + amountExpected +
                 ", members=" + members +
+                ", accountNumber=" + accountNumber +
                 ", name='" + name + '\'' +
                 ", venue='" + venue + '\'' +
                 ", milestone='" + milestone + '\'' +
                 ", dateCreated='" + dateCreated + '\'' +
                 ", milestoneDate='" + milestoneDate + '\'' +
                 ", nextMeetingTime='" + nextMeetingTime + '\'' +
+                ", bankName='" + bankName + '\'' +
                 '}';
     }
 
@@ -118,6 +136,22 @@ public class ChamaPojo implements Parcelable {
         this.milestone = milestone;
     }
 
+    public long getAccountNumber() {
+        return accountNumber;
+    }
+
+    public void setAccountNumber(long accountNumber) {
+        this.accountNumber = accountNumber;
+    }
+
+    public String getBankName() {
+        return bankName;
+    }
+
+    public void setBankName(String bankName) {
+        this.bankName = bankName;
+    }
+
     public ChamaPojo(Parcel source) {
         this.totalAmount =source.readLong();
         this.amountExpected=source.readLong();
@@ -128,7 +162,8 @@ public class ChamaPojo implements Parcelable {
         this.dateCreated= source.readString();
         this.milestoneDate= source.readString();
         this.nextMeetingTime= source.readString();
-
+        this.bankName = source.readString();
+        this.accountNumber = source.readLong();
     }
 
     public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
@@ -159,5 +194,7 @@ public class ChamaPojo implements Parcelable {
         dest.writeString(this.dateCreated);
         dest.writeString(this.milestoneDate);
         dest.writeString(this.nextMeetingTime);
+        dest.writeLong(this.accountNumber);
+        dest.writeString(this.bankName);
     }
 }

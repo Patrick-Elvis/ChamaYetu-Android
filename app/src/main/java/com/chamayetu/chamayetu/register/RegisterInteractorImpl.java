@@ -28,7 +28,6 @@ public class RegisterInteractorImpl implements RegisterInteractor {
 
     @Override
     public void registerNewUser(Context context, String name, String email, String password, String retypePassword, long phoneNumber, FirebaseAuth mAuth, DatabaseReference mDatabaseReference, OnRegistrationFinishedListener listener) {
-        /**Submit registration details*/
         boolean error = false;
 
         /*if email is not valid, display an error*/
@@ -56,7 +55,8 @@ public class RegisterInteractorImpl implements RegisterInteractor {
                             Log.e(TAG, task.getException().getMessage());
                         } else {
                             //write new user to the node users in FirebaseDatabase
-                            writeNewUser(name, email, "chairperson", phoneNumber, mDatabaseReference, listener);
+                            writeNewUser(name, email, "chairperson", phoneNumber, mDatabaseReference,
+                                    listener);
                             /*send email verification*/
                             mAuth.addAuthStateListener(firebaseAuth -> firebaseAuth.getCurrentUser()
                                     .sendEmailVerification());
@@ -64,6 +64,62 @@ public class RegisterInteractorImpl implements RegisterInteractor {
                         }
                     });
         }
+    }
+
+    @Override
+    public void registerNewChama(String chamaName, String chamaMembers, String bankName, long accountNumber, OnRegisterNewChamaFinishedListener listener) {
+        boolean error = false;
+        //check if the chama name is filled out
+        if(TextUtils.isEmpty(chamaName)){
+            listener.onChamaNameError();
+            error = true;
+        }
+        //if the chama members is 0 or empty
+        if(TextUtils.isEmpty(chamaMembers)){
+            listener.onChamaMemberError();
+            error = true;
+        }
+
+        //if the bankname is empty
+        if(TextUtils.isEmpty(bankName)){
+            listener.onChamaBankNameError();
+            error = true;
+        }
+
+        if(TextUtils.isEmpty(String.valueOf(accountNumber))){
+            listener.onChamaAccountError();
+            error = true;
+        }
+
+        /*if there is no error, proceed to registering the new chama*/
+        if(!error){
+
+        }
+
+    }
+
+    /**VALIDATE user password
+     * Check if user password is valid, if the user password is empty, display an error
+     * If the user retype password and passwords do not match, display an error to user
+     * else, if all checks out, then return true
+     * @return boolean*/
+    //todo: increase security of password
+    private boolean validatePassword(String password, String retypePassword) {
+        if(TextUtils.isEmpty(password)|| TextUtils.isEmpty(retypePassword)){
+            return false;
+        }
+        /*if the passwords do not match*/
+        else if(!password.equals(retypePassword)){
+            return false;
+        }
+        return true;
+    }
+
+    /**validate user email
+     * @return boolean
+    **checks for a valid email address from a pattern*/
+    private boolean isValidEmail(String email) {
+        return !TextUtils.isEmpty(email) && Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
 
     /**Writes a new user to the Firebase Database at the User node*/
@@ -102,36 +158,6 @@ public class RegisterInteractorImpl implements RegisterInteractor {
                 Log.d(TAG+"DBError", databaseError.getMessage());
             }
         });
-    }
-
-
-    @Override
-    public void registerNewChama(String chamaName, String chamaMembers, String chairPerson, String bankName, long accountNumber, OnRegisterNewChamaFinishedListener listener) {
-
-
-    }
-
-    /**VALIDATE user password
-     * Check if user password is valid, if the user password is empty, display an error
-     * If the user retype password and passwords do not match, display an error to user
-     * else, if all checks out, then return true
-     * @return boolean*/
-    private boolean validatePassword(String password, String retypePassword) {
-        if(TextUtils.isEmpty(password)|| TextUtils.isEmpty(retypePassword)){
-            return false;
-        }
-        /*if the passwords do not match*/
-        else if(!password.equals(retypePassword)){
-            return false;
-        }
-        return true;
-    }
-
-    /**validate user email
-     * @return boolean
-    **checks for a valid email address from a pattern*/
-    private boolean isValidEmail(String email) {
-        return !TextUtils.isEmpty(email) && Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
 
 }
