@@ -1,6 +1,4 @@
-package com.chamayetu.chamayetu.register;
-
-import android.content.Context;
+package com.chamayetu.chamayetu.registeruser;
 
 /**
  * ChamaYetu

@@ -279,6 +279,8 @@
     <string name="project_hint">Your Project</string>
     <string name="date_picker">Pick a date</string>
     <string name="project_hint_prefill">Project</string>
+    <string name="please_wait">Please wait</string>
+    <string name="progress_dialog_title">Verifying credentials</string>
 
     <string-array name="chama_roles_array">
         <item>Chairperson</item>

@@ -1,4 +1,4 @@
-package com.chamayetu.chamayetu.register;
+package com.chamayetu.chamayetu.registeruser;
 
 /**
  * ChamaYetu

@@ -1,4 +1,4 @@
-package com.chamayetu.chamayetu.register;
+package com.chamayetu.chamayetu.registeruser;
 
 /**
  * ChamaYetu
@@ -18,9 +18,14 @@ public interface RegisterView {
     /**set email error if the email is invalid*/
     void setEmailError();
 
+    void setFullNameError();
+
     /**set password error if the password is less than 6 characters or does not match the retype password*/
     void setPasswordError();
 
-    /**navigate to main activity if all tests pass*/
-    void navigateToMain();
+    /**navigate to chama registration if all tests pass*/
+    void navigateToChamaReg();
+
+    /**display an error when the phone number is blank or is not a valid phone number*/
+    void setPhoneNoError();
 }

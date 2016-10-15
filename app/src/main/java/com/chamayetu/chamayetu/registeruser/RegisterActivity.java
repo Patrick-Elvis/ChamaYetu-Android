@@ -1,4 +1,4 @@
-package com.chamayetu.chamayetu.register;
+package com.chamayetu.chamayetu.registeruser;
 
 import android.annotation.TargetApi;
 import android.content.Intent;
@@ -18,10 +18,10 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
+
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.chamayetu.chamayetu.R;
 import com.chamayetu.chamayetu.login.LoginSuccess;
-import com.chamayetu.chamayetu.main.MainActivity;
 import com.chamayetu.chamayetu.utils.Contract;
 import com.chamayetu.chamayetu.models.UserPojo;
 import com.chamayetu.chamayetu.utils.SingletonStash;
@@ -70,6 +70,8 @@ public class RegisterActivity extends AppCompatActivity implements RegisterView{
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private DatabaseReference mDatabaseRef;
+    private RegisterPresenter registerPresenter;
+    private MaterialDialog materialDialog;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -263,31 +265,54 @@ public class RegisterActivity extends AppCompatActivity implements RegisterView{
     }
 
     @Override
-    public void showProgress() {
+    protected void onDestroy() {
+        registerPresenter.onDestroy();
+        super.onDestroy();
+    }
 
+    @Override
+    public void showProgress() {
+        materialDialog = new MaterialDialog.Builder(this)
+                .title(R.string.progress_dialog_title)
+                .content(R.string.please_wait)
+                .progress(true, 0)
+                .show();
     }
 
     @Override
     public void hideProgress() {
-
+        if(materialDialog.isShowing()){
+            materialDialog.dismiss();
+        }
     }
 
     @Override
     public void setEmailError() {
-
+        requestFocus(signUpEmail);
     }
 
     @Override
     public void setPasswordError() {
-
+        requestFocus(signUpPassword);
+        requestFocus(retypePassword);
     }
 
     @Override
-    public void navigateToMain() {
-
+    public void setPhoneNoError(){
+        requestFocus(signUpPhoneNo);
     }
 
-    /**Todo: Make TextWatcher an interface*/
+    @Override
+    public void setFullNameError(){
+        requestFocus(signUpName);
+    }
+
+    @Override
+    public void navigateToChamaReg() {
+
+        finish();
+    }
+
     private class MyTextWatcher implements TextWatcher {
         private View view;
 
