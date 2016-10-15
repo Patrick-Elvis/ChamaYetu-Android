@@ -97,6 +97,8 @@ public class RegisterActivity extends AppCompatActivity implements RegisterView,
         floatingActionButton.setOnClickListener(this);
         signUpButton.setOnClickListener(this);
 
+        registerPresenter = new RegisterPresenterImpl();
+
         mDatabaseRef = FirebaseDatabase.getInstance().getReference();
         signUpEmail.addTextChangedListener(new MyTextWatcher(signUpEmail));
         signUpPassword.addTextChangedListener(new MyTextWatcher((signUpPassword)));
