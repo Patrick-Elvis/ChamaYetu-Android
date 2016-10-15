@@ -12,27 +12,36 @@ import com.google.firebase.database.DatabaseReference;
  * Description:Presenter implementation calls view methods to update the UI by calling view interface.
  */
 
-public class RegisterPresenterImpl implements RegisterPresenter,RegisterInteractor.OnRegistrationFinishedListener {
+public class RegisterPresenterImpl implements RegisterPresenter, RegisterInteractor.OnRegistrationFinishedListener {
 
-    private RegisterView registerView;
+    private RegisterView.RegisterChama registerChamaView;
+    private RegisterView.RegisterUser registerUserView;
     private RegisterInteractor registerInteractor;
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabaseReference;
     private Context context;
 
-    public RegisterPresenterImpl(RegisterView registerView, Context context, FirebaseAuth mAuth, DatabaseReference mDatabaseRef) {
-        this.registerView = registerView;
+    public RegisterPresenterImpl(RegisterView.RegisterUser registerUserView, Context context, FirebaseAuth mAuth, DatabaseReference mDatabaseRef) {
+        this.registerUserView = registerUserView;
         this.registerInteractor = new RegisterInteractorImpl();
         this.mAuth = mAuth;
         this.mDatabaseReference = mDatabaseRef;
         this.context = context;
     }
 
+    public RegisterPresenterImpl(RegisterView.RegisterChama registerChamaView, Context context, FirebaseAuth mAuth, DatabaseReference mDatabaseRef) {
+        this.registerChamaView = registerChamaView;
+        this.registerInteractor = new RegisterInteractorImpl();
+        this.mAuth = mAuth;
+        this.mDatabaseReference = mDatabaseRef;
+        this.context = context;
+    }
 
+    
     @Override
     public void validateCredentials(String name, String email, long phoneNumber, String password, String retypePassword) {
-        if(registerView !=null){
-            registerView.showProgress();
+        if(registerUserView !=null){
+            registerUserView.showProgress();
         }
 
         /*register the new user*/
@@ -40,55 +49,61 @@ public class RegisterPresenterImpl implements RegisterPresenter,RegisterInteract
     }
 
     @Override
+    public void validateChamaCredentials(String chamaName, int memberNo, String bankName, int accountNo) {
+
+    }
+
+
+    @Override
     public void onDestroy() {
-        registerView = null;
+        registerUserView = null;
     }
 
     @Override
     public void onNameError() {
-        if (registerView != null) {
-            registerView.setFullNameError();
-            registerView.hideProgress();
+        if (registerUserView != null) {
+            registerUserView.setFullNameError();
+            registerUserView.hideProgress();
         }
     }
 
     @Override
     public void onEmailError() {
-        if (registerView != null) {
-            registerView.setEmailError();
-            registerView.hideProgress();
+        if (registerUserView != null) {
+            registerUserView.setEmailError();
+            registerUserView.hideProgress();
         }
     }
 
     @Override
     public void onPhoneError() {
-        if (registerView != null) {
-            registerView.setPhoneNoError();
-            registerView.hideProgress();
+        if (registerUserView != null) {
+            registerUserView.setPhoneNoError();
+            registerUserView.hideProgress();
         }
     }
 
     @Override
     public void onPasswordError() {
-        if (registerView != null) {
-            registerView.setPasswordError();
-            registerView.hideProgress();
+        if (registerUserView != null) {
+            registerUserView.setPasswordError();
+            registerUserView.hideProgress();
         }
     }
 
 
     @Override
     public void onTaskError(String message, int messageType) {
-        if(registerView != null){
-            registerView.displayToastError(message, messageType);
-            registerView.hideProgress();
+        if(registerUserView != null){
+            registerUserView.displayToastError(message, messageType);
+            registerUserView.hideProgress();
         }
     }
 
     @Override
     public void onSuccess() {
-        if (registerView != null) {
-            registerView.navigateToChamaReg();
+        if (registerUserView != null) {
+            registerUserView.navigateToChamaReg();
         }
     }
 

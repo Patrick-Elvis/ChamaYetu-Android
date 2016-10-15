@@ -38,18 +38,17 @@ import butterknife.ButterKnife;
  * Created by lusinabrian on 30/09/16.
  * Description: Register Activity class for a new user
  */
-public class RegisterActivity extends AppCompatActivity implements RegisterView, View.OnClickListener{
+public class RegisterActivity extends AppCompatActivity implements RegisterView.RegisterUser, View.OnClickListener{
+
     public static final String REGISTERACT_TAG = RegisterActivity.class.getSimpleName();
 
     /*UI views*/
     @BindView(R.id.signup_name_id) EditText signUpName;
     @BindView(R.id.signup_email_id) EditText signUpEmail;
     @BindView(R.id.signup_phoneNo_id) EditText signUpPhoneNo;
-
     @BindView(R.id.signup_password_id) EditText signUpPassword;
     @BindView(R.id.signup_retypepassword_id) EditText retypePassword;
     @BindView(R.id.signup_button_id) Button signUpButton;
-
     @BindView(R.id.cv_add) CardView cardViewAdd;
     @BindView(R.id.fab) FloatingActionButton floatingActionButton;
 
@@ -84,7 +83,7 @@ public class RegisterActivity extends AppCompatActivity implements RegisterView,
         floatingActionButton.setOnClickListener(this);
         signUpButton.setOnClickListener(this);
 
-        registerPresenter = new RegisterPresenterImpl(this, RegisterActivity.this ,mAuth, mDatabaseRef);
+        registerPresenter = new RegisterPresenterImpl(this, RegisterActivity.this, mAuth, mDatabaseRef);
 
     }
 
@@ -267,5 +266,4 @@ public class RegisterActivity extends AppCompatActivity implements RegisterView,
             this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
         }
     }
-
 }

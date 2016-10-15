@@ -9,7 +9,11 @@ package com.chamayetu.chamayetu.register;
 
 public interface RegisterPresenter{
 
+    /**pass these parameters to the interactor for validation*/
     void validateCredentials(String name, String email, long phoneNumber, String password, String retypePassword);
+
+    /**pass the chama name to the interactor*/
+    void validateChamaCredentials(String chamaName,int memberNo, String bankName,int accountNo);
 
     void onDestroy();
 }

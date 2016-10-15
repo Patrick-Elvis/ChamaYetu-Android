@@ -108,6 +108,7 @@ public class RegisterInteractorImpl implements RegisterInteractor {
     @Override
     public void registerNewChama(String chamaName, String chamaMembers, String chairPerson, String bankName, long accountNumber, OnRegisterNewChamaFinishedListener listener) {
 
+
     }
 
     /**VALIDATE user password
