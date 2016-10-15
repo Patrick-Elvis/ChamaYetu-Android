@@ -35,7 +35,7 @@
         <activity android:name=".registeruser.RegisterActivity"/>
 
         <!--register a new chama activity-->
-        <activity android:name=".registerchama.RegisterChamaActivity"/>
+        <activity android:name=".register.RegisterChamaActivity"/>
 
         <!--For the registration slides-->
 

@@ -1,4 +1,4 @@
-package com.chamayetu.chamayetu.registeruser;
+package com.chamayetu.chamayetu.register;
 
 import android.content.Context;
 
@@ -45,7 +45,9 @@ public interface RegisterInteractor {
     /**registers a new chama to the database adding the name and the members
      * @param chamaName  name of the chama
      * @param chamaMembers members of the new chama
+     * @param accountNumber Account number of the chama;
+     * @param bankName Name of the bank
      * @param chairPerson the chairperson name, which is the new registering member*/
-    void registerNewChama(String chamaName, String chamaMembers, String chairPerson, OnRegisterNewChamaFinishedListener listener);
+    void registerNewChama(String chamaName, String chamaMembers, String chairPerson,String bankName, long accountNumber, OnRegisterNewChamaFinishedListener listener);
 
 }

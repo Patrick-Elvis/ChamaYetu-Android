@@ -1,8 +1,8 @@
-package com.chamayetu.chamayetu.registeruser;
+package com.chamayetu.chamayetu.register;
 
 import android.app.Activity;
 import android.content.Context;
-import android.support.annotation.NonNull;
+
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.Patterns;
@@ -104,11 +104,11 @@ public class RegisterInteractorImpl implements RegisterInteractor {
         });
     }
 
+
     @Override
-    public void registerNewChama(String chamaName, String chamaMembers, String chairPerson, OnRegisterNewChamaFinishedListener listener) {
+    public void registerNewChama(String chamaName, String chamaMembers, String chairPerson, String bankName, long accountNumber, OnRegisterNewChamaFinishedListener listener) {
 
     }
-
 
     /**VALIDATE user password
      * Check if user password is valid, if the user password is empty, display an error
