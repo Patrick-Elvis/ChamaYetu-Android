@@ -3,6 +3,7 @@ package com.chamayetu.chamayetu.register;
 import android.app.Activity;
 import android.content.Context;
 
+import android.content.SharedPreferences;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.Patterns;
@@ -23,7 +24,6 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Objects;
 
 /**
  * ChamaYetu
@@ -64,7 +64,7 @@ public class RegisterInteractorImpl implements RegisterInteractor {
                             Log.e(TAG, task.getException().getMessage());
                         } else {
                             //write new user to the node users in FirebaseDatabase
-                            writeNewUser(name, email, "chairperson", phoneNumber, mDatabaseReference,
+                            writeNewUser(context, name, email, "chairperson", phoneNumber, mDatabaseReference,
                                     listener);
                             /*send email verification*/
                             mAuth.addAuthStateListener(firebaseAuth -> firebaseAuth.getCurrentUser()
@@ -77,6 +77,7 @@ public class RegisterInteractorImpl implements RegisterInteractor {
 
     @Override
     public void registerNewChama(Context context, String chamaName, String chamaMembers, String bankName, long accountNumber, FirebaseAuth mAuth, DatabaseReference mDatabaseReference, OnRegisterNewChamaFinishedListener listener) {
+
         boolean error = false;
         //check if the chama name is filled out
         if(TextUtils.isEmpty(chamaName)){
@@ -103,37 +104,16 @@ public class RegisterInteractorImpl implements RegisterInteractor {
         /*if there is no error, proceed to registering the new chama*/
         if(!error){
             Calendar c = Calendar.getInstance();
-            System.out.println("Current time => " + c.getTime());
 
             SimpleDateFormat df = new SimpleDateFormat("MMMM-dd-yyyy", Locale.ENGLISH);
             String formattedDate = df.format(c.getTime());
 
             ChamaPojo newChama = new ChamaPojo(formattedDate,"","",Long.parseLong(chamaMembers),0,chamaName,"",bankName,accountNumber);
 
-            /*check if the chama is already in existence*/
-            mDatabaseReference.child(Contract.CHAMA_NODE).addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    if(dataSnapshot.child(Contract.CHAMA_NODE).hasChild(chamaName)){
-                        listener.onChamaNameError();
-                        listener.chamaNameExistsError("Chama already exists", TastyToast.ERROR);
-                    } else {
-                        /*create the new chama*/
-                        Map<String, Object> newChamaNode = new HashMap<>();
-                        newChamaNode.put(chamaName, newChama);
-                        mDatabaseReference.child(Contract.CHAMA_NODE).updateChildren(newChamaNode);
-                        listener.onChamaSuccess();
-                    }
-                }
+            RegisterNewUserChama registerNewUserChama = new RegisterNewUserChama(context, mAuth,mDatabaseReference,listener, newChama);
 
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-                    listener.onTaskError("Error encountered, please retry", TastyToast.ERROR);
-                    Log.d(TAG+"DBError", databaseError.getMessage());
-                }
-            });
+            registerNewUserChama.newChama(context, chamaName, newChama);
         }
-
     }
 
     /**VALIDATE user password
@@ -161,13 +141,19 @@ public class RegisterInteractorImpl implements RegisterInteractor {
     }
 
     /**Writes a new user to the Firebase Database at the User node*/
-    private void writeNewUser(String name, String email,String role, long phoneNumber, DatabaseReference mDatabaseReference, OnRegistrationFinishedListener listener) {
+    private void writeNewUser(Context context, String name, String email,String role, long phoneNumber, DatabaseReference mDatabaseReference, OnRegistrationFinishedListener listener) {
+        SharedPreferences userSharedPref = context.getSharedPreferences("CurrentUser", Contract.SHAREPREF_PRIVATE_MODE);
+        SharedPreferences.Editor userPrefEditor = userSharedPref.edit();
+
         String firstName = name.split(" ")[0];
         String lastName = name.split(" ")[1];
 
         // obtain only the first part of the email address
         int index = email.indexOf('@');
         String userName = email.substring(0, index);
+
+        userPrefEditor.putString("CurrentUserName", userName);
+        userPrefEditor.apply();
 
         // new instance of the new user
         UserPojo newUser = new UserPojo(firstName, lastName, email, role, phoneNumber,0,0);

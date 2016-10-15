@@ -11,9 +11,7 @@ import android.os.Parcelable;
  */
 
 public class StatementPojo implements Parcelable {
-    /*
-      "outgoings":5000,
-      "fundsRecieved":15000,*/
+
     private String dateFrom, dateTo, title;
     private long totalAmount, outgoings, fundsReceived;
 

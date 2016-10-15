@@ -16,8 +16,10 @@ import java.util.List;
 public class Contract {
     public static final String TWITTER_KEY = BuildConfig.TWITTER_CONSUMER_KEY;
     public static final String TWITTER_CONSUMER_SECRET = BuildConfig.TWITTER_CONSUMER_KEY;
+
     public static final String NOTIFICATION_SP_FILE = "Notifications";
     public static final String NOTIFICATION_SP_KEY="NotificationCount";
+    public static final int SHAREPREF_PRIVATE_MODE = 0;
 
     public static final int RC_SIGN_IN = 9001;
     public static final String ANONYMOUS = "anonymous";
@@ -28,4 +30,5 @@ public class Contract {
     public static final String USERS_NODE = "users";
     public static final String ACTIVITY_NODE = "activity";
     public static final String PROJECTS_NODE ="projects";
+
 }
