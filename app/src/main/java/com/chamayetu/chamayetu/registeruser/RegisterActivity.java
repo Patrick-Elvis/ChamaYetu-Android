@@ -67,7 +67,6 @@ public class RegisterActivity extends AppCompatActivity implements RegisterView,
     @BindView(R.id.cv_add) CardView cardViewAdd;
     @BindView(R.id.fab) FloatingActionButton floatingActionButton;
 
-
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private DatabaseReference mDatabaseRef;
@@ -80,6 +79,8 @@ public class RegisterActivity extends AppCompatActivity implements RegisterView,
         setContentView(R.layout.registeractivity);
         ButterKnife.bind(this);
         mAuth = FirebaseAuth.getInstance();
+        mDatabaseRef = FirebaseDatabase.getInstance().getReference();
+
         mAuthListener = firebaseAuth -> {
             FirebaseUser user = firebaseAuth.getCurrentUser();
             if (user != null) {
@@ -97,11 +98,8 @@ public class RegisterActivity extends AppCompatActivity implements RegisterView,
         floatingActionButton.setOnClickListener(this);
         signUpButton.setOnClickListener(this);
 
-        registerPresenter = new RegisterPresenterImpl();
+        registerPresenter = new RegisterPresenterImpl(this, mAuth, mDatabaseRef);
 
-        mDatabaseRef = FirebaseDatabase.getInstance().getReference();
-        signUpEmail.addTextChangedListener(new MyTextWatcher(signUpEmail));
-        signUpPassword.addTextChangedListener(new MyTextWatcher((signUpPassword)));
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
@@ -187,71 +185,6 @@ public class RegisterActivity extends AppCompatActivity implements RegisterView,
         animateRevealClose();
     }
 
-    /**Submit registration details*/
-    private void submitFormDetails() {
-        String password = signUpPassword.getText().toString().trim();
-        String email = signUpEmail.getText().toString().trim();
-        String name = signUpName.getText().toString();
-        String phoneNumber = signUpPhoneNo.getText().toString();
-
-        if(validateEmail() && validatePassword()){
-            mAuth.createUserWithEmailAndPassword(email, password)
-                    .addOnCompleteListener(this, task -> {
-                        Log.d(REGISTERACT_TAG+"register",email + password);
-                        // If sign in fails, display a message to the user. If sign in succeeds
-                        // the auth state listener will be notified and logic to handle the
-                        // signed in user can be handled in the listener.
-                        if (!task.isSuccessful()) {
-                            Log.d(REGISTERACT_TAG, "Create User with Email: "+ task.isSuccessful());
-                            TastyToast.makeText(RegisterActivity.this,"Authentication failed.", TastyToast.LENGTH_SHORT,TastyToast.ERROR);
-                            Log.e(REGISTERACT_TAG, task.getException().getMessage());
-                        } else {
-                            //write new user to the node users in FirebaseDatabase
-                            writeNewUser(name, email, "boda", "chairperson", Long.parseLong(phoneNumber));
-                            startActivity(new Intent(RegisterActivity.this, LoginSuccess.class));
-                        }
-                    });
-        }
-    }
-
-    /**Writes a new user to the Firebase Database at the User node*/
-    private void writeNewUser(String name, String email, String chamaName,String role, long phoneNumber) {
-        String firstName = name.split(" ")[0];
-        String lastName = name.split(" ")[1];
-        Map<String, Object> chamaGroups = new HashMap<>();
-
-        // obtain only the first part of the email address
-        int index = email.indexOf('@');
-        String userName = email.substring(0, index);
-
-        chamaGroups.put(chamaName, true);
-
-        // new instance of the new user
-        UserPojo newUser = new UserPojo(firstName, lastName, email, role, phoneNumber,0,0,chamaGroups);
-        Log.d(REGISTERACT_TAG, newUser.toString());
-
-        //check if the user already exists in the database at the User's node
-        mDatabaseRef.child(Contract.USERS_NODE).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                //if the user name already exists
-                if(dataSnapshot.hasChild(userName)){
-                    //alert the user about the conflict
-                }else{
-                    //perform write operation, adding new user, start next activity
-                    mDatabaseRef.child(userName).setValue(newUser);
-                    startActivity(new Intent(RegisterActivity.this, LoginSuccess.class));
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                SingletonStash.showToast(RegisterActivity.this, "Encountered error, please retry",TastyToast.ERROR);
-                Log.d(REGISTERACT_TAG, String.valueOf(databaseError));
-            }
-
-        });
-    }
 
     @Override
     public void onStart() {
@@ -301,6 +234,11 @@ public class RegisterActivity extends AppCompatActivity implements RegisterView,
     }
 
     @Override
+    public void displayToastError(String message, int messageType) {
+        TastyToast.makeText(this, message, TastyToast.LENGTH_SHORT, messageType);
+    }
+
+    @Override
     public void setPhoneNoError(){
         requestFocus(signUpPhoneNo);
     }
@@ -327,8 +265,6 @@ public class RegisterActivity extends AppCompatActivity implements RegisterView,
                 String phoneNumber = signUpPhoneNo.getText().toString();
 
                 registerPresenter.validateCredentials(name, email, Long.parseLong(phoneNumber), password, retypePass);
-
-                submitFormDetails();
                 break;
 
             case R.id.fab:
@@ -336,76 +272,6 @@ public class RegisterActivity extends AppCompatActivity implements RegisterView,
                 break;
         }
 
-    }
-
-    private class MyTextWatcher implements TextWatcher {
-        private View view;
-
-        public MyTextWatcher(View view) {
-            this.view = view;
-        }
-
-        @Override
-        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-        }
-
-        @Override
-        public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-        }
-
-        @Override
-        public void afterTextChanged(Editable s) {
-            switch (view.getId()){
-                case R.id.signup_email_id:
-                    validateEmail();
-                    break;
-
-                case R.id.signup_password_id:
-                    validatePassword();
-                    break;
-            }
-        }
-    }
-
-    /**VALIDATE user password
-     * Check if user password is valid, if the user password is empty, display an error
-     * If the user retype password and passwords do not match, display an error to user
-     * else, if all checks out, then return true
-     * @return boolean*/
-    private boolean validatePassword() {
-        String password = signUpPassword.getText().toString();
-        String password2 = retypePassword.getText().toString();
-        if(password.isEmpty()){
-            requestFocus(signUpPassword);
-            return false;
-        }else if(password.length() < 6) {
-            requestFocus(signUpPassword);
-        }else if(!password.equals(password2)){
-            requestFocus(signUpPassword);
-            requestFocus(retypePassword);
-        }
-
-        return true;
-    }
-
-    /**validate user email
-     * @return boolean*/
-    private boolean validateEmail() {
-        String email = signUpEmail.getText().toString().trim();
-
-        // if empty or is not valid display an error
-        if(email.isEmpty() || !isValidEmail(email)){
-            requestFocus(signUpEmail);
-            return false;
-        }
-        return true;
-    }
-
-    /**checks for a valid email address from a pattern*/
-    private boolean isValidEmail(String email) {
-        return !TextUtils.isEmpty(email) && Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
 
     /**sets the focus to the edit text with the error message*/

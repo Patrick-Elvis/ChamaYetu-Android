@@ -31,6 +31,17 @@ public class UserPojo implements Parcelable {
         this.chamaGroups = chamaGroups;
     }
 
+    public UserPojo(String firstName, String lastName, String email, String role, long phoneNumber, long totalContributed, long avgContribution) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.role = role;
+        this.phoneNumber = phoneNumber;
+        this.totalContributed = totalContributed;
+        this.avgContribution = avgContribution;
+        this.chamaGroups = chamaGroups;
+    }
+
     protected UserPojo(Parcel in) {
         this.firstName = in.readString();
         this.lastName = in.readString();

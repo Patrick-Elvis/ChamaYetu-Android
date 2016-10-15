@@ -23,6 +23,8 @@ public interface RegisterView {
     /**set password error if the password is less than 6 characters or does not match the retype password*/
     void setPasswordError();
 
+    void displayToastError(String message, int messageType);
+
     /**navigate to chama registration if all tests pass*/
     void navigateToChamaReg();
 
