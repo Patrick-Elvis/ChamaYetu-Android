@@ -22,6 +22,8 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
+import java.util.Objects;
 
 /**
  * ChamaYetu
@@ -117,9 +119,9 @@ public class RegisterInteractorImpl implements RegisterInteractor {
                         listener.chamaNameExistsError("Chama already exists", TastyToast.ERROR);
                     } else {
                         /*create the new chama*/
-                        HashMap<String, ChamaPojo> newChamaNode = new HashMap<>();
+                        Map<String, Object> newChamaNode = new HashMap<>();
                         newChamaNode.put(chamaName, newChama);
-                        mDatabaseReference.child(Contract.CHAMA_NODE).setValue(newChamaNode);
+                        mDatabaseReference.child(Contract.CHAMA_NODE).updateChildren(newChamaNode);
                         listener.onChamaSuccess();
                     }
                 }
@@ -183,7 +185,9 @@ public class RegisterInteractorImpl implements RegisterInteractor {
                     Log.d(TAG+"UserExists: ",String.valueOf(dataSnapshot.hasChild(userName)));
                 }else{
                     //perform write operation, adding new user
-                    mDatabaseReference.setValue(newUser);
+                    Map<String, Object> userHash = new HashMap<>();
+                    userHash.put(name, newUser);
+                    mDatabaseReference.child(Contract.USERS_NODE).updateChildren(userHash);
                     listener.onSuccess();
                 }
             }
