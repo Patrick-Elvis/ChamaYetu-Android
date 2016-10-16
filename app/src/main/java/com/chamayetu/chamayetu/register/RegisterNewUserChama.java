@@ -43,6 +43,7 @@ import static com.chamayetu.chamayetu.utils.Contract.USERS_NODE;
 class RegisterNewUserChama {
     private static final String TAG  = RegisterUserActivity.REGISTERACT_TAG;
     private DatabaseReference mDatabaseReference;
+    private FirebaseAuth mAuth;
     private RegisterInteractor.OnRegisterNewChamaFinishedListener registerChamaListener;
     private ChamaPojo chamaPojo;
     private UserPojo userPojo;
@@ -55,7 +56,7 @@ class RegisterNewUserChama {
 
     /**constructor to initialize registration of new Chama*/
     RegisterNewUserChama(Context context, FirebaseAuth mAuth, DatabaseReference mDatabaseReference, RegisterInteractor.OnRegisterNewChamaFinishedListener registerChamaListener, ChamaPojo chamaPojo){
-        FirebaseAuth mAuth1 = mAuth;
+        this.mAuth = mAuth;
         this.mDatabaseReference = mDatabaseReference;
         this.registerChamaListener = registerChamaListener;
         this.chamaPojo = chamaPojo;

@@ -39,6 +39,7 @@ android {
 
 repositories {
     mavenCentral()
+    jcenter()
 }
 
 dependencies {
@@ -91,6 +92,9 @@ dependencies {
     /*material textfields*/
     compile 'com.github.florent37:materialtextfield:1.0.5'
     compile 'com.android.support:cardview-v7:24.2.1'
+
+    /*tap target view*/
+    compile 'com.getkeepsafe.taptargetview:taptargetview:1.4.1'
 
     /*Material sheet fab*/
     compile 'com.gordonwong:material-sheet-fab:1.2.1'
