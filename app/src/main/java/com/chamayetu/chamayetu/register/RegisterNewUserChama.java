@@ -27,6 +27,7 @@ import java.util.Map;
 import static com.chamayetu.chamayetu.utils.Contract.ACTIVITY_NODE;
 import static com.chamayetu.chamayetu.utils.Contract.CHAMA_GROUPS;
 import static com.chamayetu.chamayetu.utils.Contract.CHAMA_NODE;
+import static com.chamayetu.chamayetu.utils.Contract.CHAMA_ROLES;
 import static com.chamayetu.chamayetu.utils.Contract.MEMBERS_NODE;
 import static com.chamayetu.chamayetu.utils.Contract.PROJECTS_NODE;
 import static com.chamayetu.chamayetu.utils.Contract.STATEMENT_NODE;
@@ -117,8 +118,9 @@ public class RegisterNewUserChama {
                     Map<String, Object> activityModelMap = new HashMap<>();
                     activityModelMap.put("a1", activityModel);
 
-                    /*update the chama roles, with initial value being for the chairperson*/
-                    
+                    /*update the chama roles, with initial value being for the chairperson
+                    * Other values are null, until other user's are invited*/
+                    chamaPojo = new ChamaPojo(username,"","","");
 
                     /*put values in the maps to later update the respective nodes*/
                     newStatementNode.put(chamaNameKey, statementPojo);
@@ -127,11 +129,12 @@ public class RegisterNewUserChama {
                     newActivityNode.put(chamaNameKey, activityModelMap);
                     newMembersNode.put(chamaNameKey,newMember);
                     newChamaGroups.put(CHAMA_GROUPS, newChamaGroupMap);
-
+                    chamaRoles.put(CHAMA_ROLES, chamaPojo);
 
                     //update all the nodes for the new chama with default values
                     mDatabaseReference.child(STATEMENT_NODE).updateChildren(newStatementNode);
                     mDatabaseReference.child(CHAMA_NODE).updateChildren(newChamaNode);
+                    mDatabaseReference.child(CHAMA_NODE).child(chamaNameKey).updateChildren(chamaRoles);
                     mDatabaseReference.child(PROJECTS_NODE).updateChildren(newProjectNode);
                     mDatabaseReference.child(ACTIVITY_NODE).updateChildren(newActivityNode);
                     mDatabaseReference.child(MEMBERS_NODE).updateChildren(newMembersNode);

@@ -28,6 +28,7 @@ public class Contract {
     public static final String CHAMA_GROUPS = "chamaGroups";
 
     public static final String CHAMA_NODE = "chamas";
+    public static final String CHAMA_ROLES = "roles";
     public static final String STATEMENT_NODE ="statements";
     public static final String MEMBERS_NODE = "members";
     public static final String USERS_NODE = "users";
