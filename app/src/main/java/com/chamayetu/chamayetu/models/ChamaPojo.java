@@ -43,6 +43,15 @@ public class ChamaPojo implements Parcelable {
         this.accountNumber = accountNumber;
     }
 
+    /**Constructor to update the roles node in the chama node this is to display the roles of the people
+     * in the chama*/
+    public ChamaPojo(String chairPerson, String viceChair, String treasurer, String secretary) {
+        this.chairPerson = chairPerson;
+        this.viceChair = viceChair;
+        this.treasurer = treasurer;
+        this.secretary = secretary;
+    }
+
     @Override
     public String toString() {
         return "ChamaPojo{" +

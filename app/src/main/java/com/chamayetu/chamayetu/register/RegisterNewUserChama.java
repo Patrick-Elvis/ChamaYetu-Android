@@ -85,13 +85,17 @@ public class RegisterNewUserChama {
                     registerChamaListener.onChamaNameError();
                     registerChamaListener.chamaNameExistsError("Chama already exists", TastyToast.ERROR);
                 } else {
-                    /*create the new chama, statement, projects*/
+
+                    /*create the new chama, statement, projects
+                    * activity, members, chama groups and roles
+                    * All these are created with default values*/
                     Map<String, Object> newChamaNode = new HashMap<>();
                     Map<String, Object> newStatementNode = new HashMap<>();
                     Map<String, Object> newProjectNode = new HashMap<>();
                     Map<String, Object> newActivityNode = new HashMap<>();
                     Map<String, Object> newMembersNode = new HashMap<>();
                     Map<String, Object> newChamaGroups = new HashMap<>();
+                    Map<String, Object> chamaRoles = new HashMap<>();
 
                     /**todo: get real date of chama creation*/
                     statementPojo = new StatementPojo(currentDate,currentDate, chamaName + " Statement", 0, 0, 0);
@@ -99,10 +103,9 @@ public class RegisterNewUserChama {
                     Map<String, Boolean> newMember = new HashMap<>();
                     newMember.put(username, true);
 
-                    /*update chama groups for the user in the chama-groups node in user node*/
-                    Map<String, Boolean> newChama = new HashMap<>();
-                    newChamaGroups.put(chamaNameKey, true);
-
+                    /*update chama groups for the user in the chamaGroups node in user node*/
+                    Map<String, Boolean> newChamaGroupMap = new HashMap<>();
+                    newChamaGroupMap.put(chamaNameKey, true);
 
                     /*add the projects model to a map to later add the map to the node*/
                     projects = new Projects("","");
@@ -114,14 +117,19 @@ public class RegisterNewUserChama {
                     Map<String, Object> activityModelMap = new HashMap<>();
                     activityModelMap.put("a1", activityModel);
 
+                    /*update the chama roles, with initial value being for the chairperson*/
+                    
+
+                    /*put values in the maps to later update the respective nodes*/
                     newStatementNode.put(chamaNameKey, statementPojo);
                     newChamaNode.put(chamaNameKey, newChama);
                     newProjectNode.put(chamaNameKey, projectsMap);
                     newActivityNode.put(chamaNameKey, activityModelMap);
                     newMembersNode.put(chamaNameKey,newMember);
-                    newChamaGroups.put(CHAMA_GROUPS, newChamaGroups);
+                    newChamaGroups.put(CHAMA_GROUPS, newChamaGroupMap);
 
-                    //update all the nodes for the new chama
+
+                    //update all the nodes for the new chama with default values
                     mDatabaseReference.child(STATEMENT_NODE).updateChildren(newStatementNode);
                     mDatabaseReference.child(CHAMA_NODE).updateChildren(newChamaNode);
                     mDatabaseReference.child(PROJECTS_NODE).updateChildren(newProjectNode);
