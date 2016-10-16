@@ -24,6 +24,9 @@ public class Contract {
     public static final int RC_SIGN_IN = 9001;
     public static final String ANONYMOUS = "anonymous";
 
+    //this is for the user node, to update the user's chamas
+    public static final String CHAMA_GROUPS = "chamaGroups";
+
     public static final String CHAMA_NODE = "chamas";
     public static final String STATEMENT_NODE ="statements";
     public static final String MEMBERS_NODE = "members";

@@ -24,6 +24,14 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
+import static com.chamayetu.chamayetu.utils.Contract.ACTIVITY_NODE;
+import static com.chamayetu.chamayetu.utils.Contract.CHAMA_GROUPS;
+import static com.chamayetu.chamayetu.utils.Contract.CHAMA_NODE;
+import static com.chamayetu.chamayetu.utils.Contract.MEMBERS_NODE;
+import static com.chamayetu.chamayetu.utils.Contract.PROJECTS_NODE;
+import static com.chamayetu.chamayetu.utils.Contract.STATEMENT_NODE;
+import static com.chamayetu.chamayetu.utils.Contract.USERS_NODE;
+
 /**
  * ChamaYetu
  * com.chamayetu.chamayetu.register
@@ -73,7 +81,7 @@ public class RegisterNewUserChama {
         mDatabaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                if(dataSnapshot.child(Contract.CHAMA_NODE).hasChild(chamaNameKey)){
+                if(dataSnapshot.child(CHAMA_NODE).hasChild(chamaNameKey)){
                     registerChamaListener.onChamaNameError();
                     registerChamaListener.chamaNameExistsError("Chama already exists", TastyToast.ERROR);
                 } else {
@@ -87,8 +95,14 @@ public class RegisterNewUserChama {
 
                     /**todo: get real date of chama creation*/
                     statementPojo = new StatementPojo(currentDate,currentDate, chamaName + " Statement", 0, 0, 0);
+                    /*update member status of the user for the member's node*/
                     Map<String, Boolean> newMember = new HashMap<>();
                     newMember.put(username, true);
+
+                    /*update chama groups for the user in the chama-groups node in user node*/
+                    Map<String, Boolean> newChama = new HashMap<>();
+                    newChamaGroups.put(chamaNameKey, true);
+
 
                     /*add the projects model to a map to later add the map to the node*/
                     projects = new Projects("","");
@@ -105,13 +119,15 @@ public class RegisterNewUserChama {
                     newProjectNode.put(chamaNameKey, projectsMap);
                     newActivityNode.put(chamaNameKey, activityModelMap);
                     newMembersNode.put(chamaNameKey,newMember);
+                    newChamaGroups.put(CHAMA_GROUPS, newChamaGroups);
 
                     //update all the nodes for the new chama
-                    mDatabaseReference.child(Contract.STATEMENT_NODE).updateChildren(newStatementNode);
-                    mDatabaseReference.child(Contract.CHAMA_NODE).updateChildren(newChamaNode);
-                    mDatabaseReference.child(Contract.PROJECTS_NODE).updateChildren(newProjectNode);
-                    mDatabaseReference.child(Contract.ACTIVITY_NODE).updateChildren(newActivityNode);
-                    mDatabaseReference.child(Contract.MEMBERS_NODE).updateChildren(newMembersNode);
+                    mDatabaseReference.child(STATEMENT_NODE).updateChildren(newStatementNode);
+                    mDatabaseReference.child(CHAMA_NODE).updateChildren(newChamaNode);
+                    mDatabaseReference.child(PROJECTS_NODE).updateChildren(newProjectNode);
+                    mDatabaseReference.child(ACTIVITY_NODE).updateChildren(newActivityNode);
+                    mDatabaseReference.child(MEMBERS_NODE).updateChildren(newMembersNode);
+                    mDatabaseReference.child(USERS_NODE).child(username).updateChildren(newChamaGroups);
 
                     /*proceed to next step*/
                     registerChamaListener.onChamaSuccess();

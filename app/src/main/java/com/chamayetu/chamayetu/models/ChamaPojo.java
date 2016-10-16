@@ -12,10 +12,9 @@ import com.chamayetu.chamayetu.dasboard.DashboardView;
  * Description: The Pojo class for the Chama Object to be displayed in {@link DashboardView}
  */
 public class ChamaPojo implements Parcelable {
-    //brief statement amounts
     private long totalAmount,amountExpected, members,accountNumber;
-    private String name, venue, milestone,dateCreated,milestoneDate,nextMeetingTime;
-    private String bankName;
+    private String name, venue, milestone,dateCreated,milestoneDate,nextMeetingTime, bankName;
+    private String chairPerson, viceChair, treasurer, secretary;
 
     public ChamaPojo(){}
 
@@ -58,6 +57,10 @@ public class ChamaPojo implements Parcelable {
                 ", milestoneDate='" + milestoneDate + '\'' +
                 ", nextMeetingTime='" + nextMeetingTime + '\'' +
                 ", bankName='" + bankName + '\'' +
+                ", chairPerson='" + chairPerson + '\'' +
+                ", viceChair='" + viceChair + '\'' +
+                ", treasurer='" + treasurer + '\'' +
+                ", secretary='" + secretary + '\'' +
                 '}';
     }
 
@@ -149,31 +152,37 @@ public class ChamaPojo implements Parcelable {
         this.bankName = bankName;
     }
 
-    public ChamaPojo(Parcel source) {
-        this.totalAmount =source.readLong();
-        this.amountExpected=source.readLong();
-        this.members=source.readLong();
-        this.name = source.readString();
-        this.venue= source.readString();
-        this.milestone= source.readString();
-        this.dateCreated= source.readString();
-        this.milestoneDate= source.readString();
-        this.nextMeetingTime= source.readString();
-        this.bankName = source.readString();
-        this.accountNumber = source.readLong();
+    public String getChairPerson() {
+        return chairPerson;
     }
 
-    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
-        @Override
-        public ChamaPojo createFromParcel(Parcel in) {
-            return new ChamaPojo(in);
-        }
+    public void setChairPerson(String chairPerson) {
+        this.chairPerson = chairPerson;
+    }
 
-        @Override
-        public ChamaPojo[] newArray(int size) {
-            return new ChamaPojo[size];
-        }
-    };
+    public String getViceChair() {
+        return viceChair;
+    }
+
+    public void setViceChair(String viceChair) {
+        this.viceChair = viceChair;
+    }
+
+    public String getTreasurer() {
+        return treasurer;
+    }
+
+    public void setTreasurer(String treasurer) {
+        this.treasurer = treasurer;
+    }
+
+    public String getSecretary() {
+        return secretary;
+    }
+
+    public void setSecretary(String secretary) {
+        this.secretary = secretary;
+    }
 
     @Override
     public int describeContents() {
@@ -185,13 +194,47 @@ public class ChamaPojo implements Parcelable {
         dest.writeLong(this.totalAmount);
         dest.writeLong(this.amountExpected);
         dest.writeLong(this.members);
+        dest.writeLong(this.accountNumber);
         dest.writeString(this.name);
         dest.writeString(this.venue);
         dest.writeString(this.milestone);
         dest.writeString(this.dateCreated);
         dest.writeString(this.milestoneDate);
         dest.writeString(this.nextMeetingTime);
-        dest.writeLong(this.accountNumber);
         dest.writeString(this.bankName);
+        dest.writeString(this.chairPerson);
+        dest.writeString(this.viceChair);
+        dest.writeString(this.treasurer);
+        dest.writeString(this.secretary);
     }
+
+    protected ChamaPojo(Parcel in) {
+        this.totalAmount = in.readLong();
+        this.amountExpected = in.readLong();
+        this.members = in.readLong();
+        this.accountNumber = in.readLong();
+        this.name = in.readString();
+        this.venue = in.readString();
+        this.milestone = in.readString();
+        this.dateCreated = in.readString();
+        this.milestoneDate = in.readString();
+        this.nextMeetingTime = in.readString();
+        this.bankName = in.readString();
+        this.chairPerson = in.readString();
+        this.viceChair = in.readString();
+        this.treasurer = in.readString();
+        this.secretary = in.readString();
+    }
+
+    public static final Creator<ChamaPojo> CREATOR = new Creator<ChamaPojo>() {
+        @Override
+        public ChamaPojo createFromParcel(Parcel source) {
+            return new ChamaPojo(source);
+        }
+
+        @Override
+        public ChamaPojo[] newArray(int size) {
+            return new ChamaPojo[size];
+        }
+    };
 }
