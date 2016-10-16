@@ -28,7 +28,13 @@ public class Contract {
     public static final String CHAMA_GROUPS = "chamaGroups";
 
     public static final String CHAMA_NODE = "chamas";
+    /**node in chama node to show the officials of the chama*/
     public static final String CHAMA_ROLES = "roles";
+    public static final String CHAIR_PERSION = "chairperson";
+    public static final String VICE_CHAIR = "viceChair";
+    public static final String TREASURER = "treasurer";
+    public static final String SECRETARY = "secretary";
+
     public static final String STATEMENT_NODE ="statements";
     public static final String MEMBERS_NODE = "members";
     public static final String USERS_NODE = "users";

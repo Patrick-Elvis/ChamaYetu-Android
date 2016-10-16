@@ -6,7 +6,6 @@ import android.util.Log;
 
 import com.chamayetu.chamayetu.models.ActivityModel;
 import com.chamayetu.chamayetu.models.ChamaPojo;
-import com.chamayetu.chamayetu.models.MembersModel;
 import com.chamayetu.chamayetu.models.Projects;
 import com.chamayetu.chamayetu.models.StatementPojo;
 import com.chamayetu.chamayetu.models.UserPojo;
@@ -25,6 +24,7 @@ import java.util.Locale;
 import java.util.Map;
 
 import static com.chamayetu.chamayetu.utils.Contract.ACTIVITY_NODE;
+import static com.chamayetu.chamayetu.utils.Contract.CHAIR_PERSION;
 import static com.chamayetu.chamayetu.utils.Contract.CHAMA_GROUPS;
 import static com.chamayetu.chamayetu.utils.Contract.CHAMA_NODE;
 import static com.chamayetu.chamayetu.utils.Contract.CHAMA_ROLES;
@@ -40,9 +40,8 @@ import static com.chamayetu.chamayetu.utils.Contract.USERS_NODE;
  * Description: Registers new users and chamas to all nodes
  */
 
-public class RegisterNewUserChama {
-    public static final String TAG  = RegisterUserActivity.REGISTERACT_TAG;
-    private FirebaseAuth mAuth;
+class RegisterNewUserChama {
+    private static final String TAG  = RegisterUserActivity.REGISTERACT_TAG;
     private DatabaseReference mDatabaseReference;
     private RegisterInteractor.OnRegisterNewChamaFinishedListener registerChamaListener;
     private ChamaPojo chamaPojo;
@@ -55,8 +54,8 @@ public class RegisterNewUserChama {
     public RegisterNewUserChama(){}
 
     /**constructor to initialize registration of new Chama*/
-    public RegisterNewUserChama(Context context, FirebaseAuth mAuth, DatabaseReference mDatabaseReference, RegisterInteractor.OnRegisterNewChamaFinishedListener registerChamaListener, ChamaPojo chamaPojo){
-        this.mAuth = mAuth;
+    RegisterNewUserChama(Context context, FirebaseAuth mAuth, DatabaseReference mDatabaseReference, RegisterInteractor.OnRegisterNewChamaFinishedListener registerChamaListener, ChamaPojo chamaPojo){
+        FirebaseAuth mAuth1 = mAuth;
         this.mDatabaseReference = mDatabaseReference;
         this.registerChamaListener = registerChamaListener;
         this.chamaPojo = chamaPojo;
@@ -65,7 +64,7 @@ public class RegisterNewUserChama {
 
     /**registers the new chama to the chama node
      * Creates nodes for the new chama at the specified nodes, activity node, statement, projects, milestones, members*/
-    public void newChama(String chamaName, ChamaPojo newChama){
+    void newChama(String chamaName, ChamaPojo newChama){
         Calendar c = Calendar.getInstance();
 
         SimpleDateFormat df = new SimpleDateFormat("MMMM-dd-yyyy", Locale.ENGLISH);
@@ -120,7 +119,8 @@ public class RegisterNewUserChama {
 
                     /*update the chama roles, with initial value being for the chairperson
                     * Other values are null, until other user's are invited*/
-                    chamaPojo = new ChamaPojo(username,"","","");
+                    Map<String, String> chamaRolesMap = new HashMap<>();
+                    chamaRolesMap.put(CHAIR_PERSION, username);
 
                     /*put values in the maps to later update the respective nodes*/
                     newStatementNode.put(chamaNameKey, statementPojo);
@@ -129,7 +129,7 @@ public class RegisterNewUserChama {
                     newActivityNode.put(chamaNameKey, activityModelMap);
                     newMembersNode.put(chamaNameKey,newMember);
                     newChamaGroups.put(CHAMA_GROUPS, newChamaGroupMap);
-                    chamaRoles.put(CHAMA_ROLES, chamaPojo);
+                    chamaRoles.put(CHAMA_ROLES, chamaRolesMap);
 
                     //update all the nodes for the new chama with default values
                     mDatabaseReference.child(STATEMENT_NODE).updateChildren(newStatementNode);

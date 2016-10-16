@@ -11,8 +11,6 @@ import android.os.Parcelable;
  */
 
 public class Projects implements Parcelable {
-    /*  "projDate" : "October 1st 2016",
-          "projName" : "Start a coffee shop"*/
     private String projDate,projName;
 
     public Projects(){}
