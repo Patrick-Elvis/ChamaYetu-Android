@@ -32,7 +32,7 @@ import java.util.Map;
  */
 
 public class RegisterNewUserChama {
-    public static final String TAG  = RegisterActivity.REGISTERACT_TAG;
+    public static final String TAG  = RegisterUserActivity.REGISTERACT_TAG;
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabaseReference;
     private RegisterInteractor.OnRegisterNewChamaFinishedListener registerChamaListener;
@@ -57,7 +57,7 @@ public class RegisterNewUserChama {
 
     /**registers the new chama to the chama node
      * Creates nodes for the new chama at the specified nodes, activity node, statement, projects, milestones, members*/
-    public void newChama(Context context, String chamaName, ChamaPojo newChama){
+    public void newChama(String chamaName, ChamaPojo newChama){
         Calendar c = Calendar.getInstance();
 
         SimpleDateFormat df = new SimpleDateFormat("MMMM-dd-yyyy", Locale.ENGLISH);
@@ -87,7 +87,9 @@ public class RegisterNewUserChama {
 
                     /**todo: get real date of chama creation*/
                     statementPojo = new StatementPojo(currentDate,currentDate, chamaName + " Statement", 0, 0, 0);
-                    membersModel = new MembersModel(username, true);
+                    //membersModel = new MembersModel(username, true);
+                    Map<String, Boolean> newMember = new HashMap<>();
+                    newMember.put(username, true);
 
                     /*add the projects model to a map to later add the map to the node*/
                     projects = new Projects("","");
@@ -103,7 +105,7 @@ public class RegisterNewUserChama {
                     newChamaNode.put(chamaNameKey, newChama);
                     newProjectNode.put(chamaNameKey, projectsMap);
                     newActivityNode.put(chamaNameKey, activityModelMap);
-                    newMembersNode.put(chamaNameKey,membersModel);
+                    newMembersNode.put(chamaNameKey,newMember);
 
                     //update all the nodes for the new chama
                     mDatabaseReference.child(Contract.STATEMENT_NODE).updateChildren(newStatementNode);

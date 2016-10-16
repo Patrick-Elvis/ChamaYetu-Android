@@ -4,7 +4,7 @@ package com.chamayetu.chamayetu.register;
  * ChamaYetu
  * com.chamayetu.chamayetu.register
  * Created by lusinabrian on 15/10/16.
- * Description: Calls methods whenever there is user interaction in the RegisterActivity
+ * Description: Calls methods whenever there is user interaction in the RegisterUserActivity
  * */
 
 public interface RegisterView {

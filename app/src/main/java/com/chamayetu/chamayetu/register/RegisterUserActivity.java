@@ -38,9 +38,9 @@ import butterknife.ButterKnife;
  * Created by lusinabrian on 30/09/16.
  * Description: Register Activity class for a new user
  */
-public class RegisterActivity extends AppCompatActivity implements RegisterView.RegisterUser, View.OnClickListener{
+public class RegisterUserActivity extends AppCompatActivity implements RegisterView.RegisterUser, View.OnClickListener{
 
-    public static final String REGISTERACT_TAG = RegisterActivity.class.getSimpleName();
+    public static final String REGISTERACT_TAG = RegisterUserActivity.class.getSimpleName();
 
     /*UI views*/
     @BindView(R.id.signup_name_id) EditText signUpName;
@@ -54,17 +54,16 @@ public class RegisterActivity extends AppCompatActivity implements RegisterView.
 
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
-    private DatabaseReference mDatabaseRef;
     private RegisterPresenter registerPresenter;
     private MaterialDialog materialDialog;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.registeractivity);
+        setContentView(R.layout.register_user_activity);
         ButterKnife.bind(this);
         mAuth = FirebaseAuth.getInstance();
-        mDatabaseRef = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference mDatabaseRef = FirebaseDatabase.getInstance().getReference();
 
         mAuthListener = firebaseAuth -> {
             FirebaseUser user = firebaseAuth.getCurrentUser();
@@ -83,7 +82,7 @@ public class RegisterActivity extends AppCompatActivity implements RegisterView.
         floatingActionButton.setOnClickListener(this);
         signUpButton.setOnClickListener(this);
 
-        registerPresenter = new RegisterPresenterImpl(this, RegisterActivity.this, mAuth, mDatabaseRef);
+        registerPresenter = new RegisterPresenterImpl(this, RegisterUserActivity.this, mAuth, mDatabaseRef);
 
     }
 
@@ -154,7 +153,7 @@ public class RegisterActivity extends AppCompatActivity implements RegisterView.
                 cardViewAdd.setVisibility(View.INVISIBLE);
                 super.onAnimationEnd(animation);
                 floatingActionButton.setImageResource(R.drawable.plus);
-                RegisterActivity.super.onBackPressed();
+                RegisterUserActivity.super.onBackPressed();
             }
 
             @Override
@@ -193,7 +192,7 @@ public class RegisterActivity extends AppCompatActivity implements RegisterView.
 
     @Override
     public void showProgress() {
-        materialDialog = new MaterialDialog.Builder(this)
+        materialDialog = new MaterialDialog.Builder(this.getApplicationContext())
                 .title(R.string.progress_dialog_title)
                 .content(R.string.please_wait)
                 .progress(true, 0)
@@ -210,13 +209,13 @@ public class RegisterActivity extends AppCompatActivity implements RegisterView.
 
     @Override
     public void setEmailError() {
-        requestFocus(signUpEmail);
+        signUpEmail.setError(getString(R.string.err_msg_email));
     }
 
     @Override
     public void setPasswordError() {
-        requestFocus(signUpPassword);
-        requestFocus(retypePassword);
+        signUpPassword.setError(getString(R.string.err_msg_password_match));
+        retypePassword.setError(getString(R.string.err_msg_password_match));
     }
 
     @Override
@@ -226,12 +225,12 @@ public class RegisterActivity extends AppCompatActivity implements RegisterView.
 
     @Override
     public void setPhoneNoError(){
-        requestFocus(signUpPhoneNo);
+        signUpPhoneNo.setError(getString(R.string.err_msg_phone));
     }
 
     @Override
     public void setFullNameError(){
-        requestFocus(signUpName);
+        signUpName.setError(getString(R.string.err_msg_name));
     }
 
     @Override
@@ -260,10 +259,4 @@ public class RegisterActivity extends AppCompatActivity implements RegisterView.
 
     }
 
-    /**sets the focus to the edit text with the error message*/
-    private void requestFocus(View view) {
-        if(view.requestFocus()) {
-            this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
-        }
-    }
 }

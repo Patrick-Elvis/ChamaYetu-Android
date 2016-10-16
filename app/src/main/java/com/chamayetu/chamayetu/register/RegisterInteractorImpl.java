@@ -33,7 +33,7 @@ import java.util.Map;
  */
 
 public class RegisterInteractorImpl implements RegisterInteractor {
-    private static final String TAG = RegisterActivity.REGISTERACT_TAG;
+    private static final String TAG = RegisterUserActivity.REGISTERACT_TAG;
 
     @Override
     public void registerNewUser(Context context, String name, String email, String password, String retypePassword, long phoneNumber, FirebaseAuth mAuth, DatabaseReference mDatabaseReference, OnRegistrationFinishedListener listener) {
@@ -67,9 +67,12 @@ public class RegisterInteractorImpl implements RegisterInteractor {
                             writeNewUser(context, name, email, "chairperson", phoneNumber, mDatabaseReference,
                                     listener);
                             /*send email verification*/
-                            mAuth.addAuthStateListener(firebaseAuth -> firebaseAuth.getCurrentUser()
-                                    .sendEmailVerification());
-                            //listener.onSuccess();
+                            try{
+                                mAuth.addAuthStateListener(firebaseAuth -> firebaseAuth.getCurrentUser()
+                                        .sendEmailVerification());
+                            }catch (NullPointerException npe){
+                                Log.e(TAG+"EMAILVerification:", npe.getMessage());
+                            }
                         }
                     });
         }
@@ -112,7 +115,7 @@ public class RegisterInteractorImpl implements RegisterInteractor {
 
             RegisterNewUserChama registerNewUserChama = new RegisterNewUserChama(context, mAuth,mDatabaseReference,listener, newChama);
 
-            registerNewUserChama.newChama(context, chamaName, newChama);
+            registerNewUserChama.newChama(chamaName, newChama);
         }
     }
 

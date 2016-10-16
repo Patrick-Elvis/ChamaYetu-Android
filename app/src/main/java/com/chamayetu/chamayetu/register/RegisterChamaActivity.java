@@ -5,10 +5,10 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.afollestad.materialdialogs.Theme;
 import com.chamayetu.chamayetu.R;
 import com.chamayetu.chamayetu.main.MainActivity;
 import com.google.firebase.auth.FirebaseAuth;
@@ -41,7 +41,7 @@ public class RegisterChamaActivity extends AppCompatActivity implements Register
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.register_chama_form);
+        setContentView(R.layout.register_chama_activity);
         ButterKnife.bind(this);
 
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
@@ -75,28 +75,29 @@ public class RegisterChamaActivity extends AppCompatActivity implements Register
 
     @Override
     public void setChamaNameError() {
-        requestFocus(chamaNameView);
+        chamaNameView.setError(getString(R.string.chamaname_error));
     }
 
     @Override
     public void setChamaMemberNumbers() {
-     requestFocus(chamaMemberNumbersView);
+     chamaMemberNumbersView.setError(getString(R.string.chamamembers_error));
     }
 
     @Override
     public void setBankNameError() {
-        requestFocus(chamaBankNameView);
+        chamaBankNameView.setError(getString(R.string.chamabank_error));
     }
 
     @Override
     public void setBankAccountError() {
-        requestFocus(chamaAccountNoView);
+       chamaAccountNoView.setError(getString(R.string.chamaaccount_error));
     }
 
     @Override
     public void showProgress() {
-        materialDialog = new MaterialDialog.Builder(this)
+        materialDialog = new MaterialDialog.Builder(this.getApplicationContext())
                 .title(R.string.progress_dialog_title)
+                .theme(Theme.DARK)
                 .content(R.string.please_wait)
                 .progress(true, 0)
                 .show();
@@ -120,12 +121,4 @@ public class RegisterChamaActivity extends AppCompatActivity implements Register
         startActivity(new Intent(this, MainActivity.class));
         finish();
     }
-
-    /**sets the focus to the edit text with the error message*/
-    private void requestFocus(View view) {
-        if(view.requestFocus()) {
-            this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
-        }
-    }
-
 }

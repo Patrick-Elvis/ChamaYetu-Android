@@ -23,7 +23,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.chamayetu.chamayetu.R;
 import com.chamayetu.chamayetu.main.MainActivity;
-import com.chamayetu.chamayetu.register.RegisterActivity;
+import com.chamayetu.chamayetu.register.RegisterUserActivity;
 
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -110,9 +110,9 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                         ActivityOptions options =
                                 ActivityOptions.makeSceneTransitionAnimation(this, floatingActionButton, floatingActionButton.getTransitionName());
-                        startActivity(new Intent(this, RegisterActivity.class), options.toBundle());
+                        startActivity(new Intent(this, RegisterUserActivity.class), options.toBundle());
                     } else {
-                        startActivity(new Intent(this, RegisterActivity.class));
+                        startActivity(new Intent(this, RegisterUserActivity.class));
                     }
                 break;
 
