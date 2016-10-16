@@ -16,6 +16,7 @@ import java.util.List;
 public class Contract {
     public static final String TWITTER_KEY = BuildConfig.TWITTER_CONSUMER_KEY;
     public static final String TWITTER_CONSUMER_SECRET = BuildConfig.TWITTER_CONSUMER_KEY;
+    public static final int REQUEST_INVITE = 1;
 
     public static final String NOTIFICATION_SP_FILE = "Notifications";
     public static final String NOTIFICATION_SP_KEY="NotificationCount";
@@ -34,6 +35,7 @@ public class Contract {
     public static final String VICE_CHAIR = "viceChair";
     public static final String TREASURER = "treasurer";
     public static final String SECRETARY = "secretary";
+
 
     public static final String STATEMENT_NODE ="statements";
     public static final String MEMBERS_NODE = "members";

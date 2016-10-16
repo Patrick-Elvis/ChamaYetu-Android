@@ -4,6 +4,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
+        android:id="@+id/settings_invite"
+        android:title="@string/settings_invite"
+        app:showAsAction="never"/>
+
+    <item
         android:id="@+id/settings_menu"
         android:title="@string/settings_menu"
         app:showAsAction="never"/>

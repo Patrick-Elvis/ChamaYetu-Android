@@ -289,12 +289,11 @@
     <string name="chamamembers_error">Value can not be 0</string>
     <string name="chamabank_error">Field can not be blank</string>
     <string name="chamaaccount_error">Field can not be blank</string>
+    <string name="settings_invite">Invite</string>
 
-    <string-array name="chama_roles_array">
-        <item>Chairperson</item>
-        <item>Vice-chair</item>
-        <item>Treasurer</item>
-        <item>Secretary</item>
-        <item>Member</item>
-    </string-array>
+    <!--invitation strings-->
+    <string name="invitation_message">Please join me at ChamaYetu.</string>
+    <string name="invitation_cta">Join</string>
+    <string name="invitation_title">ChamaYetu Invite</string>
+
 </resources>

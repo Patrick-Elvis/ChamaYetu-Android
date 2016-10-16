@@ -6,7 +6,6 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -29,8 +28,10 @@ import com.chamayetu.chamayetu.models.Projects;
 import com.chamayetu.chamayetu.settings.SettingsActivity;
 import com.chamayetu.chamayetu.useraccount.UserAccountActivity;
 import com.chamayetu.chamayetu.utils.Contract;
-import com.chamayetu.chamayetu.utils.SingletonStash;
+import com.chamayetu.chamayetu.utils.UtilityMethods;
 import com.chamayetu.chamayetu.widgets.Fab;
+import com.google.android.gms.appinvite.AppInviteInvitation;
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -60,10 +61,12 @@ import com.sdsmdg.tastytoast.TastyToast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import cn.pedant.SweetAlert.SweetAlertDialog;
+
 import android.text.InputType;
 
 import java.util.HashMap;
+
+import static com.chamayetu.chamayetu.utils.Contract.REQUEST_INVITE;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
     public static final String MAINACT_TAG = MainActivity.class.getSimpleName();
@@ -81,6 +84,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private int statusBarColor;
     private int projCount = 0;
     private DatabaseReference mDatabase;
+    private FirebaseAnalytics mFirebaseAnalytics;
 
     // Define UI elements
     @BindView(R.id.toolbar) Toolbar toolbar;
@@ -104,6 +108,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         // Initialize Firebase Remote Config.
         mFirebaseRemoteConfig = FirebaseRemoteConfig.getInstance();
+        // Initialize Firebase Measurement.
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
 
         if (mFirebaseUser == null) {
             // Not signed in, launch the Sign In activity
@@ -349,6 +355,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
+            /*invite a new user to the app*/
+            case R.id.settings_invite:
+                /*.setCustomImage(Uri.parse(getString(R.string.invitation_custom_image)))
+                *.setDeepLink(Uri.parse(getString(R.string.invitation_deep_link)))
+                * */
+                Intent intent = new AppInviteInvitation.IntentBuilder(getString(R.string.invitation_title))
+                        .setMessage(getString(R.string.invitation_message))
+                        .setCallToActionText(getString(R.string.invitation_cta))
+                        .build();
+                startActivityForResult(intent, REQUEST_INVITE);
+                return true;
             case R.id.settings_menu:
                 //open settings
                 startActivity(new Intent(this, SettingsActivity.class));
@@ -364,6 +381,33 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Log.d(MAINACT_TAG, "onActivityResult: requestCode=" + requestCode + ", resultCode=" + resultCode);
+
+        if (requestCode == REQUEST_INVITE) {
+            if (resultCode == RESULT_OK) {
+                // Use Firebase Measurement to log that invitation was sent.
+                Bundle payload = new Bundle();
+                payload.putString(FirebaseAnalytics.Param.VALUE, "inv_sent");
+
+                // Check how many invitations were sent and log.
+                String[] ids = AppInviteInvitation.getInvitationIds(resultCode, data);
+                Log.d(MAINACT_TAG, "Invitations sent: " + ids.length);
+            } else {
+                // Use Firebase Measurement to log that invitation was not sent
+                Bundle payload = new Bundle();
+                payload.putString(FirebaseAnalytics.Param.VALUE, "inv_not_sent");
+                mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SHARE, payload);
+
+                // Sending failed or it was canceled, show failure message to the user
+                UtilityMethods.showToast(MainActivity.this,"Failed to send invitation", TastyToast.ERROR);
+                Log.d(MAINACT_TAG, "Failed to send invitation.");
+            }
         }
     }
 
@@ -384,7 +428,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         .positiveColor(ContextCompat.getColor(this, R.color.colorPrimaryDark))
                         .input(R.string.project_hint, R.string.project_hint_prefill, false,
                                 (dialog, input) -> {
-                                    SingletonStash.showToast(MainActivity.this, input.toString() + " submitted.",TastyToast.INFO);
+                                    UtilityMethods.showToast(MainActivity.this, input.toString() + " submitted.",TastyToast.INFO);
                                     Projects projects = new Projects("Oct 14 2016",input.toString());
                                     HashMap<String, Projects> proj = new HashMap<>();
                                     proj.put("proj" + String.valueOf(projCount+=1), projects);

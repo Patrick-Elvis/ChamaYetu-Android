@@ -12,7 +12,7 @@ import com.sdsmdg.tastytoast.TastyToast;
  * Simply override the methods
  */
 
-public class SingletonStash {
+public class UtilityMethods {
 
     public static void showToast(Context context, String message, int messageType) {
         TastyToast.makeText(context, message, TastyToast.LENGTH_SHORT, messageType);
