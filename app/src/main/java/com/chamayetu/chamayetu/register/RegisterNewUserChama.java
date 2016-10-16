@@ -41,7 +41,6 @@ public class RegisterNewUserChama {
     private StatementPojo statementPojo;
     private ActivityModel activityModel;
     private Projects projects;
-    private MembersModel membersModel;
     private Context context;
 
     public RegisterNewUserChama(){}
@@ -84,10 +83,10 @@ public class RegisterNewUserChama {
                     Map<String, Object> newProjectNode = new HashMap<>();
                     Map<String, Object> newActivityNode = new HashMap<>();
                     Map<String, Object> newMembersNode = new HashMap<>();
+                    Map<String, Object> newChamaGroups = new HashMap<>();
 
                     /**todo: get real date of chama creation*/
                     statementPojo = new StatementPojo(currentDate,currentDate, chamaName + " Statement", 0, 0, 0);
-                    //membersModel = new MembersModel(username, true);
                     Map<String, Boolean> newMember = new HashMap<>();
                     newMember.put(username, true);
 

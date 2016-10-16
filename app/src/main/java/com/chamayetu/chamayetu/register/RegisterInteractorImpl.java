@@ -153,7 +153,7 @@ public class RegisterInteractorImpl implements RegisterInteractor {
 
         // obtain only the first part of the email address
         int index = email.indexOf('@');
-        String userName = email.substring(0, index);
+        String userName = email.substring(0, index).toLowerCase();
 
         userPrefEditor.putString("CurrentUserName", userName);
         userPrefEditor.apply();
@@ -175,7 +175,7 @@ public class RegisterInteractorImpl implements RegisterInteractor {
                 }else{
                     //perform write operation, adding new user
                     Map<String, Object> userHash = new HashMap<>();
-                    userHash.put(name, newUser);
+                    userHash.put(userName, newUser);
                     mDatabaseReference.child(Contract.USERS_NODE).updateChildren(userHash);
                     listener.onSuccess();
                 }

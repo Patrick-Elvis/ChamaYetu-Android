@@ -95,7 +95,7 @@ public class RegisterChamaActivity extends AppCompatActivity implements Register
 
     @Override
     public void showProgress() {
-        materialDialog = new MaterialDialog.Builder(this.getApplicationContext())
+        materialDialog = new MaterialDialog.Builder(RegisterChamaActivity.this)
                 .title(R.string.progress_dialog_title)
                 .theme(Theme.DARK)
                 .content(R.string.please_wait)

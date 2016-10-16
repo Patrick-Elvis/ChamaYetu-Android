@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.afollestad.materialdialogs.Theme;
 import com.chamayetu.chamayetu.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -53,7 +54,6 @@ public class RegisterUserActivity extends AppCompatActivity implements RegisterV
     @BindView(R.id.fab) FloatingActionButton floatingActionButton;
 
     private FirebaseAuth mAuth;
-    private FirebaseAuth.AuthStateListener mAuthListener;
     private RegisterPresenter registerPresenter;
     private MaterialDialog materialDialog;
 
@@ -64,17 +64,6 @@ public class RegisterUserActivity extends AppCompatActivity implements RegisterV
         ButterKnife.bind(this);
         mAuth = FirebaseAuth.getInstance();
         DatabaseReference mDatabaseRef = FirebaseDatabase.getInstance().getReference();
-
-        mAuthListener = firebaseAuth -> {
-            FirebaseUser user = firebaseAuth.getCurrentUser();
-            if (user != null) {
-                // User is signed in
-                Log.d(REGISTERACT_TAG, "onAuthStateChanged:signed_in:" + user.getUid());
-            } else {
-                // User is signed out
-                Log.d(REGISTERACT_TAG, "onAuthStateChanged:signed_out");
-            }
-        };
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             ShowEnterAnimation();
@@ -173,15 +162,12 @@ public class RegisterUserActivity extends AppCompatActivity implements RegisterV
     @Override
     public void onStart() {
         super.onStart();
-        mAuth.addAuthStateListener(mAuthListener);
+
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        if (mAuthListener != null) {
-            mAuth.removeAuthStateListener(mAuthListener);
-        }
     }
 
     @Override
@@ -192,8 +178,9 @@ public class RegisterUserActivity extends AppCompatActivity implements RegisterV
 
     @Override
     public void showProgress() {
-        materialDialog = new MaterialDialog.Builder(this.getApplicationContext())
+        materialDialog = new MaterialDialog.Builder(RegisterUserActivity.this)
                 .title(R.string.progress_dialog_title)
+                .theme(Theme.DARK)
                 .content(R.string.please_wait)
                 .progress(true, 0)
                 .show();
