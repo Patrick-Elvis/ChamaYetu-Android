@@ -2,7 +2,9 @@ package com.chamayetu.chamayetu.forgotpassword;
 
 import android.content.Context;
 
+import com.chamayetu.chamayetu.R;
 import com.google.firebase.auth.FirebaseAuth;
+import com.sdsmdg.tastytoast.TastyToast;
 
 /**
  * ChamaYetu
@@ -49,6 +51,7 @@ class ForgotPresenterImpl implements ForgotPresenter, ForgotPassInteractor.onSub
     @Override
     public void onSuccess() {
         if(forgotPassView != null){
+            forgotPassView.displayToast(context.getString(R.string.display_reset_email), TastyToast.SUCCESS);
             forgotPassView.navigateToLogin();
         }
     }

@@ -304,5 +304,6 @@
     <string name="cancel_password">Cancel</string>
     <string name="submit_pass_reset">Submit</string>
     <string name="reset_password">Reset Password</string>
+    <string name="display_reset_email">Password reset sent, please check your email.</string>
 
 </resources>
