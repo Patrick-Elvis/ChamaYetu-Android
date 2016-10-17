@@ -3,6 +3,8 @@ package com.chamayetu.chamayetu.login;
 import android.annotation.TargetApi;
 import android.app.ActivityOptions;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityOptionsCompat;
@@ -22,6 +24,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.chamayetu.chamayetu.R;
+import com.chamayetu.chamayetu.introduction.IntroScreen;
 import com.chamayetu.chamayetu.main.MainActivity;
 import com.chamayetu.chamayetu.register.RegisterUserActivity;
 
@@ -104,7 +107,29 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     /**method to check if this is the first start of the application for the user
      * THis is in order to show the brief app intros*/
     private void checkFirstStart() {
+        Thread thread = new Thread(() -> {
+            /*initialize the shared preferences*/
+            SharedPreferences getPrefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
 
+            /*create a new boolean and set it to true*/
+            boolean isFirstStart = getPrefs.getBoolean("firstStart", true);
+            /*if the activity has never started before, begin the app intros*/
+            if(isFirstStart){
+
+                /*start the intro screen*/
+                startActivity(new Intent(LoginActivity.this, IntroScreen.class));
+                SharedPreferences.Editor editor = getPrefs.edit();
+
+                //edit preferences to make it false to not start a second time
+                editor.putBoolean("firstStart", false);
+
+                //apply these changes
+                editor.apply();
+            }
+        });
+        
+        /*start our thread*/
+        thread.start();
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)

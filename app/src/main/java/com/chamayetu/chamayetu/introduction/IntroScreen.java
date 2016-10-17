@@ -48,9 +48,6 @@ public class IntroScreen extends AppIntro2 {
                 ContextCompat.getColor(getApplicationContext(),R.color.foreground1))
         );
 
-        /*final screen*/
-        addSlide(AppIntro2Fragment.newInstance());
-
         /*set the depth animation*/
         setDepthAnimation();
 
