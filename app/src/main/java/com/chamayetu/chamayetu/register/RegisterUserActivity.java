@@ -72,7 +72,6 @@ public class RegisterUserActivity extends AppCompatActivity implements RegisterV
         signUpButton.setOnClickListener(this);
 
         registerPresenter = new RegisterPresenterImpl(this, RegisterUserActivity.this, mAuth, mDatabaseRef);
-
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
@@ -243,7 +242,5 @@ public class RegisterUserActivity extends AppCompatActivity implements RegisterV
                 animateRevealClose();
                 break;
         }
-
     }
-
 }

@@ -22,5 +22,4 @@ public interface ForgotPasswordView {
      * @param message The message to display
      * @param messageType the error type to display*/
     void displayToast(String message, int messageType);
-
 }

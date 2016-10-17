@@ -8,8 +8,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.afollestad.materialdialogs.MaterialDialog;
+import com.afollestad.materialdialogs.Theme;
 import com.chamayetu.chamayetu.R;
 import com.chamayetu.chamayetu.login.LoginActivity;
+import com.google.firebase.auth.FirebaseAuth;
+import com.sdsmdg.tastytoast.TastyToast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -22,19 +26,33 @@ import butterknife.ButterKnife;
  */
 
 public class ForgotPassword extends AppCompatActivity implements ForgotPasswordView,View.OnClickListener{
+    public static final String FORGOTPASS_TAG = ForgotPassword.class.getSimpleName();
 
     @BindView(R.id.cancel_return) Button cancelBtn;
     @BindView(R.id.submit_password_reset) Button submitPasswordReset;
     @BindView(R.id.forgot_email) EditText forgotEmail;
+    private ForgotPresenter forgotPresenter;
+    private MaterialDialog materialDialog;
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.forgotpassword_layout);
         ButterKnife.bind(this);
+        mAuth = FirebaseAuth.getInstance();
+
+        /*create an object of the PresenterImpl and pass it to the presenter*/
+        forgotPresenter = new ForgotPresenterImpl(ForgotPassword.this, this, mAuth);
 
         cancelBtn.setOnClickListener(this);
         submitPasswordReset.setOnClickListener(this);
+    }
+
+    @Override
+    protected void onDestroy() {
+        forgotPresenter.onDestroy();
+        super.onDestroy();
     }
 
     @Override
@@ -48,28 +66,35 @@ public class ForgotPassword extends AppCompatActivity implements ForgotPasswordV
             case R.id.submit_password_reset:
                 /*submit the user email*/
                 String email = forgotEmail.getText().toString().trim();
-
+                forgotPresenter.validateUserCredentials(email);
                 break;
         }
     }
 
     @Override
     public void setEmailError() {
-
+        forgotEmail.setError(R.string.error_invalid_email);
     }
 
     @Override
     public void displayProgress() {
-
+        materialDialog = new MaterialDialog.Builder(ForgotPassword.this)
+                .title(R.string.progress_dialog_title)
+                .theme(Theme.DARK)
+                .content(R.string.please_wait)
+                .progress(true, 0)
+                .show();
     }
 
     @Override
     public void hideProgress() {
-
+        if(materialDialog.isShowing()){
+            materialDialog.dismiss();
+        }
     }
 
     @Override
     public void displayToast(String message, int messageType) {
-
+        TastyToast.makeText(ForgotPassword.this,message, TastyToast.LENGTH_SHORT, messageType);
     }
 }

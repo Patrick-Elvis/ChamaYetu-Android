@@ -12,7 +12,7 @@ import com.google.firebase.database.DatabaseReference;
  * Description:Presenter implementation calls view methods to update the UI by calling view interface.
  */
 
-public class RegisterPresenterImpl implements RegisterPresenter, RegisterInteractor.OnRegistrationFinishedListener, RegisterInteractor.OnRegisterNewChamaFinishedListener {
+class RegisterPresenterImpl implements RegisterPresenter, RegisterInteractor.OnRegistrationFinishedListener, RegisterInteractor.OnRegisterNewChamaFinishedListener {
 
     private RegisterView.RegisterChama registerChamaView;
     private RegisterView.RegisterUser registerUserView;
@@ -21,7 +21,7 @@ public class RegisterPresenterImpl implements RegisterPresenter, RegisterInterac
     private DatabaseReference mDatabaseReference;
     private Context context;
 
-    public RegisterPresenterImpl(RegisterView.RegisterUser registerUserView, Context context, FirebaseAuth mAuth, DatabaseReference mDatabaseRef) {
+    RegisterPresenterImpl(RegisterView.RegisterUser registerUserView, Context context, FirebaseAuth mAuth, DatabaseReference mDatabaseRef) {
         this.registerUserView = registerUserView;
         this.registerInteractor = new RegisterInteractorImpl();
         this.mAuth = mAuth;
@@ -29,7 +29,7 @@ public class RegisterPresenterImpl implements RegisterPresenter, RegisterInterac
         this.context = context;
     }
 
-    public RegisterPresenterImpl(RegisterView.RegisterChama registerChamaView, Context context, FirebaseAuth mAuth, DatabaseReference mDatabaseRef) {
+    RegisterPresenterImpl(RegisterView.RegisterChama registerChamaView, Context context, FirebaseAuth mAuth, DatabaseReference mDatabaseRef) {
         this.registerChamaView = registerChamaView;
         this.registerInteractor = new RegisterInteractorImpl();
         this.mAuth = mAuth;
