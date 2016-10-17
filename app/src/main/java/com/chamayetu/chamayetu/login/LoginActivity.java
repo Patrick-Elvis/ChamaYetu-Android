@@ -24,6 +24,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.chamayetu.chamayetu.R;
+import com.chamayetu.chamayetu.forgotpassword.ForgotPassword;
 import com.chamayetu.chamayetu.introduction.IntroScreen;
 import com.chamayetu.chamayetu.main.MainActivity;
 import com.chamayetu.chamayetu.register.RegisterUserActivity;
@@ -59,8 +60,8 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
     @BindView(R.id.email) EditText mEmailView;
     @BindView(R.id.password) EditText mPasswordView;
-    @BindView(R.id.email_sign_in_button)Button mEmailSignInButton;
-    @BindView(R.id.forgot_password_link) TextView forgotPassword;
+    @BindView(R.id.email_sign_in_button) Button mEmailSignInButton;
+    @BindView(R.id.forgot_password_link) Button forgotPassword;
     @BindView(R.id.fab) FloatingActionButton floatingActionButton;
 
     @BindView(R.id.google_signin_button) SignInButton googleSignInButton;
@@ -98,6 +99,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
         googleSignInButton.setOnClickListener(this);
         mEmailSignInButton.setOnClickListener(this);
+        forgotPassword.setOnClickListener(this);
 
         initSocialLogins();
 
@@ -133,7 +135,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    @OnClick({R.id.email_sign_in_button, R.id.fab, R.id.google_signin_button})
+    @OnClick({R.id.email_sign_in_button, R.id.fab, R.id.google_signin_button, R.id.forgot_password_link})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.fab:
@@ -163,6 +165,12 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                 /*handle google login*/
                 Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
                 startActivityForResult(signInIntent, RC_SIGN_IN);
+                break;
+
+            /*forgot password*/
+            case R.id.forgot_password_link:
+                /*handle forgot password*/
+                startActivity(new Intent(LoginActivity.this, ForgotPassword.class));
                 break;
         }
     }

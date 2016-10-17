@@ -301,5 +301,8 @@
     <string name="appdesc_2">Simple chama financial management</string>
     <string name="appintro_3">Live updates</string>
     <string name="appdesc_3">Get live updates on your chama wherever you are.</string>
+    <string name="cancel_password">Cancel</string>
+    <string name="submit_pass_reset">Submit</string>
+    <string name="reset_password">Reset Password</string>
 
 </resources>
