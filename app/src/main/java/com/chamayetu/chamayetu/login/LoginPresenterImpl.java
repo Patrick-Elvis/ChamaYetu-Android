@@ -1,15 +1,8 @@
 package com.chamayetu.chamayetu.login;
 
 import android.content.Context;
-import android.graphics.Color;
-import android.os.Parcelable;
-import android.view.View;
-import android.widget.Toast;
-
-import com.chamayetu.chamayetu.R;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.firebase.auth.FirebaseAuth;
-
-import cn.pedant.SweetAlert.SweetAlertDialog;
 
 /**
  * ChamaYetu
@@ -37,6 +30,14 @@ class LoginPresenterImpl implements LoginPresenter, LoginInteractor.OnLoginFinis
             loginView.displayProgress();
         }
         loginInteractor.loginUser(context, email,password,mAuth,this);
+    }
+
+    @Override
+    public void validateGoogleLogin(GoogleSignInAccount googleSignInAccount, FirebaseAuth mAuth, Context context) {
+        if(loginView != null){
+            loginView.displayProgress();
+        }
+
     }
 
     @Override

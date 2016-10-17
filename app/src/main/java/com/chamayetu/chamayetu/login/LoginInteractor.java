@@ -3,6 +3,7 @@ package com.chamayetu.chamayetu.login;
 import android.content.Context;
 
 import com.chamayetu.chamayetu.register.RegisterInteractor;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 
@@ -15,7 +16,7 @@ import com.google.firebase.database.DatabaseReference;
 
 public interface LoginInteractor {
 
-    /***/
+    /**Interface to handle Login with email and password*/
     interface OnLoginFinishedListener{
         /**what should happen whtn the email is invalid*/
         void onEmailError();
@@ -39,6 +40,7 @@ public interface LoginInteractor {
      * @param listener The listenr which will handle when the user finished the login session*/
     void loginUser(Context context, String email, String password, FirebaseAuth mAuth, OnLoginFinishedListener listener);
 
-
+    /**Login the user with their Google account*/
+    void loginUserWithGoogle(Context context, GoogleSignInAccount googleSignInAccount,FirebaseAuth mAuth);
 
 }

@@ -1,16 +1,14 @@
 package com.chamayetu.chamayetu.login;
 
+import android.app.Activity;
 import android.content.Context;
-import android.support.annotation.NonNull;
 import android.util.Log;
 
-import com.chamayetu.chamayetu.utils.Contract;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.GoogleAuthProvider;
 import com.sdsmdg.tastytoast.TastyToast;
-
 import static com.chamayetu.chamayetu.utils.Contract.LOGINACT_TAG;
 import static com.chamayetu.chamayetu.utils.UtilityMethods.isValidEmail;
 import static com.chamayetu.chamayetu.utils.UtilityMethods.validateLoginPassword;
@@ -52,5 +50,20 @@ class LoginInteractorImpl implements LoginInteractor{
                 }
             });
         }
+    }
+
+    @Override
+    public void loginUserWithGoogle(Context context, GoogleSignInAccount googleSignInAccount, FirebaseAuth mAuth) {
+        Log.d(LOGINACT_TAG, "FirebaseWithGoogleLogin: " + googleSignInAccount.getId());
+        AuthCredential credential = GoogleAuthProvider.getCredential(googleSignInAccount.getIdToken(), null);
+
+        mAuth.signInWithCredential(credential).addOnCompleteListener((Activity)context, task -> {
+            Log.d(LOGINACT_TAG, "SignInWithCredentialComplete: "+ task.isSuccessful());
+            if(!task.isSuccessful()){
+                Log.d(LOGINACT_TAG, "GoogleSignInFail: ", task.getException());
+            }else{
+
+            }
+        });
     }
 }
