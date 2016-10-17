@@ -73,7 +73,7 @@ public class ForgotPass extends AppCompatActivity implements ForgotPassView,View
 
     @Override
     public void setEmailError() {
-        forgotEmail.setError(R.string.error_invalid_email);
+        forgotEmail.setError(getString(R.string.error_invalid_email));
     }
 
     @Override

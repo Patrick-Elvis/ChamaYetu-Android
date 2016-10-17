@@ -11,7 +11,7 @@ import com.google.firebase.auth.FirebaseAuth;
  * Description:
  */
 
-public interface ForgotPassInteractor {
+interface ForgotPassInteractor {
 
     interface onSubmitListener{
         void onEmailError();

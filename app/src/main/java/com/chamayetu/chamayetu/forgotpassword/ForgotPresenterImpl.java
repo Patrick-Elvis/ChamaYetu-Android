@@ -30,7 +30,7 @@ class ForgotPresenterImpl implements ForgotPresenter, ForgotPassInteractor.onSub
             forgotPassView.displayProgress();
         }
         /*interactor will send the forgot password link to the email provided*/
-        forgotPassInteractor.sendPasswordReset(context, email, this);
+        forgotPassInteractor.sendPasswordReset(context, email,mAuth, this);
     }
 
     @Override

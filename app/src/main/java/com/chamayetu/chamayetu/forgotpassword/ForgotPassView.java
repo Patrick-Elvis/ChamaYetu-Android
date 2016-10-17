@@ -7,7 +7,7 @@ package com.chamayetu.chamayetu.forgotpassword;
  * Description: View interface to handle interaction with user
  */
 
-public interface ForgotPassView {
+interface ForgotPassView {
 
     /**display an error if the email entered is invalid or empty*/
     void setEmailError();

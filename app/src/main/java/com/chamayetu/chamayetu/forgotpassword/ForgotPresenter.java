@@ -7,7 +7,7 @@ package com.chamayetu.chamayetu.forgotpassword;
  * Description: Presenter to submit the email data to the models
  */
 
-public interface ForgotPresenter {
+interface ForgotPresenter {
 
     /**pass the email to the interactor*/
     void validateUserCredentials(String email);
