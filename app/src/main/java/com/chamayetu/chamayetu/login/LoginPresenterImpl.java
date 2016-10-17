@@ -22,11 +22,13 @@ class LoginPresenterImpl implements LoginPresenter, LoginInteractor.OnLoginFinis
     private Context context;
     private LoginView loginView;
     private FirebaseAuth mAuth;
+    private LoginInteractor loginInteractor;
 
     LoginPresenterImpl(Context context, LoginView loginView, FirebaseAuth mAuth){
         this.context = context;
         this.loginView = loginView;
         this.mAuth = mAuth;
+        this.loginInteractor = new LoginInteractorImpl();
     }
 
     @Override
@@ -34,6 +36,7 @@ class LoginPresenterImpl implements LoginPresenter, LoginInteractor.OnLoginFinis
         if(loginView != null){
             loginView.displayProgress();
         }
+        loginInteractor.loginUser(context, email,password,mAuth,this);
     }
 
     @Override

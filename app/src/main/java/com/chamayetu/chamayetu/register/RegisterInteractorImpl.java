@@ -25,6 +25,9 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
+import static com.chamayetu.chamayetu.utils.UtilityMethods.isValidEmail;
+import static com.chamayetu.chamayetu.utils.UtilityMethods.validateRegisterPassword;
+
 /**
  * ChamaYetu
  * com.chamayetu.chamayetu.registeruser
@@ -45,7 +48,7 @@ public class RegisterInteractorImpl implements RegisterInteractor {
             error = true;
         }
         /*if password is invalid*/
-        if(!validatePassword(password, retypePassword)) {
+        if(!validateRegisterPassword(password, retypePassword)) {
             listener.onPasswordError();
             error = true;
         }
@@ -117,30 +120,6 @@ public class RegisterInteractorImpl implements RegisterInteractor {
 
             registerNewUserChama.newChama(chamaName, newChama);
         }
-    }
-
-    /**VALIDATE user password
-     * Check if user password is valid, if the user password is empty, display an error
-     * If the user retype password and passwords do not match, display an error to user
-     * else, if all checks out, then return true
-     * @return boolean*/
-    //todo: increase security of password
-    private boolean validatePassword(String password, String retypePassword) {
-        if(TextUtils.isEmpty(password)|| TextUtils.isEmpty(retypePassword)){
-            return false;
-        }
-        /*if the passwords do not match*/
-        else if(!password.equals(retypePassword)){
-            return false;
-        }
-        return true;
-    }
-
-    /**validate user email
-     * @return boolean
-    **checks for a valid email address from a pattern*/
-    private boolean isValidEmail(String email) {
-        return !TextUtils.isEmpty(email) && Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
 
     /**Writes a new user to the Firebase Database at the User node*/

@@ -1,6 +1,7 @@
 package com.chamayetu.chamayetu.utils;
 
 import com.chamayetu.chamayetu.BuildConfig;
+import com.chamayetu.chamayetu.login.LoginActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +18,9 @@ public class Contract {
     public static final String TWITTER_KEY = BuildConfig.TWITTER_CONSUMER_KEY;
     public static final String TWITTER_CONSUMER_SECRET = BuildConfig.TWITTER_CONSUMER_KEY;
     public static final int REQUEST_INVITE = 1;
+
+    /*TAGS*/
+    public static final String LOGINACT_TAG = LoginActivity.class.getSimpleName();
 
     public static final String NOTIFICATION_SP_FILE = "Notifications";
     public static final String NOTIFICATION_SP_KEY="NotificationCount";
