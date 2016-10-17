@@ -38,7 +38,7 @@ public interface LoginInteractor {
      * @param mAuth FirebaseAuth to assist with user login
      * @param listener The listenr which will handle when the user finished the login session*/
     void loginUser(Context context, String email, String password, FirebaseAuth mAuth, OnLoginFinishedListener listener);
-    
+
 
 
 }

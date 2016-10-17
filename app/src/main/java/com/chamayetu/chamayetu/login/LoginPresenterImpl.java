@@ -18,7 +18,7 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
  * Description: Default implementation of the LoginPresenter
  */
 
-class LoginPresenterImpl implements LoginPresenter {
+class LoginPresenterImpl implements LoginPresenter, LoginInteractor.OnLoginFinishedListener {
     private Context context;
     private LoginView loginView;
     private FirebaseAuth mAuth;
@@ -42,4 +42,35 @@ class LoginPresenterImpl implements LoginPresenter {
     }
 
 
+    @Override
+    public void onEmailError() {
+        if(loginView != null){
+            loginView.hideProgress();
+            loginView.setEmailError();
+        }
+    }
+
+    @Override
+    public void onPasswordError() {
+        if(loginView != null){
+            loginView.hideProgress();
+            loginView.setPasswordError();
+        }
+    }
+
+    @Override
+    public void onSuccess() {
+        if(loginView != null){
+            loginView.hideProgress();
+            loginView.navigateToMain();
+        }
+    }
+
+    @Override
+    public void onTaskError(String message, int messageType) {
+        if(loginView != null){
+            loginView.hideProgress();
+            loginView.displayToast(message, messageType);
+        }
+    }
 }
