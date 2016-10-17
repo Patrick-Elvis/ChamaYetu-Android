@@ -48,9 +48,6 @@
         <!--For the registration slides-->
 
 
-        <!--brief login success page-->
-        <activity android:name=".login.LoginSuccess"/>
-
         <activity
             android:name=".main.MainActivity"
             android:label="@string/title_activity_main" />

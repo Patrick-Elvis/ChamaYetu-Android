@@ -184,7 +184,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                 //Google sign in was successful, authenticate with Firebase
                 GoogleSignInAccount googleSignInAccount = googleSignInResult.getSignInAccount();
                 if(LoginAuthHandler.handleGoogleLogin(googleSignInAccount,mAuth,LoginActivity.this)){
-                    startActivity(new Intent(LoginActivity.this, LoginSuccess.class));
+                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
                 }
             }
         }
@@ -250,7 +250,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     public void navigateToMain() {
         /*start the next activity, the MainActivity screen*/
         ActivityOptionsCompat oc2 = ActivityOptionsCompat.makeSceneTransitionAnimation(LoginActivity.this);
-        Intent i2 = new Intent(LoginActivity.this, LoginSuccess.class);
+        Intent i2 = new Intent(LoginActivity.this, MainActivity.class);
         startActivity(i2, oc2.toBundle());
         finish();
     }

@@ -46,7 +46,7 @@ class LoginInteractorImpl implements LoginInteractor{
                 Log.d(LOGINACT_TAG, "signInWithEmail:onComplete "+ task.isSuccessful());
                 if(!task.isSuccessful()){
                     Log.d(LOGINACT_TAG, "SignInWithEmail: ", task.getException());
-                    listener.onTaskError("Authentication failed", TastyToast.ERROR);
+                    listener.onTaskError("Email or password is invalid", TastyToast.ERROR);
                 } else {
                     listener.onSuccess();
                 }

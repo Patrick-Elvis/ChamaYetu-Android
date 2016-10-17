@@ -8,6 +8,8 @@ import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
 
+import static com.chamayetu.chamayetu.utils.Contract.LOGINACT_TAG;
+
 /**
  * ChamaYetu
  * com.chamayetu.chamayetu.login
@@ -17,12 +19,7 @@ import com.google.firebase.auth.GoogleAuthProvider;
 
 public class LoginAuthHandler{
     private static boolean success = false;
-    private static String TAG = LoginActivity.LOGINACT_TAG;
-    private static LoginPresenterImpl loginPresenter = new LoginPresenterImpl();
-
-    public LoginAuthHandler(LoginPresenterImpl loginPresenter){
-        LoginAuthHandler.loginPresenter = loginPresenter;
-    }
+    private static String TAG = LOGINACT_TAG;
 
 
     /**Handles Google Login, takes in GoogleSignInAccount from onActivityResult, gets token
@@ -32,7 +29,6 @@ public class LoginAuthHandler{
      * @param auth Firebase Auth that will be used to sign in this particular user to Firebase*/
     public static boolean handleGoogleLogin(GoogleSignInAccount account, FirebaseAuth auth, Context context){
         Log.d(TAG, "FirebaseWithGoogleLogin: " + account.getId());
-        loginPresenter.showProgressDialog(context);
         AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
 
         auth.signInWithCredential(credential).addOnCompleteListener((Activity)context, task -> {
@@ -40,8 +36,6 @@ public class LoginAuthHandler{
            if(!task.isSuccessful()){
                Log.d(TAG, "GoogleSignInFail: ", task.getException());
                success = !task.isSuccessful();
-               loginPresenter.dismissProgressDialog(context, success);
-               loginPresenter.displayErrorMessage(context, "Failed to login with Google");
            }else{
                success = task.isSuccessful();
            }
