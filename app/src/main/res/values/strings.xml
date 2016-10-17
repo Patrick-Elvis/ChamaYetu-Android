@@ -295,5 +295,11 @@
     <string name="invitation_message">Please join me at ChamaYetu.</string>
     <string name="invitation_cta">Join</string>
     <string name="invitation_title">ChamaYetu Invite</string>
+    <string name="appintro">Welcome to ChamaYetu</string>
+    <string name="appdesc">A simple chama management plartform.</string>
+    <string name="appintro_2">Chama management</string>
+    <string name="appdesc_2">Simple chama financial management</string>
+    <string name="appintro_3">Live updates</string>
+    <string name="appdesc_3">Get live updates on your chama wherever you are.</string>
 
 </resources>

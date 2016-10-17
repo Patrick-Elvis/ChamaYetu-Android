@@ -97,6 +97,14 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         mEmailSignInButton.setOnClickListener(this);
 
         initSocialLogins();
+
+        checkFirstStart();
+    }
+
+    /**method to check if this is the first start of the application for the user
+     * THis is in order to show the brief app intros*/
+    private void checkFirstStart() {
+
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
