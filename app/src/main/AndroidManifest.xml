@@ -28,6 +28,8 @@
         <!--brief intro screen for the application, only displayed once-->
         <activity android:name=".introduction.IntroScreen"/>
 
+        <activity android:name=".forgotpassword.ForgotPass"/>
+
         <activity
             android:name=".login.LoginActivity"
             android:label="@string/app_name">
