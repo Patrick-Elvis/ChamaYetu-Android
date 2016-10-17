@@ -1,11 +1,9 @@
 package com.chamayetu.chamayetu.login;
 
 import android.content.Context;
-
-import com.chamayetu.chamayetu.register.RegisterInteractor;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
+
 
 /**
  * ChamaYetu
@@ -41,6 +39,6 @@ public interface LoginInteractor {
     void loginUser(Context context, String email, String password, FirebaseAuth mAuth, OnLoginFinishedListener listener);
 
     /**Login the user with their Google account*/
-    void loginUserWithGoogle(Context context, GoogleSignInAccount googleSignInAccount,FirebaseAuth mAuth);
+    void loginUserWithGoogle(Context context, GoogleSignInAccount googleSignInAccount,FirebaseAuth mAuth, OnLoginFinishedListener listener);
 
 }

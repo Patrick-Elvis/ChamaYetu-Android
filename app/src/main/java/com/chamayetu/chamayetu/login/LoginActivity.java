@@ -197,10 +197,11 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     /**Initialize social logins: Google, Twitter, Facebook, Github...*/
     private void initSocialLogins() {
         /*Google Sign in logic*/
-        /*request permissions ffrom Google*/
+        /*request permissions from Google*/
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
+                .requestProfile()
                 .build();
 
         mGoogleApiClient = new GoogleApiClient.Builder(this)

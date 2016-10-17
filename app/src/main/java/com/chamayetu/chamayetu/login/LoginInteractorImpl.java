@@ -53,7 +53,7 @@ class LoginInteractorImpl implements LoginInteractor{
     }
 
     @Override
-    public void loginUserWithGoogle(Context context, GoogleSignInAccount googleSignInAccount, FirebaseAuth mAuth) {
+    public void loginUserWithGoogle(Context context, GoogleSignInAccount googleSignInAccount, FirebaseAuth mAuth, OnLoginFinishedListener listener) {
         Log.d(LOGINACT_TAG, "FirebaseWithGoogleLogin: " + googleSignInAccount.getId());
         AuthCredential credential = GoogleAuthProvider.getCredential(googleSignInAccount.getIdToken(), null);
 
@@ -61,8 +61,9 @@ class LoginInteractorImpl implements LoginInteractor{
             Log.d(LOGINACT_TAG, "SignInWithCredentialComplete: "+ task.isSuccessful());
             if(!task.isSuccessful()){
                 Log.d(LOGINACT_TAG, "GoogleSignInFail: ", task.getException());
+                listener.onTaskError("Failed to sign in, please try again", TastyToast.ERROR);
             }else{
-
+                listener.onSuccess();
             }
         });
     }

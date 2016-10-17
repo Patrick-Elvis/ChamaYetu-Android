@@ -38,6 +38,8 @@ class LoginPresenterImpl implements LoginPresenter, LoginInteractor.OnLoginFinis
             loginView.displayProgress();
         }
 
+        /**login the user with Google*/
+        loginInteractor.loginUserWithGoogle(context,googleSignInAccount,mAuth,this);
     }
 
     @Override
