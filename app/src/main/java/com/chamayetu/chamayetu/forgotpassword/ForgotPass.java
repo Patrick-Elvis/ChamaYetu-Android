@@ -25,8 +25,8 @@ import butterknife.ButterKnife;
  * Description: Handles Forgot password screen
  */
 
-public class ForgotPassword extends AppCompatActivity implements ForgotPasswordView,View.OnClickListener{
-    public static final String FORGOTPASS_TAG = ForgotPassword.class.getSimpleName();
+public class ForgotPass extends AppCompatActivity implements ForgotPassView,View.OnClickListener{
+    public static final String FORGOTPASS_TAG = ForgotPass.class.getSimpleName();
 
     @BindView(R.id.cancel_return) Button cancelBtn;
     @BindView(R.id.submit_password_reset) Button submitPasswordReset;
@@ -43,7 +43,7 @@ public class ForgotPassword extends AppCompatActivity implements ForgotPasswordV
         mAuth = FirebaseAuth.getInstance();
 
         /*create an object of the PresenterImpl and pass it to the presenter*/
-        forgotPresenter = new ForgotPresenterImpl(ForgotPassword.this, this, mAuth);
+        forgotPresenter = new ForgotPresenterImpl(ForgotPass.this, this, mAuth);
 
         cancelBtn.setOnClickListener(this);
         submitPasswordReset.setOnClickListener(this);
@@ -60,7 +60,7 @@ public class ForgotPassword extends AppCompatActivity implements ForgotPasswordV
         switch (v.getId()){
             case R.id.cancel_return:
                 //return to login screen
-                startActivity(new Intent(ForgotPassword.this, LoginActivity.class));
+                startActivity(new Intent(ForgotPass.this, LoginActivity.class));
                 break;
 
             case R.id.submit_password_reset:
@@ -78,7 +78,7 @@ public class ForgotPassword extends AppCompatActivity implements ForgotPasswordV
 
     @Override
     public void displayProgress() {
-        materialDialog = new MaterialDialog.Builder(ForgotPassword.this)
+        materialDialog = new MaterialDialog.Builder(ForgotPass.this)
                 .title(R.string.progress_dialog_title)
                 .theme(Theme.DARK)
                 .content(R.string.please_wait)
@@ -94,7 +94,13 @@ public class ForgotPassword extends AppCompatActivity implements ForgotPasswordV
     }
 
     @Override
+    public void navigateToLogin() {
+        /*start the next activity, the login screen*/
+        startActivity(new Intent(ForgotPass.this, LoginActivity.class));
+    }
+
+    @Override
     public void displayToast(String message, int messageType) {
-        TastyToast.makeText(ForgotPassword.this,message, TastyToast.LENGTH_SHORT, messageType);
+        TastyToast.makeText(ForgotPass.this,message, TastyToast.LENGTH_SHORT, messageType);
     }
 }

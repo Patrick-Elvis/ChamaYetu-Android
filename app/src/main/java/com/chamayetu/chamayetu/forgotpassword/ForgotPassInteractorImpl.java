@@ -14,7 +14,7 @@ import com.sdsmdg.tastytoast.TastyToast;
  * Description: handles the implementation of the ForgotPasswordInteractor
  */
 class ForgotPassInteractorImpl implements ForgotPassInteractor {
-    private static final String TAG = ForgotPassword.FORGOTPASS_TAG;
+    private static final String TAG = ForgotPass.FORGOTPASS_TAG;
 
     @Override
     public void sendPasswordReset(Context context, String email, FirebaseAuth mAuth, onSubmitListener onSubmitListener) {

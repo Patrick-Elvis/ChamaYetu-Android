@@ -21,10 +21,9 @@ import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 import com.chamayetu.chamayetu.R;
-import com.chamayetu.chamayetu.forgotpassword.ForgotPassword;
+import com.chamayetu.chamayetu.forgotpassword.ForgotPass;
 import com.chamayetu.chamayetu.introduction.IntroScreen;
 import com.chamayetu.chamayetu.main.MainActivity;
 import com.chamayetu.chamayetu.register.RegisterUserActivity;
@@ -170,7 +169,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
             /*forgot password*/
             case R.id.forgot_password_link:
                 /*handle forgot password*/
-                startActivity(new Intent(LoginActivity.this, ForgotPassword.class));
+                startActivity(new Intent(LoginActivity.this, ForgotPass.class));
                 break;
         }
     }

@@ -7,7 +7,7 @@ package com.chamayetu.chamayetu.forgotpassword;
  * Description: View interface to handle interaction with user
  */
 
-public interface ForgotPasswordView {
+public interface ForgotPassView {
 
     /**display an error if the email entered is invalid or empty*/
     void setEmailError();
@@ -17,6 +17,9 @@ public interface ForgotPasswordView {
 
     /**dismiss the progress dialog in case of any error encountered, or in case of success*/
     void hideProgress();
+
+    /**navigates to Login screen when successfull*/
+    void navigateToLogin();
 
     /**display toast on success or error
      * @param message The message to display
