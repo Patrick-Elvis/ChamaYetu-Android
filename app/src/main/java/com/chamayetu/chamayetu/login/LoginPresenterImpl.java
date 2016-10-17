@@ -18,49 +18,28 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
  * Description: Default implementation of the LoginPresenter
  */
 
-public class LoginPresenterImpl implements LoginPresenter {
-    private SweetAlertDialog pDialog;
-    public LoginPresenterImpl(){}
+class LoginPresenterImpl implements LoginPresenter {
+    private Context context;
+    private LoginView loginView;
+    private FirebaseAuth mAuth;
 
-    @Override
-    public void showProgressDialog(Context context) {
-        pDialog = new SweetAlertDialog(context, SweetAlertDialog.PROGRESS_TYPE);
-        pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
-        pDialog.setTitleText("Loading");
-        pDialog.setCancelable(false);
-        pDialog.show();
+    LoginPresenterImpl(Context context, LoginView loginView, FirebaseAuth mAuth){
+        this.context = context;
+        this.loginView = loginView;
+        this.mAuth = mAuth;
     }
 
     @Override
-    public void dismissProgressDialog(Context context, boolean isSuccess) {
-        if(pDialog.isShowing() && isSuccess){
-            pDialog.setTitleText("Success!");
-            pDialog.dismissWithAnimation();
-        }else{
-            pDialog = new SweetAlertDialog(context,SweetAlertDialog.ERROR_TYPE);
-            pDialog.setTitleText("Authentication Failed. Please try again");
-            pDialog.dismissWithAnimation();
+    public void validateUserCredentials(String email, String password) {
+        if(loginView != null){
+            loginView.displayProgress();
         }
     }
 
     @Override
-    public void displayErrorMessage(Context context, String ErrorMessage) {
-        Toast.makeText(context, ErrorMessage, Toast.LENGTH_SHORT).show();
+    public void onDestroy() {
+        loginView = null;
     }
 
-    @Override
-    public void displaySuccessMessage(Context context, String message) {
-        Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public void retry(Context context) {
-        //LoginAuthHandler.handleFacebookLogin(token, FirebaseAuth.getInstance(),context);
-    }
-
-    @Override
-    public void isNetworkBeforeLoginAttempt(Context context) {
-
-    }
 
 }

@@ -22,6 +22,9 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.afollestad.materialdialogs.MaterialDialog;
+import com.afollestad.materialdialogs.Theme;
 import com.chamayetu.chamayetu.R;
 import com.chamayetu.chamayetu.forgotpassword.ForgotPass;
 import com.chamayetu.chamayetu.introduction.IntroScreen;
@@ -53,10 +56,11 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private GoogleApiClient mGoogleApiClient;
+    private LoginPresenter loginPresenter;
+    private MaterialDialog materialDialog;
 
     // UI references.
     @BindView(R.id.cv_container) CardView cardViewContainer;
-
     @BindView(R.id.email) EditText mEmailView;
     @BindView(R.id.password) EditText mPasswordView;
     @BindView(R.id.email_sign_in_button) Button mEmailSignInButton;
@@ -75,14 +79,6 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         setContentView(R.layout.login_activity);
         ButterKnife.bind(this);
 
-        mPasswordView.setOnEditorActionListener((textView, id, keyEvent) -> {
-            if (id == R.id.email_sign_in_button || id == EditorInfo.IME_NULL) {
-                attemptLogin();
-                return true;
-            }
-            return false;
-        });
-
         mAuth = FirebaseAuth.getInstance();
 
         mAuthListener = firebaseAuth -> {
@@ -95,6 +91,17 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                 Log.d(LOGINACT_TAG, "onAuthStateChanged:signedout");
             }
         };
+
+        /*instantiate the LoginPresenterImpl*/
+        loginPresenter = new LoginPresenterImpl(LoginActivity.this,this, mAuth);
+
+        mPasswordView.setOnEditorActionListener((textView, id, keyEvent) -> {
+            if (id == R.id.email_sign_in_button || id == EditorInfo.IME_NULL) {
+                attemptLogin();
+                return true;
+            }
+            return false;
+        });
 
         googleSignInButton.setOnClickListener(this);
         mEmailSignInButton.setOnClickListener(this);
@@ -138,25 +145,29 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.fab:
-                    getWindow().setExitTransition(null);
-                    getWindow().setEnterTransition(null);
+                getWindow().setExitTransition(null);
+                getWindow().setEnterTransition(null);
 
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                        ActivityOptions options =
-                                ActivityOptions.makeSceneTransitionAnimation(this, floatingActionButton, floatingActionButton.getTransitionName());
-                        startActivity(new Intent(this, RegisterUserActivity.class), options.toBundle());
-                    } else {
-                        startActivity(new Intent(this, RegisterUserActivity.class));
-                    }
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    ActivityOptions options =
+                            ActivityOptions.makeSceneTransitionAnimation(this, floatingActionButton, floatingActionButton.getTransitionName());
+                    startActivity(new Intent(this, RegisterUserActivity.class), options.toBundle());
+                } else {
+                    startActivity(new Intent(this, RegisterUserActivity.class));
+                }
                 break;
 
             case R.id.email_sign_in_button:
-                    Explode explode = new Explode();
-                    explode.setDuration(500);
-                    getWindow().setExitTransition(explode);
-                    getWindow().setEnterTransition(explode);
-                    //verify credentials
-                    attemptLogin();
+                Explode explode = new Explode();
+                explode.setDuration(500);
+                getWindow().setExitTransition(explode);
+                getWindow().setEnterTransition(explode);
+
+                // Store values at the time of the login attempt.
+                String email = mEmailView.getText().toString();
+                String password = mPasswordView.getText().toString();
+
+                loginPresenter.validateUserCredentials(email, password);
                 break;
 
             /*Google login*/
@@ -185,11 +196,16 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                 //Google sign in was successful, authenticate with Firebase
                 GoogleSignInAccount googleSignInAccount = googleSignInResult.getSignInAccount();
                 if(LoginAuthHandler.handleGoogleLogin(googleSignInAccount,mAuth,LoginActivity.this)){
-                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                    startActivity(new Intent(LoginActivity.this, LoginSuccess.class));
                 }
             }
         }
+    }
 
+    @Override
+    protected void onDestroy() {
+        loginPresenter.onDestroy();
+        super.onDestroy();
     }
 
     /**Initialize social logins: Google, Twitter, Facebook, Github...*/
@@ -205,7 +221,6 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                 .enableAutoManage(this, this)
                 .addApi(Auth.GOOGLE_SIGN_IN_API,gso)
                 .build();
-
     }
 
 
@@ -279,32 +294,38 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
     @Override
     public void setEmailError() {
-
+        mEmailView.setError(getString(R.string.err_msg_email));
     }
 
     @Override
-    public void setPasswordError() {
-
-    }
+    public void setPasswordError() { mPasswordView.setError(getString(R.string.err_msg_password_login));}
 
     @Override
     public void displayProgress() {
-
+        materialDialog = new MaterialDialog.Builder(LoginActivity.this)
+                .title(R.string.progress_dialog_title)
+                .theme(Theme.DARK)
+                .content(R.string.please_wait)
+                .progress(true, 0)
+                .show();
     }
 
     @Override
     public void hideProgress() {
-
+        if(materialDialog.isShowing()){
+            materialDialog.dismiss();
+        }
     }
 
     @Override
     public void navigateToMain() {
-
+        /*start the next activity, the MainActivity screen*/
+        startActivity(new Intent(LoginActivity.this, LoginSuccess.class));
     }
 
     @Override
     public void displayToast(String message, int messageType) {
-
+        TastyToast.makeText(LoginActivity.this, message, TastyToast.LENGTH_SHORT, messageType);
     }
 
     /**
