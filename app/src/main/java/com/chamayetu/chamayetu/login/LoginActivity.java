@@ -48,7 +48,7 @@ import com.sdsmdg.tastytoast.TastyToast;
 /**
  * A login screen that offers login via email/password.
  * or social media logins.*/
-public class LoginActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener, View.OnClickListener {
+public class LoginActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener, View.OnClickListener, LoginView{
     public static final String LOGINACT_TAG = LoginActivity.class.getSimpleName();
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
@@ -275,6 +275,36 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         // be available.
         Log.d(LOGINACT_TAG, "onConnectionFailed: GoogleAPI" + connectionResult);
         Toast.makeText(this, "Google Play Services error.", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void setEmailError() {
+
+    }
+
+    @Override
+    public void setPasswordError() {
+
+    }
+
+    @Override
+    public void displayProgress() {
+
+    }
+
+    @Override
+    public void hideProgress() {
+
+    }
+
+    @Override
+    public void navigateToMain() {
+
+    }
+
+    @Override
+    public void displayToast(String message, int messageType) {
+
     }
 
     /**
