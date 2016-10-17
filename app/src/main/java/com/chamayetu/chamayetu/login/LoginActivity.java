@@ -43,6 +43,8 @@ import com.google.firebase.auth.FirebaseUser;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+
+import static com.chamayetu.chamayetu.utils.Contract.LOGINACT_TAG;
 import static com.chamayetu.chamayetu.utils.Contract.RC_SIGN_IN;
 
 import com.google.android.gms.auth.api.Auth;
@@ -52,7 +54,6 @@ import com.sdsmdg.tastytoast.TastyToast;
  * A login screen that offers login via email/password.
  * or social media logins.*/
 public class LoginActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener, View.OnClickListener, LoginView{
-    public static final String LOGINACT_TAG = LoginActivity.class.getSimpleName();
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private GoogleApiClient mGoogleApiClient;
@@ -66,12 +67,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     @BindView(R.id.email_sign_in_button) Button mEmailSignInButton;
     @BindView(R.id.forgot_password_link) Button forgotPassword;
     @BindView(R.id.fab) FloatingActionButton floatingActionButton;
-
     @BindView(R.id.google_signin_button) SignInButton googleSignInButton;
-
-    /**
-     * Keep track of the login task to ensure we can cancel it if requested.*/
-    private UserLoginTask mAuthTask = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,14 +90,6 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
         /*instantiate the LoginPresenterImpl*/
         loginPresenter = new LoginPresenterImpl(LoginActivity.this,this, mAuth);
-
-        mPasswordView.setOnEditorActionListener((textView, id, keyEvent) -> {
-            if (id == R.id.email_sign_in_button || id == EditorInfo.IME_NULL) {
-                attemptLogin();
-                return true;
-            }
-            return false;
-        });
 
         googleSignInButton.setOnClickListener(this);
         mEmailSignInButton.setOnClickListener(this);
@@ -224,66 +212,6 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     }
 
 
-    /**
-     * Attempts to sign in or register the account specified by the login form.
-     * If there are form errors (invalid email, missing fields, etc.), the
-     * errors are presented and no actual login attempt is made.
-     */
-    private void attemptLogin() {
-        if (mAuthTask != null) {
-            return;
-        }
-
-        // Reset errors.
-        mEmailView.setError(null);
-        mPasswordView.setError(null);
-
-        // Store values at the time of the login attempt.
-        String email = mEmailView.getText().toString();
-        String password = mPasswordView.getText().toString();
-
-        boolean cancel = false;
-        View focusView = null;
-
-        // Check for a valid password, if the user entered one.
-        if (TextUtils.isEmpty(password) && !isPasswordValid(password)) {
-            mPasswordView.setError(getString(R.string.error_invalid_password));
-            focusView = mPasswordView;
-            cancel = true;
-        }
-
-        // Check for a valid email address.
-        if (TextUtils.isEmpty(email)) {
-            mEmailView.setError(getString(R.string.error_field_required));
-            focusView = mEmailView;
-            cancel = true;
-        } else if (!isEmailValid(email)) {
-            mEmailView.setError(getString(R.string.error_invalid_email));
-            focusView = mEmailView;
-            cancel = true;
-        }
-
-        if (cancel) {
-            // There was an error; don't attempt login and focus the first
-            // form field with an error.
-            focusView.requestFocus();
-        } else {
-            // Show a progress spinner, and kick off a background task to
-            // perform the user login attempt.
-            mAuthTask = new UserLoginTask(email, password);
-            mAuthTask.execute((Void) null);
-        }
-    }
-
-    private boolean isEmailValid(String email) {
-        return !TextUtils.isEmpty(email) && Patterns.EMAIL_ADDRESS.matcher(email).matches();
-    }
-
-    private boolean isPasswordValid(String password) {
-        return password.isEmpty();
-    }
-
-
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
         // An unresolvable error has occurred and Google APIs (including Sign-In) will not
@@ -317,10 +245,14 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         }
     }
 
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     @Override
     public void navigateToMain() {
         /*start the next activity, the MainActivity screen*/
-        startActivity(new Intent(LoginActivity.this, LoginSuccess.class));
+        ActivityOptionsCompat oc2 = ActivityOptionsCompat.makeSceneTransitionAnimation(LoginActivity.this);
+        Intent i2 = new Intent(LoginActivity.this, LoginSuccess.class);
+        startActivity(i2, oc2.toBundle());
+        finish();
     }
 
     @Override
@@ -328,56 +260,6 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         TastyToast.makeText(LoginActivity.this, message, TastyToast.LENGTH_SHORT, messageType);
     }
 
-    /**
-     * Represents an asynchronous login/registration task used to authenticate
-     * the user.
-     */
-    public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
-
-        private final String mEmail;
-        private final String mPassword;
-
-        UserLoginTask(String email, String password) {
-            mEmail = email;
-            mPassword = password;
-        }
-
-        @Override
-        protected Boolean doInBackground(Void... params) {
-            mAuth.signInWithEmailAndPassword(mEmail, mPassword).addOnCompleteListener(
-                    LoginActivity.this,
-                    task -> {
-                        Log.d(LOGINACT_TAG, "signInWithEmail:onComplete "+ task.isSuccessful());
-                        if(!task.isSuccessful()){
-                            Log.w(LOGINACT_TAG, "SignInWithEmail: ", task.getException());
-                            TastyToast.makeText(LoginActivity.this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT, TastyToast.ERROR);
-                        }
-                });
-            return true;
-        }
-
-        @Override
-        protected void onPostExecute(final Boolean success) {
-            mAuthTask = null;
-
-            // if successful, start main activity
-            if (success) {
-                ActivityOptionsCompat oc2 = ActivityOptionsCompat.makeSceneTransitionAnimation(LoginActivity.this);
-                Intent i2 = new Intent(LoginActivity.this, LoginSuccess.class);
-                startActivity(i2, oc2.toBundle());
-                finish();
-            } else {
-                mPasswordView.setError(getString(R.string.error_incorrect_password));
-                mPasswordView.requestFocus();
-            }
-        }
-
-        @Override
-        protected void onCancelled() {
-            mAuthTask = null;
-        }
-    }
 
     @Override
     protected void onStart() {

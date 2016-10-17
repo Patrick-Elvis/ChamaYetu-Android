@@ -1,10 +1,19 @@
 package com.chamayetu.chamayetu.login;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
+import android.util.Log;
 
+import com.chamayetu.chamayetu.utils.Contract;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.sdsmdg.tastytoast.TastyToast;
 
+import static com.chamayetu.chamayetu.utils.Contract.LOGINACT_TAG;
 import static com.chamayetu.chamayetu.utils.UtilityMethods.isValidEmail;
+import static com.chamayetu.chamayetu.utils.UtilityMethods.validateLoginPassword;
 
 /**
  * ChamaYetu
@@ -25,6 +34,23 @@ class LoginInteractorImpl implements LoginInteractor{
             error = true;
         }
 
+        /*if password is blank, display an error to user*/
+        if(validateLoginPassword(password)){
+           listener.onPasswordError();
+            error = true;
+        }
 
+        /*if there is no error login in the user with their email and password*/
+        if(!error){
+            mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
+                Log.d(LOGINACT_TAG, "signInWithEmail:onComplete "+ task.isSuccessful());
+                if(!task.isSuccessful()){
+                    Log.d(LOGINACT_TAG, "SignInWithEmail: ", task.getException());
+                    listener.onTaskError("Authentication failed", TastyToast.ERROR);
+                } else {
+                    listener.onSuccess();
+                }
+            });
+        }
     }
 }
