@@ -127,7 +127,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                 editor.apply();
             }
         });
-        
+
         /*start our thread*/
         thread.start();
     }

@@ -1,12 +1,13 @@
 package com.chamayetu.chamayetu.introduction;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 
 import com.chamayetu.chamayetu.R;
+import com.chamayetu.chamayetu.login.LoginActivity;
 import com.github.paolorotolo.appintro.AppIntro2;
 import com.github.paolorotolo.appintro.AppIntro2Fragment;
 
@@ -20,8 +21,8 @@ import com.github.paolorotolo.appintro.AppIntro2Fragment;
 public class IntroScreen extends AppIntro2 {
 
     @Override
-    public void onCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
-        super.onCreate(savedInstanceState, persistentState);
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
         /*adding the slides for the app, 3 slides*/
 
@@ -59,12 +60,14 @@ public class IntroScreen extends AppIntro2 {
     public void onSkipPressed(Fragment currentFragment) {
         super.onSkipPressed(currentFragment);
         /*proceed to login screen when user skips intros*/
+
     }
 
     @Override
     public void onDonePressed(Fragment currentFragment) {
         super.onDonePressed(currentFragment);
         /*moves to login screen when the user is done with the app intro*/
+        openLogin();
     }
 
 
@@ -74,5 +77,10 @@ public class IntroScreen extends AppIntro2 {
         /*do nothing when the slide is changed*/
     }
 
+    /**go to login screen*/
+    public void openLogin(){
+        startActivity(new Intent(IntroScreen.this, LoginActivity.class));
+        finish();
+    }
 
 }
