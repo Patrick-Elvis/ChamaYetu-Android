@@ -18,6 +18,7 @@ import android.widget.EditText;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.afollestad.materialdialogs.Theme;
 import com.chamayetu.chamayetu.R;
+import com.chamayetu.chamayetu.login.LoginActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -239,7 +240,12 @@ public class RegisterUserActivity extends AppCompatActivity implements RegisterV
                 break;
 
             case R.id.fab:
-                animateRevealClose();
+                /*check for versions*/
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+                    animateRevealClose();
+                }else{
+                    startActivity(new Intent(RegisterUserActivity.this, LoginActivity.class));
+                }
                 break;
         }
     }
