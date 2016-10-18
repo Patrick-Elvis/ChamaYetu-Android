@@ -84,6 +84,7 @@ public class DashboardView extends Fragment implements View.OnClickListener, OnC
     private List<ActivityModel> activityModelList;
     private String chamaName;
     private String userName;
+    private int notificationCounter = 0;
     private FirebaseUser mFirebaseUser;
     private FirebaseAuth mFirebaseAuth;
     private FirebaseRecyclerAdapter<ActivityModel, ActivityRecyclerAdapter.ViewHolder> firebaseRecyclerAdapter;
@@ -182,36 +183,10 @@ public class DashboardView extends Fragment implements View.OnClickListener, OnC
         mDatabase = FirebaseDatabase.getInstance().getReference();
         SharedPreferences mNotification = getActivity().getSharedPreferences(NOTIFICATION_SP_FILE,0);
         SharedPreferences.Editor editor = mNotification.edit();
-        mDatabase.child(ACTIVITY_NODE).child(chamaName).addValueEventListener(
-                new ValueEventListener() {
-                int notificationCounter = 0;
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    notificationCounter += 1;
-                    editor.putInt(Contract.NOTIFICATION_SP_KEY, notificationCounter);
-                    editor.apply();
-                    for(DataSnapshot children: dataSnapshot.getChildren()){
-                        ActivityModel activityModel1 = children.getValue(ActivityModel.class);
-                        activityModel1 = new ActivityModel(
-                                activityModel1.getActivityType(),
-                                activityModel1.getPerson(),
-                                activityModel1.getDate(),
-                                activityModel1.getAmount());
-                        activityModelList.add(activityModel1);
-                    }
 
-                    activityRecyclerAdapter = new ActivityRecyclerAdapter(getActivity(), activityModelList,
-                            R.layout.chamaactivity_item_layout);
-                }
+        firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<ActivityModel,
+                ActivityRecyclerAdapter.ViewHolder>(
 
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-                    Log.e(DASHBOARDVIEW_TAG+"DBError", String.valueOf(databaseError));
-                    TastyToast.makeText(getActivity(), "Operation cancelled",TastyToast.LENGTH_SHORT, TastyToast.ERROR);
-                }
-            });
-
-        firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<ActivityModel, ActivityRecyclerAdapter.ViewHolder>(
                 ActivityModel.class,
                 R.layout.chamaactivity_item_layout,
                 ActivityRecyclerAdapter.ViewHolder.class,
@@ -222,6 +197,11 @@ public class DashboardView extends Fragment implements View.OnClickListener, OnC
                 viewHolder.activityName.setText(activityModel.getActivityType());
                 viewHolder.activityDate.setText(activityModel.getDate());
                 viewHolder.amount.setText("Ksh. " + String.valueOf(activityModel.getAmount()));
+
+                /*record notification counts*/
+                notificationCounter += 1;
+                editor.putInt(Contract.NOTIFICATION_SP_KEY, notificationCounter);
+                editor.apply();
             }
         };
         mRecyclerView.setAdapter(firebaseRecyclerAdapter);
