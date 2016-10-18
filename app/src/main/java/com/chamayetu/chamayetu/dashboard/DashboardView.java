@@ -181,6 +181,8 @@ public class DashboardView extends Fragment implements View.OnClickListener, OnC
                 /*if the user has only one chama then retrieve data for that one chama*/
                 if(dataSnapshot.getChildrenCount() == 1){
                     chamaName = dataSnapshot.getKey();
+                    updateStatement(chamaName);
+                    initActivityRecycler(chamaName);
                 }
                 if(dataSnapshot.getChildrenCount() > 1){
                  /*else loop through them retrieving the keys for each and storing them,
@@ -195,9 +197,9 @@ public class DashboardView extends Fragment implements View.OnClickListener, OnC
                         Log.d(DASHBOARDVIEW_TAG,iobe.getMessage());
                         chamaName = "boda";
                     }
+                    updateStatement(chamaName);
+                    initActivityRecycler(chamaName);
                 }
-                updateStatement(chamaName);
-                initActivityRecycler(chamaName);
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {
