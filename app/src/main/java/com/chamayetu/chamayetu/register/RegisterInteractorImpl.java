@@ -25,6 +25,7 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
+import static com.chamayetu.chamayetu.utils.Contract.SHAREPREF_PRIVATE_MODE;
 import static com.chamayetu.chamayetu.utils.UtilityMethods.isValidEmail;
 import static com.chamayetu.chamayetu.utils.UtilityMethods.validateRegisterPassword;
 
@@ -124,7 +125,9 @@ public class RegisterInteractorImpl implements RegisterInteractor {
 
     /**Writes a new user to the Firebase Database at the User node*/
     private void writeNewUser(Context context, String name, String email,String role, long phoneNumber, DatabaseReference mDatabaseReference, OnRegistrationFinishedListener listener) {
-        SharedPreferences userSharedPref = context.getSharedPreferences("CurrentUser", Contract.SHAREPREF_PRIVATE_MODE);
+
+        /*creating a new share preference file for the current user*/
+        SharedPreferences userSharedPref = context.getSharedPreferences("CurrentUser",SHAREPREF_PRIVATE_MODE);
         SharedPreferences.Editor userPrefEditor = userSharedPref.edit();
 
         String firstName = name.split(" ")[0];

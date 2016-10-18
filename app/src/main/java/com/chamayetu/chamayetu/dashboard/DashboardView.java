@@ -44,6 +44,7 @@ import butterknife.OnClick;
 import static com.chamayetu.chamayetu.utils.Contract.CHAMA_NAME_KEY;
 import static com.chamayetu.chamayetu.utils.Contract.CHAMA_SP_FILE;
 import static com.chamayetu.chamayetu.utils.Contract.FULL_STATEMENT_CHOICE;
+import static com.chamayetu.chamayetu.utils.Contract.SHAREPREF_PRIVATE_MODE;
 
 /**
  * ChamaYetu
@@ -89,10 +90,11 @@ public class DashboardView extends Fragment implements View.OnClickListener, OnC
         activityModelList = new ArrayList<>();
         activityRecyclerAdapter = new ActivityRecyclerAdapter(getActivity(),activityModelList,R.layout.chamaactivity_item_layout);
         /*access the user's chama, the one they registered with*/
-        SharedPreferences mChamaName = getActivity().getSharedPreferences(CHAMA_SP_FILE,0);
+        SharedPreferences mChamaName = getActivity().getSharedPreferences(CHAMA_SP_FILE,SHAREPREF_PRIVATE_MODE);
 
+        Log.d(DASHBOARDVIEW_TAG, mChamaName.getString(CHAMA_NAME_KEY,"missing"));
         /*store the user's chama in a chama name*/
-        chamaName = mChamaName.getString(CHAMA_NAME_KEY,null);
+        chamaName = mChamaName.getString(CHAMA_NAME_KEY,"boda");
     }
 
     @Override
