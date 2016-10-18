@@ -64,9 +64,15 @@ public class UserAccountActivity extends AppCompatActivity {
         Glide.with(this).load(mFirebaseUser.getPhotoUrl()).into(userImagView);
         userDisplayName.setText(mFirebaseUser.getDisplayName());
         userEmail.setText(mFirebaseUser.getEmail());
-        String username = mFirebaseUser.getDisplayName().toLowerCase().replaceAll("\\s+","");
-        databaseReference = FirebaseDatabase.getInstance().getReference();
+        String username;
+        try{
+            username = mFirebaseUser.getDisplayName().toLowerCase().replaceAll("\\s+","");
+        }catch (NullPointerException npe){
+            Log.e(USERACCT_TAG, npe.getMessage());
+            username = mFirebaseUser.getEmail();
+        }
 
+        databaseReference = FirebaseDatabase.getInstance().getReference();
         databaseReference.child(Contract.USERS_NODE).child(username).child("chamaGroups")
                 .addValueEventListener(new ValueEventListener() {
                     @Override

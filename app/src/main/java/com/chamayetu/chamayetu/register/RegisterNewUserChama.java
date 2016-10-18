@@ -2,6 +2,7 @@ package com.chamayetu.chamayetu.register;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.util.Log;
 
 import com.chamayetu.chamayetu.models.ActivityModel;
@@ -26,8 +27,10 @@ import java.util.Map;
 import static com.chamayetu.chamayetu.utils.Contract.ACTIVITY_NODE;
 import static com.chamayetu.chamayetu.utils.Contract.CHAIR_PERSION;
 import static com.chamayetu.chamayetu.utils.Contract.CHAMA_GROUPS;
+import static com.chamayetu.chamayetu.utils.Contract.CHAMA_NAME_KEY;
 import static com.chamayetu.chamayetu.utils.Contract.CHAMA_NODE;
 import static com.chamayetu.chamayetu.utils.Contract.CHAMA_ROLES;
+import static com.chamayetu.chamayetu.utils.Contract.CHAMA_SP_FILE;
 import static com.chamayetu.chamayetu.utils.Contract.MEMBERS_NODE;
 import static com.chamayetu.chamayetu.utils.Contract.PROJECTS_NODE;
 import static com.chamayetu.chamayetu.utils.Contract.STATEMENT_NODE;
@@ -75,6 +78,13 @@ class RegisterNewUserChama {
 
         /*access the username of the current registering user*/
         SharedPreferences mUsername = context.getSharedPreferences("CurrentUser", Contract.SHAREPREF_PRIVATE_MODE);
+
+        /*chared preference file to store the user's chama, this will store the current registering chama
+        * name in a shared preference file for app wide access*/
+        SharedPreferences userChama = context.getSharedPreferences(CHAMA_SP_FILE,0);
+        SharedPreferences.Editor userChamaEditor = userChama.edit();
+        userChamaEditor.putString(CHAMA_NAME_KEY, chamaNameKey);
+        userChamaEditor.apply();
 
         String username = mUsername.getString("CurrentUserName", "missing");
 

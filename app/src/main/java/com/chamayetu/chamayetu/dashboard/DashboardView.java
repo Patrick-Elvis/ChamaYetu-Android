@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -40,6 +41,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static com.chamayetu.chamayetu.utils.Contract.CHAMA_NAME_KEY;
+import static com.chamayetu.chamayetu.utils.Contract.CHAMA_SP_FILE;
 import static com.chamayetu.chamayetu.utils.Contract.FULL_STATEMENT_CHOICE;
 
 /**
@@ -70,6 +73,7 @@ public class DashboardView extends Fragment implements View.OnClickListener, OnC
     private DatabaseReference mDatabase;
     private ActivityRecyclerAdapter activityRecyclerAdapter;
     private List<ActivityModel> activityModelList;
+    private String chamaName;
 
     public DashboardView() {}
 
@@ -84,6 +88,11 @@ public class DashboardView extends Fragment implements View.OnClickListener, OnC
         super.onCreate(savedInstanceState);
         activityModelList = new ArrayList<>();
         activityRecyclerAdapter = new ActivityRecyclerAdapter(getActivity(),activityModelList,R.layout.chamaactivity_item_layout);
+        /*access the user's chama, the one they registered with*/
+        SharedPreferences mChamaName = getActivity().getSharedPreferences(CHAMA_SP_FILE,0);
+
+        /*store the user's chama in a chama name*/
+        chamaName = mChamaName.getString(CHAMA_NAME_KEY,null);
     }
 
     @Override
@@ -112,7 +121,7 @@ public class DashboardView extends Fragment implements View.OnClickListener, OnC
         mDatabase = FirebaseDatabase.getInstance().getReference();
         SharedPreferences mNotification = getActivity().getSharedPreferences(Contract.NOTIFICATION_SP_FILE,0);
         SharedPreferences.Editor editor = mNotification.edit();
-        mDatabase.child(Contract.ACTIVITY_NODE).child("boda").addValueEventListener(
+        mDatabase.child(Contract.ACTIVITY_NODE).child(chamaName).addValueEventListener(
                 new ValueEventListener() {
                 int notificationCounter = 0;
                 @Override
@@ -188,12 +197,15 @@ public class DashboardView extends Fragment implements View.OnClickListener, OnC
                             Intent openFullStatement = new Intent(getActivity(), FullStatement.class);
                             Bundle userChoiceBundle = new Bundle();
                             userChoiceBundle.putCharSequence(FULL_STATEMENT_CHOICE,text);
+                            openFullStatement.putExtras(userChoiceBundle);
                             startActivity(openFullStatement);
                             return true;
                         })
                         .theme(Theme.LIGHT)
                         .positiveText(R.string.choose)
+                        .positiveColor(ContextCompat.getColor(getActivity(),R.color.light_purple))
                         .negativeText(R.string.cancel)
+                        .negativeColor(ContextCompat.getColor(getActivity(),R.color.light_purple))
                         .show();
                 break;
 

@@ -134,7 +134,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 .withActivity(this)
                 .withToolbar(toolbar)
                 .withHasStableIds(true)
-                .withGenerateMiniDrawer(true)
                 .withAccountHeader(headerResult)
                 .addDrawerItems(
                         //default screen My Chama

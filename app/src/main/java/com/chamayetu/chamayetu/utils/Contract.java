@@ -23,6 +23,11 @@ public class Contract {
     public static final String LOGINACT_TAG = LoginActivity.class.getSimpleName();
 
     public static final String NOTIFICATION_SP_FILE = "Notifications";
+
+    /*stores the user's chama in a shared preferences file for app wide access*/
+    public static final String CHAMA_SP_FILE = "CHAMA_SP_FILE";
+    public static final String CHAMA_NAME_KEY = "CHAMA_NAME_KEY";
+
     public static final String NOTIFICATION_SP_KEY="NotificationCount";
     public static final int SHAREPREF_PRIVATE_MODE = 0;
     public static final String FULL_STATEMENT_CHOICE = "FULL_STATEMENT_PERIOD_CHOICE";

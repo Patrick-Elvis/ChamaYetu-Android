@@ -236,7 +236,7 @@ public class RegisterUserActivity extends AppCompatActivity implements RegisterV
                 String retypePass = retypePassword.getText().toString();
                 String phoneNumber = signUpPhoneNo.getText().toString();
                 long phone = 0;
-                
+
                 //handle empty phone input
                 if(phoneNumber.isEmpty()){
                     try{
