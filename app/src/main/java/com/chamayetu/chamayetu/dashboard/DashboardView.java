@@ -202,7 +202,6 @@ public class DashboardView extends Fragment implements View.OnClickListener, OnC
 
                     activityRecyclerAdapter = new ActivityRecyclerAdapter(getActivity(), activityModelList,
                             R.layout.chamaactivity_item_layout);
-                    mRecyclerView.setAdapter(activityRecyclerAdapter);
                 }
 
                 @Override
@@ -225,6 +224,7 @@ public class DashboardView extends Fragment implements View.OnClickListener, OnC
                 viewHolder.amount.setText("Ksh. " + String.valueOf(activityModel.getAmount()));
             }
         };
+        mRecyclerView.setAdapter(firebaseRecyclerAdapter);
     }
 
     /**Get the statement of the chama the user is currently logged into*/
