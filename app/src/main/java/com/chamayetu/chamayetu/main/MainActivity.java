@@ -146,7 +146,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         //Calender
                         new PrimaryDrawerItem().withName(R.string.drawer_item_calender).withIcon(FontAwesome.Icon.faw_calendar).withIdentifier(21),
                         /*projects*/
-                        new PrimaryDrawerItem().withName(R.string.drawer_item_projects).withIcon(FontAwesome.Icon.faw_calendar).withIdentifier(22),
+                        new PrimaryDrawerItem().withName(R.string.drawer_item_projects).withIcon(FontAwesome.Icon.faw_briefcase).withIdentifier(22),
 
                         //Notifications
                         new PrimaryDrawerItem().withName(R.string.drawer_item_notification).withIcon(FontAwesome.Icon.faw_bell).withBadge(String.valueOf(badgeCount)).withBadgeStyle(new BadgeStyle(Color.RED, Color.RED)).withIdentifier(3),
