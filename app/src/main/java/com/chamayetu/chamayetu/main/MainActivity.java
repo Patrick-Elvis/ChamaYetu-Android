@@ -404,9 +404,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                     UtilityMethods.showToast(MainActivity.this, input.toString() + " submitted.",TastyToast.INFO);
                                     Projects projects = new Projects("Oct 14 2016",input.toString());
                                     HashMap<String, Projects> proj = new HashMap<>();
-                                    proj.put("proj" + String.valueOf(projCount+=1), projects);
+                                    proj.put("proj" + String.valueOf(projCount), projects);
                                     mDatabase.child(Contract.PROJECTS_NODE).child("boda").setValue(proj);
                                 }).show();
+                projCount += 1;
                 break;
 
             case R.id.materialsheet_item_reminder:

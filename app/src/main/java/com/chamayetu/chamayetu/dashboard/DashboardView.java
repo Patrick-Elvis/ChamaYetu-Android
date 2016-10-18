@@ -25,6 +25,7 @@ import com.chamayetu.chamayetu.statements.FullStatement;
 import com.chamayetu.chamayetu.utils.Contract;
 
 import com.chamayetu.chamayetu.models.StatementPojo;
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.highlight.Highlight;
@@ -85,6 +86,7 @@ public class DashboardView extends Fragment implements View.OnClickListener, OnC
     private String userName;
     private FirebaseUser mFirebaseUser;
     private FirebaseAuth mFirebaseAuth;
+    private FirebaseRecyclerAdapter<ActivityModel, ActivityRecyclerAdapter.ViewHolder> firebaseRecyclerAdapter;
 
     public DashboardView() {}
 
@@ -113,13 +115,6 @@ public class DashboardView extends Fragment implements View.OnClickListener, OnC
         //get the currently logged in user, get their username which will act as a node in USERS_NODE
         mFirebaseUser = mFirebaseAuth.getCurrentUser();
 
-        String userEmail;
-        if (mFirebaseUser != null) {
-            userEmail = mFirebaseUser.getEmail();
-            int index = userEmail.indexOf('@');
-            userName = userEmail.substring(0, index).toLowerCase();
-        }
-
         StatementBarGraph statementBarGraph = new StatementBarGraph(mBarChart, getActivity());
         statementBarGraph.initGraph();
 
@@ -127,6 +122,54 @@ public class DashboardView extends Fragment implements View.OnClickListener, OnC
         initFirebaseDatabase();
         return rootView;
     }
+
+    /**Initialize Firebase Database*/
+    private void initFirebaseDatabase() {
+        String userEmail;
+        if (mFirebaseUser != null) {
+            userEmail = mFirebaseUser.getEmail();
+            int index = userEmail.indexOf('@');
+            userName = userEmail.substring(0, index).toLowerCase();
+        }
+
+        /**Access the user's chama from the user's node*/
+        mDatabase.child(USERS_NODE).child(userName).child(CHAMA_GROUPS).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                ArrayList<String> userChamaList = new ArrayList<>();
+                /*if the user has only one chama then retrieve data for that one chama*/
+                if(dataSnapshot.getChildrenCount() == 1){
+                    chamaName = dataSnapshot.getKey();
+                    Log.d(DASHBOARDVIEW_TAG+"key", chamaName);
+                    updateStatement(chamaName);
+                    initActivityRecycler(chamaName);
+                }
+                if(dataSnapshot.getChildrenCount() > 1){
+                 /*else loop through them retrieving the keys for each and storing them,
+                 only set the 1st chama as the chamaName variable*/
+                    for(DataSnapshot d: dataSnapshot.getChildren()){
+                        userChamaList.add(d.getKey());
+                        Log.d(DASHBOARDVIEW_TAG,d.getKey());
+                    }
+                    try{
+                        chamaName = userChamaList.get(0);
+                    }catch (IndexOutOfBoundsException iobe){
+                        Log.d(DASHBOARDVIEW_TAG,iobe.getMessage());
+                    }
+                    updateStatement(chamaName);
+                    initActivityRecycler(chamaName);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                /*silently log the database error*/
+                Log.d(DASHBOARDVIEW_TAG, databaseError.getMessage());
+            }
+        });
+    }
+
+
 
     /**Initilizes the Activity Recycler to display activity for a particular chama
      * The notificationCounter variable will be used to post badges in the drawer menu
@@ -159,7 +202,6 @@ public class DashboardView extends Fragment implements View.OnClickListener, OnC
 
                     activityRecyclerAdapter = new ActivityRecyclerAdapter(getActivity(), activityModelList,
                             R.layout.chamaactivity_item_layout);
-
                     mRecyclerView.setAdapter(activityRecyclerAdapter);
                 }
 
@@ -169,45 +211,20 @@ public class DashboardView extends Fragment implements View.OnClickListener, OnC
                     TastyToast.makeText(getActivity(), "Operation cancelled",TastyToast.LENGTH_SHORT, TastyToast.ERROR);
                 }
             });
-    }
 
-    /**Initialize Firebase Database*/
-    private void initFirebaseDatabase() {
-        /**Access the user's chama from the user's node*/
-        mDatabase.child(USERS_NODE).child(userName).child(CHAMA_GROUPS).addValueEventListener(new ValueEventListener() {
+        firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<ActivityModel, ActivityRecyclerAdapter.ViewHolder>(
+                ActivityModel.class,
+                R.layout.chamaactivity_item_layout,
+                ActivityRecyclerAdapter.ViewHolder.class,
+                mDatabase.child(ACTIVITY_NODE).child(chamaName)){
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                ArrayList<String> userChamaList = new ArrayList<>();
-                /*if the user has only one chama then retrieve data for that one chama*/
-                if(dataSnapshot.getChildrenCount() == 1){
-                    chamaName = dataSnapshot.getKey();
-                    updateStatement(chamaName);
-                    initActivityRecycler(chamaName);
-                }
-                if(dataSnapshot.getChildrenCount() > 1){
-                 /*else loop through them retrieving the keys for each and storing them,
-                 only set the 1st chama as the chamaName variable*/
-                    for(DataSnapshot d: dataSnapshot.getChildren()){
-                        userChamaList.add(d.getKey());
-                        Log.d(DASHBOARDVIEW_TAG,d.getKey());
-                    }
-                    try{
-                        chamaName = userChamaList.get(0);
-                    }catch (IndexOutOfBoundsException iobe){
-                        Log.d(DASHBOARDVIEW_TAG,iobe.getMessage());
-                        chamaName = "boda";
-                    }
-                    updateStatement(chamaName);
-                    initActivityRecycler(chamaName);
-                }
+            protected void populateViewHolder(ActivityRecyclerAdapter.ViewHolder viewHolder, ActivityModel activityModel, int position) {
+                viewHolder.personName.setText(activityModel.getPerson());
+                viewHolder.activityName.setText(activityModel.getActivityType());
+                viewHolder.activityDate.setText(activityModel.getDate());
+                viewHolder.amount.setText("Ksh. " + String.valueOf(activityModel.getAmount()));
             }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                /*silently log the database error*/
-                Log.d(DASHBOARDVIEW_TAG, databaseError.getMessage());
-            }
-        });
+        };
     }
 
     /**Get the statement of the chama the user is currently logged into*/
@@ -219,24 +236,21 @@ public class DashboardView extends Fragment implements View.OnClickListener, OnC
                         try {
                             StatementPojo statementPojo = dataSnapshot.getValue(StatementPojo.class);
                             statementPojo = new StatementPojo(statementPojo.getDateFrom(),
-                                    statementPojo.getDateTo(), statementPojo.getTitle(),
-                                    statementPojo.getTotalAmount(), statementPojo.getOutgoings(), statementPojo.getFundsReceived());
+                                    statementPojo.getDateTo(),
+                                    statementPojo.getTitle(),
+                                    statementPojo.getTotalAmount(),
+                                    statementPojo.getOutgoings(),
+                                    statementPojo.getFundsReceived());
 
+                            outgoingsField.setText(String.valueOf(statementPojo.getOutgoings()) + "KSH");
+                            fundsRecievedField.setText(String.valueOf(statementPojo.getFundsReceived()) + "KSH");
+                            chamaBalance.setText(String.valueOf("Ksh. " + statementPojo.getTotalAmount()));
                             Log.d(DASHBOARDVIEW_TAG, statementPojo.toString());
-                            /*if the statement outgoings is 0
-                            * set the text to nil*/
-                            if(statementPojo.getOutgoings() == 0 || statementPojo.getFundsReceived() == 0
-                                    || statementPojo.getTotalAmount() == 0){
-                                outgoingsField.setText(getString(R.string.nill_value));
-                                fundsRecievedField.setText(getString(R.string.nill_value));
-                                chamaBalance.setText(getString(R.string.nill_value));
-                            }else{
-                                outgoingsField.setText(String.valueOf(statementPojo.getOutgoings()) + "KSH");
-                                fundsRecievedField.setText(String.valueOf(statementPojo.getFundsReceived()) + "KSH");
-                                chamaBalance.setText(String.valueOf("Ksh. " + statementPojo.getTotalAmount()));
-                            }
                         }catch (NullPointerException npe){
                             Log.e(DASHBOARDVIEW_TAG, npe.getMessage());
+                            outgoingsField.setText(getString(R.string.nill_value));
+                            fundsRecievedField.setText(getString(R.string.nill_value));
+                            chamaBalance.setText(getString(R.string.nill_value));
                         }
                     }
 
