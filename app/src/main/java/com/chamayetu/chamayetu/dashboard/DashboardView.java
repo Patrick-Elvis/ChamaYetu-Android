@@ -43,12 +43,14 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static com.chamayetu.chamayetu.utils.Contract.ACTIVITY_NODE;
 import static com.chamayetu.chamayetu.utils.Contract.CHAMA_GROUPS;
 import static com.chamayetu.chamayetu.utils.Contract.CHAMA_NAME_KEY;
 import static com.chamayetu.chamayetu.utils.Contract.CHAMA_SP_FILE;
 import static com.chamayetu.chamayetu.utils.Contract.DASHBOARDVIEW_TAG;
 import static com.chamayetu.chamayetu.utils.Contract.FULL_STATEMENT_CHOICE;
 import static com.chamayetu.chamayetu.utils.Contract.SHAREPREF_PRIVATE_MODE;
+import static com.chamayetu.chamayetu.utils.Contract.STATEMENT_NODE;
 import static com.chamayetu.chamayetu.utils.Contract.USERS_NODE;
 
 /**
@@ -105,9 +107,11 @@ public class DashboardView extends Fragment implements View.OnClickListener, OnC
         View rootView = inflater.inflate(R.layout.dashboardview_layout, container, false);
         ButterKnife.bind(this, rootView);
 
+        mDatabase = FirebaseDatabase.getInstance().getReference();
         mFirebaseAuth = FirebaseAuth.getInstance();
         //get the currently logged in user, get their username which will act as a node in USERS_NODE
         mFirebaseUser = mFirebaseAuth.getCurrentUser();
+
         String userEmail;
         if (mFirebaseUser != null) {
             userEmail = mFirebaseUser.getEmail();
@@ -119,8 +123,8 @@ public class DashboardView extends Fragment implements View.OnClickListener, OnC
         statementBarGraph.initGraph();
 
         // initialize recycler adapter
-        initActivityRecycler();
         initFirebaseDatabase();
+        initActivityRecycler();
         return rootView;
     }
 
@@ -135,7 +139,7 @@ public class DashboardView extends Fragment implements View.OnClickListener, OnC
         mDatabase = FirebaseDatabase.getInstance().getReference();
         SharedPreferences mNotification = getActivity().getSharedPreferences(Contract.NOTIFICATION_SP_FILE,0);
         SharedPreferences.Editor editor = mNotification.edit();
-        mDatabase.child(Contract.ACTIVITY_NODE).child(chamaName).addValueEventListener(
+        mDatabase.child(ACTIVITY_NODE).child(chamaName).addValueEventListener(
                 new ValueEventListener() {
                 int notificationCounter = 0;
                 @Override
@@ -169,7 +173,6 @@ public class DashboardView extends Fragment implements View.OnClickListener, OnC
 
     /**Initialize Firebase Database*/
     private void initFirebaseDatabase() {
-        mDatabase = FirebaseDatabase.getInstance().getReference();
 
         /**Access the user's chama from the user's node*/
         mDatabase.child(USERS_NODE).child(userName).child(CHAMA_GROUPS).addValueEventListener(new ValueEventListener() {
@@ -188,18 +191,20 @@ public class DashboardView extends Fragment implements View.OnClickListener, OnC
                     }
                     chamaName = userChamaList.get(0);
                 }
+                updateStatement(chamaName);
             }
-
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 /*silently log the database error*/
                 Log.d(DASHBOARDVIEW_TAG, databaseError.getMessage());
             }
         });
-        
+    }
+
+    /**Get the statement of the chama the user is currently logged into*/
+    private void updateStatement(String chamaName) {
         /*Get statement node of boda node*/
-        /*TODO: get node of client's statement*/
-        mDatabase.child(Contract.STATEMENT_NODE).child(chamaName)
+        mDatabase.child(STATEMENT_NODE).child(chamaName)
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
@@ -210,7 +215,7 @@ public class DashboardView extends Fragment implements View.OnClickListener, OnC
 
                         Log.d(DASHBOARDVIEW_TAG, statementPojo.toString());
                         /*if the statement outgoings is 0
-                        * set the text to nill*/
+                        * set the text to nil*/
                         if(statementPojo.getOutgoings() == 0 || statementPojo.getFundsReceived() == 0
                                 || statementPojo.getTotalAmount() == 0){
                             outgoingsField.setText(getString(R.string.nill_value));
