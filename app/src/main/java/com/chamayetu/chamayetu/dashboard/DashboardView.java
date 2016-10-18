@@ -173,7 +173,6 @@ public class DashboardView extends Fragment implements View.OnClickListener, OnC
 
     /**Initialize Firebase Database*/
     private void initFirebaseDatabase() {
-
         /**Access the user's chama from the user's node*/
         mDatabase.child(USERS_NODE).child(userName).child(CHAMA_GROUPS).addValueEventListener(new ValueEventListener() {
             @Override
@@ -182,14 +181,20 @@ public class DashboardView extends Fragment implements View.OnClickListener, OnC
                 /*if the user has only one chama then retrieve data for that one chama*/
                 if(dataSnapshot.getChildrenCount() == 1){
                     chamaName = dataSnapshot.getKey();
-                }else{
+                }
+                if(dataSnapshot.getChildrenCount() > 1){
                  /*else loop through them retrieving the keys for each and storing them,
                  only set the 1st chama as the chamaName variable*/
                     for(DataSnapshot d: dataSnapshot.getChildren()){
                         userChamaList.add(d.getKey());
                         Log.d(DASHBOARDVIEW_TAG,d.getKey());
                     }
-                    chamaName = userChamaList.get(0);
+                    try{
+                        chamaName = userChamaList.get(0);
+                    }catch (IndexOutOfBoundsException iobe){
+                        Log.d(DASHBOARDVIEW_TAG,iobe.getMessage());
+                        chamaName = "boda";
+                    }
                 }
                 updateStatement(chamaName);
                 initActivityRecycler(chamaName);
@@ -204,7 +209,6 @@ public class DashboardView extends Fragment implements View.OnClickListener, OnC
 
     /**Get the statement of the chama the user is currently logged into*/
     private void updateStatement(String chamaName) {
-        /*Get statement node of boda node*/
         mDatabase.child(STATEMENT_NODE).child(chamaName)
                 .addValueEventListener(new ValueEventListener() {
                     @Override
