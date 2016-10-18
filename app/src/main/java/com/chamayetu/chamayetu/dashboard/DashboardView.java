@@ -96,7 +96,7 @@ public class DashboardView extends Fragment implements View.OnClickListener, OnC
         super.onCreate(savedInstanceState);
         activityModelList = new ArrayList<>();
         activityRecyclerAdapter = new ActivityRecyclerAdapter(getActivity(),activityModelList,R.layout.chamaactivity_item_layout);
-
+        mFirebaseAuth = FirebaseAuth.getInstance();
         //get the currently logged in user, get their username which will act as a node in USERS_NODE
         mFirebaseUser = mFirebaseAuth.getCurrentUser();
         String userEmail;
