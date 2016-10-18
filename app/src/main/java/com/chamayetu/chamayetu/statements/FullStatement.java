@@ -25,6 +25,6 @@ public class FullStatement extends AppCompatActivity{
 
         //extract the data and store for processing
         CharSequence statementPeriod = receiveUserChoice.getCharSequence(FULL_STATEMENT_CHOICE);
-        
+
     }
 }

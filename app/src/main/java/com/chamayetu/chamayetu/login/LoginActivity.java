@@ -128,15 +128,14 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         thread.start();
     }
 
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+
     @OnClick({R.id.email_sign_in_button, R.id.fab, R.id.google_signin_button, R.id.forgot_password_link})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.fab:
-                getWindow().setExitTransition(null);
-                getWindow().setEnterTransition(null);
-
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    getWindow().setExitTransition(null);
+                    getWindow().setEnterTransition(null);
                     ActivityOptions options =
                             ActivityOptions.makeSceneTransitionAnimation(this, floatingActionButton, floatingActionButton.getTransitionName());
                     startActivity(new Intent(this, RegisterUserActivity.class), options.toBundle());
@@ -146,16 +145,20 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                 break;
 
             case R.id.email_sign_in_button:
-                Explode explode = new Explode();
-                explode.setDuration(500);
-                getWindow().setExitTransition(explode);
-                getWindow().setEnterTransition(explode);
-
                 // Store values at the time of the login attempt.
                 String email = mEmailView.getText().toString();
                 String password = mPasswordView.getText().toString();
 
-                loginPresenter.validateUserCredentials(email, password);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    Explode explode = new Explode();
+                    explode.setDuration(500);
+                    getWindow().setExitTransition(explode);
+                    getWindow().setEnterTransition(explode);
+
+                    loginPresenter.validateUserCredentials(email, password);
+                }else{
+                    loginPresenter.validateUserCredentials(email, password);
+                }
                 break;
 
             /*Google login*/
@@ -244,13 +247,17 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         }
     }
 
-    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     @Override
     public void navigateToMain() {
         /*start the next activity, the MainActivity screen*/
-        ActivityOptionsCompat oc2 = ActivityOptionsCompat.makeSceneTransitionAnimation(LoginActivity.this);
         Intent i2 = new Intent(LoginActivity.this, MainActivity.class);
-        startActivity(i2, oc2.toBundle());
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+            ActivityOptionsCompat oc2 = ActivityOptionsCompat.makeSceneTransitionAnimation(LoginActivity.this);
+            startActivity(i2, oc2.toBundle());
+        }else{
+            startActivity(i2);
+        }
         finish();
     }
 

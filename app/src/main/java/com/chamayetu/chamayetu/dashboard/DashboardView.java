@@ -191,7 +191,7 @@ public class DashboardView extends Fragment implements View.OnClickListener, OnC
                             startActivity(openFullStatement);
                             return true;
                         })
-                        .theme(Theme.DARK)
+                        .theme(Theme.LIGHT)
                         .positiveText(R.string.choose)
                         .negativeText(R.string.cancel)
                         .show();
