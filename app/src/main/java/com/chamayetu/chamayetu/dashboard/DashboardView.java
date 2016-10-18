@@ -1,5 +1,6 @@
-package com.chamayetu.chamayetu.dasboard;
+package com.chamayetu.chamayetu.dashboard;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -13,10 +14,13 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.afollestad.materialdialogs.MaterialDialog;
+import com.afollestad.materialdialogs.Theme;
 import com.chamayetu.chamayetu.R;
 import com.chamayetu.chamayetu.adapters.ActivityRecyclerAdapter;
 import com.chamayetu.chamayetu.graph.StatementBarGraph;
 import com.chamayetu.chamayetu.models.ActivityModel;
+import com.chamayetu.chamayetu.statements.FullStatement;
 import com.chamayetu.chamayetu.utils.Contract;
 
 import com.chamayetu.chamayetu.models.StatementPojo;
@@ -35,6 +39,9 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+
+import static com.chamayetu.chamayetu.utils.Contract.FULL_STATEMENT_CHOICE;
+
 /**
  * ChamaYetu
  * com.chamayetu.chamayetu.mychama
@@ -172,7 +179,22 @@ public class DashboardView extends Fragment implements View.OnClickListener, OnC
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.btn_full_statement:
-                /*display the full statement*/
+                //display a dialog of choice of months to pick from
+                new MaterialDialog.Builder(getActivity())
+                        .title(R.string.full_statement_title)
+                        .items(R.array.statement_period_items)
+                        .itemsCallbackSingleChoice(-1, (dialog, view, which, text) -> {
+                            //storing user choice in a bundle for retrieval in the next activity
+                            Intent openFullStatement = new Intent(getActivity(), FullStatement.class);
+                            Bundle userChoiceBundle = new Bundle();
+                            userChoiceBundle.putCharSequence(FULL_STATEMENT_CHOICE,text);
+                            startActivity(openFullStatement);
+                            return true;
+                        })
+                        .theme(Theme.DARK)
+                        .positiveText(R.string.choose)
+                        .negativeText(R.string.cancel)
+                        .show();
                 break;
 
             case R.id.btn_mini_statment:

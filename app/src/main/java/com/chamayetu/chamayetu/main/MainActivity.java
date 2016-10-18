@@ -20,7 +20,7 @@ import android.view.View;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.chamayetu.chamayetu.R;
 import com.chamayetu.chamayetu.login.LoginActivity;
-import com.chamayetu.chamayetu.dasboard.DashboardView;
+import com.chamayetu.chamayetu.dashboard.DashboardView;
 import com.chamayetu.chamayetu.models.Projects;
 import com.chamayetu.chamayetu.settings.SettingsActivity;
 import com.chamayetu.chamayetu.useraccount.UserAccountActivity;

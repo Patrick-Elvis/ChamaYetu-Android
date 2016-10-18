@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.chamayetu.chamayetu.R;
 
+import static com.chamayetu.chamayetu.utils.Contract.FULL_STATEMENT_CHOICE;
+
 /**
  * ChamaYetu
  * com.chamayetu.chamayetu.statements
@@ -19,5 +21,10 @@ public class FullStatement extends AppCompatActivity{
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fullstatement_layout);
+        Bundle receiveUserChoice = getIntent().getExtras();
+
+        //extract the data and store for processing
+        CharSequence statementPeriod = receiveUserChoice.getCharSequence(FULL_STATEMENT_CHOICE);
+        
     }
 }

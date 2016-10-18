@@ -25,6 +25,7 @@ public class Contract {
     public static final String NOTIFICATION_SP_FILE = "Notifications";
     public static final String NOTIFICATION_SP_KEY="NotificationCount";
     public static final int SHAREPREF_PRIVATE_MODE = 0;
+    public static final String FULL_STATEMENT_CHOICE = "FULL_STATEMENT_PERIOD_CHOICE";
 
     public static final int RC_SIGN_IN = 9001;
     public static final String ANONYMOUS = "anonymous";

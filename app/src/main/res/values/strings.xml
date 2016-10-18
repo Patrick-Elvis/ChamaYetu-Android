@@ -183,6 +183,13 @@
         <item>3</item>
     </string-array>
 
+    <!--array items for the statement period items-->
+    <string-array name="statement_period_items">
+        <item>3 Months</item>
+        <item>6 Months</item>
+        <item>12 Months</item>
+    </string-array>
+
     <string-array name="multi_select_list_preference_default_value" />
 
     <string name="pref_title_system_sync_settings">System sync settings</string>
@@ -308,5 +315,8 @@
     <string name="err_msg_password_login">Invalid Password</string>
     <string name="drawer_item_projects">Projects</string>
     <string name="drawer_item_reports">Reports</string>
+    <string name="choose">choose</string>
+    <string name="full_statement_title">Select a period</string>
+    <string name="cancel">Cancel</string>
 
 </resources>

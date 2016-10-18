@@ -3,7 +3,7 @@ package com.chamayetu.chamayetu.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.chamayetu.chamayetu.dasboard.DashboardView;
+import com.chamayetu.chamayetu.dashboard.DashboardView;
 
 /**
  * ChamaYetu
