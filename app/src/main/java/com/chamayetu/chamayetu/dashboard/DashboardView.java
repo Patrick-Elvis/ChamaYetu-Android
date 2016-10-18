@@ -29,6 +29,8 @@ import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -77,6 +79,9 @@ public class DashboardView extends Fragment implements View.OnClickListener, OnC
     private ActivityRecyclerAdapter activityRecyclerAdapter;
     private List<ActivityModel> activityModelList;
     private String chamaName;
+    private String userName;
+    private FirebaseUser mFirebaseUser;
+    private FirebaseAuth mFirebaseAuth;
 
     public DashboardView() {}
 
@@ -92,8 +97,17 @@ public class DashboardView extends Fragment implements View.OnClickListener, OnC
         activityModelList = new ArrayList<>();
         activityRecyclerAdapter = new ActivityRecyclerAdapter(getActivity(),activityModelList,R.layout.chamaactivity_item_layout);
 
+        //get the currently logged in user, get their username which will act as a node in USERS_NODE
+        mFirebaseUser = mFirebaseAuth.getCurrentUser();
+        String userEmail;
+        if (mFirebaseUser != null) {
+            userEmail = mFirebaseUser.getEmail();
+            int index = userEmail.indexOf('@');
+            userName = userEmail.substring(0, index).toLowerCase();
+        }
+
         /**Access the user's chama from the user's node*/
-        mDatabase.child(USERS_NODE).child(CHAMA_GROUPS).addValueEventListener(new ValueEventListener() {
+        mDatabase.child(USERS_NODE).child(userName).child(CHAMA_GROUPS).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 ArrayList<String> userChamaList = new ArrayList<>();

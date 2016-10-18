@@ -130,6 +130,7 @@ public class RegisterInteractorImpl implements RegisterInteractor {
         SharedPreferences userSharedPref = context.getSharedPreferences("CurrentUser",SHAREPREF_PRIVATE_MODE);
         SharedPreferences.Editor userPrefEditor = userSharedPref.edit();
 
+        //todo: consider 3 name splits
         String firstName = name.split(" ")[0];
         String lastName = name.split(" ")[1];
 
