@@ -306,5 +306,6 @@
     <string name="reset_password">Reset Password</string>
     <string name="display_reset_email">Password reset sent, please check your email.</string>
     <string name="err_msg_password_login">Invalid Password</string>
+    <string name="drawer_item_projects">Projects</string>
 
 </resources>
