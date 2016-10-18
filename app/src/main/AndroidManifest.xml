@@ -45,12 +45,13 @@
         <!--register a new chama activity-->
         <activity android:name=".register.RegisterChamaActivity"/>
 
-        <!--For the registration slides-->
-
-
         <activity
             android:name=".main.MainActivity"
             android:label="@string/title_activity_main" />
+
+        <!--full statement activity-->
+        <activity android:name=".statements.FullStatement" />
+
         <activity
             android:name=".useraccount.UserAccountActivity"
             android:label="@string/title_activity_user_account"

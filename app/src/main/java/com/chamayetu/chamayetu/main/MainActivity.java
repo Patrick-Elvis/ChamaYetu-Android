@@ -148,6 +148,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         /*projects*/
                         new PrimaryDrawerItem().withName(R.string.drawer_item_projects).withIcon(FontAwesome.Icon.faw_briefcase).withIdentifier(22),
 
+                        //Reports
+                        new PrimaryDrawerItem().withName(R.string.drawer_item_reports).withIcon(FontAwesome.Icon.faw_book).withIdentifier(23),
+
                         //Notifications
                         new PrimaryDrawerItem().withName(R.string.drawer_item_notification).withIcon(FontAwesome.Icon.faw_bell).withBadge(String.valueOf(badgeCount)).withBadgeStyle(new BadgeStyle(Color.RED, Color.RED)).withIdentifier(3),
 
@@ -182,6 +185,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 break;
                             case 22:
                                 //projects activity
+
+                                break;
+                            
+                            case 23:
+                                //reports activity
 
                                 break;
                             case 3:
