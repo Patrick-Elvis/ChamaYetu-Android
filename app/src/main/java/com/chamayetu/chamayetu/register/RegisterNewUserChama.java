@@ -79,12 +79,6 @@ class RegisterNewUserChama {
 
         /*access the username of the current registering user*/
         SharedPreferences mUsername = context.getSharedPreferences("CurrentUser", SHAREPREF_PRIVATE_MODE);
-
-        /*chared preference file to store the user's chama, this will store the current registering chama
-        * name in a shared preference file for app wide access*/
-        SharedPreferences userChama = context.getSharedPreferences(CHAMA_SP_FILE, SHAREPREF_PRIVATE_MODE);
-        SharedPreferences.Editor userChamaEditor = userChama.edit();
-
         String username = mUsername.getString("CurrentUserName", "missing");
 
         /*check if the chama is already in existence*/
@@ -112,9 +106,6 @@ class RegisterNewUserChama {
                     /*update member status of the user for the member's node*/
                     Map<String, Boolean> newMember = new HashMap<>();
                     newMember.put(username, true);
-
-                    userChamaEditor.putString(CHAMA_NAME_KEY, chamaNameKey);
-                    userChamaEditor.apply();
 
                     /*update chama groups for the user in the chamaGroups node in user node*/
                     Map<String, Boolean> newChamaGroupMap = new HashMap<>();

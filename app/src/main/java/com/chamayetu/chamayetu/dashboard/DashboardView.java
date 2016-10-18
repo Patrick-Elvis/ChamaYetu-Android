@@ -41,10 +41,12 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static com.chamayetu.chamayetu.utils.Contract.CHAMA_GROUPS;
 import static com.chamayetu.chamayetu.utils.Contract.CHAMA_NAME_KEY;
 import static com.chamayetu.chamayetu.utils.Contract.CHAMA_SP_FILE;
 import static com.chamayetu.chamayetu.utils.Contract.FULL_STATEMENT_CHOICE;
 import static com.chamayetu.chamayetu.utils.Contract.SHAREPREF_PRIVATE_MODE;
+import static com.chamayetu.chamayetu.utils.Contract.USERS_NODE;
 
 /**
  * ChamaYetu
@@ -89,12 +91,31 @@ public class DashboardView extends Fragment implements View.OnClickListener, OnC
         super.onCreate(savedInstanceState);
         activityModelList = new ArrayList<>();
         activityRecyclerAdapter = new ActivityRecyclerAdapter(getActivity(),activityModelList,R.layout.chamaactivity_item_layout);
-        /*access the user's chama, the one they registered with*/
-        SharedPreferences mChamaName = getActivity().getSharedPreferences(CHAMA_SP_FILE,SHAREPREF_PRIVATE_MODE);
 
-        Log.d(DASHBOARDVIEW_TAG, mChamaName.getString(CHAMA_NAME_KEY,"missing"));
-        /*store the user's chama in a chama name*/
-        chamaName = mChamaName.getString(CHAMA_NAME_KEY,chamaName);
+        /**Access the user's chama from the user's node*/
+        mDatabase.child(USERS_NODE).child(CHAMA_GROUPS).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                ArrayList<String> userChamaList = new ArrayList<>();
+                /*if the user has only one chama then retrieve data for that one chama*/
+                if(dataSnapshot.getChildrenCount() == 1){
+                    chamaName = dataSnapshot.getKey();
+                }else{
+                 /*else loop through them retrieving the keys for each and storing them,
+                 only set the 1st chama as the chamaName variable*/
+                    for(DataSnapshot d: dataSnapshot.getChildren()){
+                        userChamaList.add(d.getKey());
+                    }
+                    chamaName = userChamaList.get(0);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                /*silently log the database error*/
+                Log.d(DASHBOARDVIEW_TAG, databaseError.getMessage());
+            }
+        });
     }
 
     @Override
