@@ -187,7 +187,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 //projects activity
 
                                 break;
-                            
+
                             case 23:
                                 //reports activity
 
