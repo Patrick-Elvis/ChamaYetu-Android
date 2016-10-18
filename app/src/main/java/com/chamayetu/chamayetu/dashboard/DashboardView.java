@@ -49,6 +49,7 @@ import static com.chamayetu.chamayetu.utils.Contract.CHAMA_NAME_KEY;
 import static com.chamayetu.chamayetu.utils.Contract.CHAMA_SP_FILE;
 import static com.chamayetu.chamayetu.utils.Contract.DASHBOARDVIEW_TAG;
 import static com.chamayetu.chamayetu.utils.Contract.FULL_STATEMENT_CHOICE;
+import static com.chamayetu.chamayetu.utils.Contract.NOTIFICATION_SP_FILE;
 import static com.chamayetu.chamayetu.utils.Contract.SHAREPREF_PRIVATE_MODE;
 import static com.chamayetu.chamayetu.utils.Contract.STATEMENT_NODE;
 import static com.chamayetu.chamayetu.utils.Contract.USERS_NODE;
@@ -124,7 +125,6 @@ public class DashboardView extends Fragment implements View.OnClickListener, OnC
 
         // initialize recycler adapter
         initFirebaseDatabase();
-        initActivityRecycler();
         return rootView;
     }
 
@@ -134,10 +134,10 @@ public class DashboardView extends Fragment implements View.OnClickListener, OnC
      * Initialize the arraylist that will store the information of activities
      * initialize an instance of the Firebase database*/
     /*todo: change child node from boda to current user's chama*/
-    public void initActivityRecycler(){
+    public void initActivityRecycler(String chamaName){
         activityModelList = new ArrayList<>();
         mDatabase = FirebaseDatabase.getInstance().getReference();
-        SharedPreferences mNotification = getActivity().getSharedPreferences(Contract.NOTIFICATION_SP_FILE,0);
+        SharedPreferences mNotification = getActivity().getSharedPreferences(NOTIFICATION_SP_FILE,0);
         SharedPreferences.Editor editor = mNotification.edit();
         mDatabase.child(ACTIVITY_NODE).child(chamaName).addValueEventListener(
                 new ValueEventListener() {
@@ -192,6 +192,7 @@ public class DashboardView extends Fragment implements View.OnClickListener, OnC
                     chamaName = userChamaList.get(0);
                 }
                 updateStatement(chamaName);
+                initActivityRecycler(chamaName);
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {
