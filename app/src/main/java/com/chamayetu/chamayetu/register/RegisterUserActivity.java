@@ -235,8 +235,18 @@ public class RegisterUserActivity extends AppCompatActivity implements RegisterV
                 String name = signUpName.getText().toString();
                 String retypePass = retypePassword.getText().toString();
                 String phoneNumber = signUpPhoneNo.getText().toString();
-
-                registerPresenter.validateCredentials(name, email, Long.parseLong(phoneNumber), password, retypePass);
+                long phone = 0;
+                
+                //handle empty phone input
+                if(phoneNumber.isEmpty()){
+                    try{
+                        phone = Long.parseLong(phoneNumber);
+                    }catch (NumberFormatException nfe){
+                        Log.d(REGISTERACT_TAG, nfe.getMessage());
+                        phone = 0;
+                    }
+                }
+                registerPresenter.validateCredentials(name, email, phone, password, retypePass);
                 break;
 
             case R.id.fab:
