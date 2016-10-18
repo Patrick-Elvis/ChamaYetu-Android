@@ -39,19 +39,14 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.sdsmdg.tastytoast.TastyToast;
 import java.util.ArrayList;
-import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-
 import static com.chamayetu.chamayetu.utils.Contract.ACTIVITY_NODE;
 import static com.chamayetu.chamayetu.utils.Contract.CHAMA_GROUPS;
-import static com.chamayetu.chamayetu.utils.Contract.CHAMA_NAME_KEY;
-import static com.chamayetu.chamayetu.utils.Contract.CHAMA_SP_FILE;
 import static com.chamayetu.chamayetu.utils.Contract.DASHBOARDVIEW_TAG;
 import static com.chamayetu.chamayetu.utils.Contract.FULL_STATEMENT_CHOICE;
 import static com.chamayetu.chamayetu.utils.Contract.NOTIFICATION_SP_FILE;
-import static com.chamayetu.chamayetu.utils.Contract.SHAREPREF_PRIVATE_MODE;
 import static com.chamayetu.chamayetu.utils.Contract.STATEMENT_NODE;
 import static com.chamayetu.chamayetu.utils.Contract.USERS_NODE;
 
@@ -67,27 +62,20 @@ public class DashboardView extends Fragment implements View.OnClickListener, OnC
     @BindView(R.id.mychamastatement_card) CardView statementCard;
     @BindView(R.id.mychama_graph_view_card) CardView graphCard;
     @BindView(R.id.chamaactivity_card) CardView activityCard;
-
     @BindView(R.id.statement_barchart) BarChart mBarChart;
     @BindView(R.id.chamaactivity_recycler) RecyclerView mRecyclerView;
-
     @BindView(R.id.tv_statement_bal_view) TextView chamaBalance;
     @BindView(R.id.tv_chama_memmbers_id) TextView chamaMembersNo;
-
     @BindView(R.id.tv_outgoing_field) TextView outgoingsField;
     @BindView(R.id.tv_fundsReceived_field) TextView fundsRecievedField;
     @BindView(R.id.btn_full_statement) Button btnFullStatement;
     @BindView(R.id.btn_mini_statment) Button btnMiniStatement;
 
     private DatabaseReference mDatabase;
-    private ActivityRecyclerAdapter activityRecyclerAdapter;
-    private List<ActivityModel> activityModelList;
     private String chamaName;
     private String userName;
     private int notificationCounter = 0;
     private FirebaseUser mFirebaseUser;
-    private FirebaseAuth mFirebaseAuth;
-    private FirebaseRecyclerAdapter<ActivityModel, ActivityRecyclerAdapter.ViewHolder> firebaseRecyclerAdapter;
 
     public DashboardView() {}
 
@@ -100,9 +88,6 @@ public class DashboardView extends Fragment implements View.OnClickListener, OnC
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        activityModelList = new ArrayList<>();
-        activityRecyclerAdapter = new ActivityRecyclerAdapter(getActivity(),activityModelList,R.layout.chamaactivity_item_layout);
-
     }
 
     @Override
@@ -112,7 +97,7 @@ public class DashboardView extends Fragment implements View.OnClickListener, OnC
         ButterKnife.bind(this, rootView);
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
-        mFirebaseAuth = FirebaseAuth.getInstance();
+        FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
         //get the currently logged in user, get their username which will act as a node in USERS_NODE
         mFirebaseUser = mFirebaseAuth.getCurrentUser();
 
@@ -179,18 +164,17 @@ public class DashboardView extends Fragment implements View.OnClickListener, OnC
      * initialize an instance of the Firebase database*/
     /*todo: change child node from boda to current user's chama*/
     public void initActivityRecycler(String chamaName){
-        activityModelList = new ArrayList<>();
         mDatabase = FirebaseDatabase.getInstance().getReference();
         SharedPreferences mNotification = getActivity().getSharedPreferences(NOTIFICATION_SP_FILE,0);
         SharedPreferences.Editor editor = mNotification.edit();
 
-        firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<ActivityModel,
+        FirebaseRecyclerAdapter<ActivityModel, ActivityRecyclerAdapter.ViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<ActivityModel,
                 ActivityRecyclerAdapter.ViewHolder>(
 
                 ActivityModel.class,
                 R.layout.chamaactivity_item_layout,
                 ActivityRecyclerAdapter.ViewHolder.class,
-                mDatabase.child(ACTIVITY_NODE).child(chamaName)){
+                mDatabase.child(ACTIVITY_NODE).child(chamaName)) {
             @Override
             protected void populateViewHolder(ActivityRecyclerAdapter.ViewHolder viewHolder, ActivityModel activityModel, int position) {
                 viewHolder.personName.setText(activityModel.getPerson());
