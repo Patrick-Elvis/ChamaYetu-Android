@@ -94,7 +94,7 @@ public class DashboardView extends Fragment implements View.OnClickListener, OnC
 
         Log.d(DASHBOARDVIEW_TAG, mChamaName.getString(CHAMA_NAME_KEY,"missing"));
         /*store the user's chama in a chama name*/
-        chamaName = mChamaName.getString(CHAMA_NAME_KEY,"boda");
+        chamaName = mChamaName.getString(CHAMA_NAME_KEY,chamaName);
     }
 
     @Override
@@ -161,7 +161,7 @@ public class DashboardView extends Fragment implements View.OnClickListener, OnC
 
         /*Get statement node of boda node*/
         /*TODO: get node of client's statement*/
-        mDatabase.child(Contract.STATEMENT_NODE).child("boda")
+        mDatabase.child(Contract.STATEMENT_NODE).child(chamaName)
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
@@ -171,10 +171,18 @@ public class DashboardView extends Fragment implements View.OnClickListener, OnC
                                 statementPojo.getTotalAmount(),statementPojo.getOutgoings(), statementPojo.getFundsReceived());
 
                         Log.d(DASHBOARDVIEW_TAG, statementPojo.toString());
-
-                        outgoingsField.setText(String.valueOf(statementPojo.getOutgoings()) + "KSH");
-                        fundsRecievedField.setText(String.valueOf(statementPojo.getFundsReceived()) + "KSH");
-                        chamaBalance.setText(String.valueOf("Ksh. " + statementPojo.getTotalAmount()));
+                        /*if the statement outgoings is 0
+                        * set the text to nill*/
+                        if(statementPojo.getOutgoings() == 0 || statementPojo.getFundsReceived() == 0
+                                || statementPojo.getTotalAmount() == 0){
+                            outgoingsField.setText(getString(R.string.nill_value));
+                            fundsRecievedField.setText(getString(R.string.nill_value));
+                            chamaBalance.setText(getString(R.string.nill_value));
+                        }else{
+                            outgoingsField.setText(String.valueOf(statementPojo.getOutgoings()) + "KSH");
+                            fundsRecievedField.setText(String.valueOf(statementPojo.getFundsReceived()) + "KSH");
+                            chamaBalance.setText(String.valueOf("Ksh. " + statementPojo.getTotalAmount()));
+                        }
                     }
 
                     @Override

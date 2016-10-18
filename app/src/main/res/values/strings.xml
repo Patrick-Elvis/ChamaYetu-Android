@@ -318,5 +318,6 @@
     <string name="choose">choose</string>
     <string name="full_statement_title">Select a period</string>
     <string name="cancel">Cancel</string>
+    <string name="nill_value">Nil</string>
 
 </resources>
