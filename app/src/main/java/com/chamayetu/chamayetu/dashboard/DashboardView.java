@@ -201,6 +201,7 @@ public class DashboardView extends Fragment implements View.OnClickListener, OnC
                     initActivityRecycler(chamaName);
                 }
             }
+
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 /*silently log the database error*/
@@ -215,23 +216,27 @@ public class DashboardView extends Fragment implements View.OnClickListener, OnC
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        StatementPojo statementPojo = dataSnapshot.getValue(StatementPojo.class);
-                        statementPojo = new StatementPojo(statementPojo.getDateFrom(),
-                                statementPojo.getDateTo(), statementPojo.getTitle(),
-                                statementPojo.getTotalAmount(),statementPojo.getOutgoings(), statementPojo.getFundsReceived());
+                        try {
+                            StatementPojo statementPojo = dataSnapshot.getValue(StatementPojo.class);
+                            statementPojo = new StatementPojo(statementPojo.getDateFrom(),
+                                    statementPojo.getDateTo(), statementPojo.getTitle(),
+                                    statementPojo.getTotalAmount(), statementPojo.getOutgoings(), statementPojo.getFundsReceived());
 
-                        Log.d(DASHBOARDVIEW_TAG, statementPojo.toString());
-                        /*if the statement outgoings is 0
-                        * set the text to nil*/
-                        if(statementPojo.getOutgoings() == 0 || statementPojo.getFundsReceived() == 0
-                                || statementPojo.getTotalAmount() == 0){
-                            outgoingsField.setText(getString(R.string.nill_value));
-                            fundsRecievedField.setText(getString(R.string.nill_value));
-                            chamaBalance.setText(getString(R.string.nill_value));
-                        }else{
-                            outgoingsField.setText(String.valueOf(statementPojo.getOutgoings()) + "KSH");
-                            fundsRecievedField.setText(String.valueOf(statementPojo.getFundsReceived()) + "KSH");
-                            chamaBalance.setText(String.valueOf("Ksh. " + statementPojo.getTotalAmount()));
+                            Log.d(DASHBOARDVIEW_TAG, statementPojo.toString());
+                            /*if the statement outgoings is 0
+                            * set the text to nil*/
+                            if(statementPojo.getOutgoings() == 0 || statementPojo.getFundsReceived() == 0
+                                    || statementPojo.getTotalAmount() == 0){
+                                outgoingsField.setText(getString(R.string.nill_value));
+                                fundsRecievedField.setText(getString(R.string.nill_value));
+                                chamaBalance.setText(getString(R.string.nill_value));
+                            }else{
+                                outgoingsField.setText(String.valueOf(statementPojo.getOutgoings()) + "KSH");
+                                fundsRecievedField.setText(String.valueOf(statementPojo.getFundsReceived()) + "KSH");
+                                chamaBalance.setText(String.valueOf("Ksh. " + statementPojo.getTotalAmount()));
+                            }
+                        }catch (NullPointerException npe){
+                            Log.e(DASHBOARDVIEW_TAG, npe.getMessage());
                         }
                     }
 
