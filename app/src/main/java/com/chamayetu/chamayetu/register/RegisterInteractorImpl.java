@@ -152,7 +152,6 @@ public class RegisterInteractorImpl implements RegisterInteractor {
                 //if the user name already exists
                 if(dataSnapshot.hasChild(userName)){
                     //alert the user about the conflict
-                    listener.onTaskError("User already exists",TastyToast.ERROR);
                     listener.onEmailError();
                     Log.d(TAG+"UserExists: ",String.valueOf(dataSnapshot.hasChild(userName)));
                 }else{

@@ -87,7 +87,7 @@ class RegisterNewUserChama {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if(dataSnapshot.child(CHAMA_NODE).hasChild(chamaNameKey)){
                     registerChamaListener.onChamaNameError();
-                    registerChamaListener.chamaNameExistsError("Chama already exists", TastyToast.ERROR);
+                    //registerChamaListener.chamaNameExistsError("Chama already exists", TastyToast.ERROR);
                 } else {
 
                     /*create the new chama, statement, projects

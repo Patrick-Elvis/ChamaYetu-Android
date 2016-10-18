@@ -177,11 +177,7 @@ public class DashboardView extends Fragment implements View.OnClickListener, OnC
                 mDatabase.child(ACTIVITY_NODE).child(chamaName)) {
             @Override
             protected void populateViewHolder(ActivityRecyclerAdapter.ViewHolder viewHolder, ActivityModel activityModel, int position) {
-                viewHolder.personName.setText(activityModel.getPerson());
-                viewHolder.activityName.setText(activityModel.getActivityType());
-                viewHolder.activityDate.setText(activityModel.getDate());
-                viewHolder.amount.setText("Ksh. " + String.valueOf(activityModel.getAmount()));
-
+                viewHolder.bind(activityModel);
                 /*record notification counts*/
                 notificationCounter += 1;
                 editor.putInt(Contract.NOTIFICATION_SP_KEY, notificationCounter);
@@ -204,10 +200,10 @@ public class DashboardView extends Fragment implements View.OnClickListener, OnC
                                     statementPojo.getTitle(),
                                     statementPojo.getTotalAmount(),
                                     statementPojo.getOutgoings(),
-                                    statementPojo.getFundsReceived());
+                                    statementPojo.getFundsRecieved());
 
                             outgoingsField.setText(String.valueOf(statementPojo.getOutgoings()) + "KSH");
-                            fundsRecievedField.setText(String.valueOf(statementPojo.getFundsReceived()) + "KSH");
+                            fundsRecievedField.setText(String.valueOf(statementPojo.getFundsRecieved()) + "KSH");
                             chamaBalance.setText(String.valueOf("Ksh. " + statementPojo.getTotalAmount()));
                             Log.d(DASHBOARDVIEW_TAG, statementPojo.toString());
                         }catch (NullPointerException npe){
@@ -244,6 +240,7 @@ public class DashboardView extends Fragment implements View.OnClickListener, OnC
                             startActivity(openFullStatement);
                             return true;
                         })
+
                         .theme(Theme.LIGHT)
                         .positiveText(R.string.choose)
                         .positiveColor(ContextCompat.getColor(getActivity(),R.color.light_purple))

@@ -13,17 +13,17 @@ import android.os.Parcelable;
 public class StatementPojo implements Parcelable {
 
     private String dateFrom, dateTo, title;
-    private long totalAmount, outgoings, fundsReceived;
+    private long totalAmount, outgoings, fundsRecieved;
 
     public StatementPojo(){}
 
-    public StatementPojo(String dateFrom, String dateTo, String title, long totalAmount, long outgoings,long fundsReceived) {
+    public StatementPojo(String dateFrom, String dateTo, String title, long totalAmount, long outgoings,long fundsRecieved) {
         this.dateFrom = dateFrom;
         this.dateTo = dateTo;
         this.title = title;
         this.totalAmount = totalAmount;
         this.outgoings = outgoings;
-        this.fundsReceived = fundsReceived;
+        this.fundsRecieved = fundsRecieved;
     }
 
     public String getDateFrom() {
@@ -66,12 +66,12 @@ public class StatementPojo implements Parcelable {
         this.outgoings = outgoings;
     }
 
-    public long getFundsReceived() {
-        return fundsReceived;
+    public long getFundsRecieved() {
+        return fundsRecieved;
     }
 
-    public void setFundsReceived(long fundsReceived) {
-        this.fundsReceived = fundsReceived;
+    public void setFundsRecieved(long fundsRecieved) {
+        this.fundsRecieved = fundsRecieved;
     }
 
     @Override
@@ -86,7 +86,7 @@ public class StatementPojo implements Parcelable {
         dest.writeString(this.title);
         dest.writeLong(this.totalAmount);
         dest.writeLong(this.outgoings);
-        dest.writeLong(this.fundsReceived);
+        dest.writeLong(this.fundsRecieved);
     }
 
     protected StatementPojo(Parcel in) {
@@ -95,7 +95,7 @@ public class StatementPojo implements Parcelable {
         this.title = in.readString();
         this.totalAmount = in.readLong();
         this.outgoings = in.readLong();
-        this.fundsReceived = in.readLong();
+        this.fundsRecieved = in.readLong();
     }
 
     public static final Creator<StatementPojo> CREATOR = new Creator<StatementPojo>() {
@@ -118,7 +118,7 @@ public class StatementPojo implements Parcelable {
                 ", title='" + title + '\'' +
                 ", totalAmount=" + totalAmount +
                 ", outgoings=" + outgoings +
-                ", fundsReceived=" + fundsReceived +
+                ", fundsRecieved=" + fundsRecieved +
                 '}';
     }
 }
