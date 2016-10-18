@@ -96,6 +96,15 @@ public class DashboardView extends Fragment implements View.OnClickListener, OnC
         super.onCreate(savedInstanceState);
         activityModelList = new ArrayList<>();
         activityRecyclerAdapter = new ActivityRecyclerAdapter(getActivity(),activityModelList,R.layout.chamaactivity_item_layout);
+
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View rootView = inflater.inflate(R.layout.dashboardview_layout, container, false);
+        ButterKnife.bind(this, rootView);
+
         mFirebaseAuth = FirebaseAuth.getInstance();
         //get the currently logged in user, get their username which will act as a node in USERS_NODE
         mFirebaseUser = mFirebaseAuth.getCurrentUser();
@@ -105,39 +114,6 @@ public class DashboardView extends Fragment implements View.OnClickListener, OnC
             int index = userEmail.indexOf('@');
             userName = userEmail.substring(0, index).toLowerCase();
         }
-
-        /**Access the user's chama from the user's node*/
-        mDatabase.child(USERS_NODE).child(userName).child(CHAMA_GROUPS).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                ArrayList<String> userChamaList = new ArrayList<>();
-                /*if the user has only one chama then retrieve data for that one chama*/
-                if(dataSnapshot.getChildrenCount() == 1){
-                    chamaName = dataSnapshot.getKey();
-                }else{
-                 /*else loop through them retrieving the keys for each and storing them,
-                 only set the 1st chama as the chamaName variable*/
-                    for(DataSnapshot d: dataSnapshot.getChildren()){
-                        userChamaList.add(d.getKey());
-                        Log.d(DASHBOARDVIEW_TAG,d.getKey());
-                    }
-                    chamaName = userChamaList.get(0);
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                /*silently log the database error*/
-                Log.d(DASHBOARDVIEW_TAG, databaseError.getMessage());
-            }
-        });
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.dashboardview_layout, container, false);
-        ButterKnife.bind(this, rootView);
 
         StatementBarGraph statementBarGraph = new StatementBarGraph(mBarChart, getActivity());
         statementBarGraph.initGraph();
@@ -195,6 +171,32 @@ public class DashboardView extends Fragment implements View.OnClickListener, OnC
     private void initFirebaseDatabase() {
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
+        /**Access the user's chama from the user's node*/
+        mDatabase.child(USERS_NODE).child(userName).child(CHAMA_GROUPS).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                ArrayList<String> userChamaList = new ArrayList<>();
+                /*if the user has only one chama then retrieve data for that one chama*/
+                if(dataSnapshot.getChildrenCount() == 1){
+                    chamaName = dataSnapshot.getKey();
+                }else{
+                 /*else loop through them retrieving the keys for each and storing them,
+                 only set the 1st chama as the chamaName variable*/
+                    for(DataSnapshot d: dataSnapshot.getChildren()){
+                        userChamaList.add(d.getKey());
+                        Log.d(DASHBOARDVIEW_TAG,d.getKey());
+                    }
+                    chamaName = userChamaList.get(0);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                /*silently log the database error*/
+                Log.d(DASHBOARDVIEW_TAG, databaseError.getMessage());
+            }
+        });
+        
         /*Get statement node of boda node*/
         /*TODO: get node of client's statement*/
         mDatabase.child(Contract.STATEMENT_NODE).child(chamaName)
