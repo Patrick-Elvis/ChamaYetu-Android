@@ -44,6 +44,7 @@ import butterknife.OnClick;
 import static com.chamayetu.chamayetu.utils.Contract.CHAMA_GROUPS;
 import static com.chamayetu.chamayetu.utils.Contract.CHAMA_NAME_KEY;
 import static com.chamayetu.chamayetu.utils.Contract.CHAMA_SP_FILE;
+import static com.chamayetu.chamayetu.utils.Contract.DASHBOARDVIEW_TAG;
 import static com.chamayetu.chamayetu.utils.Contract.FULL_STATEMENT_CHOICE;
 import static com.chamayetu.chamayetu.utils.Contract.SHAREPREF_PRIVATE_MODE;
 import static com.chamayetu.chamayetu.utils.Contract.USERS_NODE;
@@ -56,7 +57,6 @@ import static com.chamayetu.chamayetu.utils.Contract.USERS_NODE;
  */
 
 public class DashboardView extends Fragment implements View.OnClickListener, OnChartValueSelectedListener {
-    public static final String DASHBOARDVIEW_TAG = DashboardView.class.getSimpleName();
 
     @BindView(R.id.mychamastatement_card) CardView statementCard;
     @BindView(R.id.mychama_graph_view_card) CardView graphCard;
@@ -105,6 +105,7 @@ public class DashboardView extends Fragment implements View.OnClickListener, OnC
                  only set the 1st chama as the chamaName variable*/
                     for(DataSnapshot d: dataSnapshot.getChildren()){
                         userChamaList.add(d.getKey());
+                        Log.d(DASHBOARDVIEW_TAG,d.getKey());
                     }
                     chamaName = userChamaList.get(0);
                 }

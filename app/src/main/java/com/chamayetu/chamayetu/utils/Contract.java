@@ -1,6 +1,7 @@
 package com.chamayetu.chamayetu.utils;
 
 import com.chamayetu.chamayetu.BuildConfig;
+import com.chamayetu.chamayetu.dashboard.DashboardView;
 import com.chamayetu.chamayetu.login.LoginActivity;
 
 import java.util.ArrayList;
@@ -21,6 +22,7 @@ public class Contract {
 
     /*TAGS*/
     public static final String LOGINACT_TAG = LoginActivity.class.getSimpleName();
+    public static final String DASHBOARDVIEW_TAG = DashboardView.class.getSimpleName();
 
     public static final String NOTIFICATION_SP_FILE = "Notifications";
 
