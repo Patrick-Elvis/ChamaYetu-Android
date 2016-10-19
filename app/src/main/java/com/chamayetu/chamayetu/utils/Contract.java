@@ -3,6 +3,7 @@ package com.chamayetu.chamayetu.utils;
 import com.chamayetu.chamayetu.BuildConfig;
 import com.chamayetu.chamayetu.dashboard.DashboardView;
 import com.chamayetu.chamayetu.login.LoginActivity;
+import com.chamayetu.chamayetu.statements.FullStatement;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,9 +21,10 @@ public class Contract {
     public static final String TWITTER_CONSUMER_SECRET = BuildConfig.TWITTER_CONSUMER_KEY;
     public static final int REQUEST_INVITE = 1;
 
-    /*TAGS*/
+    /*class TAGS*/
     public static final String LOGINACT_TAG = LoginActivity.class.getSimpleName();
     public static final String DASHBOARDVIEW_TAG = DashboardView.class.getSimpleName();
+    public static final String FULL_STATEMENT_TAG = FullStatement.class.getSimpleName();
 
     public static final String NOTIFICATION_SP_FILE = "Notifications";
 
@@ -51,11 +53,9 @@ public class Contract {
     public static final String TREASURER = "treasurer";
     public static final String SECRETARY = "secretary";
 
-
     public static final String STATEMENT_NODE ="statements";
     public static final String MEMBERS_NODE = "members";
     public static final String USERS_NODE = "users";
     public static final String ACTIVITY_NODE = "activity";
     public static final String PROJECTS_NODE ="projects";
-
 }
