@@ -1,6 +1,8 @@
 package com.chamayetu.chamayetu.statements;
 
+import com.chamayetu.chamayetu.adapters.FullStatementViewHolder;
 import com.chamayetu.chamayetu.models.FullStatementModel;
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
 
 import java.util.List;
 
@@ -18,7 +20,7 @@ interface FullStatementView {
     void hideProgress();
 
     /**set the items to the recyclerView*/
-    void setItems(FullStatementModel items);
+    void setAdapter(FirebaseRecyclerAdapter<FullStatementModel, FullStatementViewHolder> statmentRecyclerAdapter);
 
     void openItemActivity();
 

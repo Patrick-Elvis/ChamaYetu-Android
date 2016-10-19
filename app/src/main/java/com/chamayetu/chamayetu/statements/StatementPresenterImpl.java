@@ -12,7 +12,7 @@ import com.google.firebase.database.DatabaseReference;
  * ChamaYetu
  * com.chamayetu.chamayetu.statements
  * Created by lusinabrian on 19/10/16.
- * Description:
+ * Description: IMplementation of {@link StatementPresenter}
  */
 
 class StatementPresenterImpl implements StatementPresenter, FindItemsInteractor.OnFinishedListener {
@@ -36,6 +36,7 @@ class StatementPresenterImpl implements StatementPresenter, FindItemsInteractor.
         if (fullStatementView != null) {
             fullStatementView.showProgress();
         }
+
         /*find the items for the recycler view*/
         findItemsInteractor.findItems(this);
     }
@@ -58,9 +59,9 @@ class StatementPresenterImpl implements StatementPresenter, FindItemsInteractor.
     }
 
     @Override
-    public void onFinished(FullStatementModel items) {
+    public void onFinished(Context context, FirebaseRecyclerAdapter<FullStatementModel, FullStatementViewHolder> statmentRecyclerAdapter, DatabaseReference mDatabaseReference) {
         if (fullStatementView != null) {
-            fullStatementView.setItems(items);
+            fullStatementView.setAdapter(statmentRecyclerAdapter);
             fullStatementView.hideProgress();
         }
     }

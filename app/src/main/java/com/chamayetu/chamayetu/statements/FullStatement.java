@@ -128,7 +128,7 @@ public class FullStatement extends AppCompatActivity implements FullStatementVie
     }
 
     @Override
-    public void setItems(FullStatementModel items) {
+    public void setAdapter(FirebaseRecyclerAdapter<FullStatementModel, FullStatementViewHolder> statmentRecyclerAdapter) {
         /*initialize the FirebaseRecyclerAdapter*/
         statementFirebaseRecyclerAdapter = new FirebaseRecyclerAdapter<FullStatementModel,
                 FullStatementViewHolder>(
@@ -144,8 +144,9 @@ public class FullStatement extends AppCompatActivity implements FullStatementVie
                 viewHolder.bind(model);
             }
         };
+
         /*set the adapter*/
-        mRecyclerView.setAdapter(statementFirebaseRecyclerAdapter);
+        mRecyclerView.setAdapter(statmentRecyclerAdapter);
     }
 
     @Override

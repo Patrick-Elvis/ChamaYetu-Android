@@ -1,6 +1,11 @@
 package com.chamayetu.chamayetu.statements;
 
+import android.content.Context;
+
+import com.chamayetu.chamayetu.adapters.FullStatementViewHolder;
 import com.chamayetu.chamayetu.models.FullStatementModel;
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.google.firebase.database.DatabaseReference;
 
 /**
  * ChamaYetu
@@ -10,9 +15,10 @@ import com.chamayetu.chamayetu.models.FullStatementModel;
  */
 
 interface FindItemsInteractor {
+
     interface OnFinishedListener {
         /**when finished loading set the items to recycler*/
-        void onFinished(FullStatementModel items);
+        void onFinished(Context context, FirebaseRecyclerAdapter<FullStatementModel, FullStatementViewHolder> statmentRecyclerAdapter, DatabaseReference mDatabaseReference);
     }
 
     void findItems(OnFinishedListener listener);
