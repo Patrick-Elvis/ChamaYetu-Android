@@ -10,26 +10,20 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.ProgressBar;
-
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.afollestad.materialdialogs.Theme;
 import com.chamayetu.chamayetu.R;
 
 import com.chamayetu.chamayetu.adapters.FullStatementViewHolder;
 import com.chamayetu.chamayetu.models.FullStatementModel;
-import com.chamayetu.chamayetu.register.RegisterChamaActivity;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.sdsmdg.tastytoast.TastyToast;
 import butterknife.BindView;
 import butterknife.ButterKnife;
-
 import static com.chamayetu.chamayetu.utils.Contract.CHAMA_STATEMENT_TITLE;
 import static com.chamayetu.chamayetu.utils.Contract.FULL_STATEMENT_CHOICE;
-import static com.chamayetu.chamayetu.utils.Contract.FULL_STATEMENT_NODE;
-import static com.chamayetu.chamayetu.utils.Contract.STATEMENT_NODE;
 
 /**
  * ChamaYetu
