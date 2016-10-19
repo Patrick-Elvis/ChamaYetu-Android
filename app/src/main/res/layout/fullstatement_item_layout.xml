@@ -7,6 +7,7 @@
 
     <!--date-->
     <TextView
+        android:id="@+id/full_statement_item_date"
         android:text="@string/full_statement_title_date"
         style="@style/TextComponent.ItemRow"
         android:layout_width="match_parent"
