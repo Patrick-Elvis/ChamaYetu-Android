@@ -18,8 +18,8 @@ interface FindItemsInteractor {
 
     interface OnFinishedListener {
         /**when finished loading set the items to recycler*/
-        void onFinished(Context context, FirebaseRecyclerAdapter<FullStatementModel, FullStatementViewHolder> statmentRecyclerAdapter, DatabaseReference mDatabaseReference);
+        void onFinished(FirebaseRecyclerAdapter<FullStatementModel, FullStatementViewHolder> statmentRecyclerAdapter);
     }
 
-    void findItems(OnFinishedListener listener);
+    void findItems(String chamaName, Context context, FirebaseRecyclerAdapter<FullStatementModel, FullStatementViewHolder> statmentRecyclerAdapter, DatabaseReference mDatabaseReference, OnFinishedListener listener);
 }

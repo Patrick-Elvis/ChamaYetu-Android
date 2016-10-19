@@ -21,10 +21,12 @@ class StatementPresenterImpl implements StatementPresenter, FindItemsInteractor.
     private FindItemsInteractor findItemsInteractor;
     private DatabaseReference mDatabaseRef;
     private Context context;
+    private String chamaName;
     private FirebaseRecyclerAdapter<FullStatementModel, FullStatementViewHolder> statementFirebaseRecyclerAdapter;
 
-    StatementPresenterImpl(FirebaseRecyclerAdapter<FullStatementModel, FullStatementViewHolder> statementFirebaseRecyclerAdapter, Context context, FullStatementView fullStatementView, FindItemsInteractor findItemsInteractor, DatabaseReference mDatabaseRef){
+    StatementPresenterImpl(String chamaName,FirebaseRecyclerAdapter<FullStatementModel, FullStatementViewHolder> statementFirebaseRecyclerAdapter, Context context, FullStatementView fullStatementView, FindItemsInteractor findItemsInteractor, DatabaseReference mDatabaseRef){
         this.mDatabaseRef = mDatabaseRef;
+        this.chamaName = chamaName;
         this.fullStatementView = fullStatementView;
         this.findItemsInteractor = findItemsInteractor;
         this.context = context;
@@ -38,7 +40,7 @@ class StatementPresenterImpl implements StatementPresenter, FindItemsInteractor.
         }
 
         /*find the items for the recycler view*/
-        findItemsInteractor.findItems(this);
+        findItemsInteractor.findItems(chamaName, context,statementFirebaseRecyclerAdapter, mDatabaseRef,this);
     }
 
     @Override
@@ -59,7 +61,7 @@ class StatementPresenterImpl implements StatementPresenter, FindItemsInteractor.
     }
 
     @Override
-    public void onFinished(Context context, FirebaseRecyclerAdapter<FullStatementModel, FullStatementViewHolder> statmentRecyclerAdapter, DatabaseReference mDatabaseReference) {
+    public void onFinished(FirebaseRecyclerAdapter<FullStatementModel, FullStatementViewHolder> statmentRecyclerAdapter) {
         if (fullStatementView != null) {
             fullStatementView.setAdapter(statmentRecyclerAdapter);
             fullStatementView.hideProgress();

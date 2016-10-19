@@ -41,10 +41,8 @@ public class FullStatement extends AppCompatActivity implements FullStatementVie
     private boolean mIsImageHidden;
     private View mFab;
     private StatementPresenter statementPresenter;
-    private DatabaseReference mDatabase;
 
     private FirebaseRecyclerAdapter<FullStatementModel, FullStatementViewHolder> statementFirebaseRecyclerAdapter;
-    private String chamaStatmentTitle;
 
     /*ui references*/
     @BindView(R.id.full_statement_collapsingtoolbar) CollapsingToolbarLayout collapsingToolbarLayout;
@@ -60,14 +58,19 @@ public class FullStatement extends AppCompatActivity implements FullStatementVie
         setContentView(R.layout.fullstatement_layout);
         ButterKnife.bind(this);
         Bundle receiveUserChoice = getIntent().getExtras();
-        mDatabase = FirebaseDatabase.getInstance().getReference();
-
-        /*initialize the presenter*/
-        statementPresenter = new StatementPresenterImpl(statementFirebaseRecyclerAdapter,FullStatement.this, this, new FindItemsInteractorImpl(), mDatabase);
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
 
         //extract the data and store for processing
         CharSequence statementPeriod = receiveUserChoice.getCharSequence(FULL_STATEMENT_CHOICE);
-        chamaStatmentTitle = receiveUserChoice.getString(CHAMA_STATEMENT_TITLE);
+        String chamaStatmentTitle = receiveUserChoice.getString(CHAMA_STATEMENT_TITLE);
+
+        /*initialize the presenter*/
+        statementPresenter = new StatementPresenterImpl(chamaStatmentTitle,
+                statementFirebaseRecyclerAdapter,
+                FullStatement.this,
+                this,
+                new FindItemsInteractorImpl(),
+                mDatabase);
 
         /*set the title to the currently viewed chama statement*/
         collapsingToolbarLayout.setTitle(chamaStatmentTitle + " Statement");
@@ -129,22 +132,6 @@ public class FullStatement extends AppCompatActivity implements FullStatementVie
 
     @Override
     public void setAdapter(FirebaseRecyclerAdapter<FullStatementModel, FullStatementViewHolder> statmentRecyclerAdapter) {
-        /*initialize the FirebaseRecyclerAdapter*/
-        statementFirebaseRecyclerAdapter = new FirebaseRecyclerAdapter<FullStatementModel,
-                FullStatementViewHolder>(
-                FullStatementModel.class,
-                R.layout.fullstatement_item_layout,
-                FullStatementViewHolder.class,
-                mDatabase.child(STATEMENT_NODE).child(chamaStatmentTitle).child(FULL_STATEMENT_NODE)
-                )
-        {
-            @Override
-            protected void populateViewHolder(FullStatementViewHolder viewHolder,
-                                              FullStatementModel model, int position) {
-                viewHolder.bind(model);
-            }
-        };
-
         /*set the adapter*/
         mRecyclerView.setAdapter(statmentRecyclerAdapter);
     }
