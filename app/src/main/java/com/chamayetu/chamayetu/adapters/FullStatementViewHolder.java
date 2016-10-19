@@ -25,14 +25,13 @@ public class FullStatementViewHolder extends RecyclerView.ViewHolder{
         details = (TextView)itemView.findViewById(R.id.full_statement_item_details);
         amount = (TextView)itemView.findViewById(R.id.full_statement_item_amount);
         itemImg = (CircleImageView)itemView.findViewById(R.id.full_statement_item_img);
-
     }
 
     /*bind the views to the models*/
     public void bind(FullStatementModel fullStatementModel){
         date.setText(fullStatementModel.getDate());
         transactor.setText(fullStatementModel.getTransactor());
-        details.setText(fullStatementModel.getDate());
+        details.setText(fullStatementModel.getDetails());
         amount.setText(String.valueOf(fullStatementModel.getAmount()) + " Ksh" );
     }
 }

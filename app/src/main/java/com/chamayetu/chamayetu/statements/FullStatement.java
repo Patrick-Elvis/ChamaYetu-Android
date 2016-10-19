@@ -12,10 +12,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ProgressBar;
 
+import com.afollestad.materialdialogs.MaterialDialog;
+import com.afollestad.materialdialogs.Theme;
 import com.chamayetu.chamayetu.R;
 
 import com.chamayetu.chamayetu.adapters.FullStatementViewHolder;
 import com.chamayetu.chamayetu.models.FullStatementModel;
+import com.chamayetu.chamayetu.register.RegisterChamaActivity;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -42,7 +45,7 @@ public class FullStatement extends AppCompatActivity implements FullStatementVie
     private boolean mIsImageHidden;
     private View mFab;
     private StatementPresenter statementPresenter;
-
+    private MaterialDialog materialDialog;
     private FirebaseRecyclerAdapter<FullStatementModel, FullStatementViewHolder> statementFirebaseRecyclerAdapter;
 
     /*ui references*/
@@ -51,7 +54,6 @@ public class FullStatement extends AppCompatActivity implements FullStatementVie
     @BindView(R.id.full_statement_toolbar) Toolbar mToolbar;
     @BindView(R.id.full_statement_cardview) CardView mCardView;
     @BindView(R.id.full_statement_recyclerView) RecyclerView mRecyclerView;
-    @BindView(R.id.full_statement_progressbar) ProgressBar progressBar;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -121,14 +123,21 @@ public class FullStatement extends AppCompatActivity implements FullStatementVie
 
     @Override
     public void showProgress() {
-        progressBar.setVisibility(View.VISIBLE);
+        materialDialog = new MaterialDialog.Builder(FullStatement.this)
+                .title(R.string.progress_dialog_title)
+                .theme(Theme.DARK)
+                .content(R.string.please_wait)
+                .progress(true, 0)
+                .show();
         mRecyclerView.setVisibility(View.INVISIBLE);
     }
 
     @Override
     public void hideProgress() {
-        progressBar.setVisibility(View.INVISIBLE);
-        mRecyclerView.setVisibility(View.VISIBLE);
+        if(materialDialog.isShowing()){
+            materialDialog.dismiss();
+            mRecyclerView.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override

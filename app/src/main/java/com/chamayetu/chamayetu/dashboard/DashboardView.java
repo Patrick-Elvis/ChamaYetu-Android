@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.CardView;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,16 +15,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.afollestad.materialdialogs.Theme;
 import com.chamayetu.chamayetu.R;
-import com.chamayetu.chamayetu.adapters.ActivityRecyclerAdapter;
+import com.chamayetu.chamayetu.adapters.ActivityViewHolder;
 import com.chamayetu.chamayetu.graph.StatementBarGraph;
 import com.chamayetu.chamayetu.models.ActivityModel;
 import com.chamayetu.chamayetu.statements.FullStatement;
 import com.chamayetu.chamayetu.utils.Contract;
-
 import com.chamayetu.chamayetu.models.StatementPojo;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.github.mikephil.charting.charts.BarChart;
@@ -169,15 +168,15 @@ public class DashboardView extends Fragment implements View.OnClickListener, OnC
         SharedPreferences mNotification = getActivity().getSharedPreferences(NOTIFICATION_SP_FILE,0);
         SharedPreferences.Editor editor = mNotification.edit();
 
-        FirebaseRecyclerAdapter<ActivityModel, ActivityRecyclerAdapter.ViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<ActivityModel,
-                ActivityRecyclerAdapter.ViewHolder>(
+        FirebaseRecyclerAdapter<ActivityModel, ActivityViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<ActivityModel,
+                ActivityViewHolder>(
 
                 ActivityModel.class,
                 R.layout.chamaactivity_item_layout,
-                ActivityRecyclerAdapter.ViewHolder.class,
+                ActivityViewHolder.class,
                 mDatabase.child(ACTIVITY_NODE).child(chamaName)) {
             @Override
-            protected void populateViewHolder(ActivityRecyclerAdapter.ViewHolder viewHolder, ActivityModel activityModel, int position) {
+            protected void populateViewHolder(ActivityViewHolder viewHolder, ActivityModel activityModel, int position) {
                 viewHolder.bind(activityModel);
                 /*record notification counts*/
                 notificationCounter += 1;
@@ -185,6 +184,9 @@ public class DashboardView extends Fragment implements View.OnClickListener, OnC
                 editor.apply();
             }
         };
+
+        /*set the libear layout manager and the adapter*/
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRecyclerView.setAdapter(firebaseRecyclerAdapter);
     }
 
