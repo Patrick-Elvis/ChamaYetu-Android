@@ -109,4 +109,15 @@
         <item name="android:textAllCaps">true</item>
     </style>
 
+    <!--styles for flexible space of Full Statement View-->
+    <style name="CollapsingTextAppearance" parent="Base.TextAppearance.AppCompat.Widget.ActionBar.Title"/>
+    <style name="CollapsingTextAppearance.Inverse" >
+        <item name="android:textSize">30sp</item>
+    </style>
+
+    <style name="ToolBarWithNavigationBack">
+        <item name="navigationIcon">@drawable/ic_keyboard_arrow_left_white_36dp</item>
+    </style>
+
+
 </resources>
