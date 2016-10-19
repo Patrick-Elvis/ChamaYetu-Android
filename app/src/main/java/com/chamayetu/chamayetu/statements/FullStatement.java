@@ -12,15 +12,13 @@ import android.view.View;
 import android.widget.ProgressBar;
 
 import com.chamayetu.chamayetu.R;
-import com.chamayetu.chamayetu.adapters.FullStatementAdapter;
+
+import com.chamayetu.chamayetu.adapters.FullStatementViewHolder;
 import com.chamayetu.chamayetu.models.FullStatementModel;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.sdsmdg.tastytoast.TastyToast;
-
-import java.util.List;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -45,7 +43,7 @@ public class FullStatement extends AppCompatActivity implements FullStatementVie
     private StatementPresenter statementPresenter;
     private DatabaseReference mDatabase;
 
-    private FirebaseRecyclerAdapter<FullStatementModel, FullStatementAdapter.ViewHolder> statementFirebaseRecyclerAdapter;
+    private FirebaseRecyclerAdapter<FullStatementModel, FullStatementViewHolder> statementFirebaseRecyclerAdapter;
     private String chamaStatmentTitle;
 
     /*ui references*/
@@ -130,21 +128,24 @@ public class FullStatement extends AppCompatActivity implements FullStatementVie
     }
 
     @Override
-    public void setItems(List<FullStatementModel> items) {
+    public void setItems(FullStatementModel items) {
         /*initialize the FirebaseRecyclerAdapter*/
-        statementFirebaseRecyclerAdapter = new FirebaseRecyclerAdapter<FullStatementModel, FullStatementAdapter.ViewHolder>(
+        statementFirebaseRecyclerAdapter = new FirebaseRecyclerAdapter<FullStatementModel,
+                FullStatementViewHolder>(
+
                 FullStatementModel.class,
                 R.layout.fullstatement_item_layout,
-                FullStatementAdapter.ViewHolder.class,
+                FullStatementViewHolder.class,
                 mDatabase.child(STATEMENT_NODE).child(chamaStatmentTitle).child(FULL_STATEMENT_NODE)
-                ) {
+                )
+        {
             @Override
-            protected void populateViewHolder(FullStatementAdapter.ViewHolder viewHolder,
+            protected void populateViewHolder(FullStatementViewHolder viewHolder,
                                               FullStatementModel model, int position) {
                 viewHolder.bind(model);
             }
         };
-
+        /*set the adapter*/
         mRecyclerView.setAdapter(statementFirebaseRecyclerAdapter);
     }
 

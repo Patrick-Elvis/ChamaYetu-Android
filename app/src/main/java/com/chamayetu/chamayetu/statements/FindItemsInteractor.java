@@ -14,7 +14,7 @@ import java.util.List;
 public interface FindItemsInteractor {
     interface OnFinishedListener {
         /**when finished loading set the items to recycler*/
-        void onFinished(List<FullStatementModel> items);
+        void onFinished(FullStatementModel items);
     }
 
     void findItems(OnFinishedListener listener);

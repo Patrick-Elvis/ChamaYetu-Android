@@ -18,7 +18,7 @@ interface FullStatementView {
     void hideProgress();
 
     /**set the items to the recyclerView*/
-    void setItems(List<FullStatementModel> items);
+    void setItems(FullStatementModel items);
 
     void openItemActivity();
 

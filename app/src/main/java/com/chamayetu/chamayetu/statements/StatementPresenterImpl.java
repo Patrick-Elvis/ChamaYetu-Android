@@ -48,7 +48,7 @@ public class StatementPresenterImpl implements StatementPresenter, FindItemsInte
     }
 
     @Override
-    public void onFinished(List<FullStatementModel> items) {
+    public void onFinished(FullStatementModel items) {
         if (fullStatementView != null) {
             fullStatementView.setItems(items);
             fullStatementView.hideProgress();
