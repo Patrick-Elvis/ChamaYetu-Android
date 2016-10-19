@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.ProgressBar;
 
 import com.chamayetu.chamayetu.R;
+import com.sdsmdg.tastytoast.TastyToast;
 
 import java.util.List;
 
@@ -35,6 +36,7 @@ public class FullStatement extends AppCompatActivity implements FullStatementVie
     private int mMaxScrollSize;
     private boolean mIsImageHidden;
     private View mFab;
+    private StatementPresenter statementPresenter;
 
     /*ui references*/
     @BindView(R.id.full_statement_collapsingtoolbar) CollapsingToolbarLayout collapsingToolbarLayout;
@@ -50,6 +52,7 @@ public class FullStatement extends AppCompatActivity implements FullStatementVie
         setContentView(R.layout.fullstatement_layout);
         ButterKnife.bind(this);
         Bundle receiveUserChoice = getIntent().getExtras();
+
 
         //extract the data and store for processing
         CharSequence statementPeriod = receiveUserChoice.getCharSequence(FULL_STATEMENT_CHOICE);
@@ -97,7 +100,8 @@ public class FullStatement extends AppCompatActivity implements FullStatementVie
 
     @Override
     public void hideProgress() {
-
+        progressBar.setVisibility(View.INVISIBLE);
+        mRecyclerView.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -106,7 +110,12 @@ public class FullStatement extends AppCompatActivity implements FullStatementVie
     }
 
     @Override
-    public void showMessage(String message) {
+    public void openItemActivity() {
 
+    }
+
+    @Override
+    public void showMessage(String message, int messageType) {
+        TastyToast.makeText(this, message, TastyToast.LENGTH_LONG, messageType);
     }
 }
