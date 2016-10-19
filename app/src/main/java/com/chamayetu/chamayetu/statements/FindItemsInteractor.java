@@ -2,8 +2,6 @@ package com.chamayetu.chamayetu.statements;
 
 import com.chamayetu.chamayetu.models.FullStatementModel;
 
-import java.util.List;
-
 /**
  * ChamaYetu
  * com.chamayetu.chamayetu.statements
@@ -11,7 +9,7 @@ import java.util.List;
  * Description:
  */
 
-public interface FindItemsInteractor {
+interface FindItemsInteractor {
     interface OnFinishedListener {
         /**when finished loading set the items to recycler*/
         void onFinished(FullStatementModel items);

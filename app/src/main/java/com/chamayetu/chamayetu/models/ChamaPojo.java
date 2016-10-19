@@ -45,7 +45,7 @@ public class ChamaPojo implements Parcelable {
         this.bankName = bankName;
         this.accountNumber = accountNumber;
     }
-    
+
     /**Constructor for creating the ChamaPojo object*/
     public ChamaPojo(String dateCreated,String nextMeetingTime, String milestoneDate, long members, long totalAmount, String name, Map<String, Object> fullStatement, String venue,String bankName, long accountNumber) {
         this.dateCreated = dateCreated;

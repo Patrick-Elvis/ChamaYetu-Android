@@ -8,4 +8,5 @@ package com.chamayetu.chamayetu.statements;
  */
 
 public class MiniStatement {
+
 }

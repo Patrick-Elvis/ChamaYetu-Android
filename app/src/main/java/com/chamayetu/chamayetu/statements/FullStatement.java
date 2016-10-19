@@ -63,7 +63,7 @@ public class FullStatement extends AppCompatActivity implements FullStatementVie
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
         /*initialize the presenter*/
-        statementPresenter = new StatementPresenterImpl(this, new FindItemsInteractorImpl());
+        statementPresenter = new StatementPresenterImpl(statementFirebaseRecyclerAdapter,FullStatement.this, this, new FindItemsInteractorImpl(), mDatabase);
 
         //extract the data and store for processing
         CharSequence statementPeriod = receiveUserChoice.getCharSequence(FULL_STATEMENT_CHOICE);

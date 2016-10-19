@@ -1,5 +1,7 @@
 package com.chamayetu.chamayetu.statements;
 
+import com.chamayetu.chamayetu.models.FullStatementModel;
+
 /**
  * ChamaYetu
  * com.chamayetu.chamayetu.statements
@@ -11,7 +13,9 @@ class FindItemsInteractorImpl implements FindItemsInteractor {
     @Override
     public void findItems(OnFinishedListener listener) {
 
+        //listener.onFinished(FullStatementModel);
     }
+
 
 
 }

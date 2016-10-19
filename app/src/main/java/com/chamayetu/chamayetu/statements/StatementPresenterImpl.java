@@ -1,6 +1,11 @@
 package com.chamayetu.chamayetu.statements;
 
+import android.content.Context;
+
+import com.chamayetu.chamayetu.adapters.FullStatementViewHolder;
 import com.chamayetu.chamayetu.models.FullStatementModel;
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.google.firebase.database.DatabaseReference;
 
 
 /**
@@ -10,14 +15,20 @@ import com.chamayetu.chamayetu.models.FullStatementModel;
  * Description:
  */
 
-public class StatementPresenterImpl implements StatementPresenter, FindItemsInteractor.OnFinishedListener {
+class StatementPresenterImpl implements StatementPresenter, FindItemsInteractor.OnFinishedListener {
 
     private FullStatementView fullStatementView;
     private FindItemsInteractor findItemsInteractor;
+    private DatabaseReference mDatabaseRef;
+    private Context context;
+    private FirebaseRecyclerAdapter<FullStatementModel, FullStatementViewHolder> statementFirebaseRecyclerAdapter;
 
-    public StatementPresenterImpl(FullStatementView fullStatementView, FindItemsInteractor findItemsInteractor){
+    StatementPresenterImpl(FirebaseRecyclerAdapter<FullStatementModel, FullStatementViewHolder> statementFirebaseRecyclerAdapter, Context context, FullStatementView fullStatementView, FindItemsInteractor findItemsInteractor, DatabaseReference mDatabaseRef){
+        this.mDatabaseRef = mDatabaseRef;
         this.fullStatementView = fullStatementView;
         this.findItemsInteractor = findItemsInteractor;
+        this.context = context;
+        this.statementFirebaseRecyclerAdapter = statementFirebaseRecyclerAdapter;
     }
 
     @Override
