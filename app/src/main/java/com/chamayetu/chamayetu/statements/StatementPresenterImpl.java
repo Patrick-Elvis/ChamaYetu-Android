@@ -1,5 +1,7 @@
 package com.chamayetu.chamayetu.statements;
 
+import com.chamayetu.chamayetu.models.FullStatementModel;
+
 import java.util.List;
 
 /**
@@ -46,7 +48,7 @@ public class StatementPresenterImpl implements StatementPresenter, FindItemsInte
     }
 
     @Override
-    public void onFinished(List<String> items) {
+    public void onFinished(List<FullStatementModel> items) {
         if (fullStatementView != null) {
             fullStatementView.setItems(items);
             fullStatementView.hideProgress();

@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -13,6 +12,11 @@ import android.view.View;
 import android.widget.ProgressBar;
 
 import com.chamayetu.chamayetu.R;
+import com.chamayetu.chamayetu.adapters.FullStatementAdapter;
+import com.chamayetu.chamayetu.models.FullStatementModel;
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.sdsmdg.tastytoast.TastyToast;
 
 import java.util.List;
@@ -22,6 +26,8 @@ import butterknife.ButterKnife;
 
 import static com.chamayetu.chamayetu.utils.Contract.CHAMA_STATEMENT_TITLE;
 import static com.chamayetu.chamayetu.utils.Contract.FULL_STATEMENT_CHOICE;
+import static com.chamayetu.chamayetu.utils.Contract.FULL_STATEMENT_NODE;
+import static com.chamayetu.chamayetu.utils.Contract.STATEMENT_NODE;
 
 /**
  * ChamaYetu
@@ -37,6 +43,10 @@ public class FullStatement extends AppCompatActivity implements FullStatementVie
     private boolean mIsImageHidden;
     private View mFab;
     private StatementPresenter statementPresenter;
+    private DatabaseReference mDatabase;
+
+    private FirebaseRecyclerAdapter<FullStatementModel, FullStatementAdapter.ViewHolder> statementFirebaseRecyclerAdapter;
+    private String chamaStatmentTitle;
 
     /*ui references*/
     @BindView(R.id.full_statement_collapsingtoolbar) CollapsingToolbarLayout collapsingToolbarLayout;
@@ -52,12 +62,14 @@ public class FullStatement extends AppCompatActivity implements FullStatementVie
         setContentView(R.layout.fullstatement_layout);
         ButterKnife.bind(this);
         Bundle receiveUserChoice = getIntent().getExtras();
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+
         /*initialize the presenter*/
         statementPresenter = new StatementPresenterImpl(this, new FindItemsInteractorImpl());
 
         //extract the data and store for processing
         CharSequence statementPeriod = receiveUserChoice.getCharSequence(FULL_STATEMENT_CHOICE);
-        String chamaStatmentTitle = receiveUserChoice.getString(CHAMA_STATEMENT_TITLE);
+        chamaStatmentTitle = receiveUserChoice.getString(CHAMA_STATEMENT_TITLE);
 
         /*set the title to the currently viewed chama statement*/
         collapsingToolbarLayout.setTitle(chamaStatmentTitle + " Statement");
@@ -118,8 +130,22 @@ public class FullStatement extends AppCompatActivity implements FullStatementVie
     }
 
     @Override
-    public void setItems(List<String> items) {
+    public void setItems(List<FullStatementModel> items) {
+        /*initialize the FirebaseRecyclerAdapter*/
+        statementFirebaseRecyclerAdapter = new FirebaseRecyclerAdapter<FullStatementModel, FullStatementAdapter.ViewHolder>(
+                FullStatementModel.class,
+                R.layout.fullstatement_item_layout,
+                FullStatementAdapter.ViewHolder.class,
+                mDatabase.child(STATEMENT_NODE).child(chamaStatmentTitle).child(FULL_STATEMENT_NODE)
+                ) {
+            @Override
+            protected void populateViewHolder(FullStatementAdapter.ViewHolder viewHolder,
+                                              FullStatementModel model, int position) {
+                viewHolder.bind(model);
+            }
+        };
 
+        mRecyclerView.setAdapter(statementFirebaseRecyclerAdapter);
     }
 
     @Override

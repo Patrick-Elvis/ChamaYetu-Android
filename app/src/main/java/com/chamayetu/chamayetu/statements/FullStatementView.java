@@ -1,5 +1,7 @@
 package com.chamayetu.chamayetu.statements;
 
+import com.chamayetu.chamayetu.models.FullStatementModel;
+
 import java.util.List;
 
 /**
@@ -16,7 +18,7 @@ interface FullStatementView {
     void hideProgress();
 
     /**set the items to the recyclerView*/
-    void setItems(List<String> items);
+    void setItems(List<FullStatementModel> items);
 
     void openItemActivity();
 

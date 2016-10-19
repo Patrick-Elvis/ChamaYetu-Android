@@ -1,5 +1,7 @@
 package com.chamayetu.chamayetu.statements;
 
+import com.chamayetu.chamayetu.models.FullStatementModel;
+
 import java.util.List;
 
 /**
@@ -12,7 +14,7 @@ import java.util.List;
 public interface FindItemsInteractor {
     interface OnFinishedListener {
         /**when finished loading set the items to recycler*/
-        void onFinished(List<String> items);
+        void onFinished(List<FullStatementModel> items);
     }
 
     void findItems(OnFinishedListener listener);

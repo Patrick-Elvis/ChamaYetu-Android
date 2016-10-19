@@ -42,10 +42,6 @@ public class Contract {
     public static final int RC_SIGN_IN = 9001;
     public static final String ANONYMOUS = "anonymous";
 
-    //this is for the user node, to update the user's chamas
-    public static final String CHAMA_GROUPS = "chamaGroups";
-
-    public static final String CHAMA_NODE = "chamas";
     /**node in chama node to show the officials of the chama*/
     public static final String CHAMA_ROLES = "roles";
     public static final String CHAIR_PERSION = "chairperson";
@@ -53,9 +49,16 @@ public class Contract {
     public static final String TREASURER = "treasurer";
     public static final String SECRETARY = "secretary";
 
+    /*nodes*/
+    public static final String CHAMA_NODE = "chamas";
     public static final String STATEMENT_NODE ="statements";
     public static final String MEMBERS_NODE = "members";
     public static final String USERS_NODE = "users";
     public static final String ACTIVITY_NODE = "activity";
     public static final String PROJECTS_NODE ="projects";
+    public static final String FULL_STATEMENT_NODE = "fullStatement";
+
+    //this is for the user node, to update the user's chamas
+    public static final String CHAMA_GROUPS = "chamaGroups";
 }
+
