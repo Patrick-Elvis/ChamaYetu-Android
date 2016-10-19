@@ -7,6 +7,7 @@ import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
@@ -15,6 +16,7 @@ import com.chamayetu.chamayetu.R;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static com.chamayetu.chamayetu.utils.Contract.CHAMA_STATEMENT_TITLE;
 import static com.chamayetu.chamayetu.utils.Contract.FULL_STATEMENT_CHOICE;
 
 /**
@@ -35,6 +37,7 @@ public class FullStatement extends AppCompatActivity implements AppBarLayout.OnO
     @BindView(R.id.full_statement_appbar) AppBarLayout appBarLayout;
     @BindView(R.id.full_statement_toolbar) Toolbar mToolbar;
     @BindView(R.id.full_statement_cardview) CardView mCardView;
+    @BindView(R.id.full_statement_recyclerView) RecyclerView mRecyclerView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -45,7 +48,10 @@ public class FullStatement extends AppCompatActivity implements AppBarLayout.OnO
 
         //extract the data and store for processing
         CharSequence statementPeriod = receiveUserChoice.getCharSequence(FULL_STATEMENT_CHOICE);
+        String chamaStatmentTitle = receiveUserChoice.getString(CHAMA_STATEMENT_TITLE);
 
+        /*set the title to the currently viewed chama statement*/
+        collapsingToolbarLayout.setTitle(chamaStatmentTitle + " Statement");
 
         /*go back to dashboard view in MainActivity*/
         mToolbar.setNavigationOnClickListener(v -> onBackPressed());

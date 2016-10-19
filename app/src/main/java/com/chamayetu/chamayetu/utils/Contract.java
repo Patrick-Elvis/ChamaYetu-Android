@@ -32,7 +32,10 @@ public class Contract {
 
     public static final String NOTIFICATION_SP_KEY="NotificationCount";
     public static final int SHAREPREF_PRIVATE_MODE = 0;
+
+    /*Keys for bundle when moving from Dashboard to FUll Statement*/
     public static final String FULL_STATEMENT_CHOICE = "FULL_STATEMENT_PERIOD_CHOICE";
+    public static final String CHAMA_STATEMENT_TITLE = "CHAMA_STATEMENT_TITLE";
 
     public static final int RC_SIGN_IN = 9001;
     public static final String ANONYMOUS = "anonymous";

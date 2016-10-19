@@ -44,6 +44,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import static com.chamayetu.chamayetu.utils.Contract.ACTIVITY_NODE;
 import static com.chamayetu.chamayetu.utils.Contract.CHAMA_GROUPS;
+import static com.chamayetu.chamayetu.utils.Contract.CHAMA_STATEMENT_TITLE;
 import static com.chamayetu.chamayetu.utils.Contract.DASHBOARDVIEW_TAG;
 import static com.chamayetu.chamayetu.utils.Contract.FULL_STATEMENT_CHOICE;
 import static com.chamayetu.chamayetu.utils.Contract.NOTIFICATION_SP_FILE;
@@ -236,6 +237,7 @@ public class DashboardView extends Fragment implements View.OnClickListener, OnC
                             Intent openFullStatement = new Intent(getActivity(), FullStatement.class);
                             Bundle userChoiceBundle = new Bundle();
                             userChoiceBundle.putCharSequence(FULL_STATEMENT_CHOICE,text);
+                            userChoiceBundle.putString(CHAMA_STATEMENT_TITLE,chamaName);
                             openFullStatement.putExtras(userChoiceBundle);
                             startActivity(openFullStatement);
                             return true;
