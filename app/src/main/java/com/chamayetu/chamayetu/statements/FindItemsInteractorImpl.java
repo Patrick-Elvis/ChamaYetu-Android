@@ -12,4 +12,6 @@ class FindItemsInteractorImpl implements FindItemsInteractor {
     public void findItems(OnFinishedListener listener) {
 
     }
+
+
 }

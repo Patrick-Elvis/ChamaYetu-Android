@@ -132,7 +132,6 @@ public class FullStatement extends AppCompatActivity implements FullStatementVie
         /*initialize the FirebaseRecyclerAdapter*/
         statementFirebaseRecyclerAdapter = new FirebaseRecyclerAdapter<FullStatementModel,
                 FullStatementViewHolder>(
-
                 FullStatementModel.class,
                 R.layout.fullstatement_item_layout,
                 FullStatementViewHolder.class,

@@ -2,7 +2,6 @@ package com.chamayetu.chamayetu.statements;
 
 import com.chamayetu.chamayetu.models.FullStatementModel;
 
-import java.util.List;
 
 /**
  * ChamaYetu

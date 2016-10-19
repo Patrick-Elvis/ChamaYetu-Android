@@ -5,6 +5,8 @@ import android.os.Parcelable;
 
 import com.chamayetu.chamayetu.dashboard.DashboardView;
 
+import java.util.Map;
+
 /**
  * ChamaYetu
  * com.chamayetu.chamayetu.models
@@ -15,6 +17,7 @@ public class ChamaPojo implements Parcelable {
     private long totalAmount,amountExpected, members,accountNumber;
     private String name, venue, milestone,dateCreated,milestoneDate,nextMeetingTime, bankName;
     private String chairPerson, viceChair, treasurer, secretary;
+    private Map<String, Object> fullStatement;
 
     public ChamaPojo(){}
 
@@ -39,6 +42,20 @@ public class ChamaPojo implements Parcelable {
         this.totalAmount = totalAmount;
         this.name = name;
         this.venue = venue;
+        this.bankName = bankName;
+        this.accountNumber = accountNumber;
+    }
+    
+    /**Constructor for creating the ChamaPojo object*/
+    public ChamaPojo(String dateCreated,String nextMeetingTime, String milestoneDate, long members, long totalAmount, String name, Map<String, Object> fullStatement, String venue,String bankName, long accountNumber) {
+        this.dateCreated = dateCreated;
+        this.nextMeetingTime = nextMeetingTime;
+        this.milestoneDate = milestoneDate;
+        this.members = members;
+        this.totalAmount = totalAmount;
+        this.name = name;
+        this.venue = venue;
+        this.fullStatement = fullStatement;
         this.bankName = bankName;
         this.accountNumber = accountNumber;
     }
@@ -246,4 +263,12 @@ public class ChamaPojo implements Parcelable {
             return new ChamaPojo[size];
         }
     };
+
+    public Map<String, Object> getFullStatement() {
+        return fullStatement;
+    }
+
+    public void setFullStatement(Map<String, Object> fullStatement) {
+        this.fullStatement = fullStatement;
+    }
 }
