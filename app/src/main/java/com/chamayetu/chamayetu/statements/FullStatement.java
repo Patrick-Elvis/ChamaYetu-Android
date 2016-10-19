@@ -10,8 +10,11 @@ import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.ProgressBar;
 
 import com.chamayetu.chamayetu.R;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -26,11 +29,12 @@ import static com.chamayetu.chamayetu.utils.Contract.FULL_STATEMENT_CHOICE;
  * Description: Display a full statement to the user
  */
 
-public class FullStatement extends AppCompatActivity implements AppBarLayout.OnOffsetChangedListener{
+public class FullStatement extends AppCompatActivity implements FullStatementView, AppBarLayout.OnOffsetChangedListener{
 
     private static final int PERCENTAGE_TO_SHOW_IMAGE = 20;
     private int mMaxScrollSize;
     private boolean mIsImageHidden;
+    private View mFab;
 
     /*ui references*/
     @BindView(R.id.full_statement_collapsingtoolbar) CollapsingToolbarLayout collapsingToolbarLayout;
@@ -38,6 +42,7 @@ public class FullStatement extends AppCompatActivity implements AppBarLayout.OnO
     @BindView(R.id.full_statement_toolbar) Toolbar mToolbar;
     @BindView(R.id.full_statement_cardview) CardView mCardView;
     @BindView(R.id.full_statement_recyclerView) RecyclerView mRecyclerView;
+    @BindView(R.id.full_statement_progressbar) ProgressBar progressBar;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -82,5 +87,26 @@ public class FullStatement extends AppCompatActivity implements AppBarLayout.OnO
                 //ViewCompat.animate(mFab).scaleY(1).scaleX(1).start();
             }
         }
+    }
+
+    @Override
+    public void showProgress() {
+        progressBar.setVisibility(View.VISIBLE);
+        mRecyclerView.setVisibility(View.INVISIBLE);
+    }
+
+    @Override
+    public void hideProgress() {
+
+    }
+
+    @Override
+    public void setItems(List<String> items) {
+
+    }
+
+    @Override
+    public void showMessage(String message) {
+
     }
 }

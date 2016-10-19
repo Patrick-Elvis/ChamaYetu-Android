@@ -66,17 +66,26 @@
                 app:cardBackgroundColor="@android:color/white"
                 app:cardElevation="4dp"
                 android:layout_margin="8dp">
-                <LinearLayout
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                <!--RecyclerView containing data-->
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/full_statement_recyclerView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
-                    <!--RecyclerView containing data-->
-                    <android.support.v7.widget.RecyclerView
-                        android:id="@+id/full_statement_recyclerView"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        tools:listitem="@layout/fullstatement_item_layout" />
-                </LinearLayout>
+                    android:clipToPadding="false"
+                    android:scrollbarStyle="outsideOverlay"
+                    tools:listitem="@layout/fullstatement_item_layout" />
+                <!--progress bar-->
+                <ProgressBar
+                    android:id="@+id/full_statement_progressbar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:visibility="gone" />
+                </FrameLayout>
             </android.support.v7.widget.CardView>
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
