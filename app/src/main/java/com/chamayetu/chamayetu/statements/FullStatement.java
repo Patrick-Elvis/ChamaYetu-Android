@@ -52,7 +52,8 @@ public class FullStatement extends AppCompatActivity implements FullStatementVie
         setContentView(R.layout.fullstatement_layout);
         ButterKnife.bind(this);
         Bundle receiveUserChoice = getIntent().getExtras();
-
+        /*initialize the presenter*/
+        statementPresenter = new StatementPresenterImpl(this, new FindItemsInteractorImpl());
 
         //extract the data and store for processing
         CharSequence statementPeriod = receiveUserChoice.getCharSequence(FULL_STATEMENT_CHOICE);
@@ -90,6 +91,18 @@ public class FullStatement extends AppCompatActivity implements FullStatementVie
                 //ViewCompat.animate(mFab).scaleY(1).scaleX(1).start();
             }
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        statementPresenter.onResume();
+    }
+
+    @Override
+    protected void onDestroy() {
+        statementPresenter.onDestroy();
+        super.onDestroy();
     }
 
     @Override

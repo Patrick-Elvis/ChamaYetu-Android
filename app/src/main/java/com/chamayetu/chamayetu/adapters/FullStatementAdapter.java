@@ -8,4 +8,5 @@ package com.chamayetu.chamayetu.adapters;
  */
 
 public class FullStatementAdapter {
+
 }

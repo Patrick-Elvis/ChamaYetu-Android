@@ -7,7 +7,7 @@ package com.chamayetu.chamayetu.statements;
  * Description:
  */
 
-public interface StatementPresenter {
+interface StatementPresenter {
     /**when activity is resumed*/
     void onResume();
 
