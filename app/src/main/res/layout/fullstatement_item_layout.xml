@@ -3,39 +3,65 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:weightSum="4"
-    android:orientation="horizontal">
-
-    <TextView
-        android:text="@string/full_statement_title_desc"
-        style="@style/TextComponent.ItemRow"
-        android:gravity="start"
-        android:layout_width="wrap_content"
-        android:layout_weight="1"
-        android:layout_height="wrap_content" />
+    android:orientation="vertical">
 
     <!--date-->
     <TextView
         android:text="@string/full_statement_title_date"
-        android:layout_weight="1"
         style="@style/TextComponent.ItemRow"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
+        android:padding="10dp"
         android:layout_height="wrap_content" />
 
-    <!--Reference number-->
-    <TextView
-        android:text="@string/full_statement_title_refno"
-        android:layout_weight="1"
-        style="@style/TextComponent.ItemRow"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
-    <!--amount-->
-    <TextView
-        android:text="@string/full_statement_title_amount"
-        android:layout_weight="1"
-        android:gravity="end"
-        style="@style/TextComponent.ItemRow"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        <!--image view -->
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/full_statement_item_img"
+            android:src="@mipmap/ic_launcher"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:contentDescription="@null"/>
+
+        <!--Name of transactor and details of transaction-->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/full_statement_item_transactor"
+                android:text="@string/full_statement_item_transactor"
+                style="@style/TextComponent.ItemRow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/full_statement_item_details"
+                android:text="@string/full_statement_item_details"
+                android:textColor="@color/black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+        <!--amount-->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/full_statement_item_amount"
+                android:text="@string/full_statement_item_amount"
+                style="@style/TextComponent.ItemRow"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+    </LinearLayout>
+
 </LinearLayout>

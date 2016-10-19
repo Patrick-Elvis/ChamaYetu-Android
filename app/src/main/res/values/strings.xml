@@ -323,5 +323,8 @@
     <string name="full_statement_title_amount">Amount</string>
     <string name="full_statement_title_refno">Ref No.</string>
     <string name="full_statement_title_date">Date</string>
+    <string name="full_statement_item_transactor">Transactor</string>
+    <string name="full_statement_item_amount">amount KSH</string>
+    <string name="full_statement_item_details">Details</string>
 
 </resources>
