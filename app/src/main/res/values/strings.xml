@@ -319,5 +319,9 @@
     <string name="full_statement_title">Select a period</string>
     <string name="cancel">Cancel</string>
     <string name="nill_value">Nil</string>
+    <string name="full_statement_title_desc">Details</string>
+    <string name="full_statement_title_amount">Amount</string>
+    <string name="full_statement_title_refno">Ref No.</string>
+    <string name="full_statement_title_date">Date</string>
 
 </resources>

@@ -7,7 +7,6 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/white</item>
         <item name="spark_SparkViewStyle">@style/spark_SparkView</item>
-
     </style>
 
     <style name="AppTheme.NoActionBar">
@@ -24,14 +23,11 @@
         <item name="spark_lineWidth">@dimen/graph_line_width</item>
         <item name="spark_cornerRadius">@dimen/graph_corner_radius</item>
         <item name="spark_fill">false</item>
-
         <item name="spark_baseLineColor">@color/md_blue_grey_900</item>
         <item name="spark_baseLineWidth">@dimen/graph_base_line_width</item>
-
         <item name="spark_scrubLineColor">@color/md_blue_grey_900</item>
         <item name="spark_scrubLineWidth">@dimen/graph_scrub_line_width</item>
         <item name="spark_scrubEnabled">true</item>
-
         <item name="spark_animateChanges">true</item>
     </style>
 
@@ -115,9 +111,22 @@
         <item name="android:textSize">30sp</item>
     </style>
 
+    <!--toolbar icon back button-->
     <style name="ToolBarWithNavigationBack">
         <item name="navigationIcon">@drawable/ic_keyboard_arrow_left_white_36dp</item>
     </style>
+
+    <!--header styles-->
+    <style name="TextComponent"/>
+
+    <style name="TextComponent.ItemRow">
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:minHeight">48dp</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
 
 
 </resources>

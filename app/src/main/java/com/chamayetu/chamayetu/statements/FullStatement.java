@@ -45,7 +45,7 @@ public class FullStatement extends AppCompatActivity implements AppBarLayout.OnO
 
         //extract the data and store for processing
         CharSequence statementPeriod = receiveUserChoice.getCharSequence(FULL_STATEMENT_CHOICE);
-        
+
 
         /*go back to dashboard view in MainActivity*/
         mToolbar.setNavigationOnClickListener(v -> onBackPressed());
