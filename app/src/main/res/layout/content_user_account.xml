@@ -133,7 +133,7 @@
                     android:padding="24dp"
                     android:textColor="@color/black"/>
 
-                <!--List of Chama's the user is in-->
+                <!--List of Chama's the user is in, recyclerView-->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

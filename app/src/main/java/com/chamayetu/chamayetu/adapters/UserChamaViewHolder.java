@@ -1,0 +1,29 @@
+package com.chamayetu.chamayetu.adapters;
+
+import android.content.Context;
+import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.TextView;
+
+import com.chamayetu.chamayetu.R;
+import com.chamayetu.chamayetu.models.UserPojo;
+
+/**
+ * ChamaYetu
+ * com.chamayetu.chamayetu.useraccount
+ * Created by lusinabrian on 30/09/16.
+ * Description: Recycler Adapter for the User's chama*/
+
+public class UserChamaViewHolder extends RecyclerView.ViewHolder{
+    public TextView chamaName;
+
+    public UserChamaViewHolder(View itemView) {
+        super(itemView);
+        chamaName = (TextView) itemView.findViewById(R.id.full_statement_item_date);
+    }
+
+    /*bind the views to the models*/
+    public void bind(UserPojo userPojo){
+        //chamaName.setText(userPojo.getDate());
+    }
+}
