@@ -1,6 +1,5 @@
 package com.chamayetu.chamayetu.useraccount;
 
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -10,10 +9,7 @@ import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.bumptech.glide.Glide;
 import com.chamayetu.chamayetu.R;
 import com.chamayetu.chamayetu.utils.Contract;
@@ -70,10 +66,11 @@ public class UserAccountActivity extends AppCompatActivity {
         userEmail.setText(mFirebaseUser.getEmail());
         String username;
         try{
-            username = mFirebaseUser.getDisplayName().toLowerCase().replaceAll("\\s+","");
+            username = mFirebaseUser.getEmail().toLowerCase().replaceAll("\\s+","");
         }catch (NullPointerException npe){
             Log.e(USERACCT_TAG, npe.getMessage());
-            username = mFirebaseUser.getEmail();
+            int indx = mFirebaseUser.getEmail().indexOf("@");
+            username = mFirebaseUser.getEmail().substring(0,indx);
         }
 
         databaseReference = FirebaseDatabase.getInstance().getReference();
