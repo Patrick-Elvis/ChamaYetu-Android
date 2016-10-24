@@ -1,11 +1,13 @@
 package com.chamayetu.chamayetu.useraccount;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -13,7 +15,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.chamayetu.chamayetu.R;
+import com.chamayetu.chamayetu.adapters.ActivityViewHolder;
+import com.chamayetu.chamayetu.models.ActivityModel;
 import com.chamayetu.chamayetu.utils.Contract;
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -25,6 +30,9 @@ import com.google.firebase.database.ValueEventListener;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import de.hdodenhof.circleimageview.CircleImageView;
+
+import static com.chamayetu.chamayetu.utils.Contract.ACTIVITY_NODE;
+import static com.chamayetu.chamayetu.utils.Contract.NOTIFICATION_SP_FILE;
 
 public class UserAccountActivity extends AppCompatActivity implements UserAccountView{
 
@@ -55,11 +63,36 @@ public class UserAccountActivity extends AppCompatActivity implements UserAccoun
         mFirebaseUser = mFirebaseAuth.getCurrentUser();
         initDataIntoViews();
 
+        //initFirebaseRecycler();
+
         //TODO: change user profile in Firebase, display a dialog
         fab.setOnClickListener(view -> Snackbar.make(view,
                 "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show());
     }
+
+    /**initialize Firebase Recycler*/
+/*
+    private void initFirebaseRecycler() {
+        databaseReference = FirebaseDatabase.getInstance().getReference();
+
+        FirebaseRecyclerAdapter<ActivityModel, ActivityViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<ActivityModel,
+                ActivityViewHolder>(
+                ActivityModel.class,
+                R.layout.chamaactivity_item_layout,
+                ActivityViewHolder.class,
+                databaseReference.child(ACTIVITY_NODE).child(chamaName)) {
+            @Override
+            protected void populateViewHolder(ActivityViewHolder viewHolder, ActivityModel activityModel, int position) {
+                viewHolder.bind(activityModel);
+            }
+        };
+
+        //set the linear layout manager and the adapter
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mRecyclerView.setAdapter(firebaseRecyclerAdapter);
+    }
+*/
 
     /**Fetches data from Firebase,loads them into the views*/
     private void initDataIntoViews() {

@@ -7,6 +7,12 @@ package com.chamayetu.chamayetu.useraccount;
  * Description:
  */
 
-class UserAcctPresenterImpl implements UserAccountPresenter{
+class UserAcctPresenterImpl implements UserAcctInteractor{
+    private UserAccountPresenter userAccountPresenter;
+
+    UserAcctPresenterImpl(UserAccountPresenter userAccountPresenter){
+        this.userAccountPresenter = userAccountPresenter;
+    }
+
 
 }

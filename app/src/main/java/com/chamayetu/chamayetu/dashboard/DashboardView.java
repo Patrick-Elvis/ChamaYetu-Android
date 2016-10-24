@@ -57,7 +57,8 @@ import static com.chamayetu.chamayetu.utils.Contract.USERS_NODE;
  * Description: View that will handle Chama Details and data for the user's chama
  */
 
-public class DashboardView extends Fragment implements View.OnClickListener, OnChartValueSelectedListener {
+public class DashboardView extends Fragment implements View.OnClickListener,
+        OnChartValueSelectedListener {
 
     @BindView(R.id.mychamastatement_card) CardView statementCard;
     @BindView(R.id.mychama_graph_view_card) CardView graphCard;
@@ -170,7 +171,6 @@ public class DashboardView extends Fragment implements View.OnClickListener, OnC
 
         FirebaseRecyclerAdapter<ActivityModel, ActivityViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<ActivityModel,
                 ActivityViewHolder>(
-
                 ActivityModel.class,
                 R.layout.chamaactivity_item_layout,
                 ActivityViewHolder.class,
@@ -185,7 +185,7 @@ public class DashboardView extends Fragment implements View.OnClickListener, OnC
             }
         };
 
-        /*set the libear layout manager and the adapter*/
+        /*set the linear layout manager and the adapter*/
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRecyclerView.setAdapter(firebaseRecyclerAdapter);
     }
