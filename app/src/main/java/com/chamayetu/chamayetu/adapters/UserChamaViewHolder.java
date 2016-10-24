@@ -4,7 +4,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 import com.chamayetu.chamayetu.R;
-import com.chamayetu.chamayetu.models.UserPojo;
+import com.chamayetu.chamayetu.models.ChamaGroupsModel;
 
 /**
  * ChamaYetu
@@ -21,7 +21,7 @@ public class UserChamaViewHolder extends RecyclerView.ViewHolder{
     }
 
     /*bind the views to the models*/
-    public void bind(UserPojo userPojo){
-        //chamaName.setText(userPojo.getDate());
+    public void bind(ChamaGroupsModel chamaGroupsModel){
+        chamaGroupsModel.getChamaGroups();
     }
 }

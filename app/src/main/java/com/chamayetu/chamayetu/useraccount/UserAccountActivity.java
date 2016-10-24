@@ -67,7 +67,7 @@ public class UserAccountActivity extends AppCompatActivity implements UserAccoun
         mFirebaseUser = mFirebaseAuth.getCurrentUser();
         initDataIntoViews();
 
-        //initFirebaseRecycler();
+        initFirebaseRecycler();
 
         //TODO: change user profile in Firebase, display a dialog
         fab.setOnClickListener(view -> Snackbar.make(view,
@@ -76,16 +76,15 @@ public class UserAccountActivity extends AppCompatActivity implements UserAccoun
     }
 
     /**initialize Firebase Recycler*/
-
     private void initFirebaseRecycler() {
         databaseReference = FirebaseDatabase.getInstance().getReference();
 
-        FirebaseRecyclerAdapter<ActivityModel, UserChamaViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<ChamaGroupsModel,
-                UserChamaViewHolder>(
+        FirebaseRecyclerAdapter<ChamaGroupsModel, UserChamaViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<ChamaGroupsModel, UserChamaViewHolder>(
                 ChamaGroupsModel.class,
                 R.layout.userchamagroups_item,
-                ActivityViewHolder.class,
-                databaseReference.child(USERS_NODE).child(CHAMA_GROUPS)) {
+                UserChamaViewHolder.class,
+                databaseReference.child(USERS_NODE).child(CHAMA_GROUPS)
+        ) {
             @Override
             protected void populateViewHolder(UserChamaViewHolder viewHolder, ChamaGroupsModel chamaGroupsModel, int position) {
                 viewHolder.bind(chamaGroupsModel);

@@ -78,7 +78,7 @@ public class ActivityModel implements Parcelable {
         dest.writeLong(this.amount);
     }
 
-    protected ActivityModel(Parcel in) {
+    private ActivityModel(Parcel in) {
         this.activityType = in.readString();
         this.person = in.readString();
         this.date = in.readString();
