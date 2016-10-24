@@ -16,7 +16,9 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.chamayetu.chamayetu.R;
 import com.chamayetu.chamayetu.adapters.ActivityViewHolder;
+import com.chamayetu.chamayetu.adapters.UserChamaViewHolder;
 import com.chamayetu.chamayetu.models.ActivityModel;
+import com.chamayetu.chamayetu.models.ChamaGroupsModel;
 import com.chamayetu.chamayetu.utils.Contract;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
@@ -32,7 +34,9 @@ import butterknife.ButterKnife;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 import static com.chamayetu.chamayetu.utils.Contract.ACTIVITY_NODE;
+import static com.chamayetu.chamayetu.utils.Contract.CHAMA_GROUPS;
 import static com.chamayetu.chamayetu.utils.Contract.NOTIFICATION_SP_FILE;
+import static com.chamayetu.chamayetu.utils.Contract.USERS_NODE;
 
 public class UserAccountActivity extends AppCompatActivity implements UserAccountView{
 
@@ -72,19 +76,19 @@ public class UserAccountActivity extends AppCompatActivity implements UserAccoun
     }
 
     /**initialize Firebase Recycler*/
-/*
+
     private void initFirebaseRecycler() {
         databaseReference = FirebaseDatabase.getInstance().getReference();
 
-        FirebaseRecyclerAdapter<ActivityModel, ActivityViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<ActivityModel,
-                ActivityViewHolder>(
-                ActivityModel.class,
-                R.layout.chamaactivity_item_layout,
+        FirebaseRecyclerAdapter<ActivityModel, UserChamaViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<ChamaGroupsModel,
+                UserChamaViewHolder>(
+                ChamaGroupsModel.class,
+                R.layout.userchamagroups_item,
                 ActivityViewHolder.class,
-                databaseReference.child(ACTIVITY_NODE).child(chamaName)) {
+                databaseReference.child(USERS_NODE).child(CHAMA_GROUPS)) {
             @Override
-            protected void populateViewHolder(ActivityViewHolder viewHolder, ActivityModel activityModel, int position) {
-                viewHolder.bind(activityModel);
+            protected void populateViewHolder(UserChamaViewHolder viewHolder, ChamaGroupsModel chamaGroupsModel, int position) {
+                viewHolder.bind(chamaGroupsModel);
             }
         };
 
@@ -92,7 +96,6 @@ public class UserAccountActivity extends AppCompatActivity implements UserAccoun
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setAdapter(firebaseRecyclerAdapter);
     }
-*/
 
     /**Fetches data from Firebase,loads them into the views*/
     private void initDataIntoViews() {
