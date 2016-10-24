@@ -1,6 +1,7 @@
 package com.chamayetu.chamayetu.useraccount;
 
 import android.os.Bundle;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -31,9 +32,9 @@ public class UserAccountActivity extends AppCompatActivity {
     @BindView(R.id.useracct_profilecard) CardView profileCardView;
     @BindView(R.id.useracct_img) CircleImageView userImagView;
     @BindView(R.id.useracct_chamacard) CardView chamaCardView;
-    @BindView(R.id.useracct_displayname) TextView userDisplayName;
     @BindView(R.id.useracct_email) TextView userEmail;
     @BindView(R.id.user_toolbar) Toolbar toolbar;
+    @BindView(R.id.useracct_collapsing_toolbar_layout) CollapsingToolbarLayout collapsingToolbarLayout;
     @BindView(R.id.fab) FloatingActionButton fab;
     @BindView(R.id.useracct_chamarecycler) RecyclerView mRecyclerView;
     private FirebaseAuth mFirebaseAuth;
@@ -62,7 +63,7 @@ public class UserAccountActivity extends AppCompatActivity {
     /**Fetches data from Firebase,loads them into the views*/
     private void initDataIntoViews() {
         Glide.with(this).load(mFirebaseUser.getPhotoUrl()).into(userImagView);
-        userDisplayName.setText(mFirebaseUser.getDisplayName());
+        collapsingToolbarLayout.setTitle(mFirebaseUser.getDisplayName());
         userEmail.setText(mFirebaseUser.getEmail());
         String username;
         try{
