@@ -13,29 +13,27 @@ import java.util.Map;
  */
 
 public class UserPojo implements Parcelable {
-    private String firstName,lastName, email, role;
+    private String firstName,lastName, email;
     private long phoneNumber, totalContributed,avgContribution;
     private Map<String, Object> chamaGroups;
 
     /**Default constructor required for calls to DataSnapshot.getValue(UserPojo.class)*/
     public UserPojo(){}
 
-    public UserPojo(String firstName, String lastName, String email, String role, long phoneNumber, long totalContributed, long avgContribution, Map<String, Object> chamaGroups) {
+    public UserPojo(String firstName, String lastName, String email, long phoneNumber, long totalContributed, long avgContribution, Map<String, Object> chamaGroups) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
-        this.role = role;
         this.phoneNumber = phoneNumber;
         this.totalContributed = totalContributed;
         this.avgContribution = avgContribution;
         this.chamaGroups = chamaGroups;
     }
 
-    public UserPojo(String firstName, String lastName, String email, String role, long phoneNumber, long totalContributed, long avgContribution) {
+    public UserPojo(String firstName, String lastName, String email, long phoneNumber, long totalContributed, long avgContribution) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
-        this.role = role;
         this.phoneNumber = phoneNumber;
         this.totalContributed = totalContributed;
         this.avgContribution = avgContribution;
@@ -46,7 +44,6 @@ public class UserPojo implements Parcelable {
         this.firstName = in.readString();
         this.lastName = in.readString();
         this.email = in.readString();
-        this.role = in.readString();
         this.phoneNumber = in.readInt();
         this.totalContributed = in.readInt();
         this.avgContribution = in.readInt();
@@ -59,7 +56,7 @@ public class UserPojo implements Parcelable {
         dest.writeString(firstName);
         dest.writeString(lastName);
         dest.writeString(email);
-        dest.writeString(role);
+
         dest.writeLong(phoneNumber);
         dest.writeLong(totalContributed);
         dest.writeLong(avgContribution);
@@ -89,7 +86,6 @@ public class UserPojo implements Parcelable {
                 "firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
-                ", role='" + role + '\'' +
                 ", phoneNumber=" + phoneNumber +
                 ", totalContributed=" + totalContributed +
                 ", avgContribution=" + avgContribution +
@@ -119,14 +115,6 @@ public class UserPojo implements Parcelable {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
     }
 
     public long getPhoneNumber() {
