@@ -26,7 +26,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class UserAccountActivity extends AppCompatActivity {
+public class UserAccountActivity extends AppCompatActivity implements UserAccountView{
+
     public static final String USERACCT_TAG = UserAccountActivity.class.getSimpleName();
     @BindView(R.id.useracct_profilecard) CardView profileCardView;
     @BindView(R.id.useracct_img) ImageView userImagView;

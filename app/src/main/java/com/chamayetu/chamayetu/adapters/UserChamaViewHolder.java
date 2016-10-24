@@ -1,10 +1,8 @@
 package com.chamayetu.chamayetu.adapters;
 
-import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
-
 import com.chamayetu.chamayetu.R;
 import com.chamayetu.chamayetu.models.UserPojo;
 
