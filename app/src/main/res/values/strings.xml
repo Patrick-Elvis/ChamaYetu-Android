@@ -326,5 +326,8 @@
     <string name="full_statement_item_transactor">Transactor</string>
     <string name="full_statement_item_amount">amount KSH</string>
     <string name="full_statement_item_details">Details</string>
+    <string name="useracct_email_label">Home</string>
+    <string name="useracct_phone_label">Mobile</string>
+    <string name="useracct_phone">Phone</string>
 
 </resources>

@@ -9,6 +9,7 @@ import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.widget.ImageView;
 import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.chamayetu.chamayetu.R;
@@ -28,13 +29,14 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class UserAccountActivity extends AppCompatActivity {
     public static final String USERACCT_TAG = UserAccountActivity.class.getSimpleName();
     @BindView(R.id.useracct_profilecard) CardView profileCardView;
-    @BindView(R.id.useracct_img) CircleImageView userImagView;
+    @BindView(R.id.useracct_img) ImageView userImagView;
     @BindView(R.id.useracct_chamacard) CardView chamaCardView;
     @BindView(R.id.useracct_email) TextView userEmail;
     @BindView(R.id.user_toolbar) Toolbar toolbar;
     @BindView(R.id.useracct_collapsing_toolbar_layout) CollapsingToolbarLayout collapsingToolbarLayout;
     @BindView(R.id.fab) FloatingActionButton fab;
     @BindView(R.id.useracct_chamarecycler) RecyclerView mRecyclerView;
+    @BindView(R.id.useracct_phone) TextView userPhone;
     private FirebaseAuth mFirebaseAuth;
     private FirebaseUser mFirebaseUser;
 
@@ -64,12 +66,12 @@ public class UserAccountActivity extends AppCompatActivity {
         collapsingToolbarLayout.setTitle(mFirebaseUser.getDisplayName());
 
         userEmail.setText(mFirebaseUser.getEmail());
+        int indx = mFirebaseUser.getEmail().indexOf("@");
         String username;
         try{
-            username = mFirebaseUser.getEmail().toLowerCase().replaceAll("\\s+","");
+            username = mFirebaseUser.getEmail().substring(0,indx).toLowerCase().replaceAll("\\s+","");
         }catch (NullPointerException npe){
             Log.e(USERACCT_TAG, npe.getMessage());
-            int indx = mFirebaseUser.getEmail().indexOf("@");
             username = mFirebaseUser.getEmail().substring(0,indx);
         }
 
@@ -78,7 +80,11 @@ public class UserAccountActivity extends AppCompatActivity {
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        Log.d(USERACCT_TAG, dataSnapshot.getValue().toString());
+                        try {
+                            Log.d(USERACCT_TAG, dataSnapshot.getValue().toString());
+                        }catch (NullPointerException npe){
+                            Log.e(USERACCT_TAG, npe.getMessage());
+                        }
                     }
                     @Override
                     public void onCancelled(DatabaseError databaseError) {

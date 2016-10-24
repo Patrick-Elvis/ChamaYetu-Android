@@ -26,19 +26,88 @@
                     android:orientation="vertical"
                     android:layout_height="wrap_content">
 
+                    <!--contact information-->
                     <LinearLayout
                        android:orientation="vertical"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
-                        <TextView
-                            android:id="@+id/useracct_email"
-                            android:layout_width="match_parent"
-                            android:padding="10dp"
+                        <!--phone container-->
+                        <LinearLayout
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/black"
-                            android:textStyle="bold"
-                            android:text="@string/useracct_email"/>
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:src="@drawable/ic_phone_black_24dp"
+                                android:layout_width="wrap_content"
+                                android:contentDescription="@null"
+                                android:padding="10dp"
+                                android:layout_height="wrap_content" />
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="10dp"
+                                android:orientation="vertical">
+
+                                <!--phone-->
+                                <TextView
+                                    android:id="@+id/useracct_phone"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="@color/black"
+                                    android:textStyle="bold"
+                                    android:text="@string/useracct_phone"/>
+
+                                <!--phone label-->
+                                <TextView
+                                    android:id="@+id/useracct_phone_label"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:textStyle="bold"
+                                    android:text="@string/useracct_phone_label"/>
+
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <!--email container-->
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+                            <ImageView
+                                android:src="@drawable/ic_mail_black_24dp"
+                                android:layout_width="wrap_content"
+                                android:contentDescription="@null"
+                                android:padding="10dp"
+                                android:layout_height="wrap_content" />
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="10dp"
+                                android:orientation="vertical">
+
+                                <!--email-->
+                                <TextView
+                                    android:id="@+id/useracct_email"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="@color/black"
+                                    android:textStyle="bold"
+                                    android:text="@string/useracct_email"/>
+
+                                <!--email-->
+                                <TextView
+                                    android:id="@+id/useracct_email_label"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:textStyle="bold"
+                                    android:text="@string/useracct_email_label"/>
+
+                            </LinearLayout>
+                        </LinearLayout>
 
                     </LinearLayout>
 
