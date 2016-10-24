@@ -25,6 +25,10 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.HashMap;
+import java.util.Map;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import static com.chamayetu.chamayetu.utils.Contract.CHAMA_GROUPS;
@@ -61,8 +65,6 @@ public class UserAccountActivity extends AppCompatActivity implements UserAccoun
 
         initDataIntoViews();
 
-        initFirebaseRecycler();
-
         //TODO: change user profile in Firebase, display a dialog
         fab.setOnClickListener(view -> Snackbar.make(view,
                 "Replace with your own action", Snackbar.LENGTH_LONG)
@@ -70,7 +72,7 @@ public class UserAccountActivity extends AppCompatActivity implements UserAccoun
     }
 
     /**initialize Firebase Recycler*/
-    private void initFirebaseRecycler() {
+    private void initFirebaseRecycler(ChamaGroupsModel chamaGroupsModel) {
         FirebaseRecyclerAdapter<ChamaGroupsModel, UserChamaViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<ChamaGroupsModel, UserChamaViewHolder>(
                 ChamaGroupsModel.class,
                 R.layout.userchamagroups_item,
@@ -108,20 +110,27 @@ public class UserAccountActivity extends AppCompatActivity implements UserAccoun
         }
 
         databaseReference.child(Contract.USERS_NODE).child(username).child(CHAMA_GROUPS)
-
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         try {
-                            Log.d(USERACCT_TAG+"Groups", dataSnapshot.getValue().toString());
+                            for(DataSnapshot d : dataSnapshot.getChildren()){
+                                Map<String,Object> mapper = new HashMap<>();
+                                mapper.put(d.getKey(),d.getValue());
+                                ChamaGroupsModel chamaGroupsModel = new ChamaGroupsModel(mapper);
+
+                                Log.d(USERACCT_TAG+"Groups", chamaGroupsModel.toString());
+
+                                initFirebaseRecycler(chamaGroupsModel);
+                            }
                         }catch (NullPointerException npe){
                             Log.e(USERACCT_TAG, npe.getMessage());
                         }
                     }
                     @Override
                     public void onCancelled(DatabaseError databaseError) {
+                        /*silently log the db error*/
                         Log.e(USERACCT_TAG+"DBError", databaseError.getMessage());
-
                     }
                 });
     }

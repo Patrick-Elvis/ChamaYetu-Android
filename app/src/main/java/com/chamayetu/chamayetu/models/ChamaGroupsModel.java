@@ -17,9 +17,7 @@ public class ChamaGroupsModel implements Parcelable {
 
     public ChamaGroupsModel(){}
 
-    public ChamaGroupsModel(Map<String, Object> chamaGroups) {
-        this.chamaGroups = chamaGroups;
-    }
+    public ChamaGroupsModel(Map<String, Object> chamaGroups) {this.chamaGroups = chamaGroups;}
 
     private ChamaGroupsModel(Parcel in) {
 
