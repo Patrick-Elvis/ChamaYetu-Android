@@ -22,6 +22,6 @@ public class UserChamaViewHolder extends RecyclerView.ViewHolder{
 
     /*bind the views to the models*/
     public void bind(ChamaGroupsModel chamaGroupsModel){
-        chamaGroupsModel.getChamaGroups();
+        //chamaGroupsModel.getChamaGroups();
     }
 }

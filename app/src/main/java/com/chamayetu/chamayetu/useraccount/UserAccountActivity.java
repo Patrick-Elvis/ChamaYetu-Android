@@ -29,6 +29,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.Set;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -87,7 +89,10 @@ public class UserAccountActivity extends AppCompatActivity implements UserAccoun
         ) {
             @Override
             protected void populateViewHolder(UserChamaViewHolder viewHolder, ChamaGroupsModel chamaGroupsModel, int position) {
-                viewHolder.bind(chamaGroupsModel);
+                for(String key : chamaGroupsModel.getChamaGroups().keySet()){
+                    viewHolder.chamaName.setText(key);
+                }
+                //viewHolder.bind(chamaGroupsModel);
             }
         };
 
