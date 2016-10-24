@@ -329,5 +329,7 @@
     <string name="useracct_email_label">Home</string>
     <string name="useracct_phone_label">Mobile</string>
     <string name="useracct_phone">Phone</string>
+    <string name="userchama_group_name">Chama Name</string>
+    <string name="userchama_role">Role</string>
 
 </resources>

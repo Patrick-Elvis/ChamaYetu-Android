@@ -17,7 +17,7 @@ public class UserChamaViewHolder extends RecyclerView.ViewHolder{
 
     public UserChamaViewHolder(View itemView) {
         super(itemView);
-        chamaName = (TextView) itemView.findViewById(R.id.full_statement_item_date);
+        chamaName = (TextView) itemView.findViewById(R.id.userchama_group_name);
     }
 
     /*bind the views to the models*/
