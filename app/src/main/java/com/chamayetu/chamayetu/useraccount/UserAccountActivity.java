@@ -1,6 +1,5 @@
 package com.chamayetu.chamayetu.useraccount;
 
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -15,9 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.chamayetu.chamayetu.R;
-import com.chamayetu.chamayetu.adapters.ActivityViewHolder;
 import com.chamayetu.chamayetu.adapters.UserChamaViewHolder;
-import com.chamayetu.chamayetu.models.ActivityModel;
 import com.chamayetu.chamayetu.models.ChamaGroupsModel;
 import com.chamayetu.chamayetu.utils.Contract;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -28,7 +25,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import static com.chamayetu.chamayetu.utils.Contract.CHAMA_GROUPS;
@@ -46,9 +42,9 @@ public class UserAccountActivity extends AppCompatActivity implements UserAccoun
     @BindView(R.id.fab) FloatingActionButton fab;
     @BindView(R.id.useracct_chamarecycler) RecyclerView mRecyclerView;
     @BindView(R.id.useracct_phone) TextView userPhone;
+
     private FirebaseAuth mFirebaseAuth;
     private FirebaseUser mFirebaseUser;
-
     private DatabaseReference databaseReference;
 
     @Override
@@ -61,6 +57,8 @@ public class UserAccountActivity extends AppCompatActivity implements UserAccoun
         // Initialize Firebase Auth
         mFirebaseAuth = FirebaseAuth.getInstance();
         mFirebaseUser = mFirebaseAuth.getCurrentUser();
+        databaseReference = FirebaseDatabase.getInstance().getReference();
+
         initDataIntoViews();
 
         initFirebaseRecycler();
@@ -73,8 +71,6 @@ public class UserAccountActivity extends AppCompatActivity implements UserAccoun
 
     /**initialize Firebase Recycler*/
     private void initFirebaseRecycler() {
-        databaseReference = FirebaseDatabase.getInstance().getReference();
-
         FirebaseRecyclerAdapter<ChamaGroupsModel, UserChamaViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<ChamaGroupsModel, UserChamaViewHolder>(
                 ChamaGroupsModel.class,
                 R.layout.userchamagroups_item,
@@ -111,13 +107,13 @@ public class UserAccountActivity extends AppCompatActivity implements UserAccoun
             username = mFirebaseUser.getEmail().substring(0,indx);
         }
 
-        databaseReference = FirebaseDatabase.getInstance().getReference();
-        databaseReference.child(Contract.USERS_NODE).child(username).child("chamaGroups")
+        databaseReference.child(Contract.USERS_NODE).child(username).child(CHAMA_GROUPS)
+
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         try {
-                            Log.d(USERACCT_TAG, dataSnapshot.getValue().toString());
+                            Log.d(USERACCT_TAG+"Groups", dataSnapshot.getValue().toString());
                         }catch (NullPointerException npe){
                             Log.e(USERACCT_TAG, npe.getMessage());
                         }

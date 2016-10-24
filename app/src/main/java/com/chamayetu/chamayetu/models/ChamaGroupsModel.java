@@ -13,11 +13,11 @@ import java.util.Map;
  */
 
 public class ChamaGroupsModel implements Parcelable {
-    private Map<String, Boolean> chamaGroups;
+    private Map<String, Object> chamaGroups;
 
     public ChamaGroupsModel(){}
 
-    public ChamaGroupsModel(Map<String, Boolean> chamaGroups) {
+    public ChamaGroupsModel(Map<String, Object> chamaGroups) {
         this.chamaGroups = chamaGroups;
     }
 
@@ -54,11 +54,11 @@ public class ChamaGroupsModel implements Parcelable {
         dest.writeMap(this.chamaGroups);
     }
 
-    public Map<String, Boolean> getChamaGroups() {
+    public Map<String, Object> getChamaGroups() {
         return chamaGroups;
     }
 
-    public void setChamaGroups(Map<String, Boolean> chamaGroups) {
+    public void setChamaGroups(Map<String, Object> chamaGroups) {
         this.chamaGroups = chamaGroups;
     }
 
