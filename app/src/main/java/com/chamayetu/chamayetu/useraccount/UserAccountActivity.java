@@ -1,5 +1,6 @@
 package com.chamayetu.chamayetu.useraccount;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -10,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -64,6 +66,7 @@ public class UserAccountActivity extends AppCompatActivity {
     private void initDataIntoViews() {
         Glide.with(this).load(mFirebaseUser.getPhotoUrl()).into(userImagView);
         collapsingToolbarLayout.setTitle(mFirebaseUser.getDisplayName());
+
         userEmail.setText(mFirebaseUser.getEmail());
         String username;
         try{
