@@ -19,8 +19,8 @@ import android.view.MenuItem;
 import android.view.View;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.chamayetu.chamayetu.R;
+import com.chamayetu.chamayetu.dashboard.DashboardFrag;
 import com.chamayetu.chamayetu.login.LoginActivity;
-import com.chamayetu.chamayetu.dashboard.DashboardView;
 import com.chamayetu.chamayetu.models.Projects;
 import com.chamayetu.chamayetu.settings.SettingsActivity;
 import com.chamayetu.chamayetu.useraccount.UserAccountActivity;
@@ -170,7 +170,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             case 1:
                                 /**todo: replace with the user's chama*/
                                 //default screen, MyChama
-                                fragment = DashboardView.newInstance();
+                                fragment = DashboardFrag.newInstance();
                                 title = "My Chama";
                                 Log.d(MAINACT_TAG,"FragmentView:"+title);
                                 break;
@@ -213,7 +213,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                         .start(this);
                                 break;
                             default:
-                                fragment = DashboardView.newInstance();
+                                fragment = DashboardFrag.newInstance();
                                 title = ((Nameable) drawerItem).getName().getText();
                                 break;
                         }
@@ -232,8 +232,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 .withShowDrawerOnFirstLaunch(true)
                 .build();
 
-        //set the default screen to DashboardView
-        Fragment fragment = DashboardView.newInstance();
+        //set the default screen to DashboardFrag
+        Fragment fragment = DashboardFrag.newInstance();
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.container_body, fragment);

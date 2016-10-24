@@ -3,7 +3,7 @@ package com.chamayetu.chamayetu.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.chamayetu.chamayetu.dashboard.DashboardView;
+import com.chamayetu.chamayetu.dashboard.DashboardFrag;
 
 import java.util.Map;
 
@@ -11,7 +11,7 @@ import java.util.Map;
  * ChamaYetu
  * com.chamayetu.chamayetu.models
  * Created by lusinabrian on 28/09/16.
- * Description: The Pojo class for the Chama Object to be displayed in {@link DashboardView}
+ * Description: The Pojo class for the Chama Object to be displayed in {@link DashboardFrag}
  */
 public class ChamaPojo implements Parcelable {
     private long totalAmount,amountExpected, members,accountNumber;

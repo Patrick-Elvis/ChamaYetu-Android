@@ -7,5 +7,6 @@ package com.chamayetu.chamayetu.dashboard;
  * Description:
  */
 
- interface DashboardView {
+interface DashboardPresenter {
+
 }
