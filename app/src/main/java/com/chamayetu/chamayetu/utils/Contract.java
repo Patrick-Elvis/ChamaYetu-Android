@@ -4,6 +4,7 @@ import com.chamayetu.chamayetu.BuildConfig;
 import com.chamayetu.chamayetu.dashboard.DashboardView;
 import com.chamayetu.chamayetu.login.LoginActivity;
 import com.chamayetu.chamayetu.statements.FullStatement;
+import com.chamayetu.chamayetu.useraccount.UserAccountActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +26,7 @@ public class Contract {
     public static final String LOGINACT_TAG = LoginActivity.class.getSimpleName();
     public static final String DASHBOARDVIEW_TAG = DashboardView.class.getSimpleName();
     public static final String FULL_STATEMENT_TAG = FullStatement.class.getSimpleName();
+    public static final String USERACCT_TAG = UserAccountActivity.class.getSimpleName();
 
     public static final String NOTIFICATION_SP_FILE = "Notifications";
 

@@ -29,20 +29,14 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.Set;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import de.hdodenhof.circleimageview.CircleImageView;
-
-import static com.chamayetu.chamayetu.utils.Contract.ACTIVITY_NODE;
 import static com.chamayetu.chamayetu.utils.Contract.CHAMA_GROUPS;
-import static com.chamayetu.chamayetu.utils.Contract.NOTIFICATION_SP_FILE;
+import static com.chamayetu.chamayetu.utils.Contract.USERACCT_TAG;
 import static com.chamayetu.chamayetu.utils.Contract.USERS_NODE;
 
 public class UserAccountActivity extends AppCompatActivity implements UserAccountView{
 
-    public static final String USERACCT_TAG = UserAccountActivity.class.getSimpleName();
     @BindView(R.id.useracct_profilecard) CardView profileCardView;
     @BindView(R.id.useracct_img) ImageView userImagView;
     @BindView(R.id.useracct_chamacard) CardView chamaCardView;
@@ -90,6 +84,7 @@ public class UserAccountActivity extends AppCompatActivity implements UserAccoun
             @Override
             protected void populateViewHolder(UserChamaViewHolder viewHolder, ChamaGroupsModel chamaGroupsModel, int position) {
                 for(String key : chamaGroupsModel.getChamaGroups().keySet()){
+                    Log.d(USERACCT_TAG+"KEY", key);
                     viewHolder.chamaName.setText(key);
                 }
                 //viewHolder.bind(chamaGroupsModel);
@@ -129,6 +124,7 @@ public class UserAccountActivity extends AppCompatActivity implements UserAccoun
                     }
                     @Override
                     public void onCancelled(DatabaseError databaseError) {
+                        Log.e(USERACCT_TAG+"DBError", databaseError.getMessage());
 
                     }
                 });
