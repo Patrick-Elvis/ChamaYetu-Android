@@ -67,7 +67,7 @@ public class StatementBarGraph implements OnChartValueSelectedListener{
         initYAxis(custom);
         createLegend();
 
-        setData(12, 1500);
+        setData(6, 1500);
     }
 
     /**Initialize the Legend and create it*/
@@ -118,7 +118,7 @@ public class StatementBarGraph implements OnChartValueSelectedListener{
 
         float start = 0f;
 
-        ArrayList<BarEntry> yVals1 = new ArrayList<BarEntry>();
+        ArrayList<BarEntry> yVals1 = new ArrayList<>();
 
         for (int i = (int) start; i < start + count + 1; i++) {
             float mult = (range + 1);
@@ -138,7 +138,7 @@ public class StatementBarGraph implements OnChartValueSelectedListener{
             set1 = new BarDataSet(yVals1, "The year 2017");
             set1.setColors(ColorTemplate.MATERIAL_COLORS);
 
-            ArrayList<IBarDataSet> dataSets = new ArrayList<IBarDataSet>();
+            ArrayList<IBarDataSet> dataSets = new ArrayList<>();
             dataSets.add(set1);
 
             BarData data = new BarData(dataSets);
@@ -149,7 +149,7 @@ public class StatementBarGraph implements OnChartValueSelectedListener{
         }
     }
 
-    protected RectF mOnValueSelectedRectF = new RectF();
+    private RectF mOnValueSelectedRectF = new RectF();
 
     @Override
     public void onValueSelected(Entry e, Highlight h) {
