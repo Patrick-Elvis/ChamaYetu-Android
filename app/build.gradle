@@ -87,6 +87,9 @@ dependencies {
     compile 'com.robinhood.spark:spark:1.1.2'
     compile 'com.github.PhilJay:MPAndroidChart:v3.0.0-beta1'
 
+    /*Calender view*/
+    compile 'com.github.sundeepk:compact-calendar-view:1.9.3'
+
     compile 'com.github.bumptech.glide:glide:3.7.0'
     compile 'de.hdodenhof:circleimageview:2.1.0'
     /*material textfields*/
