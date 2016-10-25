@@ -142,7 +142,7 @@ public class RegisterInteractorImpl implements RegisterInteractor {
         userPrefEditor.apply();
 
         // new instance of the new user
-        UserPojo newUser = new UserPojo(firstName, lastName, email, role, phoneNumber,0,0);
+        UserPojo newUser = new UserPojo(firstName, lastName, email, phoneNumber,0,0);
         Log.d(TAG, newUser.toString());
 
         //check if the user already exists in the database at the User's node

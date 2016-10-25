@@ -3,6 +3,7 @@ package com.chamayetu.chamayetu.calender;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -10,7 +11,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.chamayetu.chamayetu.R;
+import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
@@ -21,6 +24,8 @@ import butterknife.ButterKnife;
  */
 
 public class CalenderFrag extends Fragment{
+    @BindView(R.id.calender_recyclerView) RecyclerView calenderRecyclerView;
+    @BindView(R.id.calendarView) MaterialCalendarView calendarView;
 
     public CalenderFrag() {}
 
