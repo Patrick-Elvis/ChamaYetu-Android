@@ -333,5 +333,8 @@
     <string name="userchama_role">Role</string>
     <string name="calenderevent_month">Nov</string>
     <string name="calenderevent_date">25</string>
+    <string name="calenderevent_details">Annual General Meeting</string>
+    <string name="calenderevent_location">Hilton hotel</string>
+    <string name="calenderevent_time">10:00</string>
 
 </resources>

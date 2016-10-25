@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+    android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -39,9 +39,51 @@
     <!--container for event details-->
     <LinearLayout
         android:orientation="vertical"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
+        android:padding="25dp"
         android:layout_height="wrap_content">
 
+        <!--event deails-->
+        <TextView
+            android:id="@+id/calenderevent_details"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/calenderevent_details"
+            android:textSize="20sp"
+            android:textColor="@color/black"/>
+        <!--location and time-->
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:weightSum="2"
+            android:layout_marginTop="10dp"
+            android:layout_height="wrap_content">
+
+            <!--location-->
+            <TextView
+                android:id="@+id/calenderevent_location"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="15sp"
+                android:text="@string/calenderevent_location"
+                android:textAllCaps="true"
+                android:layout_weight="1"
+                android:textColor="@color/black"/>
+
+            <!--time-->
+            <TextView
+                android:id="@+id/calenderevent_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="15sp"
+                android:text="@string/calenderevent_time"
+                android:textAllCaps="true"
+                android:layout_weight="1"
+                android:textAlignment="textEnd"
+                android:gravity="end"
+                android:textColor="@color/black"/>
+
+        </LinearLayout>
     </LinearLayout>
 
 </LinearLayout>
