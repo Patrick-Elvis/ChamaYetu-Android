@@ -23,7 +23,7 @@ import butterknife.ButterKnife;
  * Description:
  */
 
-public class CalenderFrag extends Fragment{
+public class CalenderFrag extends Fragment implements CalenderView{
     @BindView(R.id.calender_recyclerView) RecyclerView calenderRecyclerView;
     @BindView(R.id.calendarView) MaterialCalendarView calendarView;
 
