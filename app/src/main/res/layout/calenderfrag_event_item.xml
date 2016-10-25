@@ -1,6 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+    <!--container for date-->
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="95dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:background="@color/colorPrimary"
+        android:padding="25dp">
+
+        <!--date-->
+        <TextView
+            android:id="@+id/calenderevent_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/calenderevent_date"
+            android:textSize="25sp"
+            android:gravity="center"
+            android:textColor="@color/white"/>
+
+        <!--month-->
+        <TextView
+            android:id="@+id/calenderevent_month"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:text="@string/calenderevent_month"
+            android:textAllCaps="true"
+            android:gravity="center"
+            android:textColor="@color/white"/>
+    </LinearLayout>
+
+    <!--container for event details-->
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+    </LinearLayout>
 
 </LinearLayout>
