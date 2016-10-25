@@ -56,6 +56,7 @@ public class Contract {
     public static final String ACTIVITY_NODE = "activity";
     public static final String PROJECTS_NODE ="projects";
     public static final String FULL_STATEMENT_NODE = "fullStatement";
+    public static final String CALENDER_NODE = "calender";
 
     //this is for the user node, to update the user's chamas
     public static final String CHAMA_GROUPS = "chamaGroups";

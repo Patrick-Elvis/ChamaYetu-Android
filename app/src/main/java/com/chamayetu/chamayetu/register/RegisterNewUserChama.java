@@ -6,6 +6,7 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 
 import com.chamayetu.chamayetu.models.ActivityModel;
+import com.chamayetu.chamayetu.models.CalenderModel;
 import com.chamayetu.chamayetu.models.ChamaPojo;
 import com.chamayetu.chamayetu.models.Projects;
 import com.chamayetu.chamayetu.models.StatementPojo;
@@ -53,6 +54,7 @@ class RegisterNewUserChama {
     private UserPojo userPojo;
     private StatementPojo statementPojo;
     private ActivityModel activityModel;
+    private CalenderModel calenderModel;
     private Projects projects;
     private Context context;
 
@@ -100,8 +102,8 @@ class RegisterNewUserChama {
                     Map<String, Object> newMembersNode = new HashMap<>();
                     Map<String, Object> newChamaGroups = new HashMap<>();
                     Map<String, Object> chamaRoles = new HashMap<>();
+                    Map<String, Object> newCalenderNode = new HashMap<>();
 
-                    /**todo: get real date of chama creation*/
                     statementPojo = new StatementPojo(currentDate,currentDate, chamaName + " Statement", 0, 0, 0);
                     /*update member status of the user for the member's node*/
                     Map<String, Boolean> newMember = new HashMap<>();
@@ -121,6 +123,11 @@ class RegisterNewUserChama {
                     Map<String, Object> activityModelMap = new HashMap<>();
                     activityModelMap.put("a1", activityModel);
 
+                    /*create another map for the calender node*/
+                    calenderModel = new CalenderModel("","","","");
+                    Map<String, Object> calenderModelMap = new HashMap<>();
+                    calenderModelMap.put("e1", calenderModel);
+
                     /*update the chama roles, with initial value being for the chairperson
                     * Other values are null, until other user's are invited*/
                     Map<String, String> chamaRolesMap = new HashMap<>();
@@ -131,6 +138,7 @@ class RegisterNewUserChama {
                     newChamaNode.put(chamaNameKey, newChama);
                     newProjectNode.put(chamaNameKey, projectsMap);
                     newActivityNode.put(chamaNameKey, activityModelMap);
+                    newCalenderNode.put(chamaNameKey, calenderModelMap);
                     newMembersNode.put(chamaNameKey,newMember);
                     newChamaGroups.put(CHAMA_GROUPS, newChamaGroupMap);
                     chamaRoles.put(CHAMA_ROLES, chamaRolesMap);
