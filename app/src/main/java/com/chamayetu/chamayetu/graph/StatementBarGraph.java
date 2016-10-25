@@ -67,7 +67,7 @@ public class StatementBarGraph implements OnChartValueSelectedListener{
         initYAxis(custom);
         createLegend();
 
-        setData(12, 50);
+        setData(12, 1500);
     }
 
     /**Initialize the Legend and create it*/

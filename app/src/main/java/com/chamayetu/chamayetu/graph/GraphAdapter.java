@@ -19,7 +19,7 @@ public class GraphAdapter extends SparkAdapter {
     /**Constructor to randomize data, for now*/
     public GraphAdapter(){
         random = new Random();
-        yData = new float[50];
+        yData = new float[1500];
         randomize();
     }
 

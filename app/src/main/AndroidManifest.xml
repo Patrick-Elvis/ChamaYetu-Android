@@ -47,7 +47,8 @@
 
         <activity
             android:name=".main.MainActivity"
-            android:label="@string/title_activity_main" />
+            android:label="@string/title_activity_main"
+            android:configChanges="screenSize|orientation"/>
 
         <!--full statement activity-->
         <activity android:name=".statements.FullStatement" />

@@ -12,10 +12,10 @@ import java.text.DecimalFormat;
  * Description: formats the axis values of the bar chart
  */
 
-public class MyAxisValueFormatter implements AxisValueFormatter {
+class MyAxisValueFormatter implements AxisValueFormatter {
     private DecimalFormat mFormat;
 
-    public MyAxisValueFormatter() {
+    MyAxisValueFormatter() {
         mFormat = new DecimalFormat("###,###,###,##0.0");
     }
 
