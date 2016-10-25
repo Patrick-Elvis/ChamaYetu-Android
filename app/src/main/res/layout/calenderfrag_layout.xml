@@ -14,6 +14,7 @@
         app:mcv_showOtherDates="all"
         app:mcv_selectionColor="@color/colorPrimary"
         app:mcv_allowClickDaysOutsideCurrentMonth="true"
+        app:mcv_firstDayOfWeek="monday"
         app:mcv_calendarMode="month" />
 
     <!--recycler view to show events per date-->
