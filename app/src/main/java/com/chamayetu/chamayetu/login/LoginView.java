@@ -7,7 +7,7 @@ package com.chamayetu.chamayetu.login;
  * Description: interface for the LoginActivity
  */
 
-public interface LoginView {
+ interface LoginView {
 
     /**display an error if the email entered is invalid or empty*/
     void setEmailError();

@@ -12,7 +12,7 @@ import com.google.firebase.auth.FirebaseAuth;
  * Description:
  */
 
-public interface LoginInteractor {
+interface LoginInteractor {
 
     /**Interface to handle Login with email and password*/
     interface OnLoginFinishedListener{

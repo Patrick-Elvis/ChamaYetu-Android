@@ -19,6 +19,7 @@ import android.view.MenuItem;
 import android.view.View;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.chamayetu.chamayetu.R;
+import com.chamayetu.chamayetu.calender.CalenderFrag;
 import com.chamayetu.chamayetu.dashboard.DashboardFrag;
 import com.chamayetu.chamayetu.login.LoginActivity;
 import com.chamayetu.chamayetu.models.Projects;
@@ -88,7 +89,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setSupportActionBar(toolbar);
         //set the back arrow in the toolbar
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        /*todo:Change to the current chama*/
         getSupportActionBar().setTitle(R.string.app_name);
+
         setupFab();
         updateSnackbar();
         mDatabase = FirebaseDatabase.getInstance().getReference();
@@ -181,6 +185,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             /*calender*/
                             case 21:
                                 //calender fragment
+                                fragment = CalenderFrag.newInstance();
+                                title = "Calender";
                                 break;
                             case 22:
                                 //projects activity
