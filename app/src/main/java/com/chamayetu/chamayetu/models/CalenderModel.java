@@ -10,15 +10,14 @@ import android.os.Parcelable;
  * Description: Model for calender events*/
 
 public class CalenderModel implements Parcelable{
-    private String eventDetails,eventDate,eventLocation,eventMonth,eventTime;
+    private String eventDetails,eventDate,eventLocation,eventTime;
 
     public CalenderModel() {}
 
-    public CalenderModel(String eventDetails, String eventDate, String eventLocation, String eventMonth, String eventTime) {
+    public CalenderModel(String eventDetails, String eventDate, String eventLocation, String eventTime) {
         this.eventDetails = eventDetails;
         this.eventDate = eventDate;
         this.eventLocation = eventLocation;
-        this.eventMonth = eventMonth;
         this.eventTime = eventTime;
     }
 
@@ -46,13 +45,6 @@ public class CalenderModel implements Parcelable{
         this.eventLocation = eventLocation;
     }
 
-    public String getEventMonth() {
-        return eventMonth;
-    }
-
-    public void setEventMonth(String eventMonth) {
-        this.eventMonth = eventMonth;
-    }
 
     public String getEventTime() {
         return eventTime;
@@ -74,7 +66,6 @@ public class CalenderModel implements Parcelable{
         dest.writeString(this.eventDate);
         dest.writeString(this.eventLocation);
         dest.writeString(this.eventTime);
-        dest.writeString(this.eventMonth);
     }
 
     protected CalenderModel(Parcel in) {
@@ -82,7 +73,6 @@ public class CalenderModel implements Parcelable{
         this.eventDate = in.readString();
         this.eventLocation = in.readString();
         this.eventTime = in.readString();
-        this.eventMonth = in.readString();
     }
 
     public static final Creator<CalenderModel> CREATOR = new Creator<CalenderModel>() {

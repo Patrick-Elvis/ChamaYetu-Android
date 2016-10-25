@@ -135,7 +135,7 @@ public class StatementBarGraph implements OnChartValueSelectedListener{
             mBarChart.getData().notifyDataChanged();
             mBarChart.notifyDataSetChanged();
         } else {
-            set1 = new BarDataSet(yVals1, "The year 2017");
+            set1 = new BarDataSet(yVals1, "The year 2016");
             set1.setColors(ColorTemplate.MATERIAL_COLORS);
 
             ArrayList<IBarDataSet> dataSets = new ArrayList<>();
