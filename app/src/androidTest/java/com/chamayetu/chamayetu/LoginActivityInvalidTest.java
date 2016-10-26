@@ -32,7 +32,7 @@ import static org.junit.Assert.*;
  */
 @RunWith(AndroidJUnit4.class)
 @LargeTest
-public class LoginActivityTest {
+public class LoginActivityInvalidTest {
     @Test
     public void useAppContext() throws Exception {
         // Context of the app under test.
@@ -97,6 +97,13 @@ public class LoginActivityTest {
         onView(withId(R.id.forgot_email))
                 .check(matches(hasErrorText("Invalid email address")));
 
+
+        //clicking cancel actually goes back to LoginActivity
+        onView(withId(R.id.cancel_return))
+                .perform(click());
+
+        //displays the login label
+        LoginLabelDisplayed();
     }
 
 }
