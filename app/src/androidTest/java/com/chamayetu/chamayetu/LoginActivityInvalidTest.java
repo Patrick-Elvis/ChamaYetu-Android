@@ -27,8 +27,9 @@ import static org.junit.Assert.*;
 
 /**
  * Instrumentation test, which will execute on an Android device.
- *
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
+ * Tests to check for invalid inputs by user on logging int app
+ * Checks whether error messages are displayed to user
  */
 @RunWith(AndroidJUnit4.class)
 @LargeTest
