@@ -20,6 +20,7 @@ import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.hasErrorText;
 import static android.support.test.espresso.matcher.ViewMatchers.hasFocus;
 import static android.support.test.espresso.matcher.ViewMatchers.isClickable;
+import static android.support.test.espresso.matcher.ViewMatchers.isCompletelyDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
@@ -104,6 +105,24 @@ public class LoginActivityInvalidTest {
                 .perform(click());
 
         //displays the login label
+        LoginLabelDisplayed();
+    }
+
+    @Test
+    public void OpenRegisterUserForm(){
+        //click the FAB button
+        onView(withId(R.id.fab)).perform(click());
+
+        //check if the next activity is started, check the NEW ACCOUNT label
+        onView(withText("NEW ACCOUNT")).check(matches(isDisplayed()));
+
+        //click the FAB button on Register new user
+        onView(withId(R.id.fab))
+                .check(matches(isClickable()))
+                .check(matches(isCompletelyDisplayed()))
+                .perform(click());
+
+        //go back to login activity
         LoginLabelDisplayed();
     }
 
