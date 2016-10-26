@@ -14,6 +14,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import static android.support.test.espresso.Espresso.onView;
+import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.typeText;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.hasErrorText;
@@ -48,20 +49,26 @@ public class LoginActivityTest {
     }
 
     @Test
-    public void InvalidEmailInput(){
+    public void InvalidLoginInput(){
         onView(withId(R.id.email))
                 .perform(typeText("ryanlucas7"))
-                .check(matches(isDisplayed()))
-                .check(matches(hasFocus()))
-                .check(matches(hasErrorText("Enter valid email address")));
-    }
+                .check(matches(isDisplayed()));
 
-    @Test
-    public void InvalidPasswordInput(){
+        /*type in wrong password*/
         onView(withId(R.id.password))
                 .perform(typeText("password123"))
-                .check(matches(isDisplayed()))
-                .check(matches(hasFocus()))
+                .check(matches(isDisplayed()));
+
+        /*attempt login*/
+        onView(withId(R.id.email_sign_in_button))
+                .perform(click());
+
+        /*check for email error*/
+        onView(withId(R.id.email))
+                .check(matches(hasErrorText("Enter valid email address")));
+
+        /*check for invalid password error*/
+        onView(withId(R.id.password))
                 .check(matches(hasErrorText("Invalid Password")));
     }
 
