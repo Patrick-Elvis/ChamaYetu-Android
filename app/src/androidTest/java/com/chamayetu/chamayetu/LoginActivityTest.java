@@ -73,10 +73,30 @@ public class LoginActivityTest {
     }
 
     @Test
-    public void ForgotPasswordClickable(){
+    public void ForgotPassword(){
+        //open forgot password link
         onView(withId(R.id.forgot_password_link))
                 .check(matches(isDisplayed()))
-                .check(matches(isClickable()));
+                .check(matches(isClickable()))
+                .perform(click());
+
+        //check if the forgot password activity has been opened
+        onView(withText("Reset Password"))
+                .check(matches(isDisplayed()));
+
+        //attempt to reset password with wrong email
+        onView(withId(R.id.forgot_email))
+                .perform(typeText("ryanlucas7"))
+                .check(matches(isDisplayed()));
+
+        //click reset password button
+        onView(withId(R.id.submit_password_reset))
+                .perform(click());
+
+        //check if reset password field has an email error
+        onView(withId(R.id.forgot_email))
+                .check(matches(hasErrorText("Invalid email address")));
+
     }
 
 }
