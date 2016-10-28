@@ -33,7 +33,6 @@ class LoginInteractorImpl implements LoginInteractor{
     @Override
     public void loginUser(Context context, String email, String password, FirebaseAuth mAuth, OnLoginFinishedListener listener) {
         boolean error = false;
-        final boolean[] toMain = {true};
 
         /*if email is not valid, display an error*/
         if(!isValidEmail(email)){
@@ -61,12 +60,7 @@ class LoginInteractorImpl implements LoginInteractor{
                     int indx = email.indexOf("@");
                     String username = email.substring(0, indx).toLowerCase();
                     //if the user has only one chama, navigate to MainActivity
-                    if(userChamas(username)) {
-                        listener.onSuccess(toMain[0], username);
-                    }else{
-                        toMain[0] = false;
-                        listener.onSuccess(toMain[0], username);
-                    }
+                    listener.onSuccess(userChamas(username), username);
                 }
             });
         }
@@ -86,12 +80,9 @@ class LoginInteractorImpl implements LoginInteractor{
             }else{
                 int indx = mAuth.getCurrentUser().getEmail().indexOf("@");
                 String username = mAuth.getCurrentUser().getEmail().substring(0,indx).toLowerCase();
-                if(userChamas(username)){
-                    listener.onSuccess(toMain[0], username);
-                }else{
-                    toMain[0] = false;
-                    listener.onSuccess(toMain[0], username);
-                }
+                //if the user has more than one chama, navigate to chama login
+                //if the user has only one chama, navigate to MainActivity
+                listener.onSuccess(userChamas(username), username);
             }
         });
     }
@@ -120,6 +111,7 @@ class LoginInteractorImpl implements LoginInteractor{
                         Log.e(LOGINACT_TAG, databaseError.getMessage());
                     }
                 });
+        Log.d(LOGINACT_TAG+"ChamaCountBool", String.valueOf(isCountOne[0]));
         return isCountOne[0];
     }
 }

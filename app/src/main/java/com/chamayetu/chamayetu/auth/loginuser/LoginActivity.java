@@ -247,21 +247,20 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         //Intents to start the next activities based on user chamas
         // if the user has 1 chama, start main activity
         // if they have more than one, start LoginChama activity
-        Intent toMainAct = new Intent(LoginActivity.this, MainActivity.class);
-        Intent toChamaLogin = new Intent(LoginActivity.this, LoginChamaActivity.class);
+        Intent toMainAct = new Intent(LoginActivity.this, MainActivity.class)
+                .putExtra(USERNAME_BUNDLE_KEY,username);
+        Intent toChamaLogin = new Intent(LoginActivity.this, LoginChamaActivity.class)
+                .putExtra(USERNAME_BUNDLE_KEY,username);
+        ActivityOptionsCompat oc2 = ActivityOptionsCompat.makeSceneTransitionAnimation(LoginActivity.this);
 
         if(toMain){
-            toMainAct.putExtra(USERNAME_BUNDLE_KEY,username);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-                ActivityOptionsCompat oc2 = ActivityOptionsCompat.makeSceneTransitionAnimation(LoginActivity.this);
                 startActivity(toMainAct, oc2.toBundle());
             }else{
                 startActivity(toMainAct);
             }
         }else{
-            toChamaLogin.putExtra(USERNAME_BUNDLE_KEY, username);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-                ActivityOptionsCompat oc2 = ActivityOptionsCompat.makeSceneTransitionAnimation(LoginActivity.this);
                 startActivity(toChamaLogin, oc2.toBundle());
             }else{
                 startActivity(toChamaLogin);
