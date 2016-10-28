@@ -15,7 +15,7 @@ import static com.chamayetu.chamayetu.utils.Contract.USERS_NODE;
  * ChamaYetu
  * com.chamayetu.chamayetu.auth.loginchama
  * Created by lusinabrian on 29/10/16.
- * Description:
+ * Description: Implementation of {@link LoginChamaInteractor}
  */
 
 class LoginChamaInteractorImpl implements LoginChamaInteractor {
