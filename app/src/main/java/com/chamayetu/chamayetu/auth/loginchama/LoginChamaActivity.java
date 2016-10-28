@@ -6,19 +6,14 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.widget.Button;
-
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.chamayetu.chamayetu.R;
-import com.chamayetu.chamayetu.auth.loginuser.LoginActivity;
-import com.chamayetu.chamayetu.main.MainActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-import static com.chamayetu.chamayetu.utils.Contract.LOGINACT_TAG;
+import static com.chamayetu.chamayetu.utils.Contract.LOGINCHAMA_TAG;
 
 /**
  * ChamaYetu
@@ -47,12 +42,13 @@ public class LoginChamaActivity extends AppCompatActivity implements LoginChamaV
         mAuthListener = firebaseAuth -> {
             FirebaseUser user = firebaseAuth.getCurrentUser();
             if(user !=null){
-                Log.d(LOGINACT_TAG, "onAuthStateChanged:signedIn: " + user.getUid());
+                Log.d(LOGINCHAMA_TAG, "onAuthStateChanged:signedIn: " + user.getUid());
             }else{
-                Log.d(LOGINACT_TAG, "onAuthStateChanged:signedout");
+                Log.d(LOGINCHAMA_TAG, "onAuthStateChanged:signedout");
             }
         };
-        
+
+
 
     }
 

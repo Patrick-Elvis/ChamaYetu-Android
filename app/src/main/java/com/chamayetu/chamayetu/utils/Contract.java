@@ -1,6 +1,7 @@
 package com.chamayetu.chamayetu.utils;
 
 import com.chamayetu.chamayetu.BuildConfig;
+import com.chamayetu.chamayetu.auth.loginchama.LoginChamaActivity;
 import com.chamayetu.chamayetu.dashboard.DashboardFrag;
 import com.chamayetu.chamayetu.auth.loginuser.LoginActivity;
 import com.chamayetu.chamayetu.statements.FullStatement;
@@ -24,6 +25,7 @@ public class Contract {
     public static final String DASHBOARDVIEW_TAG = DashboardFrag.class.getSimpleName();
     public static final String FULL_STATEMENT_TAG = FullStatement.class.getSimpleName();
     public static final String USERACCT_TAG = UserAccountActivity.class.getSimpleName();
+    public static final String LOGINCHAMA_TAG = LoginChamaActivity.class.getSimpleName();
 
     public static final String NOTIFICATION_SP_FILE = "Notifications";
 

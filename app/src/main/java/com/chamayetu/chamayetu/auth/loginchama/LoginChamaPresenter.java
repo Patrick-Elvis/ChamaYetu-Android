@@ -8,4 +8,12 @@ package com.chamayetu.chamayetu.auth.loginchama;
  */
 
 interface LoginChamaPresenter {
+
+    /**when activity is resumed*/
+    void onResume();
+
+    /** performs actions on user click, passes the position to implementer*/
+    void onItemClicked(int position);
+
+    void onDestroy();
 }
