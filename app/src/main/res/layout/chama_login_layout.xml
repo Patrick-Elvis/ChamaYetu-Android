@@ -1,7 +1,7 @@
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_gravity="center"
     android:layout_height="wrap_content">
 
@@ -26,6 +26,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="45dp">
+
                     <View
                         android:layout_alignParentStart="true"
                         android:layout_alignParentLeft="true"
@@ -49,7 +50,8 @@
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/chama_login_recyclerView"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    tools:listitem="@layout/chama_login_item_layout"/>
 
                 <!--sign in button-->
                 <LinearLayout

@@ -338,5 +338,7 @@
     <string name="calenderevent_location">Hilton hotel</string>
     <string name="calenderevent_time">10:00</string>
     <string name="chama_login_label">Login to</string>
+    <string name="chama_login_item_members">5 members</string>
+    <string name="chama_login_item_name">Chama name</string>
 
 </resources>
