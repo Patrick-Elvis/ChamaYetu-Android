@@ -29,7 +29,6 @@ import static com.chamayetu.chamayetu.utils.UtilityMethods.validateLoginPassword
  */
 
 class LoginInteractorImpl implements LoginInteractor{
-    private boolean isCountOne = true;
 
     @Override
     public void loginUser(Context context, String email, String password, FirebaseAuth mAuth, OnLoginFinishedListener listener) {
@@ -61,7 +60,7 @@ class LoginInteractorImpl implements LoginInteractor{
                     int indx = email.indexOf("@");
                     String username = email.substring(0, indx).toLowerCase();
                     //if the user has only one chama, navigate to MainActivity
-                    listener.onSuccess(userChamas(username), username);
+                    userChamas(username, listener);
                 }
             });
         }
@@ -82,14 +81,14 @@ class LoginInteractorImpl implements LoginInteractor{
                 String username = mAuth.getCurrentUser().getEmail().substring(0,indx).toLowerCase();
                 //if the user has more than one chama, navigate to chama login
                 //if the user has only one chama, navigate to MainActivity
-                listener.onSuccess(userChamas(username), username);
+                userChamas(username, listener);
             }
         });
     }
 
     /**Verifies the number of chamas the user is in
      * @param username Takes the username and fetches user credentials for the user chamas*/
-    private boolean userChamas(String username){
+    private void userChamas(String username, OnLoginFinishedListener listener){
         DatabaseReference mDatabaseReference = FirebaseDatabase.getInstance().getReference();
 
         //navigate down the node to the user's chama groups node and retrieve the user's chama count
@@ -99,7 +98,9 @@ class LoginInteractorImpl implements LoginInteractor{
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         if(dataSnapshot.getChildrenCount() > 1) {
                         Log.d(LOGINACT_TAG+"ChamaCount", String.valueOf(dataSnapshot.getChildrenCount()));
-                            isCountOne = false;
+                            listener.onSuccess(false, username);
+                        }else{
+                            listener.onSuccess(true, username);
                         }
                     }
 
@@ -110,7 +111,5 @@ class LoginInteractorImpl implements LoginInteractor{
                         Log.e(LOGINACT_TAG, databaseError.getMessage());
                     }
                 });
-        Log.d(LOGINACT_TAG+"ChamaCountBool", String.valueOf(isCountOne));
-        return isCountOne;
     }
 }
