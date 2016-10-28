@@ -8,8 +8,16 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.sdsmdg.tastytoast.TastyToast;
+
+import static com.chamayetu.chamayetu.utils.Contract.CHAMA_GROUPS;
 import static com.chamayetu.chamayetu.utils.Contract.LOGINACT_TAG;
+import static com.chamayetu.chamayetu.utils.Contract.USERS_NODE;
 import static com.chamayetu.chamayetu.utils.UtilityMethods.isValidEmail;
 import static com.chamayetu.chamayetu.utils.UtilityMethods.validateLoginPassword;
 
@@ -21,11 +29,12 @@ import static com.chamayetu.chamayetu.utils.UtilityMethods.validateLoginPassword
  */
 
 class LoginInteractorImpl implements LoginInteractor{
+    private DatabaseReference mDatabaseReference;
 
     @Override
     public void loginUser(Context context, String email, String password, FirebaseAuth mAuth, OnLoginFinishedListener listener) {
         boolean error = false;
-        boolean toMain = true;
+        final boolean[] toMain = {true};
 
         /*if email is not valid, display an error*/
         if(!isValidEmail(email)){
@@ -50,8 +59,15 @@ class LoginInteractorImpl implements LoginInteractor{
                     //On successful login, check the user's chamas to determine how many chams they are in.
                     //if user has 1 chama, proceed to MainActivity, if they have several,
                     // proceed to chama login
-
-                    listener.onSuccess(toMain);
+                    int indx = email.indexOf("@");
+                    String username = email.substring(0, indx).toLowerCase();
+                    //if the user has only one chama, navigate to MainActivity
+                    if(userChamas(username)) {
+                        listener.onSuccess(toMain[0]);
+                    }else{
+                        toMain[0] = false;
+                        listener.onSuccess(toMain[0]);
+                    }
                 }
             });
         }
@@ -59,7 +75,7 @@ class LoginInteractorImpl implements LoginInteractor{
 
     @Override
     public void loginUserWithGoogle(Context context, GoogleSignInAccount googleSignInAccount, FirebaseAuth mAuth, OnLoginFinishedListener listener) {
-        boolean toMain = true;
+        final boolean[] toMain = {true};
         Log.d(LOGINACT_TAG, "FirebaseWithGoogleLogin: " + googleSignInAccount.getId());
         AuthCredential credential = GoogleAuthProvider.getCredential(googleSignInAccount.getIdToken(), null);
 
@@ -69,8 +85,41 @@ class LoginInteractorImpl implements LoginInteractor{
                 Log.d(LOGINACT_TAG, "GoogleSignInFail: ", task.getException());
                 listener.onTaskError("Failed to sign in, please try again", TastyToast.ERROR);
             }else{
-                listener.onSuccess(toMain);
+                int indx = mAuth.getCurrentUser().getEmail().indexOf("@");
+                String username = mAuth.getCurrentUser().getEmail().substring(0,indx).toLowerCase();
+                if(userChamas(username)){
+                    listener.onSuccess(toMain[0]);
+                }else{
+                    toMain[0] = false;
+                    listener.onSuccess(toMain[0]);
+                }
             }
         });
+    }
+
+    /**Verifies the number of chamas the user is in
+     * @param username Takes the username and fetches user credentials for the user chamas*/
+    private boolean userChamas(String username){
+        mDatabaseReference = FirebaseDatabase.getInstance().getReference();
+        final boolean[] isCountOne = {true};
+
+        //navigate down the node to the user's chama groups node and retrieve the user's chama count
+        mDatabaseReference.child(USERS_NODE).child(username).child(CHAMA_GROUPS)
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        if(dataSnapshot.getChildrenCount() > 1) {
+                            isCountOne[0] = false;
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        //log database errors
+                        //todo: notify user
+                        Log.e(LOGINACT_TAG, databaseError.getMessage());
+                    }
+                });
+        return isCountOne[0];
     }
 }
