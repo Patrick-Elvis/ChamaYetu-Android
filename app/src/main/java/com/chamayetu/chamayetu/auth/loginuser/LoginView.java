@@ -23,8 +23,9 @@ package com.chamayetu.chamayetu.auth.loginuser;
 
     /**navigates to Main Activity screen when successful only if the user has 1 chama,
      * if they have several chamas, proceed to chama login instead
-     * @param toMain boolean value to determine whether to navigate to main activity or chama login*/
-    void navigateToMain(boolean toMain);
+     * @param toMain boolean value to determine whether to navigate to main activity or chama login
+     * @param username the username to pass on to the next activity*/
+    void navigateToMain(boolean toMain, String username);
 
     /**display toast on success or error
      * @param message The message to display

@@ -65,10 +65,10 @@ class LoginPresenterImpl implements LoginPresenter, LoginInteractor.OnLoginFinis
     }
 
     @Override
-    public void onSuccess(boolean toMain) {
+    public void onSuccess(boolean toMain, String username) {
         if(loginView != null){
             loginView.hideProgress();
-            loginView.navigateToMain(toMain);
+            loginView.navigateToMain(toMain, username);
         }
     }
 

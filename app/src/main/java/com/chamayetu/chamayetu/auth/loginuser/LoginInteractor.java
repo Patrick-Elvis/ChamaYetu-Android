@@ -23,8 +23,9 @@ interface LoginInteractor {
         void onPasswordError();
 
         /**on successful operation navigate to next activity
-         * @param toMain boolean to determine whether to navigate to main activity or to chama login*/
-        void onSuccess(boolean toMain);
+         * @param toMain boolean to determine whether to navigate to main activity or to chama login
+         * @param username the username to pass on to next activity*/
+        void onSuccess(boolean toMain, String username);
 
         /**display toast error when user encounters error when executing FirebaseAuth*/
         void onTaskError(String message, int messageType);

@@ -29,7 +29,6 @@ import static com.chamayetu.chamayetu.utils.UtilityMethods.validateLoginPassword
  */
 
 class LoginInteractorImpl implements LoginInteractor{
-    private DatabaseReference mDatabaseReference;
 
     @Override
     public void loginUser(Context context, String email, String password, FirebaseAuth mAuth, OnLoginFinishedListener listener) {
@@ -63,10 +62,10 @@ class LoginInteractorImpl implements LoginInteractor{
                     String username = email.substring(0, indx).toLowerCase();
                     //if the user has only one chama, navigate to MainActivity
                     if(userChamas(username)) {
-                        listener.onSuccess(toMain[0]);
+                        listener.onSuccess(toMain[0], username);
                     }else{
                         toMain[0] = false;
-                        listener.onSuccess(toMain[0]);
+                        listener.onSuccess(toMain[0], username);
                     }
                 }
             });
@@ -88,10 +87,10 @@ class LoginInteractorImpl implements LoginInteractor{
                 int indx = mAuth.getCurrentUser().getEmail().indexOf("@");
                 String username = mAuth.getCurrentUser().getEmail().substring(0,indx).toLowerCase();
                 if(userChamas(username)){
-                    listener.onSuccess(toMain[0]);
+                    listener.onSuccess(toMain[0], username);
                 }else{
                     toMain[0] = false;
-                    listener.onSuccess(toMain[0]);
+                    listener.onSuccess(toMain[0], username);
                 }
             }
         });
@@ -100,7 +99,7 @@ class LoginInteractorImpl implements LoginInteractor{
     /**Verifies the number of chamas the user is in
      * @param username Takes the username and fetches user credentials for the user chamas*/
     private boolean userChamas(String username){
-        mDatabaseReference = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference mDatabaseReference = FirebaseDatabase.getInstance().getReference();
         final boolean[] isCountOne = {true};
 
         //navigate down the node to the user's chama groups node and retrieve the user's chama count
@@ -109,6 +108,7 @@ class LoginInteractorImpl implements LoginInteractor{
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         if(dataSnapshot.getChildrenCount() > 1) {
+                        Log.d(LOGINACT_TAG+"ChamaCount", String.valueOf(dataSnapshot.getChildrenCount()));
                             isCountOne[0] = false;
                         }
                     }

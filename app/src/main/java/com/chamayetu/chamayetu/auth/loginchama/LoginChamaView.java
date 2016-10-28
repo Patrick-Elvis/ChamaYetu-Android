@@ -1,5 +1,9 @@
 package com.chamayetu.chamayetu.auth.loginchama;
 
+import com.chamayetu.chamayetu.adapters.LoginChamaViewHolder;
+import com.chamayetu.chamayetu.models.LoginChamaModel;
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
+
 /**
  * ChamaYetu
  * com.chamayetu.chamayetu.auth.loginchama
@@ -8,5 +12,17 @@ package com.chamayetu.chamayetu.auth.loginchama;
  */
 
 interface LoginChamaView {
+    /**show progress to user when fetching items for recyclerview*/
+    void showProgress();
 
+    /**hide progress when loading is complete*/
+    void hideProgress();
+
+    /**set the items to the recyclerView*/
+    void setAdapter(FirebaseRecyclerAdapter<LoginChamaModel, LoginChamaViewHolder> loginChamaRecyclerAdapter);
+
+    void openMainActWithChama();
+
+    /**display message to user if error occurs*/
+    void showMessage(String message, int messageType);
 }

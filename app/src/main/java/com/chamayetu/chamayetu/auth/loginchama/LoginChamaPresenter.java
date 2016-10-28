@@ -13,7 +13,7 @@ interface LoginChamaPresenter {
     void onResume();
 
     /** performs actions on user click, passes the position to implementer*/
-    void onItemClicked(int position);
+    void onChamaItemClicked(int position);
 
     void onDestroy();
 }

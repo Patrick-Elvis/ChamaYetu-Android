@@ -4,17 +4,24 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
+
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.afollestad.materialdialogs.Theme;
 import com.chamayetu.chamayetu.R;
 import com.chamayetu.chamayetu.adapters.FullStatementViewHolder;
+import com.chamayetu.chamayetu.adapters.LoginChamaViewHolder;
 import com.chamayetu.chamayetu.models.LoginChamaModel;
+import com.chamayetu.chamayetu.statements.FullStatement;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.sdsmdg.tastytoast.TastyToast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -56,13 +63,58 @@ public class LoginChamaActivity extends AppCompatActivity implements LoginChamaV
             }
         };
 
-        loginChamaPresenter = new LoginChamaPresenterImpl(LoginChamaActivity.this, "",
-                mDatabase,loginChamaFirebaseRecyclerAdapter);
+        loginChamaPresenter = new LoginChamaPresenterImpl(
+                LoginChamaActivity.this,
+                "",
+                mDatabase,
+                loginChamaFirebaseRecyclerAdapter);
 
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        loginChamaPresenter.onResume();
+    }
+
+    @Override
     protected void onDestroy() {
+        loginChamaPresenter.onDestroy();
         super.onDestroy();
+    }
+
+    @Override
+    public void showProgress() {
+        materialDialog = new MaterialDialog.Builder(LoginChamaActivity.this)
+                .title(R.string.progress_dialog_title)
+                .theme(Theme.DARK)
+                .content(R.string.please_wait)
+                .progress(true, 0)
+                .show();
+        chamaLoginRecycler.setVisibility(View.INVISIBLE);
+    }
+
+    @Override
+    public void hideProgress() {
+        if(materialDialog.isShowing()){
+            materialDialog.dismiss();
+            chamaLoginRecycler.setVisibility(View.VISIBLE);
+        }
+    }
+
+    @Override
+    public void setAdapter(FirebaseRecyclerAdapter<LoginChamaModel, LoginChamaViewHolder> loginChamaRecyclerAdapter) {
+        chamaLoginRecycler.setLayoutManager(new LinearLayoutManager(this));
+        chamaLoginRecycler.setAdapter(loginChamaRecyclerAdapter);
+    }
+
+    @Override
+    public void openMainActWithChama() {
+
+    }
+
+    @Override
+    public void showMessage(String message, int messageType) {
+        TastyToast.makeText(this, message, TastyToast.LENGTH_LONG, messageType);
     }
 }

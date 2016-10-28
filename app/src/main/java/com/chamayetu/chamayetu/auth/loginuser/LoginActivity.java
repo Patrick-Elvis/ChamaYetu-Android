@@ -40,6 +40,8 @@ import butterknife.OnClick;
 
 import static com.chamayetu.chamayetu.utils.Contract.LOGINACT_TAG;
 import static com.chamayetu.chamayetu.utils.Contract.RC_SIGN_IN;
+import static com.chamayetu.chamayetu.utils.Contract.USERNAME_BUNDLE_KEY;
+
 import com.google.android.gms.auth.api.Auth;
 import com.sdsmdg.tastytoast.TastyToast;
 
@@ -241,7 +243,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     }
 
     @Override
-    public void navigateToMain(boolean toMain) {
+    public void navigateToMain(boolean toMain, String username) {
         //Intents to start the next activities based on user chamas
         // if the user has 1 chama, start main activity
         // if they have more than one, start LoginChama activity
@@ -249,6 +251,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         Intent toChamaLogin = new Intent(LoginActivity.this, LoginChamaActivity.class);
 
         if(toMain){
+            toMainAct.putExtra(USERNAME_BUNDLE_KEY,username);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
                 ActivityOptionsCompat oc2 = ActivityOptionsCompat.makeSceneTransitionAnimation(LoginActivity.this);
                 startActivity(toMainAct, oc2.toBundle());
@@ -256,6 +259,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                 startActivity(toMainAct);
             }
         }else{
+            toChamaLogin.putExtra(USERNAME_BUNDLE_KEY, username);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
                 ActivityOptionsCompat oc2 = ActivityOptionsCompat.makeSceneTransitionAnimation(LoginActivity.this);
                 startActivity(toChamaLogin, oc2.toBundle());

@@ -39,6 +39,7 @@ public class Contract {
     /*Keys for bundle when moving from Dashboard to FUll Statement*/
     public static final String FULL_STATEMENT_CHOICE = "FULL_STATEMENT_PERIOD_CHOICE";
     public static final String CHAMA_STATEMENT_TITLE = "CHAMA_STATEMENT_TITLE";
+    public static final String USERNAME_BUNDLE_KEY = "USERNAME_KEY";
 
     public static final int RC_SIGN_IN = 9001;
     public static final String ANONYMOUS = "anonymous";
