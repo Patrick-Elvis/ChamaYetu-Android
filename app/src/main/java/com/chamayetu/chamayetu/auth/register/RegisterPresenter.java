@@ -1,8 +1,8 @@
-package com.chamayetu.chamayetu.register;
+package com.chamayetu.chamayetu.auth.register;
 
 /**
  * ChamaYetu
- * com.chamayetu.chamayetu.register
+ * com.chamayetu.chamayetu.auth.register
  * Created by lusinabrian on 15/10/16.
  * Description: Presenter implementation calls the interactor(use case handler) to get results from business/domain layer
  */

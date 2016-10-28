@@ -2,7 +2,7 @@ package com.chamayetu.chamayetu.utils;
 
 import com.chamayetu.chamayetu.BuildConfig;
 import com.chamayetu.chamayetu.dashboard.DashboardFrag;
-import com.chamayetu.chamayetu.login.LoginActivity;
+import com.chamayetu.chamayetu.auth.loginuser.LoginActivity;
 import com.chamayetu.chamayetu.statements.FullStatement;
 import com.chamayetu.chamayetu.useraccount.UserAccountActivity;
 

@@ -1,8 +1,7 @@
-package com.chamayetu.chamayetu.register;
+package com.chamayetu.chamayetu.auth.register;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 import android.util.Log;
 
 import com.chamayetu.chamayetu.models.ActivityModel;
@@ -11,7 +10,6 @@ import com.chamayetu.chamayetu.models.ChamaPojo;
 import com.chamayetu.chamayetu.models.Projects;
 import com.chamayetu.chamayetu.models.StatementPojo;
 import com.chamayetu.chamayetu.models.UserPojo;
-import com.chamayetu.chamayetu.utils.Contract;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -28,10 +26,8 @@ import java.util.Map;
 import static com.chamayetu.chamayetu.utils.Contract.ACTIVITY_NODE;
 import static com.chamayetu.chamayetu.utils.Contract.CHAIR_PERSION;
 import static com.chamayetu.chamayetu.utils.Contract.CHAMA_GROUPS;
-import static com.chamayetu.chamayetu.utils.Contract.CHAMA_NAME_KEY;
 import static com.chamayetu.chamayetu.utils.Contract.CHAMA_NODE;
 import static com.chamayetu.chamayetu.utils.Contract.CHAMA_ROLES;
-import static com.chamayetu.chamayetu.utils.Contract.CHAMA_SP_FILE;
 import static com.chamayetu.chamayetu.utils.Contract.MEMBERS_NODE;
 import static com.chamayetu.chamayetu.utils.Contract.PROJECTS_NODE;
 import static com.chamayetu.chamayetu.utils.Contract.SHAREPREF_PRIVATE_MODE;
@@ -40,7 +36,7 @@ import static com.chamayetu.chamayetu.utils.Contract.USERS_NODE;
 
 /**
  * ChamaYetu
- * com.chamayetu.chamayetu.register
+ * com.chamayetu.chamayetu.auth.register
  * Created by lusinabrian on 15/10/16.
  * Description: Registers new users and chamas to all nodes
  */

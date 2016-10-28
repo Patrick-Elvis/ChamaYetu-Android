@@ -1,4 +1,4 @@
-package com.chamayetu.chamayetu.login;
+package com.chamayetu.chamayetu.auth.loginuser;
 
 import android.app.ActivityOptions;
 import android.content.Intent;
@@ -23,7 +23,7 @@ import com.chamayetu.chamayetu.R;
 import com.chamayetu.chamayetu.forgotpassword.ForgotPass;
 import com.chamayetu.chamayetu.introduction.IntroScreen;
 import com.chamayetu.chamayetu.main.MainActivity;
-import com.chamayetu.chamayetu.register.RegisterUserActivity;
+import com.chamayetu.chamayetu.auth.register.RegisterUserActivity;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;

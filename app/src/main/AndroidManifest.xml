@@ -31,7 +31,7 @@
         <activity android:name=".forgotpassword.ForgotPass"/>
 
         <activity
-            android:name=".login.LoginActivity"
+            android:name=".auth.loginuser.LoginActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -40,10 +40,10 @@
         </activity>
 
         <!--register a new user activity-->
-        <activity android:name=".register.RegisterUserActivity"/>
+        <activity android:name=".auth.register.RegisterUserActivity"/>
 
         <!--register a new chama activity-->
-        <activity android:name=".register.RegisterChamaActivity"/>
+        <activity android:name=".auth.register.RegisterChamaActivity"/>
 
         <activity
             android:name=".main.MainActivity"

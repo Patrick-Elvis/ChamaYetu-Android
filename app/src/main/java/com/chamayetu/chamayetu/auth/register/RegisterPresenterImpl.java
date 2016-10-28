@@ -1,4 +1,4 @@
-package com.chamayetu.chamayetu.register;
+package com.chamayetu.chamayetu.auth.register;
 
 import android.content.Context;
 

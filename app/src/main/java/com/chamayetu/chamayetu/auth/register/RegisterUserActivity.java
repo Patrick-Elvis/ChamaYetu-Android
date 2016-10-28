@@ -1,4 +1,4 @@
-package com.chamayetu.chamayetu.register;
+package com.chamayetu.chamayetu.auth.register;
 
 import android.annotation.TargetApi;
 import android.content.Intent;
@@ -11,16 +11,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.afollestad.materialdialogs.Theme;
 import com.chamayetu.chamayetu.R;
-import com.chamayetu.chamayetu.login.LoginActivity;
+import com.chamayetu.chamayetu.auth.loginuser.LoginActivity;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.sdsmdg.tastytoast.TastyToast;

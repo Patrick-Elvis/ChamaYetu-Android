@@ -21,7 +21,7 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import com.chamayetu.chamayetu.R;
 import com.chamayetu.chamayetu.calender.CalenderFrag;
 import com.chamayetu.chamayetu.dashboard.DashboardFrag;
-import com.chamayetu.chamayetu.login.LoginActivity;
+import com.chamayetu.chamayetu.auth.loginuser.LoginActivity;
 import com.chamayetu.chamayetu.models.Projects;
 import com.chamayetu.chamayetu.settings.SettingsActivity;
 import com.chamayetu.chamayetu.useraccount.UserAccountActivity;

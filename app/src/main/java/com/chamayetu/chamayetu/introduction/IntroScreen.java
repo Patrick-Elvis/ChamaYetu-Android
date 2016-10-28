@@ -7,7 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 
 import com.chamayetu.chamayetu.R;
-import com.chamayetu.chamayetu.login.LoginActivity;
+import com.chamayetu.chamayetu.auth.loginuser.LoginActivity;
 import com.github.paolorotolo.appintro.AppIntro2;
 import com.github.paolorotolo.appintro.AppIntro2Fragment;
 

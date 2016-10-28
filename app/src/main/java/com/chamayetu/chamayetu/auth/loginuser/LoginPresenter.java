@@ -1,4 +1,4 @@
-package com.chamayetu.chamayetu.login;
+package com.chamayetu.chamayetu.auth.loginuser;
 
 import android.content.Context;
 

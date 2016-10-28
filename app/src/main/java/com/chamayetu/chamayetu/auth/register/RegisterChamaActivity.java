@@ -1,4 +1,4 @@
-package com.chamayetu.chamayetu.register;
+package com.chamayetu.chamayetu.auth.register;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -21,7 +21,7 @@ import butterknife.ButterKnife;
 
 /**
  * ChamaYetu
- * com.chamayetu.chamayetu.register.registerchama
+ * com.chamayetu.chamayetu.auth.register.registerchama
  * Created by lusinabrian on 15/10/16.
  * Description: Activity to register a new chama
  */
