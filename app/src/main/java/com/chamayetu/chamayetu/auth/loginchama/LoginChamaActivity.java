@@ -27,6 +27,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 import static com.chamayetu.chamayetu.utils.Contract.LOGINCHAMA_TAG;
+import static com.chamayetu.chamayetu.utils.Contract.USERNAME_BUNDLE_KEY;
 
 /**
  * ChamaYetu
@@ -51,6 +52,9 @@ public class LoginChamaActivity extends AppCompatActivity implements LoginChamaV
         setContentView(R.layout.chama_login_layout);
         ButterKnife.bind(this);
 
+        Bundle receiveUsername = getIntent().getExtras();
+        String username = receiveUsername.getString(USERNAME_BUNDLE_KEY);
+
         mAuth = FirebaseAuth.getInstance();
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
 
@@ -65,10 +69,9 @@ public class LoginChamaActivity extends AppCompatActivity implements LoginChamaV
 
         loginChamaPresenter = new LoginChamaPresenterImpl(
                 LoginChamaActivity.this,
-                "",
+                username,
                 mDatabase,
                 loginChamaFirebaseRecyclerAdapter);
-
     }
 
     @Override

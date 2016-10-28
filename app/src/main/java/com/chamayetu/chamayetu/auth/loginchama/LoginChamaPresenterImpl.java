@@ -13,8 +13,9 @@ import com.google.firebase.database.DatabaseReference;
  * Description: Implementation of {@link LoginChamaPresenter}
  */
 
-public class LoginChamaPresenterImpl implements LoginChamaPresenter {
+class LoginChamaPresenterImpl implements LoginChamaPresenter {
 
+    private LoginChamaView loginChamaView;
     private DatabaseReference mDatabaseRef;
     private Context context;
     private String username;
@@ -27,15 +28,14 @@ public class LoginChamaPresenterImpl implements LoginChamaPresenter {
         this.loginChamaFirebaseRecyclerAdapter = loginChamaFirebaseRecyclerAdapter;
     }
 
-
-
     @Override
     public void onResume() {
+
 
     }
 
     @Override
-    public void onItemClicked(int position) {
+    public void onChamaItemClicked(int position) {
 
     }
 

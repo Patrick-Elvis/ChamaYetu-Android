@@ -59,10 +59,10 @@ public class FullStatement extends AppCompatActivity implements FullStatementVie
 
         //extract the data and store for processing
         CharSequence statementPeriod = receiveUserChoice.getCharSequence(FULL_STATEMENT_CHOICE);
-        String chamaStatmentTitle = receiveUserChoice.getString(CHAMA_STATEMENT_TITLE);
+        String chamaStatementTitle = receiveUserChoice.getString(CHAMA_STATEMENT_TITLE);
 
         /*initialize the presenter*/
-        statementPresenter = new StatementPresenterImpl(chamaStatmentTitle,
+        statementPresenter = new StatementPresenterImpl(chamaStatementTitle,
                 statementFirebaseRecyclerAdapter,
                 FullStatement.this,
                 this,
@@ -70,7 +70,7 @@ public class FullStatement extends AppCompatActivity implements FullStatementVie
                 mDatabase);
 
         /*set the title to the currently viewed chama statement*/
-        collapsingToolbarLayout.setTitle(chamaStatmentTitle + " Statement");
+        collapsingToolbarLayout.setTitle(chamaStatementTitle + " Statement");
 
         /*go back to dashboard view in MainActivity*/
         mToolbar.setNavigationOnClickListener(v -> onBackPressed());
