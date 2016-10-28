@@ -29,6 +29,7 @@ import static com.chamayetu.chamayetu.utils.UtilityMethods.validateLoginPassword
  */
 
 class LoginInteractorImpl implements LoginInteractor{
+    private boolean isCountOne = true;
 
     @Override
     public void loginUser(Context context, String email, String password, FirebaseAuth mAuth, OnLoginFinishedListener listener) {
@@ -68,7 +69,6 @@ class LoginInteractorImpl implements LoginInteractor{
 
     @Override
     public void loginUserWithGoogle(Context context, GoogleSignInAccount googleSignInAccount, FirebaseAuth mAuth, OnLoginFinishedListener listener) {
-        final boolean[] toMain = {true};
         Log.d(LOGINACT_TAG, "FirebaseWithGoogleLogin: " + googleSignInAccount.getId());
         AuthCredential credential = GoogleAuthProvider.getCredential(googleSignInAccount.getIdToken(), null);
 
@@ -91,7 +91,6 @@ class LoginInteractorImpl implements LoginInteractor{
      * @param username Takes the username and fetches user credentials for the user chamas*/
     private boolean userChamas(String username){
         DatabaseReference mDatabaseReference = FirebaseDatabase.getInstance().getReference();
-        final boolean[] isCountOne = {true};
 
         //navigate down the node to the user's chama groups node and retrieve the user's chama count
         mDatabaseReference.child(USERS_NODE).child(username).child(CHAMA_GROUPS)
@@ -100,7 +99,7 @@ class LoginInteractorImpl implements LoginInteractor{
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         if(dataSnapshot.getChildrenCount() > 1) {
                         Log.d(LOGINACT_TAG+"ChamaCount", String.valueOf(dataSnapshot.getChildrenCount()));
-                            isCountOne[0] = false;
+                            isCountOne = false;
                         }
                     }
 
@@ -111,7 +110,7 @@ class LoginInteractorImpl implements LoginInteractor{
                         Log.e(LOGINACT_TAG, databaseError.getMessage());
                     }
                 });
-        Log.d(LOGINACT_TAG+"ChamaCountBool", String.valueOf(isCountOne[0]));
-        return isCountOne[0];
+        Log.d(LOGINACT_TAG+"ChamaCountBool", String.valueOf(isCountOne));
+        return isCountOne;
     }
 }
