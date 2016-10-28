@@ -1,5 +1,11 @@
 package com.chamayetu.chamayetu.auth.loginchama;
 
+import android.content.Context;
+import com.chamayetu.chamayetu.adapters.FullStatementViewHolder;
+import com.chamayetu.chamayetu.models.LoginChamaModel;
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.google.firebase.database.DatabaseReference;
+
 /**
  * ChamaYetu
  * com.chamayetu.chamayetu.auth.loginchama
@@ -8,6 +14,21 @@ package com.chamayetu.chamayetu.auth.loginchama;
  */
 
 public class LoginChamaPresenterImpl implements LoginChamaPresenter {
+
+    private DatabaseReference mDatabaseRef;
+    private Context context;
+    private String username;
+    private FirebaseRecyclerAdapter<LoginChamaModel, FullStatementViewHolder> loginChamaFirebaseRecyclerAdapter;
+
+    LoginChamaPresenterImpl(Context context, String username,DatabaseReference mDatabaseRef, FirebaseRecyclerAdapter<LoginChamaModel, FullStatementViewHolder> loginChamaFirebaseRecyclerAdapter){
+        this.context = context;
+        this.mDatabaseRef = mDatabaseRef;
+        this.username = username;
+        this.loginChamaFirebaseRecyclerAdapter = loginChamaFirebaseRecyclerAdapter;
+    }
+
+
+
     @Override
     public void onResume() {
 
