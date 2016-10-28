@@ -37,7 +37,9 @@ class LoginChamaPresenterImpl implements LoginChamaPresenter, LoginChamaInteract
             loginChamaView.showProgress();
         }
         //find items for the recyclerView
-        loginChamaInteractor.findItems(username,context,loginChamaFirebaseRecyclerAdapter,mDatabaseRef,this);
+        loginChamaInteractor.findItems(username,context,loginChamaFirebaseRecyclerAdapter,
+                mDatabaseRef,
+                this);
     }
 
     @Override

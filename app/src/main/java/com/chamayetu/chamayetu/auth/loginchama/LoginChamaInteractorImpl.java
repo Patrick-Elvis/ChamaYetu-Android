@@ -32,10 +32,7 @@ class LoginChamaInteractorImpl implements LoginChamaInteractor {
             @Override
             protected void populateViewHolder(LoginChamaViewHolder viewHolder,
                                               LoginChamaModel model, int position) {
-                for(String key: model.getChamaGroups().keySet()){
-                    Log.d(LOGINCHAMA_TAG+"ChamaGroups", key);
-                    viewHolder.chamaName.setText(key);
-                }
+                viewHolder.bind(model);
             }
         };
         //pass on the adapter to the interactor

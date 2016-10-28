@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.afollestad.materialdialogs.Theme;
@@ -18,6 +19,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.sdsmdg.tastytoast.TastyToast;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
+import static com.chamayetu.chamayetu.utils.Contract.LOGINCHAMA_TAG;
 import static com.chamayetu.chamayetu.utils.Contract.USERNAME_BUNDLE_KEY;
 
 /**
@@ -44,6 +47,8 @@ public class LoginChamaActivity extends AppCompatActivity implements LoginChamaV
         Bundle receiveUsername = getIntent().getExtras();
         String username = receiveUsername.getString(USERNAME_BUNDLE_KEY);
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+
+        Log.d(LOGINCHAMA_TAG+"username", username);
 
         loginChamaPresenter = new LoginChamaPresenterImpl(
                 LoginChamaActivity.this,
