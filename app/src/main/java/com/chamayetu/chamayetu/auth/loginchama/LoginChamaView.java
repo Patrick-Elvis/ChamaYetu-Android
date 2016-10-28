@@ -21,7 +21,7 @@ interface LoginChamaView {
     /**set the items to the recyclerView*/
     void setAdapter(FirebaseRecyclerAdapter<LoginChamaModel, LoginChamaViewHolder> loginChamaRecyclerAdapter);
 
-    void openMainActWithChama();
+    void openMainActWithChama(int position);
 
     /**display message to user if error occurs*/
     void showMessage(String message, int messageType);

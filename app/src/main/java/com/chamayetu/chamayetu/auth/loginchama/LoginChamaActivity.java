@@ -41,7 +41,7 @@ public class LoginChamaActivity extends AppCompatActivity implements LoginChamaV
     private FirebaseAuth.AuthStateListener mAuthListener;
     private LoginChamaPresenter loginChamaPresenter;
     private MaterialDialog materialDialog;
-    private FirebaseRecyclerAdapter<LoginChamaModel, FullStatementViewHolder> loginChamaFirebaseRecyclerAdapter;
+    private FirebaseRecyclerAdapter<LoginChamaModel, LoginChamaViewHolder> loginChamaFirebaseRecyclerAdapter;
 
     //UI references
     @BindView(R.id.chama_login_recyclerView) RecyclerView chamaLoginRecycler;
@@ -71,7 +71,8 @@ public class LoginChamaActivity extends AppCompatActivity implements LoginChamaV
                 LoginChamaActivity.this,
                 username,
                 mDatabase,
-                loginChamaFirebaseRecyclerAdapter);
+                loginChamaFirebaseRecyclerAdapter,
+                new LoginChamaInteractorImpl());
     }
 
     @Override
@@ -112,7 +113,7 @@ public class LoginChamaActivity extends AppCompatActivity implements LoginChamaV
     }
 
     @Override
-    public void openMainActWithChama() {
+    public void openMainActWithChama(int position) {
 
     }
 

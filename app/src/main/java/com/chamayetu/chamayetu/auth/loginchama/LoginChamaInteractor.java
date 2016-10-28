@@ -11,7 +11,7 @@ import com.google.firebase.database.DatabaseReference;
  * ChamaYetu
  * com.chamayetu.chamayetu.auth.loginchama
  * Created by lusinabrian on 29/10/16.
- * Description:
+ * Description:Interactor interface for
  */
 
 interface LoginChamaInteractor {
@@ -21,5 +21,5 @@ interface LoginChamaInteractor {
         void onFinished(FirebaseRecyclerAdapter<LoginChamaModel, LoginChamaViewHolder> loginChamaRecyAdapter);
     }
 
-    void findItems(String chamaName, Context context, FirebaseRecyclerAdapter<LoginChamaModel, LoginChamaViewHolder> loginChamaRecyAdapter, DatabaseReference mDatabaseReference, OnFinishedListener listener);
+    void findItems(String username, Context context, FirebaseRecyclerAdapter<LoginChamaModel, LoginChamaViewHolder> loginChamaRecyAdapter, DatabaseReference mDatabaseReference, OnFinishedListener listener);
 }
