@@ -1,6 +1,7 @@
 package com.chamayetu.chamayetu.auth.loginchama;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.chamayetu.chamayetu.R;
 import com.chamayetu.chamayetu.adapters.LoginChamaViewHolder;
@@ -9,6 +10,7 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
 
 import static com.chamayetu.chamayetu.utils.Contract.CHAMA_GROUPS;
+import static com.chamayetu.chamayetu.utils.Contract.LOGINCHAMA_TAG;
 import static com.chamayetu.chamayetu.utils.Contract.USERS_NODE;
 
 /**
@@ -31,6 +33,7 @@ class LoginChamaInteractorImpl implements LoginChamaInteractor {
             protected void populateViewHolder(LoginChamaViewHolder viewHolder,
                                               LoginChamaModel model, int position) {
                 for(String key: model.getChamaGroups().keySet()){
+                    Log.d(LOGINCHAMA_TAG+"ChamaGroups", key);
                     viewHolder.chamaName.setText(key);
                 }
             }
