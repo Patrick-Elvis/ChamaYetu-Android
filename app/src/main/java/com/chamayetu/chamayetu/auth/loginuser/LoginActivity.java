@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.afollestad.materialdialogs.Theme;
 import com.chamayetu.chamayetu.R;
+import com.chamayetu.chamayetu.auth.loginchama.LoginChamaActivity;
 import com.chamayetu.chamayetu.forgotpassword.ForgotPass;
 import com.chamayetu.chamayetu.introduction.IntroScreen;
 import com.chamayetu.chamayetu.main.MainActivity;
@@ -240,15 +241,27 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     }
 
     @Override
-    public void navigateToMain() {
-        /*start the next activity, the MainActivity screen*/
-        Intent i2 = new Intent(LoginActivity.this, MainActivity.class);
+    public void navigateToMain(boolean toMain) {
+        //Intents to start the next activities based on user chamas
+        // if the user has 1 chama, start main activity
+        // if they have more than one, start LoginChama activity
+        Intent toMainAct = new Intent(LoginActivity.this, MainActivity.class);
+        Intent toChamaLogin = new Intent(LoginActivity.this, LoginChamaActivity.class);
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-            ActivityOptionsCompat oc2 = ActivityOptionsCompat.makeSceneTransitionAnimation(LoginActivity.this);
-            startActivity(i2, oc2.toBundle());
+        if(toMain){
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                ActivityOptionsCompat oc2 = ActivityOptionsCompat.makeSceneTransitionAnimation(LoginActivity.this);
+                startActivity(toMainAct, oc2.toBundle());
+            }else{
+                startActivity(toMainAct);
+            }
         }else{
-            startActivity(i2);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                ActivityOptionsCompat oc2 = ActivityOptionsCompat.makeSceneTransitionAnimation(LoginActivity.this);
+                startActivity(toChamaLogin, oc2.toBundle());
+            }else{
+                startActivity(toChamaLogin);
+            }
         }
         finish();
     }

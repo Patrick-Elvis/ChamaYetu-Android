@@ -25,6 +25,7 @@ class LoginInteractorImpl implements LoginInteractor{
     @Override
     public void loginUser(Context context, String email, String password, FirebaseAuth mAuth, OnLoginFinishedListener listener) {
         boolean error = false;
+        boolean toMain = true;
 
         /*if email is not valid, display an error*/
         if(!isValidEmail(email)){
@@ -46,7 +47,11 @@ class LoginInteractorImpl implements LoginInteractor{
                     Log.d(LOGINACT_TAG, "SignInWithEmail: ", task.getException());
                     listener.onTaskError("Email or password is invalid", TastyToast.ERROR);
                 } else {
-                    listener.onSuccess();
+                    //On successful login, check the user's chamas to determine how many chams they are in.
+                    //if user has 1 chama, proceed to MainActivity, if they have several,
+                    // proceed to chama login
+
+                    listener.onSuccess(toMain);
                 }
             });
         }
@@ -54,6 +59,7 @@ class LoginInteractorImpl implements LoginInteractor{
 
     @Override
     public void loginUserWithGoogle(Context context, GoogleSignInAccount googleSignInAccount, FirebaseAuth mAuth, OnLoginFinishedListener listener) {
+        boolean toMain = true;
         Log.d(LOGINACT_TAG, "FirebaseWithGoogleLogin: " + googleSignInAccount.getId());
         AuthCredential credential = GoogleAuthProvider.getCredential(googleSignInAccount.getIdToken(), null);
 
@@ -63,7 +69,7 @@ class LoginInteractorImpl implements LoginInteractor{
                 Log.d(LOGINACT_TAG, "GoogleSignInFail: ", task.getException());
                 listener.onTaskError("Failed to sign in, please try again", TastyToast.ERROR);
             }else{
-                listener.onSuccess();
+                listener.onSuccess(toMain);
             }
         });
     }

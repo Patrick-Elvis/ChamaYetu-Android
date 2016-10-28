@@ -22,8 +22,9 @@ interface LoginInteractor {
         /**What should happen when the password is invalid**/
         void onPasswordError();
 
-        /**on successfull operation navigate to next activity*/
-        void onSuccess();
+        /**on successful operation navigate to next activity
+         * @param toMain boolean to determine whether to navigate to main activity or to chama login*/
+        void onSuccess(boolean toMain);
 
         /**display toast error when user encounters error when executing FirebaseAuth*/
         void onTaskError(String message, int messageType);
