@@ -18,6 +18,7 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
+        android:configChanges="orientation|screenSize"
         android:theme="@style/AppTheme"
         tools:replace="android:icon">
 
@@ -26,12 +27,15 @@
             android:value="@string/facebook_app_id" />
 
         <!--brief intro screen for the application, only displayed once-->
-        <activity android:name=".introduction.IntroScreen"/>
+        <activity android:name=".introduction.IntroScreen"
+            android:configChanges="orientation|screenSize" />
 
-        <activity android:name=".forgotpassword.ForgotPass"/>
+        <activity android:name=".forgotpassword.ForgotPass"
+            android:configChanges="orientation|screenSize" />
 
         <activity
             android:name=".auth.loginuser.LoginActivity"
+            android:configChanges="orientation|screenSize"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -39,11 +43,20 @@
             </intent-filter>
         </activity>
 
+        <!--chama login-->
+        <activity
+            android:name=".auth.loginchama.LoginChamaActivity"
+            android:configChanges="orientation|screenSize" />
+
         <!--register a new user activity-->
-        <activity android:name=".auth.register.RegisterUserActivity"/>
+        <activity
+            android:name=".auth.register.RegisterUserActivity"
+            android:configChanges="orientation|screenSize" />
 
         <!--register a new chama activity-->
-        <activity android:name=".auth.register.RegisterChamaActivity"/>
+        <activity
+            android:name=".auth.register.RegisterChamaActivity"
+            android:configChanges="orientation|screenSize" />
 
         <activity
             android:name=".main.MainActivity"
@@ -51,15 +64,19 @@
             android:configChanges="screenSize|orientation"/>
 
         <!--full statement activity-->
-        <activity android:name=".statements.FullStatement" />
+        <activity android:name=".statements.FullStatement"
+            android:configChanges="orientation|screenSize" />
 
         <activity
             android:name=".useraccount.UserAccountActivity"
             android:label="@string/title_activity_user_account"
+            android:configChanges="orientation|screenSize"
             android:theme="@style/AppTheme" />
+
         <activity
             android:name=".settings.SettingsActivity"
-            android:label="@string/title_activity_settings"/>
+            android:label="@string/title_activity_settings"
+            android:configChanges="orientation|screenSize" />
     </application>
 
 </manifest>
