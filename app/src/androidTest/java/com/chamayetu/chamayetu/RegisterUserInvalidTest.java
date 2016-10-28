@@ -30,7 +30,4 @@ public class RegisterUserInvalidTest {
 
     @Rule
     public ActivityTestRule<RegisterUserActivity> mActivityRule = new ActivityTestRule(RegisterUserActivity.class);
-
-
-
 }
