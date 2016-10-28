@@ -27,7 +27,7 @@ class LoginChamaInteractorImpl implements LoginChamaInteractor {
                 LoginChamaModel.class,
                 R.layout.chama_login_item_layout,
                 LoginChamaViewHolder.class,
-                mDatabaseReference.child(USERS_NODE).child(CHAMA_GROUPS)
+                mDatabaseReference.child(USERS_NODE).child(username).child(CHAMA_GROUPS)
         ) {
             @Override
             protected void populateViewHolder(LoginChamaViewHolder viewHolder,
