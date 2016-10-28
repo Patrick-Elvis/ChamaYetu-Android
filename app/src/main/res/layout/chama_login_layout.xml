@@ -1,7 +1,8 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_gravity="center"
     android:layout_height="wrap_content">
 
@@ -52,25 +53,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     tools:listitem="@layout/chama_login_item_layout"/>
-
-                <!--sign in button-->
-                <LinearLayout
-                    android:layout_marginTop="25dp"
-                    android:gravity="center"
-                    android:layout_gravity="center"
-                    android:layout_width="match_parent"
-                    android:orientation="vertical"
-                    android:padding="15dp"
-                    android:layout_height="wrap_content">
-
-                    <Button
-                        android:id="@+id/chama_login_button"
-                        android:background="@drawable/bt_shape"
-                        android:layout_width="150dp"
-                        android:layout_height="50dp"
-                        android:text="@string/action_sign_in"
-                        android:textColor="#d3d3d3"/>
-                </LinearLayout>
 
             </LinearLayout>
 

@@ -340,5 +340,6 @@
     <string name="chama_login_label">Login to</string>
     <string name="chama_login_item_members">5 members</string>
     <string name="chama_login_item_name">Chama name</string>
+    <string name="action_login">LOGIN</string>
 
 </resources>
