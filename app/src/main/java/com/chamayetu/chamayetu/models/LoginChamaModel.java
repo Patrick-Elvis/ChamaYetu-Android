@@ -2,8 +2,6 @@ package com.chamayetu.chamayetu.models;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * ChamaYetu
@@ -13,20 +11,20 @@ import java.util.Map;
  */
 
 public class LoginChamaModel implements Parcelable {
-    private Map<String, Object> chamaGroups;
+    private String chamaGroups;
 
     public LoginChamaModel(){}
 
 
-    public LoginChamaModel(Map<String, Object> chamaGroups) {
+    public LoginChamaModel(String chamaGroups) {
         this.chamaGroups = chamaGroups;
     }
 
-    public Map<String, Object> getChamaGroups() {
+    public String getChamaGroups() {
         return chamaGroups;
     }
 
-    public void setChamaGroups(Map<String, Object> chamaGroups) {
+    public void setChamaGroups( String chamaGroups) {
         this.chamaGroups = chamaGroups;
     }
 
@@ -44,21 +42,11 @@ public class LoginChamaModel implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(this.chamaGroups.size());
-        for (Map.Entry<String, Object> entry : this.chamaGroups.entrySet()) {
-            dest.writeString(entry.getKey());
-            dest.writeParcelable((Parcelable) entry.getValue(), flags);
-        }
+        dest.writeString(this.chamaGroups);
     }
 
     protected LoginChamaModel(Parcel in) {
-        int chamaGroupsSize = in.readInt();
-        this.chamaGroups = new HashMap<String, Object>(chamaGroupsSize);
-        for (int i = 0; i < chamaGroupsSize; i++) {
-            String key = in.readString();
-            Object value = in.readParcelable(Object.class.getClassLoader());
-            this.chamaGroups.put(key, value);
-        }
+        this.chamaGroups = in.readString();
     }
 
     public static final Creator<LoginChamaModel> CREATOR = new Creator<LoginChamaModel>() {

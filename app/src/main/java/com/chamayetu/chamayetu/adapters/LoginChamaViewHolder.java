@@ -26,9 +26,6 @@ public class LoginChamaViewHolder extends RecyclerView.ViewHolder{
     }
 
     public void bind(LoginChamaModel loginChamaModel){
-        for(String key: loginChamaModel.getChamaGroups().keySet()){
-            Log.d(LOGINCHAMA_TAG+"ChamaGroups", key);
-            chamaName.setText(key);
-        }
+        chamaName.setText(loginChamaModel.getChamaGroups());
     }
 }
