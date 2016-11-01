@@ -33,18 +33,6 @@ public class LoginChamaModel implements Parcelable {
         this.chamaGroups = chamaGroups;
     }
 
-    /*public LoginChamaModel(Map<String, Object> chamaGroups) {
-        this.chamaGroups = chamaGroups;
-    }*/
-
-    /*public Map<String, Object> getChamaGroups() {
-        return chamaGroups;
-    }*/
-
-    /*public void setChamaGroups(Map<String, Object> chamaGroups) {
-        this.chamaGroups = chamaGroups;
-    }*/
-
     @Override
     public String toString() {
         return "LoginChamaModel{" +

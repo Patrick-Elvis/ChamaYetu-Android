@@ -100,11 +100,6 @@ class LoginInteractorImpl implements LoginInteractor{
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         if(dataSnapshot.getChildrenCount() > 1) {
                         Log.d(LOGINACT_TAG+"ChamaCount", String.valueOf(dataSnapshot.getChildrenCount()));
-                            //find the types of the children
-                            for(DataSnapshot d: dataSnapshot.getChildren()){
-                                Log.d(LOGINACT_TAG+"ChamaKey", d.getKey());
-
-                            }
                             listener.onSuccess(false, username);
                         }else{
                             listener.onSuccess(true, username);
