@@ -106,8 +106,8 @@ class RegisterNewUserChama {
                     newMember.put(username, true);
 
                     /*update chama groups for the user in the chamaGroups node in user node*/
-                    Map<String, Boolean> newChamaGroupMap = new HashMap<>();
-                    newChamaGroupMap.put(chamaNameKey, true);
+                    Map<String, String> newChamaGroupMap = new HashMap<>();
+                    newChamaGroupMap.put("cg1", chamaNameKey);
 
                     /*add the projects model to a map to later add the map to the node*/
                     projects = new Projects("","");
