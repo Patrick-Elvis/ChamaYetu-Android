@@ -24,7 +24,7 @@ class StatementPresenterImpl implements StatementPresenter, FindItemsInteractor.
     private String chamaName;
     private FirebaseRecyclerAdapter<FullStatementModel, FullStatementViewHolder> statementFirebaseRecyclerAdapter;
 
-    StatementPresenterImpl(String chamaName,FirebaseRecyclerAdapter<FullStatementModel, FullStatementViewHolder> statementFirebaseRecyclerAdapter, Context context, FullStatementView fullStatementView, FindItemsInteractor findItemsInteractor, DatabaseReference mDatabaseRef){
+    StatementPresenterImpl(String chamaName, FirebaseRecyclerAdapter<FullStatementModel, FullStatementViewHolder> statementFirebaseRecyclerAdapter, Context context, FullStatementView fullStatementView, FindItemsInteractor findItemsInteractor, DatabaseReference mDatabaseRef){
         this.mDatabaseRef = mDatabaseRef;
         this.chamaName = chamaName;
         this.fullStatementView = fullStatementView;
@@ -40,7 +40,13 @@ class StatementPresenterImpl implements StatementPresenter, FindItemsInteractor.
         }
 
         /*find the items for the recycler view*/
-        findItemsInteractor.findItems(chamaName, context,statementFirebaseRecyclerAdapter, mDatabaseRef,this);
+        findItemsInteractor.findItems(
+                chamaName,
+                context,
+                statementFirebaseRecyclerAdapter,
+                mDatabaseRef,
+                this
+        );
     }
 
     @Override

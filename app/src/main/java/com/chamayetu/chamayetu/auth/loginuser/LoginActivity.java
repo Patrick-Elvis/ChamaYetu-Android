@@ -258,8 +258,6 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                 .putExtra(USERNAME_BUNDLE_KEY,username);
         ActivityOptionsCompat oc2 = ActivityOptionsCompat.makeSceneTransitionAnimation(LoginActivity.this);
 
-        Log.d(LOGINACT_TAG+"Username",username);
-
         if(toMain){
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
                 startActivity(toMainAct, oc2.toBundle());

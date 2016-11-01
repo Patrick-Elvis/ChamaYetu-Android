@@ -16,7 +16,6 @@ import java.util.Map;
  */
 
 public class LoginChamaModel implements Parcelable {
-    //private Map<String, Object> chamaGroups;
     private DataSnapshot chamaGroups;
 
     public LoginChamaModel(){}

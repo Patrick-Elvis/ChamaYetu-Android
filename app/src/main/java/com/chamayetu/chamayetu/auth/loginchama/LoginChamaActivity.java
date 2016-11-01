@@ -54,7 +54,8 @@ public class LoginChamaActivity extends AppCompatActivity implements LoginChamaV
                 mDatabase,
                 loginChamaFirebaseRecyclerAdapter,
                 new LoginChamaInteractorImpl(),
-                this);
+                this
+        );
     }
 
     @Override

@@ -62,12 +62,14 @@ public class FullStatement extends AppCompatActivity implements FullStatementVie
         String chamaStatementTitle = receiveUserChoice.getString(CHAMA_STATEMENT_TITLE);
 
         /*initialize the presenter*/
-        statementPresenter = new StatementPresenterImpl(chamaStatementTitle,
+        statementPresenter = new StatementPresenterImpl(
+                chamaStatementTitle,
                 statementFirebaseRecyclerAdapter,
                 FullStatement.this,
                 this,
                 new FindItemsInteractorImpl(),
-                mDatabase);
+                mDatabase
+        );
 
         /*set the title to the currently viewed chama statement*/
         collapsingToolbarLayout.setTitle(chamaStatementTitle + " Statement");

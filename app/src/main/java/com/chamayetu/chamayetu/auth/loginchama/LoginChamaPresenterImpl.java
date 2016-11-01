@@ -23,7 +23,7 @@ class LoginChamaPresenterImpl implements LoginChamaPresenter, LoginChamaInteract
     private String username;
     private FirebaseRecyclerAdapter<LoginChamaModel, LoginChamaViewHolder> loginChamaFirebaseRecyclerAdapter;
 
-    LoginChamaPresenterImpl(Context context, String username,DatabaseReference mDatabaseRef, FirebaseRecyclerAdapter<LoginChamaModel, LoginChamaViewHolder> loginChamaFirebaseRecyclerAdapter,LoginChamaInteractor loginChamaInteractor, LoginChamaView loginChamaView){
+    LoginChamaPresenterImpl(Context context, String username, DatabaseReference mDatabaseRef, FirebaseRecyclerAdapter<LoginChamaModel, LoginChamaViewHolder> loginChamaFirebaseRecyclerAdapter,LoginChamaInteractor loginChamaInteractor, LoginChamaView loginChamaView){
         this.context = context;
         this.mDatabaseRef = mDatabaseRef;
         this.username = username;
@@ -38,7 +38,10 @@ class LoginChamaPresenterImpl implements LoginChamaPresenter, LoginChamaInteract
             loginChamaView.showProgress();
         }
         //find items for the recyclerView
-        loginChamaInteractor.findItems(username,context,loginChamaFirebaseRecyclerAdapter,
+        loginChamaInteractor.findItems(
+                username,
+                context,
+                loginChamaFirebaseRecyclerAdapter,
                 mDatabaseRef,
                 this);
     }
@@ -58,7 +61,7 @@ class LoginChamaPresenterImpl implements LoginChamaPresenter, LoginChamaInteract
     @Override
     public void onFinished(FirebaseRecyclerAdapter<LoginChamaModel, LoginChamaViewHolder> loginChamaRecyAdapter) {
         if(loginChamaView != null){
-            loginChamaView.setAdapter(loginChamaFirebaseRecyclerAdapter);
+            loginChamaView.setAdapter(loginChamaRecyAdapter);
             loginChamaView.hideProgress();
         }
 
