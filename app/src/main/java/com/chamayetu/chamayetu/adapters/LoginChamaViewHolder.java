@@ -22,7 +22,6 @@ public class LoginChamaViewHolder extends RecyclerView.ViewHolder{
     }
 
     public void bind(String loginChamaModel){
-        String chama = loginChamaModel.replace(loginChamaModel, loginChamaModel+ " account");
-        chamaName.setText(chama);
+        chamaName.setText(loginChamaModel+ " account");
     }
 }

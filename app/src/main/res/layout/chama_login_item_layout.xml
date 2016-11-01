@@ -1,13 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--chama name-->
-<TextView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/chama_login_item_name"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:textColor="@color/white"
-    android:textSize="20sp"
     tools:showIn="@layout/chama_login_layout"
-    android:padding="10dp"
-    android:text="@string/chama_login_item_name"/>
+    android:padding="10dp">
+
+    <!--chama name-->
+    <TextView
+        android:id="@+id/chama_login_item_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:text="@string/chama_login_item_name"/>
+
+</LinearLayout>
