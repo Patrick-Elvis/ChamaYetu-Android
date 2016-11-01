@@ -77,12 +77,12 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
             if(user !=null){
                 // user is signed in, therefore redirect to LoginChamaActivity
                 Log.d(LOGINACT_TAG, "onAuthStateChanged:signedIn: " + user.getUid());
+                Intent loginChama = new Intent(LoginActivity.this, LoginChamaActivity.class);
                 String email = user.getEmail();
                 int idx =  email.indexOf("@");
                 String username = email.substring(0, idx).toLowerCase();
-
-                startActivity(new Intent(LoginActivity.this, LoginChamaActivity.class)
-                        .putExtra(USERNAME_BUNDLE_KEY, username));
+                loginChama.putExtra(USERNAME_BUNDLE_KEY, username);
+                startActivity(loginChama);
             }else{
                 Log.d(LOGINACT_TAG, "onAuthStateChanged:signedout");
             }
