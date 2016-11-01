@@ -21,8 +21,10 @@ import static com.chamayetu.chamayetu.utils.Contract.USERS_NODE;
  */
 
 class LoginChamaInteractorImpl implements LoginChamaInteractor {
+    
     @Override
     public void findItems(String username, Context context, FirebaseRecyclerAdapter<LoginChamaModel, LoginChamaViewHolder> loginChamaRecyAdapter, DatabaseReference mDatabaseReference, OnFinishedListener listener) {
+
         loginChamaRecyAdapter = new FirebaseRecyclerAdapter<LoginChamaModel, LoginChamaViewHolder>(
                 LoginChamaModel.class,
                 R.layout.chama_login_item_layout,
