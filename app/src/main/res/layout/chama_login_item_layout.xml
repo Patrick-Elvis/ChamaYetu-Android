@@ -12,7 +12,7 @@
         android:layout_width="60dp"
         android:src="@mipmap/ic_launcher"
         android:layout_height="60dp"
-        android:padding="15dp"
+        android:padding="5dp"
         android:contentDescription="@null"/>
 
     <!--chama name-->
