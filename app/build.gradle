@@ -39,6 +39,9 @@ android {
 
 repositories {
     mavenCentral()
+    maven {
+        url 'http://dl.bintray.com/amulyakhare/maven'
+    }
     jcenter()
 }
 
@@ -107,6 +110,9 @@ dependencies {
     /*Material dialogs*/
     compile 'com.afollestad.material-dialogs:core:0.9.0.2'
     compile 'cn.pedant.sweetalert:library:1.3'
+
+    /*Text Drawable*/
+    compile 'com.amulyakhare:com.amulyakhare.textdrawable:1.0.1'
 
     compile 'com.jakewharton:butterknife:8.4.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
