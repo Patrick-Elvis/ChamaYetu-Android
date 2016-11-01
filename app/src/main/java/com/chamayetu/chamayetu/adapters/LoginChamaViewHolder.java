@@ -6,7 +6,6 @@ import android.view.View;
 import android.widget.TextView;
 import com.chamayetu.chamayetu.R;
 import com.chamayetu.chamayetu.models.LoginChamaModel;
-import com.google.firebase.database.DataSnapshot;
 
 import static com.chamayetu.chamayetu.utils.Contract.LOGINCHAMA_TAG;
 
@@ -27,9 +26,9 @@ public class LoginChamaViewHolder extends RecyclerView.ViewHolder{
     }
 
     public void bind(LoginChamaModel loginChamaModel){
-        for(DataSnapshot d: loginChamaModel.getChamaGroups().getChildren()){
-            Log.d(LOGINCHAMA_TAG+"ChamaGroups", d.getKey());
-            chamaName.setText(d.getKey());
+        for(String key: loginChamaModel.getChamaGroups().keySet()){
+            Log.d(LOGINCHAMA_TAG+"ChamaGroups", key);
+            chamaName.setText(key);
         }
     }
 }

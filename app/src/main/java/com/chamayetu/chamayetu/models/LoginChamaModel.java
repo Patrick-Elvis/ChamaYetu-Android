@@ -2,9 +2,6 @@ package com.chamayetu.chamayetu.models;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-
-import com.google.firebase.database.DataSnapshot;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -16,19 +13,20 @@ import java.util.Map;
  */
 
 public class LoginChamaModel implements Parcelable {
-    private DataSnapshot chamaGroups;
+    private Map<String, Object> chamaGroups;
 
     public LoginChamaModel(){}
 
-    public LoginChamaModel(DataSnapshot chamaGroups) {
+
+    public LoginChamaModel(Map<String, Object> chamaGroups) {
         this.chamaGroups = chamaGroups;
     }
 
-    public DataSnapshot getChamaGroups() {
+    public Map<String, Object> getChamaGroups() {
         return chamaGroups;
     }
 
-    public void setChamaGroups(DataSnapshot chamaGroups) {
+    public void setChamaGroups(Map<String, Object> chamaGroups) {
         this.chamaGroups = chamaGroups;
     }
 
@@ -46,21 +44,21 @@ public class LoginChamaModel implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeLong(this.chamaGroups.getChildrenCount());
-        for(DataSnapshot d: this.chamaGroups.getChildren()){
-            dest.writeString(String.valueOf(d.getValue()));
-            dest.writeParcelable((Parcelable) d.getValue(), flags);
+        dest.writeInt(this.chamaGroups.size());
+        for (Map.Entry<String, Object> entry : this.chamaGroups.entrySet()) {
+            dest.writeString(entry.getKey());
+            dest.writeParcelable((Parcelable) entry.getValue(), flags);
         }
     }
 
     protected LoginChamaModel(Parcel in) {
-        long chamaGroupsSize = in.readLong();
-        /*this.chamaGroups = new DataSnapshot();
+        int chamaGroupsSize = in.readInt();
+        this.chamaGroups = new HashMap<String, Object>(chamaGroupsSize);
         for (int i = 0; i < chamaGroupsSize; i++) {
             String key = in.readString();
             Object value = in.readParcelable(Object.class.getClassLoader());
             this.chamaGroups.put(key, value);
-        }*/
+        }
     }
 
     public static final Creator<LoginChamaModel> CREATOR = new Creator<LoginChamaModel>() {
