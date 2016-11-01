@@ -48,8 +48,6 @@ public class LoginChamaActivity extends AppCompatActivity implements LoginChamaV
         String username = receiveUsername.getString(USERNAME_BUNDLE_KEY);
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
 
-        Log.d(LOGINCHAMA_TAG+"username", username);
-
         loginChamaPresenter = new LoginChamaPresenterImpl(
                 LoginChamaActivity.this,
                 username,

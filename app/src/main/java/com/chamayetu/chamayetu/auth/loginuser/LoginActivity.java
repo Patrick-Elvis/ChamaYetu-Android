@@ -77,7 +77,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
             if(user !=null){
                 // user is signed in, therefore redirect to MainActivity
                 Log.d(LOGINACT_TAG, "onAuthStateChanged:signedIn: " + user.getUid());
-                startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                startActivity(new Intent(LoginActivity.this, LoginChamaActivity.class));
             }else{
                 Log.d(LOGINACT_TAG, "onAuthStateChanged:signedout");
             }
