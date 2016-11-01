@@ -23,10 +23,11 @@ class LoginChamaPresenterImpl implements LoginChamaPresenter, LoginChamaInteract
     private String username;
     private FirebaseRecyclerAdapter<LoginChamaModel, LoginChamaViewHolder> loginChamaFirebaseRecyclerAdapter;
 
-    LoginChamaPresenterImpl(Context context, String username,DatabaseReference mDatabaseRef, FirebaseRecyclerAdapter<LoginChamaModel, LoginChamaViewHolder> loginChamaFirebaseRecyclerAdapter,LoginChamaInteractor loginChamaInteractor){
+    LoginChamaPresenterImpl(Context context, String username,DatabaseReference mDatabaseRef, FirebaseRecyclerAdapter<LoginChamaModel, LoginChamaViewHolder> loginChamaFirebaseRecyclerAdapter,LoginChamaInteractor loginChamaInteractor, LoginChamaView loginChamaView){
         this.context = context;
         this.mDatabaseRef = mDatabaseRef;
         this.username = username;
+        this.loginChamaView = loginChamaView;
         this.loginChamaFirebaseRecyclerAdapter = loginChamaFirebaseRecyclerAdapter;
         this.loginChamaInteractor = loginChamaInteractor;
     }
