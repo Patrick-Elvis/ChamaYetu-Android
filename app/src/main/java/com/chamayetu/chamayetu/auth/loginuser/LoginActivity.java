@@ -75,9 +75,14 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         mAuthListener = firebaseAuth -> {
             FirebaseUser user = firebaseAuth.getCurrentUser();
             if(user !=null){
-                // user is signed in, therefore redirect to MainActivity
+                // user is signed in, therefore redirect to LoginChamaActivity
                 Log.d(LOGINACT_TAG, "onAuthStateChanged:signedIn: " + user.getUid());
-                startActivity(new Intent(LoginActivity.this, LoginChamaActivity.class));
+                String email = user.getEmail();
+                int idx =  email.indexOf("@");
+                String username = email.substring(0, idx).toLowerCase();
+
+                startActivity(new Intent(LoginActivity.this, LoginChamaActivity.class)
+                        .putExtra(USERNAME_BUNDLE_KEY, username));
             }else{
                 Log.d(LOGINACT_TAG, "onAuthStateChanged:signedout");
             }
