@@ -33,7 +33,7 @@ import static com.chamayetu.chamayetu.utils.Contract.USERNAME_BUNDLE_KEY;
 public class LoginChamaActivity extends AppCompatActivity implements LoginChamaView{
     private LoginChamaPresenter loginChamaPresenter;
     private MaterialDialog materialDialog;
-    private FirebaseRecyclerAdapter<LoginChamaModel, LoginChamaViewHolder> loginChamaFirebaseRecyclerAdapter;
+    private FirebaseRecyclerAdapter<String, LoginChamaViewHolder> loginChamaFirebaseRecyclerAdapter;
 
     //UI references
     @BindView(R.id.chama_login_recyclerView) RecyclerView chamaLoginRecycler;
@@ -90,7 +90,7 @@ public class LoginChamaActivity extends AppCompatActivity implements LoginChamaV
     }
 
     @Override
-    public void setAdapter(FirebaseRecyclerAdapter<LoginChamaModel, LoginChamaViewHolder> loginChamaRecyclerAdapter) {
+    public void setAdapter(FirebaseRecyclerAdapter<String, LoginChamaViewHolder> loginChamaRecyclerAdapter) {
         chamaLoginRecycler.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         chamaLoginRecycler.setAdapter(loginChamaRecyclerAdapter);
     }

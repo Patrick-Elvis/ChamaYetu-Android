@@ -19,7 +19,7 @@ interface LoginChamaView {
     void hideProgress();
 
     /**set the items to the recyclerView*/
-    void setAdapter(FirebaseRecyclerAdapter<LoginChamaModel, LoginChamaViewHolder> loginChamaRecyclerAdapter);
+    void setAdapter(FirebaseRecyclerAdapter<String, LoginChamaViewHolder> loginChamaRecyclerAdapter);
 
     void openMainActWithChama(int position);
 
