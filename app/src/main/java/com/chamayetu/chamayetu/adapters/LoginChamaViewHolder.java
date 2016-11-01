@@ -1,12 +1,9 @@
 package com.chamayetu.chamayetu.adapters;
 
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import com.chamayetu.chamayetu.R;
-
-import static com.chamayetu.chamayetu.utils.Contract.LOGINCHAMA_TAG;
 
 /**
  * ChamaYetu
@@ -25,7 +22,7 @@ public class LoginChamaViewHolder extends RecyclerView.ViewHolder{
     }
 
     public void bind(String loginChamaModel){
-        Log.d(LOGINCHAMA_TAG+"VH",loginChamaModel);
-        chamaName.setText(loginChamaModel);
+        String chama = loginChamaModel.replace(loginChamaModel, loginChamaModel+ " account");
+        chamaName.setText(chama);
     }
 }
