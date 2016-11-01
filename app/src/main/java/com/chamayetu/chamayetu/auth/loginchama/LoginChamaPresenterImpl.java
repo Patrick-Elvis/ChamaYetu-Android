@@ -1,9 +1,8 @@
 package com.chamayetu.chamayetu.auth.loginchama;
 
 import android.content.Context;
-import com.chamayetu.chamayetu.adapters.FullStatementViewHolder;
+
 import com.chamayetu.chamayetu.adapters.LoginChamaViewHolder;
-import com.chamayetu.chamayetu.models.LoginChamaModel;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
 

@@ -5,7 +5,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import com.chamayetu.chamayetu.R;
-import com.chamayetu.chamayetu.models.LoginChamaModel;
 
 import static com.chamayetu.chamayetu.utils.Contract.LOGINCHAMA_TAG;
 
@@ -26,6 +25,7 @@ public class LoginChamaViewHolder extends RecyclerView.ViewHolder{
     }
 
     public void bind(String loginChamaModel){
+        Log.d(LOGINCHAMA_TAG+"VH",loginChamaModel);
         chamaName.setText(loginChamaModel);
     }
 }

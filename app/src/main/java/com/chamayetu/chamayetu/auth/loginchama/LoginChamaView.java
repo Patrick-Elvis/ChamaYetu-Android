@@ -1,7 +1,6 @@
 package com.chamayetu.chamayetu.auth.loginchama;
 
 import com.chamayetu.chamayetu.adapters.LoginChamaViewHolder;
-import com.chamayetu.chamayetu.models.LoginChamaModel;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 
 /**

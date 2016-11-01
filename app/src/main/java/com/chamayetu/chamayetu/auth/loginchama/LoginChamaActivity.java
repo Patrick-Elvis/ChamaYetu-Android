@@ -6,13 +6,11 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.afollestad.materialdialogs.Theme;
 import com.chamayetu.chamayetu.R;
 import com.chamayetu.chamayetu.adapters.LoginChamaViewHolder;
-import com.chamayetu.chamayetu.models.LoginChamaModel;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -20,7 +18,6 @@ import com.sdsmdg.tastytoast.TastyToast;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-import static com.chamayetu.chamayetu.utils.Contract.LOGINCHAMA_TAG;
 import static com.chamayetu.chamayetu.utils.Contract.USERNAME_BUNDLE_KEY;
 
 /**
