@@ -9,9 +9,9 @@
 
     <ImageView
         android:id="@+id/chama_login_item_img"
-        android:layout_width="60dp"
+        android:layout_width="50dp"
         android:src="@mipmap/ic_launcher"
-        android:layout_height="60dp"
+        android:layout_height="50dp"
         android:padding="5dp"
         android:contentDescription="@null"/>
 

@@ -21,12 +21,13 @@ public class LoginChamaViewHolder extends RecyclerView.ViewHolder{
 
     public TextView chamaName;
     public ImageView chamaImg;
+    public View mView;
 
     public LoginChamaViewHolder(View itemView) {
         super(itemView);
         chamaName = (TextView) itemView.findViewById(R.id.chama_login_item_name);
         chamaImg = (ImageView)itemView.findViewById(R.id.chama_login_item_img);
-
+        mView = itemView;
     }
 
     public void bind(String loginChamaModel){
@@ -48,4 +49,6 @@ public class LoginChamaViewHolder extends RecyclerView.ViewHolder{
 
         chamaImg.setImageDrawable(drawable);
     }
+
+
 }

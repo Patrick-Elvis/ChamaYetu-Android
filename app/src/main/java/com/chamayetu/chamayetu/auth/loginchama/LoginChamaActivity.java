@@ -94,7 +94,7 @@ public class LoginChamaActivity extends AppCompatActivity implements LoginChamaV
 
     @Override
     public void openMainActWithChama(int position) {
-
+        //login to the account selected
     }
 
     @Override

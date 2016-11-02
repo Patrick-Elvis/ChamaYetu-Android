@@ -1,6 +1,7 @@
 package com.chamayetu.chamayetu.auth.loginchama;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.chamayetu.chamayetu.R;
 import com.chamayetu.chamayetu.adapters.LoginChamaViewHolder;
@@ -8,6 +9,7 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
 
 import static com.chamayetu.chamayetu.utils.Contract.CHAMA_GROUPS;
+import static com.chamayetu.chamayetu.utils.Contract.LOGINCHAMA_TAG;
 import static com.chamayetu.chamayetu.utils.Contract.USERS_NODE;
 
 /**
@@ -22,6 +24,7 @@ class LoginChamaInteractorImpl implements LoginChamaInteractor {
     @Override
     public void findItems(String username, Context context, FirebaseRecyclerAdapter<String, LoginChamaViewHolder> loginChamaRecyAdapter, DatabaseReference mDatabaseReference, OnFinishedListener listener) {
 
+        FirebaseRecyclerAdapter<String, LoginChamaViewHolder> finalLoginChamaRecyAdapter = loginChamaRecyAdapter;
         loginChamaRecyAdapter = new FirebaseRecyclerAdapter<String, LoginChamaViewHolder>(
                 String.class,
                 R.layout.chama_login_item_layout,
@@ -32,6 +35,11 @@ class LoginChamaInteractorImpl implements LoginChamaInteractor {
             protected void populateViewHolder(LoginChamaViewHolder viewHolder,
                                               String model, int position) {
                 viewHolder.bind(model);
+
+                viewHolder.mView.setOnClickListener(v -> {
+                    Log.d(LOGINCHAMA_TAG+"Interactor", "Clicked on: " + String.valueOf(position));
+                    finalLoginChamaRecyAdapter.getRef(position);
+                });
             }
         };
         //pass on the adapter to the interactor
