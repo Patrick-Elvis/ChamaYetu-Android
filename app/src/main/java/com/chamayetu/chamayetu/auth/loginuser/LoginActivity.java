@@ -1,6 +1,7 @@
 package com.chamayetu.chamayetu.auth.loginuser;
 
 import android.app.ActivityOptions;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
@@ -41,6 +42,8 @@ import butterknife.OnClick;
 import static com.chamayetu.chamayetu.utils.Contract.LOGINACT_TAG;
 import static com.chamayetu.chamayetu.utils.Contract.RC_SIGN_IN;
 import static com.chamayetu.chamayetu.utils.Contract.USERNAME_BUNDLE_KEY;
+import static com.chamayetu.chamayetu.utils.Contract.USER_NAME_SP_KEY_PREF;
+import static com.chamayetu.chamayetu.utils.Contract.USER_NAME_SP_PREF;
 
 import com.google.android.gms.auth.api.Auth;
 import com.sdsmdg.tastytoast.TastyToast;
@@ -54,6 +57,8 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     private GoogleApiClient mGoogleApiClient;
     private LoginPresenter loginPresenter;
     private MaterialDialog materialDialog;
+    private SharedPreferences userSession;
+    private SharedPreferences.Editor userSessionEditor;
 
     // UI references.
     @BindView(R.id.cv_container) CardView cardViewContainer;
@@ -71,16 +76,23 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         ButterKnife.bind(this);
 
         mAuth = FirebaseAuth.getInstance();
+        userSession = this.getSharedPreferences(USER_NAME_SP_PREF ,Context.MODE_PRIVATE);
 
         mAuthListener = firebaseAuth -> {
             FirebaseUser user = firebaseAuth.getCurrentUser();
             if(user !=null){
-                // user is signed in, therefore redirect to LoginChamaActivity
                 Log.d(LOGINACT_TAG, "onAuthStateChanged:signedIn: " + user.getUid());
-                Intent loginChama = new Intent(LoginActivity.this, LoginChamaActivity.class);
+
+                userSessionEditor = userSession.edit();
                 String email = user.getEmail();
                 int idx =  email.indexOf("@");
                 String username = email.substring(0, idx).toLowerCase();
+                userSessionEditor.putString(USER_NAME_SP_KEY_PREF , username);
+
+                // user is signed in, therefore redirect to LoginChamaActivity
+                Intent loginChama = new Intent(LoginActivity.this, LoginChamaActivity.class);
+                // save the username to the SharedPreference
+                userSessionEditor.apply();
                 loginChama.putExtra(USERNAME_BUNDLE_KEY, username);
                 startActivity(loginChama);
             }else{

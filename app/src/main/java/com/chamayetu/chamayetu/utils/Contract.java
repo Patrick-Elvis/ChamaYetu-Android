@@ -32,6 +32,8 @@ public class Contract {
     /*stores the user's chama in a shared preferences file for app wide access*/
     public static final String CHAMA_SP_FILE = "CHAMA_SP_FILE";
     public static final String CHAMA_NAME_KEY = "CHAMA_NAME_KEY";
+    public static final String USER_NAME_SP_PREF = "USERNAME_PREF";
+    public static final String USER_NAME_SP_KEY_PREF = "USERNAME_PREF_KEY";
 
     public static final String NOTIFICATION_SP_KEY="NotificationCount";
     public static final int SHAREPREF_PRIVATE_MODE = 0;
