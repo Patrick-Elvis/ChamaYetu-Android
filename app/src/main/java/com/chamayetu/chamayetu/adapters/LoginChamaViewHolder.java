@@ -1,20 +1,13 @@
 package com.chamayetu.chamayetu.adapters;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.amulyakhare.textdrawable.TextDrawable;
 import com.amulyakhare.textdrawable.util.ColorGenerator;
 import com.chamayetu.chamayetu.R;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 /**
  * ChamaYetu
@@ -23,7 +16,7 @@ import com.google.firebase.database.FirebaseDatabase;
  * Description: ViewHolder for the RecyclerView for {@link com.chamayetu.chamayetu.auth.loginchama.LoginChamaActivity}
  */
 
-public class LoginChamaViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+public class LoginChamaViewHolder extends RecyclerView.ViewHolder{
 
     public TextView chamaName;
     public ImageView chamaImg;
@@ -54,12 +47,5 @@ public class LoginChamaViewHolder extends RecyclerView.ViewHolder implements Vie
                 );
 
         chamaImg.setImageDrawable(drawable);
-    }
-
-
-    @Override
-    public void onClick(View v) {
-        //accessing the username data from LoginActivity
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
     }
 }
